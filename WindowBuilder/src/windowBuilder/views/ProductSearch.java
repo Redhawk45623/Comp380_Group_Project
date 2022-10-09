@@ -41,7 +41,7 @@ import java.awt.Font;
 import javax.swing.JTextPane;
 import javax.swing.UIManager;
 
-public class FirstGUI extends JFrame {
+public class ProductSearch extends JFrame {
 
 	private JPanel contentPane;
 	private JButton btnOrder;
@@ -81,7 +81,7 @@ public class FirstGUI extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FirstGUI frame = new FirstGUI();
+					ProductSearch frame = new ProductSearch();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -93,7 +93,7 @@ public class FirstGUI extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FirstGUI() {
+	public ProductSearch() {
 		setTitle("PRODUCT SEARCH");
 		
 		initComponents();
@@ -142,10 +142,6 @@ public class FirstGUI extends JFrame {
 				String name = (String)cbProducts.getSelectedItem();
 				JOptionPane.showMessageDialog(null, name);
 				
-				JOptionPane.showMessageDialog(null, JListShopList);
-				
-				
-			    //JOptionPane.showMessageDialog(null, name2);
 			}
 		});
 		
