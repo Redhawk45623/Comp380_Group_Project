@@ -60,29 +60,12 @@ public class FirstGUI extends JFrame {
 	private JLabel lblNewLabel_6;
 	private JButton btnNewButton_2;
 	private JMenu mnNewMenu;
-	private JLabel lblNewLabel_7;
-	private JList list_1;
-	private JTextPane txtpnWelcomeToOur;
 	private JLabel lblNewLabel_8;
 	private JButton btnNewButton_3;
 	private JLabel lblNewLabel_9;
 	private JButton btnNewButton_4;
-	private JLabel lblNewLabel_10;
-	private JTextArea textArea_1;
-	private JLabel lblNewLabel_11;
-	private JLabel lblNewLabel_12;
-	private JTextArea textArea_2;
-	private JTextArea textArea_3;
-	private JButton btnNewButton_5;
 	private JLabel lblNewLabel_14;
 	private JButton btnNewButton_6;
-	private JButton btnNewButton_7;
-	private JLabel lblNewLabel_15;
-	private JLabel lblNewLabel_16;
-	private JButton btnNewButton_8;
-	private JLabel lblNewLabel_13;
-	private JRadioButton rdbtnNewRadioButton;
-	private JRadioButton rdbtnNewRadioButton_1;
 	private JMenu mnNewMenu_1;
 	private JMenu mnNewMenu_2;
 	private JComboBox cbProducts;
@@ -90,7 +73,6 @@ public class FirstGUI extends JFrame {
 	private Object s;
 	private String [] values;
 	private JList list;
-	private JButton btnNewButton_9;
 
 	/**
 	 * Launch the application.
@@ -112,7 +94,7 @@ public class FirstGUI extends JFrame {
 	 * Create the frame.
 	 */
 	public FirstGUI() {
-		setTitle("Comp380 Group Project - Practice GUI");
+		setTitle("PRODUCT SEARCH");
 		
 		initComponents();
 		createEvents();
@@ -123,7 +105,7 @@ public class FirstGUI extends JFrame {
 	
 	private void initComponents() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 970, 525);
+		setBounds(100, 100, 525, 525);
 		
 		menuBar = new JMenuBar();
 		menuBar.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -201,15 +183,6 @@ public class FirstGUI extends JFrame {
 		
 		btnNewButton_2 = new JButton("Add Now");
 		
-		lblNewLabel_7 = new JLabel("Quickview Shopping Cart:");
-		
-		list_1 = new JList();
-		list_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		
-		txtpnWelcomeToOur = new JTextPane();
-		txtpnWelcomeToOur.setBackground(UIManager.getColor("Button.background"));
-		txtpnWelcomeToOur.setText("Welcome to our practice GUI! You can browse our selected products for sale via the drop-down menu and add to your shopping list or straight into the shopping cart.  You will see the running total of your shopping list and add selected items or add all to the cart. Blah, blah, blah...");
-		
 		lblNewLabel_8 = new JLabel("Add all from List to Cart:");
 		
 		btnNewButton_3 = new JButton("Add All");
@@ -218,44 +191,9 @@ public class FirstGUI extends JFrame {
 		
 		btnNewButton_4 = new JButton("Remove");
 		
-		lblNewLabel_10 = new JLabel("Total:");
-		
-		textArea_1 = new JTextArea();
-		textArea_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		
-		lblNewLabel_11 = new JLabel("Tax:");
-		
-		lblNewLabel_12 = new JLabel("Grand Total:");
-		
-		textArea_2 = new JTextArea();
-		textArea_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		
-		textArea_3 = new JTextArea();
-		textArea_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		
-		btnNewButton_5 = new JButton("Checkout");
-		
 		lblNewLabel_14 = new JLabel("Add Quantity (+1):");
 		
 		btnNewButton_6 = new JButton("Add 1");
-		
-		btnNewButton_7 = new JButton("Remove");
-		
-		lblNewLabel_15 = new JLabel("Remove Item:");
-		
-		lblNewLabel_16 = new JLabel("Add Quantity (+1):");
-		
-		btnNewButton_8 = new JButton("Add 1");
-		
-		lblNewLabel_13 = new JLabel("To Checkout:");
-		lblNewLabel_13.setFont(new Font("Lucida Grande", Font.BOLD | Font.ITALIC, 13));
-		
-		rdbtnNewRadioButton = new JRadioButton("See Product Description");
-		rdbtnNewRadioButton.setToolTipText("Select the item in the list for a product description!");
-		
-		rdbtnNewRadioButton_1 = new JRadioButton("See In-Stock Qty");
-		
-		btnNewButton_9 = new JButton("Checkout");
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -294,11 +232,8 @@ public class FirstGUI extends JFrame {
 												.addPreferredGap(ComponentPlacement.RELATED)
 												.addComponent(btnNewButton_6))))
 									.addGroup(gl_contentPane.createSequentialGroup()
-										.addGap(15)
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-											.addComponent(lblNewLabel_2)
-											.addComponent(rdbtnNewRadioButton_1)
-											.addComponent(rdbtnNewRadioButton))
+										.addGap(107)
+										.addComponent(lblNewLabel_2)
 										.addPreferredGap(ComponentPlacement.UNRELATED)
 										.addComponent(list, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)))))
 						.addGroup(gl_contentPane.createSequentialGroup()
@@ -313,113 +248,34 @@ public class FirstGUI extends JFrame {
 								.addComponent(lblNewLabel_9))
 							.addGap(6)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addComponent(btnNewButton_4)
-									.addGap(18)
-									.addComponent(btnNewButton_9, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE))
+								.addComponent(btnNewButton_4)
 								.addComponent(btnNewButton_3))
-							.addGap(45)))
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addGap(58)
-							.addComponent(txtpnWelcomeToOur, GroupLayout.PREFERRED_SIZE, 384, GroupLayout.PREFERRED_SIZE))
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addComponent(lblNewLabel_10)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textArea_1, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(lblNewLabel_12)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(73)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-										.addComponent(lblNewLabel_15)
-										.addComponent(lblNewLabel_16, GroupLayout.PREFERRED_SIZE, 117, GroupLayout.PREFERRED_SIZE))
-									.addGap(6)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-										.addGroup(gl_contentPane.createSequentialGroup()
-											.addComponent(btnNewButton_8, GroupLayout.PREFERRED_SIZE, 81, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.RELATED, 93, Short.MAX_VALUE)
-											.addComponent(lblNewLabel_11))
-										.addComponent(btnNewButton_7, GroupLayout.PREFERRED_SIZE, 93, GroupLayout.PREFERRED_SIZE))))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(textArea_3, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textArea_2, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-							.addGap(34)
-							.addComponent(lblNewLabel_7)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(list_1, GroupLayout.PREFERRED_SIZE, 260, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblNewLabel_13)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton_5)))
-					.addGap(78))
+							.addGap(167)))
+					.addGap(487))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(cbProducts, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnNewButton)
-								.addComponent(lblNewLabel_1)
-								.addComponent(btnNewButton_1)
-								.addComponent(lblNewLabel_5)))
-						.addComponent(txtpnWelcomeToOur, GroupLayout.PREFERRED_SIZE, 94, GroupLayout.PREFERRED_SIZE))
+					.addContainerGap(11, Short.MAX_VALUE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(cbProducts, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnNewButton)
+						.addComponent(lblNewLabel_1)
+						.addComponent(btnNewButton_1)
+						.addComponent(lblNewLabel_5))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addComponent(lblNewLabel_2)
-							.addGap(26)
-							.addComponent(rdbtnNewRadioButton)
-							.addGap(18)
-							.addComponent(rdbtnNewRadioButton_1))
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-							.addComponent(list, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
-							.addComponent(lblNewLabel_7)
-							.addComponent(list_1, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)))
+						.addComponent(lblNewLabel_2)
+						.addComponent(list, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(18)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(4)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-										.addComponent(textArea_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblNewLabel_10))
-									.addGap(18)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-										.addComponent(textArea_2, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblNewLabel_11))
-									.addGap(18)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-										.addComponent(textArea_3, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblNewLabel_12)))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-											.addComponent(textArea, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-											.addComponent(lblNewLabel_3))
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-											.addComponent(lblNewLabel_15)
-											.addComponent(btnNewButton_7)))
-									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-										.addComponent(btnNewButton_8)
-										.addComponent(lblNewLabel_16))))
-							.addGap(18)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnNewButton_5)
-								.addComponent(lblNewLabel_13)))
+								.addComponent(textArea, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblNewLabel_3)))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPane.createSequentialGroup()
@@ -441,8 +297,7 @@ public class FirstGUI extends JFrame {
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 								.addComponent(btnNewButton_4)
-								.addComponent(lblNewLabel_9)
-								.addComponent(btnNewButton_9))))
+								.addComponent(lblNewLabel_9))))
 					.addGap(364)
 					.addComponent(btnOrder)
 					.addContainerGap())
