@@ -14,6 +14,10 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.MutableComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
@@ -92,15 +96,30 @@ public class ProductSearch extends JFrame {
 
 	/**
 	 * Create the frame.
+	 * @throws FileNotFoundException 
 	 */
-	public ProductSearch() {
+	public ProductSearch() throws FileNotFoundException {
 		setTitle("PRODUCT SEARCH");
 		
 		initComponents();
 		createEvents();
+		fillComboFromTxtFile();
+	
 		
+	}
+	
+	public void fillComboFromTxtFile() throws FileNotFoundException {
 		
+		String filepath = "/Users/Zeina/Desktop/products.txt";
+		File file = new File(filepath);
+			
+		BufferedReader br = new BufferedReader(new FileReader(file));
+		Object[] products = br.lines().toArray();
 		
+		for(int i = 0; i < products.length; i++) {
+			String line = products[i].toString();
+			cbProducts.addItem(line);
+		}
 	}
 	
 	private void initComponents() {
@@ -133,7 +152,6 @@ public class ProductSearch extends JFrame {
 		
 		cbProducts = new JComboBox();
 		cbProducts.setMaximumRowCount(5);
-		cbProducts.setModel(new DefaultComboBoxModel(new String[] {"ID: 01, Name: Widget 1, Price: $5", "ID: 02, Name: Widget 2, Price: $10", "ID: 03, Name: Widget 3, Price: $15", "ID: 04, Name: Widget 4, Price: $20", "ID: 05, Name: Widget 5, Price: $25", "ID: 06 Name: Widget 6, Price: $30", "ID: 07, Name: Widget 7, Price: $40", "ID: 08, Name: Widget 8, Price: $50", "ID: 09, Name: Widget 9, Price: $60", "ID: 10, Name: Widget 10, Price: $70"}));
 		
 		btnAddList = new JButton("Add Now");
 		btnAddList.addActionListener(new ActionListener() {
