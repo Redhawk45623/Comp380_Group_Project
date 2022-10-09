@@ -47,32 +47,32 @@ public class FirstGUI extends JFrame {
 	private JButton btnOrder;
 	private final ButtonGroup btgEntree = new ButtonGroup();
 	private final ButtonGroup btgMeats = new ButtonGroup();
-	private JLabel lblNewLabel;
-	private JButton btnNewButton;
-	private JLabel lblNewLabel_1;
-	private JLabel lblNewLabel_5;
-	private JButton btnNewButton_1;
-	private JLabel lblNewLabel_2;
+	private JLabel lblProducts;
+	private JButton btnAddList;
+	private JLabel lblAdd2List;
+	private JLabel lblAdd2Cart;
+	private JButton btnAddCart;
+	private JLabel lblShopList;
 	private JLabel lblNewLabel_3;
-	private JTextArea textArea;
+	private JTextArea textAreaTotal;
 	private JMenuBar menuBar;
-	private JLabel lblNewLabel_4;
+	private JLabel lblAdd2Cart2;
 	private JLabel lblNewLabel_6;
-	private JButton btnNewButton_2;
+	private JButton btnAddCartFromList;
 	private JMenu mnNewMenu;
-	private JLabel lblNewLabel_8;
-	private JButton btnNewButton_3;
-	private JLabel lblNewLabel_9;
-	private JButton btnNewButton_4;
-	private JLabel lblNewLabel_14;
-	private JButton btnNewButton_6;
+	private JLabel lblAddAll;
+	private JButton btnAddAll;
+	private JLabel lblRemoveList;
+	private JButton btnRemove;
+	private JLabel lbAddQuantity;
+	private JButton btnAddQuantity;
 	private JMenu mnNewMenu_1;
 	private JMenu mnNewMenu_2;
 	private JComboBox cbProducts;
 	private String s2;
 	private Object s;
 	private String [] values;
-	private JList list;
+	private JList JListShopList;
 
 	/**
 	 * Launch the application.
@@ -129,20 +129,20 @@ public class FirstGUI extends JFrame {
 		
 		btnOrder = new JButton("Order");
 		
-		lblNewLabel = new JLabel("Available Products:");
+		lblProducts = new JLabel("Available Products:");
 		
 		cbProducts = new JComboBox();
 		cbProducts.setMaximumRowCount(5);
 		cbProducts.setModel(new DefaultComboBoxModel(new String[] {"ID: 01, Name: Widget 1, Price: $5", "ID: 02, Name: Widget 2, Price: $10", "ID: 03, Name: Widget 3, Price: $15", "ID: 04, Name: Widget 4, Price: $20", "ID: 05, Name: Widget 5, Price: $25", "ID: 06 Name: Widget 6, Price: $30", "ID: 07, Name: Widget 7, Price: $40", "ID: 08, Name: Widget 8, Price: $50", "ID: 09, Name: Widget 9, Price: $60", "ID: 10, Name: Widget 10, Price: $70"}));
 		
-		btnNewButton = new JButton("Add Now");
-		btnNewButton.addActionListener(new ActionListener() {
+		btnAddList = new JButton("Add Now");
+		btnAddList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				String name = (String)cbProducts.getSelectedItem();
 				JOptionPane.showMessageDialog(null, name);
 				
-				JOptionPane.showMessageDialog(null, list);
+				JOptionPane.showMessageDialog(null, JListShopList);
 				
 				
 			    //JOptionPane.showMessageDialog(null, name2);
@@ -151,17 +151,17 @@ public class FirstGUI extends JFrame {
 		
 		
 		
-		lblNewLabel_1 = new JLabel("Add to Shopping List:");
+		lblAdd2List = new JLabel("Add to Shopping List:");
 		
-		lblNewLabel_5 = new JLabel("Add to Cart:");
+		lblAdd2Cart = new JLabel("Add to Cart:");
 		
-		btnNewButton_1 = new JButton("Add Now");
+		btnAddCart = new JButton("Add Now");
 		
-		lblNewLabel_2 = new JLabel("Shopping List:");
+		lblShopList = new JLabel("Shopping List:");
 		
-		list = new JList();
-		list.setVisibleRowCount(5);
-		list.setModel(new AbstractListModel() {
+		JListShopList = new JList();
+		JListShopList.setVisibleRowCount(5);
+		JListShopList.setModel(new AbstractListModel() {
 			String[] values = new String[] {};
 			public int getSize() {
 				return values.length;
@@ -170,30 +170,30 @@ public class FirstGUI extends JFrame {
 				return values[index];
 			}
 		});
-		list.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		JListShopList.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
 		lblNewLabel_3 = new JLabel("Total = ");
 		
-		textArea = new JTextArea();
-		textArea.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		textAreaTotal = new JTextArea();
+		textAreaTotal.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
-		lblNewLabel_4 = new JLabel(" Add to Cart");
+		lblAdd2Cart2 = new JLabel(" Add to Cart");
 		
 		lblNewLabel_6 = new JLabel("from Shopping List:");
 		
-		btnNewButton_2 = new JButton("Add Now");
+		btnAddCartFromList = new JButton("Add Now");
 		
-		lblNewLabel_8 = new JLabel("Add all from List to Cart:");
+		lblAddAll = new JLabel("Add all from List to Cart:");
 		
-		btnNewButton_3 = new JButton("Add All");
+		btnAddAll = new JButton("Add All");
 		
-		lblNewLabel_9 = new JLabel("Remove from List:");
+		lblRemoveList = new JLabel("Remove from List:");
 		
-		btnNewButton_4 = new JButton("Remove");
+		btnRemove = new JButton("Remove");
 		
-		lblNewLabel_14 = new JLabel("Add Quantity (+1):");
+		lbAddQuantity = new JLabel("Add Quantity (+1):");
 		
-		btnNewButton_6 = new JButton("Add 1");
+		btnAddQuantity = new JButton("Add 1");
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
@@ -202,13 +202,13 @@ public class FirstGUI extends JFrame {
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(18)
-							.addComponent(lblNewLabel_1)
+							.addComponent(lblAdd2List)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton)
+							.addComponent(btnAddList)
 							.addGap(24)
-							.addComponent(lblNewLabel_5)
+							.addComponent(lblAdd2Cart)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton_1))
+							.addComponent(btnAddCart))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(51)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -218,38 +218,38 @@ public class FirstGUI extends JFrame {
 										.addGap(32)
 										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
 											.addComponent(lblNewLabel_6)
-											.addComponent(lblNewLabel_4)
-											.addComponent(lblNewLabel_14))
+											.addComponent(lblAdd2Cart2)
+											.addComponent(lbAddQuantity))
 										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 											.addGroup(gl_contentPane.createSequentialGroup()
 												.addGap(6)
-												.addComponent(btnNewButton_2)
+												.addComponent(btnAddCartFromList)
 												.addPreferredGap(ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
 												.addComponent(lblNewLabel_3)
 												.addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
+												.addComponent(textAreaTotal, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
 											.addGroup(gl_contentPane.createSequentialGroup()
 												.addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(btnNewButton_6))))
+												.addComponent(btnAddQuantity))))
 									.addGroup(gl_contentPane.createSequentialGroup()
 										.addGap(107)
-										.addComponent(lblNewLabel_2)
+										.addComponent(lblShopList)
 										.addPreferredGap(ComponentPlacement.UNRELATED)
-										.addComponent(list, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)))))
+										.addComponent(JListShopList, GroupLayout.DEFAULT_SIZE, 213, Short.MAX_VALUE)))))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(33)
-							.addComponent(lblNewLabel)
+							.addComponent(lblProducts)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(cbProducts, GroupLayout.PREFERRED_SIZE, 311, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(51)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblNewLabel_8)
-								.addComponent(lblNewLabel_9))
+								.addComponent(lblAddAll)
+								.addComponent(lblRemoveList))
 							.addGap(6)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnNewButton_4)
-								.addComponent(btnNewButton_3))
+								.addComponent(btnRemove)
+								.addComponent(btnAddAll))
 							.addGap(167)))
 					.addGap(487))
 		);
@@ -259,45 +259,45 @@ public class FirstGUI extends JFrame {
 					.addContainerGap(11, Short.MAX_VALUE)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(cbProducts, GroupLayout.PREFERRED_SIZE, 54, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel))
+						.addComponent(lblProducts))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnNewButton)
-						.addComponent(lblNewLabel_1)
-						.addComponent(btnNewButton_1)
-						.addComponent(lblNewLabel_5))
+						.addComponent(btnAddList)
+						.addComponent(lblAdd2List)
+						.addComponent(btnAddCart)
+						.addComponent(lblAdd2Cart))
 					.addGap(18)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(lblNewLabel_2)
-						.addComponent(list, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblShopList)
+						.addComponent(JListShopList, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(18)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(textArea, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+								.addComponent(textAreaTotal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblNewLabel_3)))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addGap(22)
 									.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-										.addComponent(btnNewButton_2)
+										.addComponent(btnAddCartFromList)
 										.addComponent(lblNewLabel_6)))
 								.addGroup(gl_contentPane.createSequentialGroup()
 									.addGap(6)
-									.addComponent(lblNewLabel_4)))
+									.addComponent(lblAdd2Cart2)))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNewLabel_14)
-								.addComponent(btnNewButton_6))
+								.addComponent(lbAddQuantity)
+								.addComponent(btnAddQuantity))
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnNewButton_3)
-								.addComponent(lblNewLabel_8))
+								.addComponent(btnAddAll)
+								.addComponent(lblAddAll))
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnNewButton_4)
-								.addComponent(lblNewLabel_9))))
+								.addComponent(btnRemove)
+								.addComponent(lblRemoveList))))
 					.addGap(364)
 					.addComponent(btnOrder)
 					.addContainerGap())
