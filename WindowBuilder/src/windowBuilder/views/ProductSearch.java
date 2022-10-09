@@ -28,6 +28,7 @@ import javax.swing.JScrollPane;
 import java.awt.Dimension;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.DefaultListModel;
 import javax.swing.DropMode;
 import javax.swing.JList;
 import java.awt.Rectangle;
@@ -153,12 +154,12 @@ public class ProductSearch extends JFrame {
 		cbProducts = new JComboBox();
 		cbProducts.setMaximumRowCount(5);
 		
+		DefaultListModel items = new DefaultListModel();
 		btnAddList = new JButton("Add Now");
 		btnAddList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				String name = (String)cbProducts.getSelectedItem();
-				JOptionPane.showMessageDialog(null, name);
+				items.addElement(cbProducts.getSelectedItem());
+				JListShopList.setModel(items);
 				
 			}
 		});
