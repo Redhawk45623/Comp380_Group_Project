@@ -80,7 +80,7 @@ public class ProductSearch extends JFrame {
 	private Object[] prices = new String[20];
 	int[] priceArray = new int[50];
 	private DefaultListModel items;
-	private int[] selectedIndex = new int[25];
+	//private int[] selectedIndex = new int[25];
 	private int counter2 = 0;
 	private int counter = 0;
 	private JLabel lblRemoveAllFrom;
@@ -147,23 +147,16 @@ public class ProductSearch extends JFrame {
 			Object k = prices[i];
 			int l = Integer.parseInt(k.toString());
 			prices[i] = l;
-			//JOptionPane.showMessageDialog(null,prices[i]);
+			
 		}
 	}
 	
-	public int addPrices(int x) {
-		Object first = prices[x];
-		int second = Integer.parseInt(first.toString());
-		priceArray[counter2] = second;
+	public void addPrices(int x) {
+		Object first = prices[x]; //this creates an object variable that is initialized from the passed parameter/prices[]
+		int second = Integer.parseInt(first.toString()); //this converts the object to integer
+		priceArray[counter2] = second; //this loads the priceArray[]
 		counter2++;
-		return second;
 		
-		/*Object x = prices[0];
-		Object q = prices[8];
-		int l = Integer.parseInt(x.toString());
-		int m = Integer.parseInt(q.toString());
-		int t = l + m;
-		JOptionPane.showMessageDialog(null,t);*/
 	}
 	
 	
@@ -206,26 +199,21 @@ public class ProductSearch extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				//items.add(0,cbProducts.getSelectedItem());  //This adds the item at the top of the shopping list	
 				
-				selectedIndex[counter] = cbProducts.getSelectedIndex();
-								
-				int T = selectedIndex[counter];
-				int S = addPrices(T);
-				//String R = String.valueOf(S);
+				int send = cbProducts.getSelectedIndex(); //creates variable index to pass to addPrices() method										                      
+				addPrices(send); //calls addPrices method
 				
 				sum = 0;
-				for(int i = 0; i < priceArray.length; i++){
+				for(int i = 0; i < priceArray.length; i++){ //loop to add up the total price that is in priceArray
 				  sum += priceArray[i];
 				}
-				//cbTotal.addItem("Total: " + sum);
-				textAreaTotal.setText("");
-				String z = Integer.toString(sum);
-				textAreaTotal.append("$" + z + ".00");
+				
+				textAreaTotal.setText(""); //clears text from textAreaTotal
+				String z = Integer.toString(sum); //converts integer to String needed to display in textAreaTotal box
+				textAreaTotal.append("$" + z + ".00"); //displays the current total price from the shopping list in the textAreaTotal box
 								
-				items.addElement(cbProducts.getSelectedItem());  //This adds the item to shopping list in sequential order
-				JListShopList.setModel(items);
-				
-				
-				
+				items.addElement(cbProducts.getSelectedItem());  //This adds the selected element from cbProducts to DefaultListModel items
+				JListShopList.setModel(items); //this lists the selected DefaultListModel items in the JListShopList shopping list
+							
 				//JOptionPane.showMessageDialog(null,S);
 			}
 		});	
@@ -234,8 +222,6 @@ public class ProductSearch extends JFrame {
 		btnAddQuantity = new JButton("Add 1");
 		btnAddQuantity.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
 				
 			}
 		});
@@ -269,9 +255,9 @@ public class ProductSearch extends JFrame {
 		btnRemoveAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				items.removeAllElements();
-				textAreaTotal.setText("");
-				priceArray = new int[50];
+				items.removeAllElements(); //this clears all elements from DefaultListModel items and from the shopping list
+				textAreaTotal.setText(""); //this resets the textAreaTotal box back to empty
+				priceArray = new int[50]; //this resets the priceArray[]
 			}
 		});
 		
@@ -440,6 +426,5 @@ public class ProductSearch extends JFrame {
 		// TODO Auto-generated method stub
 		
 	}
-	private static void addPopup(Component component, final JPopupMenu popup) {
-	}
+	
 }
