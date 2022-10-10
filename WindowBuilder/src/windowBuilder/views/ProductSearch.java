@@ -1,3 +1,9 @@
+/**
+ * This is the beginning of my javadoc notes
+ * 
+ * 
+ */
+
 package windowBuilder.views;
 
 import java.awt.EventQueue;
@@ -80,13 +86,12 @@ public class ProductSearch extends JFrame {
 	private Object[] prices = new String[20];
 	int[] priceArray = new int[50];
 	private DefaultListModel items;
-	//private int[] selectedIndex = new int[25];
 	private int counter2 = 0;
 	private int counter = 0;
 	private JLabel lblRemoveAllFrom;
-	private int priceTotal;
-	private int check = 0;
 	private int sum;
+	Object[] products;
+	Object[] productIDs;
 	
 	/**
 	 * Launch the application.
@@ -109,29 +114,34 @@ public class ProductSearch extends JFrame {
 	 * @throws FileNotFoundException 
 	 */
 	public ProductSearch() throws FileNotFoundException {
-		setTitle("PRODUCT SEARCH");
+		setTitle("--- PRODUCT SEARCH ---");
 		
 		initComponents();
 		createEvents();
-		fillComboFromTxtFile();
-		//addPrices();
-	
+		loadArraysFromTxtFile();
 		
 	}
 	
-	public void fillComboFromTxtFile() throws FileNotFoundException {
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 * @throws FileNotFoundException
+	 */	
+	public void loadArraysFromTxtFile() throws FileNotFoundException {
 		
 		String namepath = "/Users/Zeina/Desktop/productNames.txt";
 		File file = new File(namepath);
 			
 		BufferedReader br = new BufferedReader(new FileReader(file));
-		Object[] products = br.lines().toArray();
+		products = br.lines().toArray();
 		
 		String IDpath = "/Users/Zeina/Desktop/productIDs.txt";
 		File file2 = new File(IDpath);
 			
 		BufferedReader br2 = new BufferedReader(new FileReader(file2));
-		Object[] productIDs = br2.lines().toArray();
+		productIDs = br2.lines().toArray();
 		
 		String pricespath = "/Users/Zeina/Desktop/prices.txt";
 		File file3 = new File(pricespath);
@@ -139,18 +149,17 @@ public class ProductSearch extends JFrame {
 		BufferedReader br3 = new BufferedReader(new FileReader(file3));
 		prices = br3.lines().toArray();
 		
-		for(int i = 0; i < products.length; i++) {
-			String line = productIDs[i].toString();
-			String line2 = products[i].toString();
-			
-			cbProducts.addItem(line + " - " + line2 + " - " + "Price: " + "$" + prices[i] + ".00");
-			Object k = prices[i];
-			int l = Integer.parseInt(k.toString());
-			prices[i] = l;
-			
-		}
+		loadCombobox();
+		
 	}
 	
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 * @param x
+	 */	
 	public void addPrices(int x) {
 		Object first = prices[x]; //this creates an object variable that is initialized from the passed parameter/prices[]
 		int second = Integer.parseInt(first.toString()); //this converts the object to integer
@@ -159,7 +168,32 @@ public class ProductSearch extends JFrame {
 		
 	}
 	
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
+	public void loadCombobox() {
+		
+		for(int i = 0; i < products.length; i++) {
+			String line = productIDs[i].toString();
+			String line2 = products[i].toString();		
+			cbProducts.addItem(line + " - " + line2 + " - " + "Price: " + "$" + prices[i] + ".00");
+			Object k = prices[i];
+			int l = Integer.parseInt(k.toString());
+			prices[i] = l;
+			
+		}
+		
+	}
 	
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 */	
 	private void initComponents() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 525, 525);
@@ -193,44 +227,15 @@ public class ProductSearch extends JFrame {
 		
 		items = new DefaultListModel();
 		
-		btnAddList = new JButton("Add Now");
-		btnAddList.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
-				//items.add(0,cbProducts.getSelectedItem());  //This adds the item at the top of the shopping list	
-				
-				int send = cbProducts.getSelectedIndex(); //creates variable index to pass to addPrices() method										                      
-				addPrices(send); //calls addPrices method
-				
-				sum = 0;
-				for(int i = 0; i < priceArray.length; i++){ //loop to add up the total price that is in priceArray
-				  sum += priceArray[i];
-				}
-				
-				textAreaTotal.setText(""); //clears text from textAreaTotal
-				String z = Integer.toString(sum); //converts integer to String needed to display in textAreaTotal box
-				textAreaTotal.append("$" + z + ".00"); //displays the current total price from the shopping list in the textAreaTotal box
-								
-				items.addElement(cbProducts.getSelectedItem());  //This adds the selected element from cbProducts to DefaultListModel items
-				JListShopList.setModel(items); //this lists the selected DefaultListModel items in the JListShopList shopping list
-							
-				//JOptionPane.showMessageDialog(null,S);
-			}
-		});	
-		
+		btnAddList = new JButton("Add Now");	
 		
 		btnAddQuantity = new JButton("Add 1");
-		btnAddQuantity.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
 				
-			}
-		});
-		
 		lblAdd2List = new JLabel("Add to Shopping List:");
 		
 		lblAdd2Cart = new JLabel("Add to Cart:");
 		
-		btnAddCart = new JButton("Add Now");
+		btnAddCart = new JButton("Add To Cart");
 		
 		lblShopList = new JLabel("Shopping List:");
 		
@@ -252,38 +257,13 @@ public class ProductSearch extends JFrame {
 		lblRemoveItemList = new JLabel("Remove Item from List:");
 		
 		btnRemoveAll = new JButton("Remove All");
-		btnRemoveAll.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
 				
-				items.removeAllElements(); //this clears all elements from DefaultListModel items and from the shopping list
-				textAreaTotal.setText(""); //this resets the textAreaTotal box back to empty
-				priceArray = new int[50]; //this resets the priceArray[]
-			}
-		});
-		
 		lbAddQuantity = new JLabel("Add Quantity (+1):");
 		
 		scrollPane = new JScrollPane();
 		
 		JButton btnRemove_1 = new JButton("Remove Item");
-		btnRemove_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-							
-				try {
-					int x = JListShopList.getSelectedIndex();
-					items.remove(x);
-					
-					/*for(int i = x; i < priceArray.length - 1; i++ ) {
-						priceArray[i] = priceArray[i + 1];
-					}*/
-									
-		        } catch (Exception d) {
-		        	JOptionPane.showMessageDialog(null,"Please Select Item From Shopping List to Remove");
-		        }
 				
-			}
-		});
-		
 		lblRemoveAllFrom = new JLabel("    Remove All from List:");
 		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
@@ -292,56 +272,58 @@ public class ProductSearch extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(33)
-							.addComponent(lblProducts)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(cbProducts, GroupLayout.PREFERRED_SIZE, 313, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(30)
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-									.addGroup(gl_contentPane.createSequentialGroup()
-										.addGap(66)
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-											.addComponent(lblAdd2Cart2)
-											.addComponent(lblShopList)))
-									.addComponent(lblAddAll, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addGroup(gl_contentPane.createSequentialGroup()
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-											.addComponent(lblRemoveItemList, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
-											.addComponent(lblRemoveAllFrom, GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
-										.addPreferredGap(ComponentPlacement.RELATED)))
-								.addComponent(lbAddQuantity)
-								.addComponent(lblFromShopList))
-							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(12)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-										.addGroup(Alignment.LEADING, gl_contentPane.createSequentialGroup()
-											.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-												.addComponent(btnAddCartFromList, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(btnAddQuantity, Alignment.LEADING)
-												.addComponent(btnAddAll, Alignment.LEADING))
-											.addPreferredGap(ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
-											.addComponent(lblNewLabel_3)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(textAreaTotal, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
-										.addComponent(btnRemove_1, Alignment.LEADING)
-										.addComponent(btnRemoveAll, Alignment.LEADING)))
-								.addGroup(gl_contentPane.createSequentialGroup()
-									.addGap(18)
-									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnOrder))
-						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(18)
 							.addComponent(lblAdd2List)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnAddList)
-							.addGap(30)
+							.addGap(18)
 							.addComponent(lblAdd2Cart)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnAddCart)))
+							.addComponent(btnAddCart))
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addGap(30)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+										.addGroup(gl_contentPane.createSequentialGroup()
+											.addGap(66)
+											.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+												.addComponent(lblAdd2Cart2)
+												.addComponent(lblShopList)))
+										.addComponent(lblAddAll, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addGroup(gl_contentPane.createSequentialGroup()
+											.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+												.addComponent(lblRemoveItemList, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+												.addComponent(lblRemoveAllFrom, GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
+											.addPreferredGap(ComponentPlacement.RELATED)))
+									.addComponent(lbAddQuantity)
+									.addComponent(lblFromShopList))
+								.addGap(7)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 270, GroupLayout.PREFERRED_SIZE)
+									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_contentPane.createSequentialGroup()
+											.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+												.addComponent(btnAddCartFromList, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(btnAddQuantity, Alignment.LEADING)
+												.addComponent(btnAddAll, Alignment.LEADING))
+											.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+												.addGroup(gl_contentPane.createSequentialGroup()
+													.addGap(15)
+													.addComponent(btnOrder))
+												.addGroup(gl_contentPane.createSequentialGroup()
+													.addGap(59)
+													.addComponent(lblNewLabel_3)
+													.addPreferredGap(ComponentPlacement.UNRELATED)
+													.addComponent(textAreaTotal, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))))
+										.addComponent(btnRemove_1)
+										.addComponent(btnRemoveAll)))
+								.addPreferredGap(ComponentPlacement.RELATED, 9, Short.MAX_VALUE))
+							.addGroup(gl_contentPane.createSequentialGroup()
+								.addGap(33)
+								.addComponent(lblProducts)
+								.addPreferredGap(ComponentPlacement.RELATED)
+								.addComponent(cbProducts, GroupLayout.PREFERRED_SIZE, 324, GroupLayout.PREFERRED_SIZE))))
 					.addGap(35))
 		);
 		gl_contentPane.setVerticalGroup(
@@ -364,15 +346,17 @@ public class ProductSearch extends JFrame {
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(6)
-							.addComponent(lblAdd2Cart2))
-						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(18)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 								.addComponent(btnAddCartFromList)
-								.addComponent(textAreaTotal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(lblNewLabel_3)
-								.addComponent(lblFromShopList))))
+								.addComponent(lblFromShopList)))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(6)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+									.addComponent(textAreaTotal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lblNewLabel_3))
+								.addComponent(lblAdd2Cart2))))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnAddQuantity)
@@ -416,13 +400,63 @@ public class ProductSearch extends JFrame {
 	}
 
 	private void createEvents() {
-		btnOrder.addActionListener(new ActionListener() {
+		
+		
+		btnAddQuantity.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				cbProducts.getSelectedItem();
+				int send = cbProducts.getSelectedIndex(); //creates variable index to pass to addPrices() method										                      
+				addPrices(send);
 				
+				items.addElement(JListShopList.getSelectedValue());
+				
+				int x = JListShopList.getSelectedIndex();
+				int y = priceArray[x];
+								
+				int newTotal = y + sum;
+				textAreaTotal.setText("");
+				textAreaTotal.append("$" + newTotal + ".00");
+				
+				sum = newTotal;
+				
+	
 			}
 		});
+		
+		btnAddList.addActionListener(new ActionListener() {
+			
+			public void actionPerformed(ActionEvent e) {
+				//items.add(0,cbProducts.getSelectedItem());  //This adds the item at the top of the shopping list	
+				
+				int send = cbProducts.getSelectedIndex(); //creates variable index to pass to addPrices() method										                      
+				addPrices(send); //calls addPrices method
+				
+				sum = 0;
+				for(int i = 0; i < priceArray.length; i++){ //loop to add up the total price that is in priceArray
+				  sum += priceArray[i];
+				}
+				
+				textAreaTotal.setText(""); //clears text from textAreaTotal
+				String z = Integer.toString(sum); //converts integer to String needed to display in textAreaTotal box
+				textAreaTotal.append("$" + z + ".00"); //displays the current total price from the shopping list in the textAreaTotal box
+								
+				items.addElement(cbProducts.getSelectedItem());  //This adds the selected element from cbProducts to DefaultListModel items
+				JListShopList.setModel(items); //this lists the selected DefaultListModel items in the JListShopList shopping list
+							
+				//JOptionPane.showMessageDialog(null,S);
+			}
+		});	
+		
+		btnRemoveAll.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				items.removeAllElements(); //this clears all elements from DefaultListModel items and from the shopping list
+				textAreaTotal.setText(""); //this resets the textAreaTotal box back to empty
+				priceArray = new int[50]; //this resets the priceArray[]
+			}
+		});
+
+
 		// TODO Auto-generated method stub
 		
 	}
