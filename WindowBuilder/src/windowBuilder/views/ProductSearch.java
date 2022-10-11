@@ -54,6 +54,9 @@ import javax.swing.UIManager;
 import javax.swing.JPopupMenu;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import javax.swing.ListSelectionModel;
+import java.awt.Choice;
+import javax.swing.JMenuItem;
 
 public class ProductSearch extends JFrame {
 
@@ -92,6 +95,11 @@ public class ProductSearch extends JFrame {
 	private int sum;
 	Object[] products;
 	Object[] productIDs;
+	private JMenuItem mntmNewMenuItem;
+	private JMenuItem mntmNewMenuItem_1;
+	private JMenuItem mntmNewMenuItem_2;
+	private JMenu mnNewMenu;
+	private JMenuItem mntmNewMenuItem_3;
 	
 	/**
 	 * Launch the application.
@@ -114,8 +122,8 @@ public class ProductSearch extends JFrame {
 	 * @throws FileNotFoundException 
 	 */
 	public ProductSearch() throws FileNotFoundException {
-		setTitle("--- PRODUCT SEARCH ---");
 		
+		setTitle("--- PRODUCT SEARCH ---");	
 		initComponents();
 		createEvents();
 		loadArraysFromTxtFile();
@@ -204,15 +212,31 @@ public class ProductSearch extends JFrame {
 		menuBar.setName("");
 		setJMenuBar(menuBar);
 		
-		menuProductSearch = new JMenu("Product Search");
+		menuProductSearch = new JMenu("Home");
 		menuProductSearch.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		menuBar.add(menuProductSearch);
 		
-		menuShopCart = new JMenu("Shopping Cart");
+		mntmNewMenuItem_1 = new JMenuItem("To Main Page");
+		menuProductSearch.add(mntmNewMenuItem_1);
+		
+		menuShopCart = new JMenu("Products");
 		menuBar.add(menuShopCart);
 		
-		menuHelp = new JMenu("Help");
+		mntmNewMenuItem = new JMenuItem("Search");
+		menuShopCart.add(mntmNewMenuItem);
+		
+		
+		menuHelp = new JMenu("Cart");
 		menuBar.add(menuHelp);
+		
+		mntmNewMenuItem_2 = new JMenuItem("New menu item");
+		menuHelp.add(mntmNewMenuItem_2);
+		
+		mnNewMenu = new JMenu("Help");
+		menuBar.add(mnNewMenu);
+		
+		mntmNewMenuItem_3 = new JMenuItem("FAQs");
+		mnNewMenu.add(mntmNewMenuItem_3);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -248,7 +272,7 @@ public class ProductSearch extends JFrame {
 		
 		lblFromShopList = new JLabel("from Shopping List:");
 		
-		btnAddCartFromList = new JButton("Add Now");
+		btnAddCartFromList = new JButton("Add 1");
 		
 		lblAddAll = new JLabel("Add all from List to Cart:");
 		
@@ -280,50 +304,49 @@ public class ProductSearch extends JFrame {
 							.addComponent(lblAdd2Cart)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnAddCart))
-						.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addGap(30)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
-										.addGroup(gl_contentPane.createSequentialGroup()
-											.addGap(66)
-											.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-												.addComponent(lblAdd2Cart2)
-												.addComponent(lblShopList)))
-										.addComponent(lblAddAll, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-										.addGroup(gl_contentPane.createSequentialGroup()
-											.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-												.addComponent(lblRemoveItemList, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
-												.addComponent(lblRemoveAllFrom, GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
-											.addPreferredGap(ComponentPlacement.RELATED)))
-									.addComponent(lbAddQuantity)
-									.addComponent(lblFromShopList))
-								.addGap(7)
-								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 270, GroupLayout.PREFERRED_SIZE)
-									.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_contentPane.createSequentialGroup()
-											.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(30)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+									.addGroup(gl_contentPane.createSequentialGroup()
+										.addGap(66)
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+											.addComponent(lblAdd2Cart2)
+											.addComponent(lblShopList)))
+									.addComponent(lblAddAll, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addGroup(gl_contentPane.createSequentialGroup()
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+											.addComponent(lblRemoveItemList, GroupLayout.PREFERRED_SIZE, 150, GroupLayout.PREFERRED_SIZE)
+											.addComponent(lblRemoveAllFrom, GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE))
+										.addPreferredGap(ComponentPlacement.RELATED)))
+								.addComponent(lbAddQuantity)
+								.addComponent(lblFromShopList))
+							.addGap(7)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 270, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+									.addGroup(gl_contentPane.createSequentialGroup()
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+											.addComponent(btnAddAll, Alignment.LEADING)
+											.addGroup(Alignment.LEADING, gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
 												.addComponent(btnAddCartFromList, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(btnAddQuantity, Alignment.LEADING)
-												.addComponent(btnAddAll, Alignment.LEADING))
-											.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-												.addGroup(gl_contentPane.createSequentialGroup()
-													.addGap(15)
-													.addComponent(btnOrder))
-												.addGroup(gl_contentPane.createSequentialGroup()
-													.addGap(59)
-													.addComponent(lblNewLabel_3)
-													.addPreferredGap(ComponentPlacement.UNRELATED)
-													.addComponent(textAreaTotal, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))))
-										.addComponent(btnRemove_1)
-										.addComponent(btnRemoveAll)))
-								.addPreferredGap(ComponentPlacement.RELATED, 9, Short.MAX_VALUE))
-							.addGroup(gl_contentPane.createSequentialGroup()
-								.addGap(33)
-								.addComponent(lblProducts)
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addComponent(cbProducts, GroupLayout.PREFERRED_SIZE, 324, GroupLayout.PREFERRED_SIZE))))
+												.addComponent(btnAddQuantity, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+											.addGroup(gl_contentPane.createSequentialGroup()
+												.addGap(15)
+												.addComponent(btnOrder))
+											.addGroup(gl_contentPane.createSequentialGroup()
+												.addGap(65)
+												.addComponent(lblNewLabel_3)
+												.addPreferredGap(ComponentPlacement.RELATED)
+												.addComponent(textAreaTotal, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))))
+									.addComponent(btnRemove_1)
+									.addComponent(btnRemoveAll))))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(33)
+							.addComponent(lblProducts)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(cbProducts, GroupLayout.PREFERRED_SIZE, 324, GroupLayout.PREFERRED_SIZE)))
 					.addGap(35))
 		);
 		gl_contentPane.setVerticalGroup(
@@ -460,5 +483,4 @@ public class ProductSearch extends JFrame {
 		// TODO Auto-generated method stub
 		
 	}
-	
 }
