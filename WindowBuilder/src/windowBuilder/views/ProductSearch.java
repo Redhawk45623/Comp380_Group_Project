@@ -100,6 +100,7 @@ public class ProductSearch extends JFrame {
 	private JMenuItem mntmNewMenuItem_2;
 	private JMenu mnNewMenu;
 	private JMenuItem mntmNewMenuItem_3;
+	private JLabel lblNewLabel;
 	
 	/**
 	 * Launch the application.
@@ -217,25 +218,29 @@ public class ProductSearch extends JFrame {
 		menuBar.add(menuProductSearch);
 		
 		mntmNewMenuItem_1 = new JMenuItem("To Main Page");
+		
 		menuProductSearch.add(mntmNewMenuItem_1);
 		
 		menuShopCart = new JMenu("Products");
 		menuBar.add(menuShopCart);
 		
 		mntmNewMenuItem = new JMenuItem("Search");
+		
 		menuShopCart.add(mntmNewMenuItem);
 		
 		
 		menuHelp = new JMenu("Cart");
 		menuBar.add(menuHelp);
 		
-		mntmNewMenuItem_2 = new JMenuItem("New menu item");
+		mntmNewMenuItem_2 = new JMenuItem("View cart");
+		
 		menuHelp.add(mntmNewMenuItem_2);
 		
 		mnNewMenu = new JMenu("Help");
 		menuBar.add(mnNewMenu);
 		
 		mntmNewMenuItem_3 = new JMenuItem("FAQs");
+		
 		mnNewMenu.add(mntmNewMenuItem_3);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -290,6 +295,8 @@ public class ProductSearch extends JFrame {
 				
 		lblRemoveAllFrom = new JLabel("    Remove All from List:");
 		
+		lblNewLabel = new JLabel("(Does not S&H or taxes)");
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -326,20 +333,23 @@ public class ProductSearch extends JFrame {
 								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 270, GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 									.addGroup(gl_contentPane.createSequentialGroup()
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
-											.addComponent(btnAddAll, Alignment.LEADING)
-											.addGroup(Alignment.LEADING, gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+											.addComponent(btnAddAll)
+											.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
 												.addComponent(btnAddCartFromList, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 												.addComponent(btnAddQuantity, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-											.addGroup(gl_contentPane.createSequentialGroup()
-												.addGap(15)
-												.addComponent(btnOrder))
+										.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING, false)
 											.addGroup(gl_contentPane.createSequentialGroup()
 												.addGap(65)
 												.addComponent(lblNewLabel_3)
 												.addPreferredGap(ComponentPlacement.RELATED)
-												.addComponent(textAreaTotal, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))))
+												.addComponent(textAreaTotal, GroupLayout.PREFERRED_SIZE, 59, GroupLayout.PREFERRED_SIZE))
+											.addGroup(gl_contentPane.createSequentialGroup()
+												.addGap(15)
+												.addComponent(btnOrder))
+											.addGroup(gl_contentPane.createSequentialGroup()
+												.addGap(33)
+												.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
 									.addComponent(btnRemove_1)
 									.addComponent(btnRemoveAll))))
 						.addGroup(gl_contentPane.createSequentialGroup()
@@ -372,22 +382,24 @@ public class ProductSearch extends JFrame {
 							.addGap(18)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 								.addComponent(btnAddCartFromList)
-								.addComponent(lblFromShopList)))
+								.addComponent(lblFromShopList))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnAddQuantity)
+								.addComponent(lbAddQuantity))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblAddAll)
+								.addComponent(btnAddAll)))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(6)
 							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
 									.addComponent(textAreaTotal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 									.addComponent(lblNewLabel_3))
-								.addComponent(lblAdd2Cart2))))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnAddQuantity)
-						.addComponent(lbAddQuantity))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblAddAll)
-						.addComponent(btnAddAll))
+								.addComponent(lblAdd2Cart2))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblNewLabel)))
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addGap(381)
@@ -476,6 +488,30 @@ public class ProductSearch extends JFrame {
 				items.removeAllElements(); //this clears all elements from DefaultListModel items and from the shopping list
 				textAreaTotal.setText(""); //this resets the textAreaTotal box back to empty
 				priceArray = new int[50]; //this resets the priceArray[]
+			}
+		});
+		
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null,"The Main Page option was clicked!");
+			}
+		});
+		
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null,"The Search option was clicked!");
+			}
+		});
+		
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null,"The View Cart option was clicked!");
+			}
+		});
+		
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JOptionPane.showMessageDialog(null,"The FAQs option was clicked!");
 			}
 		});
 
