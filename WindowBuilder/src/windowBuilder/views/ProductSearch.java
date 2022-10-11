@@ -74,15 +74,15 @@ public class ProductSearch extends JFrame {
 	private JLabel lblAdd2Cart2;
 	private JLabel lblFromShopList;
 	private JButton btnAddCartFromList;
-	private JMenu menuProductSearch;
+	private JMenu menuHome;
 	private JLabel lblAddAll;
 	private JButton btnAddAll;
 	private JLabel lblRemoveItemList;
 	private JButton btnRemoveAll;
 	private JLabel lbAddQuantity;
 	private JButton btnAddQuantity;
-	private JMenu menuShopCart;
-	private JMenu menuHelp;
+	private JMenu menuProducts;
+	private JMenu menuCart;
 	private JComboBox cbProducts;
 	private JList JListShopList;
 	private JScrollPane scrollPane;
@@ -95,11 +95,11 @@ public class ProductSearch extends JFrame {
 	private int sum;
 	Object[] products;
 	Object[] productIDs;
-	private JMenuItem mntmNewMenuItem;
-	private JMenuItem mntmNewMenuItem_1;
-	private JMenuItem mntmNewMenuItem_2;
-	private JMenu mnNewMenu;
-	private JMenuItem mntmNewMenuItem_3;
+	private JMenuItem menuItemSearch;
+	private JMenuItem menuItemMainPage;
+	private JMenuItem menuItemViewCart;
+	private JMenu menuHelp;
+	private JMenuItem menuItemFAQs;
 	private JLabel lblNewLabel;
 	
 	/**
@@ -213,35 +213,35 @@ public class ProductSearch extends JFrame {
 		menuBar.setName("");
 		setJMenuBar(menuBar);
 		
-		menuProductSearch = new JMenu("Home");
-		menuProductSearch.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		menuBar.add(menuProductSearch);
+		menuHome = new JMenu("Home");
+		menuHome.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		menuBar.add(menuHome);
 		
-		mntmNewMenuItem_1 = new JMenuItem("To Main Page");
+		menuItemMainPage = new JMenuItem("To Main Page");
 		
-		menuProductSearch.add(mntmNewMenuItem_1);
+		menuHome.add(menuItemMainPage);
 		
-		menuShopCart = new JMenu("Products");
-		menuBar.add(menuShopCart);
+		menuProducts = new JMenu("Products");
+		menuBar.add(menuProducts);
 		
-		mntmNewMenuItem = new JMenuItem("Search");
+		menuItemSearch = new JMenuItem("Search");
 		
-		menuShopCart.add(mntmNewMenuItem);
+		menuProducts.add(menuItemSearch);
 		
 		
-		menuHelp = new JMenu("Cart");
+		menuCart = new JMenu("Cart");
+		menuBar.add(menuCart);
+		
+		menuItemViewCart = new JMenuItem("View cart");
+		
+		menuCart.add(menuItemViewCart);
+		
+		menuHelp = new JMenu("Help");
 		menuBar.add(menuHelp);
 		
-		mntmNewMenuItem_2 = new JMenuItem("View cart");
+		menuItemFAQs = new JMenuItem("FAQs");
 		
-		menuHelp.add(mntmNewMenuItem_2);
-		
-		mnNewMenu = new JMenu("Help");
-		menuBar.add(mnNewMenu);
-		
-		mntmNewMenuItem_3 = new JMenuItem("FAQs");
-		
-		mnNewMenu.add(mntmNewMenuItem_3);
+		menuHelp.add(menuItemFAQs);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -491,25 +491,25 @@ public class ProductSearch extends JFrame {
 			}
 		});
 		
-		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+		menuItemMainPage.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null,"The Main Page option was clicked!");
 			}
 		});
 		
-		mntmNewMenuItem.addActionListener(new ActionListener() {
+		menuItemSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null,"The Search option was clicked!");
 			}
 		});
 		
-		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+		menuItemViewCart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null,"The View Cart option was clicked!");
 			}
 		});
 		
-		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+		menuItemFAQs.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				JOptionPane.showMessageDialog(null,"The FAQs option was clicked!");
 			}
