@@ -1,2 +1,1 @@
-# Comp380_Group_Project
-#This is the ongoing Product Search section currently in progress...
+
