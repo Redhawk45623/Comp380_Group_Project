@@ -23,6 +23,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import javax.swing.ButtonGroup;
@@ -128,21 +129,36 @@ public class ProductSearch extends JFrame {
 		String namepath = "/Users/Zeina/Desktop/productNames.txt";
 		File file = new File(namepath);
 			
-		BufferedReader br = new BufferedReader(new FileReader(file));
-		products = br.lines().toArray();
-		
+		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+			products = br.lines().toArray();
+		} catch (FileNotFoundException e) {
+			throw e;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String IDpath = "/Users/Zeina/Desktop/productIDs.txt";
 		File file2 = new File(IDpath);
 			
-		BufferedReader br2 = new BufferedReader(new FileReader(file2));
-		productIDs = br2.lines().toArray();
-		
+		try (BufferedReader br2 = new BufferedReader(new FileReader(file2))) {
+			productIDs = br2.lines().toArray();
+		} catch (FileNotFoundException e) {
+			throw e;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		String pricespath = "/Users/Zeina/Desktop/prices.txt";
 		File file3 = new File(pricespath);
 			
-		BufferedReader br3 = new BufferedReader(new FileReader(file3));
-		prices = br3.lines().toArray();
-		
+		try (BufferedReader br3 = new BufferedReader(new FileReader(file3))) {
+			prices = br3.lines().toArray();
+		} catch (FileNotFoundException e) {
+			throw e;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		loadCombobox();
 		
 	}
@@ -187,6 +203,12 @@ public class ProductSearch extends JFrame {
 		
 	}
 	
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
 	public void setPriceTotal() {
 		
 		textAreaTotal.setText(""); //clears text from textAreaTotal
@@ -257,8 +279,12 @@ public class ProductSearch extends JFrame {
 		
 	}
 	
-	
-	
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
 	private void initComponents() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 525, 525);
