@@ -56,8 +56,6 @@ public class productSearchClass extends JPanel {
 	private DefaultListModel items_2;
 	private DefaultListModel items_3;
 	private JList JListShopList_1;
-	private JButton btnAddList;
-	private JButton btnRemoveAll;
 	private JComboBox cbProducts_1;
 	private JButton btnAddList_1;
 	private JButton btnAddCart;
