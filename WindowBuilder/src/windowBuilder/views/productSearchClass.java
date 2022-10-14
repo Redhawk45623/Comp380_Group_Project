@@ -48,7 +48,6 @@ public class productSearchClass extends JPanel {
 	public Object[] productIDs;
 	public Object[] products;
 	public static Object[] prices = new String[20];
-	private JTextArea textAreaTotal;
 	private int sum;
 	int[] priceArray = new int[50];
 	private int counter = 0;
@@ -208,6 +207,12 @@ public class productSearchClass extends JPanel {
 			} 
 		});
 		
+		/**
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
 		btnAddCart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -225,6 +230,12 @@ public class productSearchClass extends JPanel {
 			}
 		});
 		
+		/**
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
 		btnAddAll.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 							
@@ -245,7 +256,12 @@ public class productSearchClass extends JPanel {
 			}
 		});
 		
-		
+		/**
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
 		btnRemoveAll_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
