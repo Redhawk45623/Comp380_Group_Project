@@ -20,7 +20,7 @@ public class eCommerceMain extends JFrame {
 
 	private JPanel contentPane;
 	JPanel search_panel = new productSearchClass();
-
+	JPanel cart_panel = new cartClass();
 	/**
 	 * 
 	 * 
@@ -76,7 +76,6 @@ public class eCommerceMain extends JFrame {
 				
 		tabbedPane.addTab("Product Search", null, search_panel, null);
 		
-		JPanel cart_panel = new JPanel();
 		tabbedPane.addTab("View Cart", null, cart_panel, null);
 		
 		JPanel checkout_panel = new JPanel();
