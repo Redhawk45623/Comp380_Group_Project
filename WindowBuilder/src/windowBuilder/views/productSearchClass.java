@@ -15,7 +15,9 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import javax.swing.ListModel;
 import javax.swing.JButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -44,12 +46,14 @@ public class productSearchClass extends JPanel {
 	
 	public Object[] productIDs;
 	public Object[] products;
-	public Object[] prices = new String[20];
+	public static Object[] prices = new String[20];
 	private JTextArea textAreaTotal;
 	private int sum;
 	int[] priceArray = new int[50];
 	private int counter = 0;
 	private DefaultListModel items_1;
+	private DefaultListModel items_2;
+	private DefaultListModel items_3;
 	private JList JListShopList_1;
 	private JButton btnAddList;
 	private JButton btnRemoveAll;
@@ -59,8 +63,8 @@ public class productSearchClass extends JPanel {
 	private JButton btnAddAll;
 	private JButton btnRemoveAll_1;
 	private JTextArea textAreaTotal_1;
-	
-	
+	private boolean check = true;
+	private boolean check2 = true;
 	/**
 	 * 
 	 * 
@@ -169,6 +173,7 @@ public class productSearchClass extends JPanel {
 		textAreaTotal_1.append("$" + z + ".00"); //displays the current total price from the shopping list in the textAreaTotal box
 		
 	}
+	
 	/**
 	 * 
 	 * 
@@ -184,14 +189,63 @@ public class productSearchClass extends JPanel {
 				addPrices(send); //calls addPrices method
 				
 				setPriceTotal();
-								
+				
+				if (check == true) {
+				items_3.addElement(cbProducts_1.getSelectedItem()); 
+				
+				}
+				else {
+					items_1.addElement(cbProducts_1.getSelectedItem());  //This adds the selected element from cbProducts to DefaultListModel items
+					JListShopList_1.setModel(items_1);
+					
+				}
+				
+				if (check == true ) {
 				items_1.addElement(cbProducts_1.getSelectedItem());  //This adds the selected element from cbProducts to DefaultListModel items
 				JListShopList_1.setModel(items_1); //this lists the selected DefaultListModel items in the JListShopList shopping list
 							
 				//JOptionPane.showMessageDialog(null,S);
+				}
+			} 
+		});
+		
+		btnAddCart.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				int index = cbProducts_1.getSelectedIndex();
+				cartClass.addCartprice(index);
+				
+				cartClass.setCartPriceTotal();
+				
+				items_2.addElement(cbProducts_1.getSelectedItem());
+				cartClass.JListCartList.setModel(items_2);
+				
+				//addCartprice(index);
+				//JOptionPane.showMessageDialog(null,c);
 				
 			}
 		});
+		
+		btnAddAll.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+							
+				if (check == true) {
+				cartClass.JListCartList.setModel(items_3);
+				check = false;
+				items_1.clear();
+				textAreaTotal_1.setText(""); //this resets the textAreaTotal box back to empty
+				priceArray = new int[50]; 
+				JOptionPane.showMessageDialog(null,"Moved all items in shopping list to Cart!");
+				}
+				else {
+					//items_3.removeAllElements();	
+					
+				}
+				//JOptionPane.showMessageDialog(null,x);
+				
+			}
+		});
+		
 		
 		btnRemoveAll_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -235,6 +289,8 @@ public class productSearchClass extends JPanel {
 		cbProducts_1.setMaximumRowCount(5);
 		
 		items_1 = new DefaultListModel();
+		items_2 = new DefaultListModel();
+		items_3 = new DefaultListModel();
 		
 		JLabel lblProducts = new JLabel("Available Products:");
 		
