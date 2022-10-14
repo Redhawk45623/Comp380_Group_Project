@@ -1,3 +1,9 @@
+/**
+ * 
+ * 
+ * 
+ * 
+ */
 package windowBuilder.views;
 
 import javax.swing.JPanel;
