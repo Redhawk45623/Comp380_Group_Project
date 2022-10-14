@@ -172,6 +172,12 @@ public class productSearchClass extends JPanel {
 		
 	}
 	
+	protected static <T> void addTo(ListModel<T> from, DefaultListModel<T> to) {
+	    for (int index = 0; index < from.getSize(); index++) {
+	        to.addElement(from.getElementAt(index));
+	    }
+	}
+	
 	/**
 	 * 
 	 * 
@@ -248,8 +254,15 @@ public class productSearchClass extends JPanel {
 				JOptionPane.showMessageDialog(null,"Moved all items in shopping list to Cart!");
 				}
 				else {
-					//items_3.removeAllElements();	
-					
+				 
+				cartClass.JListCartList.removeAll();
+				addTo(items_1, items_3);			
+			
+				items_1.clear();
+				textAreaTotal_1.setText(""); //this resets the textAreaTotal box back to empty
+				priceArray = new int[50];
+				JOptionPane.showMessageDialog(null,"Moved all items in shopping list to Cart!");
+				
 				}
 				//JOptionPane.showMessageDialog(null,x);
 				
