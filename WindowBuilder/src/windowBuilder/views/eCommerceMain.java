@@ -16,6 +16,14 @@ import javax.swing.JTabbedPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 
+/**
+ * 
+ * 
+ * 
+ * 
+ * @author Ralph Ramirez
+ *
+ */
 public class eCommerceMain extends JFrame {
 
 	private JPanel contentPane;
