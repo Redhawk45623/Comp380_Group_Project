@@ -63,6 +63,8 @@ public class productSearchClass extends JPanel {
 	private JTextArea textAreaTotal_1;
 	private boolean check = true;
 	private boolean check2 = true;
+	private int remember;
+	public static int addThemUp;
 	/**
 	 * 
 	 * 
@@ -172,6 +174,15 @@ public class productSearchClass extends JPanel {
 		
 	}
 	
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 * @param <T>
+	 * @param from
+	 * @param to
+	 */
 	protected static <T> void addTo(ListModel<T> from, DefaultListModel<T> to) {
 	    for (int index = 0; index < from.getSize(); index++) {
 	        to.addElement(from.getElementAt(index));
@@ -246,23 +257,33 @@ public class productSearchClass extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 							
 				if (check == true) {
-				cartClass.JListCartList.setModel(items_3);
-				check = false;
-				items_1.clear();
-				textAreaTotal_1.setText(""); //this resets the textAreaTotal box back to empty
-				priceArray = new int[50]; 
-				JOptionPane.showMessageDialog(null,"Moved all items in shopping list to Cart!");
+					
+					cartClass.textAreaCartTotal.append("$" + sum + ".00");
+					remember = sum;
+					cartClass.JListCartList.setModel(items_3);
+					check = false;
+					items_1.clear();
+					textAreaTotal_1.setText(""); //this resets the textAreaTotal box back to empty
+					priceArray = new int[50]; 
+					JOptionPane.showMessageDialog(null,"Moved all items in shopping list to Cart!");
 				}
 				else {
-				 
-				cartClass.JListCartList.removeAll();
-				addTo(items_1, items_3);			
+					
+					
+					addThemUp = remember + sum;
+					JOptionPane.showMessageDialog(null,remember);
+					JOptionPane.showMessageDialog(null,sum);
+					
+					cartClass.setCartPriceTotalFromList();
+					
+					cartClass.JListCartList.removeAll();
+					addTo(items_1, items_3);			
 			
-				items_1.clear();
-				textAreaTotal_1.setText(""); //this resets the textAreaTotal box back to empty
-				priceArray = new int[50];
-				JOptionPane.showMessageDialog(null,"Moved all items in shopping list to Cart!");
-				
+					items_1.clear();
+					textAreaTotal_1.setText(""); //this resets the textAreaTotal box back to empty
+					priceArray = new int[50];
+					JOptionPane.showMessageDialog(null,"Moved all items in shopping list to Cart!");
+				    remember = remember + sum;
 				}
 				//JOptionPane.showMessageDialog(null,x);
 				

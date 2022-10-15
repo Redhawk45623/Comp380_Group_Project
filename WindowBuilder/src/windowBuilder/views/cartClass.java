@@ -23,7 +23,7 @@ import java.awt.Font;
 
 public class cartClass extends JPanel {
 	public static JList JListCartList;
-	private static JTextArea textAreaCartTotal;
+	public static JTextArea textAreaCartTotal;
 	private static int[] cartPriceArray = new int[50];
 	private static int counter = 0;
 	private static int sum;
@@ -47,6 +47,14 @@ public static void addCartprice(int x) {
 			}
 		
 	}
+
+public static void setCartPriceTotalFromList() {
+	
+	textAreaCartTotal.setText(""); //clears text from textAreaTotal
+	String z = Integer.toString(productSearchClass.addThemUp); //converts integer to String needed to display in textAreaTotal box
+	textAreaCartTotal.append("$" + z + ".00");
+	
+}
 
 public static void setCartPriceTotal() {
 	
