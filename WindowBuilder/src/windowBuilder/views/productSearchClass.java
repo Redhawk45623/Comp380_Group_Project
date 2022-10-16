@@ -9,7 +9,6 @@
 package windowBuilder.views;
 
 import javax.swing.JPanel;
-import javax.swing.AbstractListModel;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -31,7 +30,6 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.awt.event.ActionEvent;
-import javax.swing.JTabbedPane;
 import javax.swing.JRadioButton;
 
 /**
@@ -75,6 +73,8 @@ public class productSearchClass extends JPanel {
 	private JList JListShopList_1;
 	private JRadioButton rdbtnUseList;
 	private JPanel panel_2;
+	private JRadioButton radioButton;
+	
 	/**
 	 * 
 	 * 
@@ -89,7 +89,11 @@ public class productSearchClass extends JPanel {
 		loadCombobox();	
 		
 		panel_1.setVisible(false);
+		panel_2.setVisible(true);
+		
+		
 	}
+	
 	
 	/**
 	 * 
@@ -401,9 +405,6 @@ public class productSearchClass extends JPanel {
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 510, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(18)
-							.addComponent(rdbtnUseList))
-						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(19)
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 								.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 197, GroupLayout.PREFERRED_SIZE)
@@ -412,19 +413,23 @@ public class productSearchClass extends JPanel {
 									.addGap(18)
 									.addComponent(cbProducts_1, GroupLayout.PREFERRED_SIZE, 310, GroupLayout.PREFERRED_SIZE)))))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(18)
+					.addComponent(rdbtnUseList)
+					.addContainerGap(363, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(12)
 					.addComponent(rdbtnUseList)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGap(16)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblProducts)
 						.addComponent(cbProducts_1, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
-					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 392, GroupLayout.PREFERRED_SIZE))
 		);
 		
@@ -475,6 +480,8 @@ public class productSearchClass extends JPanel {
 		btnAddList_1 = new JButton("Add Now");
 		
 		JLabel lblAdd2List = new JLabel("Add to Shopping List:");
+		
+		radioButton = new JRadioButton("New radio button");
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -482,33 +489,38 @@ public class productSearchClass extends JPanel {
 					.addContainerGap()
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addComponent(lblAddAll, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnAddAll, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
-							.addGap(45)
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel_1.createSequentialGroup()
-									.addGap(29)
-									.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-									.addGap(6)
-									.addComponent(textAreaTotal_1, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE))
-								.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_panel_1.createSequentialGroup()
 							.addGap(5)
 							.addComponent(lblRemoveAllFrom, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnRemoveAll, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(58)
-							.addComponent(lblShopList, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 273, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel_1.createSequentialGroup()
 							.addGap(22)
 							.addComponent(lblAdd2List)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnAddList_1)))
-					.addContainerGap(64, Short.MAX_VALUE))
+							.addComponent(btnAddList_1))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addComponent(lblShopList, GroupLayout.PREFERRED_SIZE, 103, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.RELATED))
+								.addComponent(lblAddAll, GroupLayout.PREFERRED_SIZE, 156, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addComponent(radioButton)
+									.addPreferredGap(ComponentPlacement.UNRELATED)))
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnAddAll, GroupLayout.PREFERRED_SIZE, 90, GroupLayout.PREFERRED_SIZE)
+									.addGap(45)
+									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_panel_1.createSequentialGroup()
+											.addGap(29)
+											.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
+											.addGap(6)
+											.addComponent(textAreaTotal_1, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE))
+										.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 273, GroupLayout.PREFERRED_SIZE))))
+					.addContainerGap(70, Short.MAX_VALUE))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -520,7 +532,10 @@ public class productSearchClass extends JPanel {
 					.addGap(26)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblShopList))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(lblShopList)
+							.addGap(18)
+							.addComponent(radioButton)))
 					.addGap(18)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_1.createSequentialGroup()
@@ -540,7 +555,7 @@ public class productSearchClass extends JPanel {
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblRemoveAllFrom)
 						.addComponent(btnRemoveAll))
-					.addContainerGap(109, Short.MAX_VALUE))
+					.addContainerGap(96, Short.MAX_VALUE))
 		);
 		
 		JListShopList_1 = new JList();
