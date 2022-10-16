@@ -81,7 +81,7 @@ private void createEvents() {
 			productSearchClass.items_3.removeAllElements();
 			textAreaCartTotal.setText(""); //this resets the textAreaTotal box back to empty
 			cartPriceArray = new int[50];
-			
+			productSearchClass.remember = 0;
 		}
 	});
 	

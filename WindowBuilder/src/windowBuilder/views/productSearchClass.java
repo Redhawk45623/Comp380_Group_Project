@@ -60,7 +60,7 @@ public class productSearchClass extends JPanel {
 	private JButton btnAddCart;
 	private boolean check = true;
 	private boolean check2 = false;
-	private int remember;
+	public static int remember;
 	public static int addThemUp;
 	private JPanel panel_1;
 	private JScrollPane scrollPane;
@@ -403,15 +403,14 @@ public class productSearchClass extends JPanel {
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(18)
 							.addComponent(rdbtnUseList))
-						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-							.addGroup(gl_panel.createSequentialGroup()
-								.addContainerGap()
-								.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 197, GroupLayout.PREFERRED_SIZE))
-							.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
-								.addGap(19)
-								.addComponent(lblProducts, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
-								.addGap(18)
-								.addComponent(cbProducts_1, GroupLayout.PREFERRED_SIZE, 290, GroupLayout.PREFERRED_SIZE))))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(19)
+							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+								.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 197, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addComponent(lblProducts, GroupLayout.PREFERRED_SIZE, 120, GroupLayout.PREFERRED_SIZE)
+									.addGap(18)
+									.addComponent(cbProducts_1, GroupLayout.PREFERRED_SIZE, 310, GroupLayout.PREFERRED_SIZE)))))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
@@ -423,9 +422,9 @@ public class productSearchClass extends JPanel {
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblProducts)
 						.addComponent(cbProducts_1, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addPreferredGap(ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
 					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 392, GroupLayout.PREFERRED_SIZE))
 		);
 		
