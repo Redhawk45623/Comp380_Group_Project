@@ -15,6 +15,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTabbedPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
+import javax.swing.JTextArea;
+import javax.swing.JLabel;
 
 /**
  * 
@@ -81,6 +83,24 @@ public class eCommerceMain extends JFrame {
 		JPanel home_panel = new JPanel();
 	
 		tabbedPane.addTab("Home", null, home_panel, null);
+		
+		JLabel lblNewLabel = new JLabel("This is the Home page that will be modified later...");
+		GroupLayout gl_home_panel = new GroupLayout(home_panel);
+		gl_home_panel.setHorizontalGroup(
+			gl_home_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_home_panel.createSequentialGroup()
+					.addGap(83)
+					.addComponent(lblNewLabel)
+					.addContainerGap(111, Short.MAX_VALUE))
+		);
+		gl_home_panel.setVerticalGroup(
+			gl_home_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_home_panel.createSequentialGroup()
+					.addGap(195)
+					.addComponent(lblNewLabel)
+					.addContainerGap(227, Short.MAX_VALUE))
+		);
+		home_panel.setLayout(gl_home_panel);
 				
 		tabbedPane.addTab("Product Search", null, search_panel, null);
 		
@@ -93,5 +113,4 @@ public class eCommerceMain extends JFrame {
 		tabbedPane.addTab("Help", null, help_panel, null);
 		contentPane.setLayout(gl_contentPane);
 	}
-
 }

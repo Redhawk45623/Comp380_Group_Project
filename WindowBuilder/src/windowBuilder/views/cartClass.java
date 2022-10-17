@@ -7,9 +7,8 @@
 package windowBuilder.views;
 
 import javax.swing.JPanel;
-
-import java.io.FileNotFoundException;
-
+import java.util.Arrays;
+import java.util.stream.IntStream;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -27,14 +26,20 @@ import java.awt.event.ActionEvent;
 public class cartClass extends JPanel {
 	public static JList JListCartList;
 	public static JTextArea textAreaCartTotal;
-	private static int[] cartPriceArray = new int[50];
+	public static int[] cartPriceArray = new int[10];
 	private static int counter = 0;
 	public static int sum;
-	private JButton btnRemove;
+	private JButton btnRemoveAll;
 	private JButton btnRemoveItem;
 	private static String total;
-	private int p;
+	public static Object[] prices2 = new String[20];
 	
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
 	public cartClass() {
 		
 		initComponents();
@@ -42,7 +47,13 @@ public class cartClass extends JPanel {
 		
 	}
 	
-public static void addCartprice(int x) {
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param x
+	 */
+	public static void addCartprice(int x) {
 		
 		Object cost = productSearchClass.prices[x];
 		int cost_value = Integer.parseInt(cost.toString());
@@ -54,58 +65,97 @@ public static void addCartprice(int x) {
 			}
 		
 	}
-
-public static void setCartPriceTotalFromList() {
 	
-	textAreaCartTotal.setText(""); //clears text from textAreaTotal
-	String z = Integer.toString(productSearchClass.addThemUp); //converts integer to String needed to display in textAreaTotal box
-	textAreaCartTotal.append("$" + z + ".00");
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
+	public static void setCartPriceTotal() {
 	
-}
+		textAreaCartTotal.setText(""); //clears text from textAreaTotal
+		total = Integer.toString(sum); //converts integer to String needed to display in textAreaTotal box
+		textAreaCartTotal.append("$" + total + ".00"); //displays the current total price from the shopping list in the textAreaTotal box
 
-public static void setCartPriceTotal() {
-	
-	textAreaCartTotal.setText(""); //clears text from textAreaTotal
-	total = Integer.toString(sum); //converts integer to String needed to display in textAreaTotal box
-	textAreaCartTotal.append("$" + total + ".00"); //displays the current total price from the shopping list in the textAreaTotal box
-
-}
-
-private void createEvents() {
-	
-	btnRemove.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
+	}
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 * @param x
+	 */
+	public static void rearrangeArray(int x) {
+		
+		int[] cartPriceArray2 = new int[cartPriceArray.length -1];
+		for(int i = 0, k = 0; i < cartPriceArray.length; i++){
+			if(cartPriceArray[i] != x){
+				cartPriceArray2[k] = cartPriceArray[i];	
+				k++;
+			}
 			
-			productSearchClass.items_1.removeAllElements();
-			productSearchClass.items_2.removeAllElements(); //this clears all elements from DefaultListModel items and from the shopping list
-			productSearchClass.items_3.removeAllElements();
-			textAreaCartTotal.setText(""); //this resets the textAreaTotal box back to empty
-			cartPriceArray = new int[50];
-			productSearchClass.remember = 0;
 		}
-	});
+		cartPriceArray = cartPriceArray2;		
+		int added = Arrays.stream(cartPriceArray).sum();		
+		if (added == 0) {				
+			textAreaCartTotal.setText("$0.00"); //this resets the textAreaTotal box back to empty
+			cartPriceArray = new int[10];
+			counter = 0;
+			sum = 0;			
+		}
+
+	}
 	
-	btnRemoveItem.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
+	private void createEvents() {
+	
+		btnRemoveAll.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+			
+			productSearchClass.ToProductSearchList_items_1.removeAllElements();
+			productSearchClass.CartList_items_2.removeAllElements(); //this clears all elements from DefaultListModel items and from the shopping list
+			productSearchClass.ToCartShopList_items_3.removeAllElements();
+			textAreaCartTotal.setText(""); //this resets the textAreaTotal box back to empty
+			cartPriceArray = new int[10];
+			productSearchClass.remember = 0;
+			}
+		});
+	
+		btnRemoveItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 			
 			int q = JListCartList.getSelectedIndex();
 			int r = cartPriceArray[q];	//r = The price of the element removed
-			p = Integer.parseInt(total);
-			int newTotal = p - r;
+			
+			
+			rearrangeArray(r);
+			int added = Arrays.stream(cartPriceArray).sum();
+		
 			textAreaCartTotal.setText("");
-			JOptionPane.showMessageDialog(null,r);
-			JOptionPane.showMessageDialog(null,newTotal);
-			textAreaCartTotal.append("$" + newTotal + ".00");
+			textAreaCartTotal.append("$" + added + ".00");
 			
-			productSearchClass.items_2.remove(q);
-			//cartPriceArray[q] = 0;
+			productSearchClass.CartList_items_2.remove(q);
+			//String n = Integer.toString(newTotal);
 			
-		}
-	});
+			
+			}
+		});
 		
 	
-}
+	}
 	
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
 	private void initComponents() {
 		JPanel panel = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -133,7 +183,7 @@ private void createEvents() {
 		
 		JLabel lblNewLabel_1 = new JLabel("Total = ");
 		
-		btnRemove = new JButton("Empty");
+		btnRemoveAll = new JButton("Empty");
 		
 		JLabel lblNewLabel_1_1 = new JLabel("*Does not include S&H or taxes");
 		lblNewLabel_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
@@ -156,7 +206,7 @@ private void createEvents() {
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
 								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(btnRemove)
+									.addComponent(btnRemoveAll)
 									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 									.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
@@ -180,7 +230,7 @@ private void createEvents() {
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textAreaCartTotal, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNewLabel_1)
-						.addComponent(btnRemove)
+						.addComponent(btnRemoveAll)
 						.addComponent(lblNewLabel_2))
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
