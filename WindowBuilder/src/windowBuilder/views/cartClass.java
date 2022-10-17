@@ -29,7 +29,7 @@ public class cartClass extends JPanel {
 	public static int[] cartPriceArray = new int[10];
 	private static int counter = 0;
 	public static int sum;
-	private JButton btnRemoveAll;
+	private JButton btnEmptyCart;
 	private JButton btnRemoveItem;
 	private static String total;
 	public static Object[] prices2 = new String[20];
@@ -115,15 +115,17 @@ public class cartClass extends JPanel {
 	 */
 	private void createEvents() {
 	
-		btnRemoveAll.addActionListener(new ActionListener() {
+		btnEmptyCart.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
 			
 			productSearchClass.ToProductSearchList_items_1.removeAllElements();
 			productSearchClass.CartList_items_2.removeAllElements(); //this clears all elements from DefaultListModel items and from the shopping list
 			productSearchClass.ToCartShopList_items_3.removeAllElements();
-			textAreaCartTotal.setText(""); //this resets the textAreaTotal box back to empty
+			textAreaCartTotal.setText("$0.00"); //this resets the textAreaTotal box back to empty
 			cartPriceArray = new int[10];
-			productSearchClass.remember = 0;
+			//productSearchClass.remember = 0;
+			sum = 0;
+			
 			}
 		});
 	
@@ -177,13 +179,14 @@ public class cartClass extends JPanel {
 		JLabel lblNewLabel = new JLabel("Items currently in Cart");
 		
 		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
 		textAreaCartTotal = new JTextArea();
 		textAreaCartTotal.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
 		JLabel lblNewLabel_1 = new JLabel("Total = ");
 		
-		btnRemoveAll = new JButton("Empty");
+		btnEmptyCart = new JButton("Empty");
 		
 		JLabel lblNewLabel_1_1 = new JLabel("*Does not include S&H or taxes");
 		lblNewLabel_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
@@ -206,7 +209,7 @@ public class cartClass extends JPanel {
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
 								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(btnRemoveAll)
+									.addComponent(btnEmptyCart)
 									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 									.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.RELATED)
@@ -230,7 +233,7 @@ public class cartClass extends JPanel {
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textAreaCartTotal, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNewLabel_1)
-						.addComponent(btnRemoveAll)
+						.addComponent(btnEmptyCart)
 						.addComponent(lblNewLabel_2))
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()

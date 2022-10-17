@@ -17,6 +17,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextArea;
 import javax.swing.JLabel;
+import java.awt.Toolkit;
 
 /**
  * 
@@ -29,8 +30,9 @@ import javax.swing.JLabel;
 public class eCommerceMain extends JFrame {
 
 	private JPanel contentPane;
-	JPanel search_panel = new productSearchClass();
-	JPanel cart_panel = new cartClass();
+	JPanel search_panel = new productSearchClass(); //instantiating an object of productSearchClass() which is a JPanel
+	JPanel cart_panel = new cartClass(); //iinstantiating an object of cartClass()
+	
 	/**
 	 * 
 	 * 
@@ -58,7 +60,7 @@ public class eCommerceMain extends JFrame {
 	public eCommerceMain() throws FileNotFoundException {
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 525, 525);
+		setBounds(100, 100, 525, 700);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -76,8 +78,8 @@ public class eCommerceMain extends JFrame {
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 484, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(88, Short.MAX_VALUE))
+					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 562, Short.MAX_VALUE)
+					.addContainerGap())
 		);
 		
 		JPanel home_panel = new JPanel();
@@ -100,11 +102,11 @@ public class eCommerceMain extends JFrame {
 					.addComponent(lblNewLabel)
 					.addContainerGap(227, Short.MAX_VALUE))
 		);
-		home_panel.setLayout(gl_home_panel);
+		home_panel.setLayout(gl_home_panel); //home tab
 				
-		tabbedPane.addTab("Product Search", null, search_panel, null);
+		tabbedPane.addTab("Product Search", null, search_panel, "Click to search for products"); //Product Search tab
 		
-		tabbedPane.addTab("View Cart", null, cart_panel, null);
+		tabbedPane.addTab("View Cart", null, cart_panel, "Click to view Cart"); //View Cart tab
 		
 		JPanel checkout_panel = new JPanel();
 		tabbedPane.addTab("Checkout", null, checkout_panel, null);
