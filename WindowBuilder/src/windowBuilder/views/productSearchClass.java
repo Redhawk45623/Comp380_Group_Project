@@ -203,7 +203,7 @@ public class productSearchClass extends JPanel {
 	 * 
 	 * 
 	 */
-	public void setPriceTotal() {
+	public void setPriceTotal() { //method that sets the total price text area (textAreaTotal_1) in Shopping List
 		
 		textAreaTotal_1.setText(""); //clears text from textAreaTotal
 		String z = Integer.toString(sum); //converts integer to String needed to display in textAreaTotal box
@@ -246,8 +246,8 @@ public class productSearchClass extends JPanel {
 				addPrices(send); //calls addPrices method				
 				setPriceTotal(); //calls setPriceTotal method			
 				
-				ToCartShopList_items_3.addElement(cbProducts_1.getSelectedItem()); 				
-				ToProductSearchList_items_1.addElement(cbProducts_1.getSelectedItem());  //This adds the selected element from cbProducts to DefaultListModel items
+				ToCartShopList_items_3.addElement(cbProducts_1.getSelectedItem()); //	//This adds the selected element from cbProducts to DefaultListModel ToCartShopList_items_3			
+				ToProductSearchList_items_1.addElement(cbProducts_1.getSelectedItem());  //This adds the selected element from cbProducts to DefaultListModel ToProductSearchList_items_1
 				JListShopList_1.setModel(ToProductSearchList_items_1); //this lists the selected DefaultListModel items in the JListShopList shopping list
 							
 				//JOptionPane.showMessageDialog(null,S);
