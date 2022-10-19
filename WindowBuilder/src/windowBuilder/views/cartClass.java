@@ -86,7 +86,7 @@ public class cartClass extends JPanel {
 	 * 
 	 * @param element
 	 */
-	public static void rearrangeArray(int element) {
+	public static void rearrangeCart(int element) {
 		
 		int[] cartPriceArray2 = new int[cartPriceArray.length -1]; //initializes the temp cartPriceArray2 to the length of cartPriceArray.length -1]
 		for(int i = 0, k = 0; i < cartPriceArray.length; i++){ //loop each element of cartPriceArray
@@ -148,7 +148,7 @@ public class cartClass extends JPanel {
 			int remove = cartPriceArray[select];	//uses select variable as the index for cartPriceArray and assigns to temp variable remove
 			
 			
-			rearrangeArray(remove); //calls rearrangeArray() methd and passes variable remove as parameter
+			rearrangeCart(remove); //calls rearrangeArray() methd and passes variable remove as parameter
 			int added = Arrays.stream(cartPriceArray).sum(); //adds up the total sum of cartPriceArray and assigns it to temp int variable: added
 		
 			textAreaCartTotal.setText(""); //empties the textAreaCartTotal text
