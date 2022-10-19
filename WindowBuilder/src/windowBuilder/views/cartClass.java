@@ -22,6 +22,8 @@ import javax.swing.JButton;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.AbstractListModel;
+import javax.swing.ListSelectionModel;
 
 public class cartClass extends JPanel {
 	
@@ -258,6 +260,16 @@ public class cartClass extends JPanel {
 		);
 		CartList_items_2= new DefaultListModel<Object>();
 		JListCartList = new JList<Object>(); //this creates a new JList element that will display the Products added to the Shopping List
+		JListCartList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		JListCartList.setModel(new AbstractListModel() {
+			String[] values = new String[] {};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
 		JListCartList.setVisibleRowCount(5);
 		JListCartList.setName("");
 		scrollPane.setViewportView(JListCartList);

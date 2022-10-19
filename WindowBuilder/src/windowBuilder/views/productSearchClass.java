@@ -53,7 +53,6 @@ public class productSearchClass extends JPanel {
 	private int[] priceArray = new int[50]; //array used to store the prices in order of added to the shopping list after pressing add to list button
 	
 	public static DefaultListModel<Object> ToProductSearchList_items_1; //DefaultListModel list used to create list containing items added to the Search List
-
 	public static DefaultListModel<Object> ToCartShopList_items_3; //DefaultListModel list used to create list containing items added Cart List from Shop List
 	
 	private JComboBox<String> cbProducts_1; //Combobox that lists all products for sale
