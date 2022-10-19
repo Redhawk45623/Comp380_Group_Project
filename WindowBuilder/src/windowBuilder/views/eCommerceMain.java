@@ -15,9 +15,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.JTabbedPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.JTextArea;
 import javax.swing.JLabel;
-import java.awt.Toolkit;
 
 /**
  * 
@@ -91,16 +89,16 @@ public class eCommerceMain extends JFrame {
 		gl_home_panel.setHorizontalGroup(
 			gl_home_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_home_panel.createSequentialGroup()
-					.addGap(83)
+					.addGap(75)
 					.addComponent(lblNewLabel)
-					.addContainerGap(111, Short.MAX_VALUE))
+					.addContainerGap(87, Short.MAX_VALUE))
 		);
 		gl_home_panel.setVerticalGroup(
 			gl_home_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_home_panel.createSequentialGroup()
-					.addGap(195)
+					.addGap(132)
 					.addComponent(lblNewLabel)
-					.addContainerGap(227, Short.MAX_VALUE))
+					.addContainerGap(468, Short.MAX_VALUE))
 		);
 		home_panel.setLayout(gl_home_panel); //home tab
 				

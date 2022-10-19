@@ -24,15 +24,16 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class cartClass extends JPanel {
-	public static JList JListCartList;
-	public static JTextArea textAreaCartTotal;
-	public static int[] cartPriceArray = new int[10];
-	private static int counter = 0;
-	public static int sum;
-	private JButton btnEmptyCart;
-	private JButton btnRemoveItem;
-	private static String total;
-	public static Object[] prices2 = new String[20];
+	
+	public static JList JListCartList; //JList element that displays the Products added to the Shopping List
+	public static JTextArea textAreaCartTotal;  // JTextArea that displays the current total of Products added to the Shopping List
+	public static int[] cartPriceArray = new int[20]; //an arrray that is used to tabulate the total amount of the Cart
+	public static Object[] prices2 = new String[20]; //used to track the order of indexes that were added to the shopping list
+	private JButton btnEmptyCart; //button that empties the Cart
+	private JButton btnRemoveItem; //button that removes selected product from cart
+	private static String total; //String variable that is used in the setCartPriceTotal() method
+	private static int counter = 0; //int variable that is used in the addCartprice() method
+	public static int sum; ////int variable that is used in the addCartprice() method and rearrangeArray() method
 	
 	/**
 	 * 
@@ -42,9 +43,9 @@ public class cartClass extends JPanel {
 	 */
 	public cartClass() {
 		
-		initComponents();
-		createEvents();
-		
+		initComponents(); //calls initComponents() method; builds all structural elements of the panel
+		createEvents(); //calls createEvents()() method; builds all events that happen (actions)
+		textAreaCartTotal.setText("$0.00"); //sets the initial total of the Shopping List to $0.00
 	}
 	
 	/**
@@ -55,13 +56,13 @@ public class cartClass extends JPanel {
 	 */
 	public static void addCartprice(int x) {
 		
-		Object cost = productSearchClass.prices[x];
-		int cost_value = Integer.parseInt(cost.toString());
-		cartPriceArray[counter] = cost_value;
-		counter++;
-		sum = 0;
-		for(int i = 0; i < cartPriceArray.length; i++){ //loop to add up the total price that is in priceArray
-			sum += cartPriceArray[i];
+		Object cost = productSearchClass.prices[x]; //this creates an object variable that is initialized from the passed parameter/prices[]
+		int cost_value = Integer.parseInt(cost.toString()); //this converts the object to integer
+		cartPriceArray[counter] = cost_value; //this loads the cartPriceArray[]
+		counter++; //increments counter variable
+		sum = 0; //sets the variable initially to 0
+		for(int i = 0; i < cartPriceArray.length; i++){ //loop to add up the total price that is in cartPriceArray
+			sum += cartPriceArray[i]; //adds up the cartPriceArray[] and stores it in the variable sum
 			}
 		
 	}
@@ -88,21 +89,21 @@ public class cartClass extends JPanel {
 	 */
 	public static void rearrangeArray(int x) {
 		
-		int[] cartPriceArray2 = new int[cartPriceArray.length -1];
-		for(int i = 0, k = 0; i < cartPriceArray.length; i++){
-			if(cartPriceArray[i] != x){
-				cartPriceArray2[k] = cartPriceArray[i];	
-				k++;
+		int[] cartPriceArray2 = new int[cartPriceArray.length -1]; //initializes the temp cartPriceArray2 to the length of cartPriceArray.length -1]
+		for(int i = 0, k = 0; i < cartPriceArray.length; i++){ //loop each element of cartPriceArray
+			if(cartPriceArray[i] != x){ //if statement; if cartPriceArray at index i does not equal parameter x
+				cartPriceArray2[k] = cartPriceArray[i];	//if statement is true, then load cartPriceArray2 at index k with cartPriceArray at index i
+				k++; //increment k
 			}
 			
 		}
-		cartPriceArray = cartPriceArray2;		
-		int added = Arrays.stream(cartPriceArray).sum();		
-		if (added == 0) {				
-			textAreaCartTotal.setText("$0.00"); //this resets the textAreaTotal box back to empty
-			cartPriceArray = new int[10];
-			counter = 0;
-			sum = 0;			
+		cartPriceArray = cartPriceArray2; //after for loop, set cartPriceArray[] to temp cartPriceArray2[]	
+		int addedUp = Arrays.stream(cartPriceArray).sum(); //add  up the total sum of cartPriceArray and set it to temp int variable: addedUp		
+		if (addedUp == 0) {	//if addUp is equal to 0			
+			textAreaCartTotal.setText("$0.00"); //this resets the textAreaCartTotal box back to empty
+			cartPriceArray = new int[10]; // this resets the cartPriceArray[]
+			counter = 0; //this resets the variabale counter
+			sum = 0; //this resets the variable sum			
 		}
 
 	}
@@ -115,34 +116,34 @@ public class cartClass extends JPanel {
 	 */
 	private void createEvents() {
 	
-		btnEmptyCart.addActionListener(new ActionListener() {
+		btnEmptyCart.addActionListener(new ActionListener() { //this action method for button: btnEmptyCart emptys the cart
 			public void actionPerformed(ActionEvent e) {	
 			
-			productSearchClass.ToProductSearchList_items_1.removeAllElements();
-			productSearchClass.CartList_items_2.removeAllElements(); //this clears all elements from DefaultListModel items and from the shopping list
-			productSearchClass.ToCartShopList_items_3.removeAllElements();
-			textAreaCartTotal.setText("$0.00"); //this resets the textAreaTotal box back to empty
-			cartPriceArray = new int[10];
+			productSearchClass.ToProductSearchList_items_1.removeAllElements(); //this clears all elemnts from DefaultList Model: ProductSearchList_items_1
+			productSearchClass.CartList_items_2.removeAllElements(); //this clears all elements from DefaultListModel: CartList_items_2
+			productSearchClass.ToCartShopList_items_3.removeAllElements(); //this clears all elements from DefaultListModel: ToCartShopList_items_3
+			textAreaCartTotal.setText("$0.00"); //this resets the textAreaCartTotal box back to empty
+			cartPriceArray = new int[10]; // this resets the cartPriceArray[]
 			//productSearchClass.remember = 0;
-			sum = 0;
+			sum = 0;//this resets the variable sum	
 			
 			}
 		});
-	
-		btnRemoveItem.addActionListener(new ActionListener() {
+		
+		btnRemoveItem.addActionListener(new ActionListener() { //this action method for button: btnRemoveItem removes a selected product from cart
 			public void actionPerformed(ActionEvent e) {
 			
-			int q = JListCartList.getSelectedIndex();
-			int r = cartPriceArray[q];	//r = The price of the element removed
+			int select = JListCartList.getSelectedIndex(); //sets temp int variable: select to the selected index from JListCartList
+			int remove = cartPriceArray[select];	//uses select variable as the index for cartPriceArray and assigns to temp variable remove
 			
 			
-			rearrangeArray(r);
-			int added = Arrays.stream(cartPriceArray).sum();
+			rearrangeArray(remove); //calls rearrangeArray() methd and passes variable remove as parameter
+			int added = Arrays.stream(cartPriceArray).sum(); //adds up the total sum of cartPriceArray and assigns it to temp int variable: added
 		
-			textAreaCartTotal.setText("");
-			textAreaCartTotal.append("$" + added + ".00");
+			textAreaCartTotal.setText(""); //empties the textAreaCartTotal text
+			textAreaCartTotal.append("$" + added + ".00"); //sets the textAreaCartTotal text with the variable: added 
 			
-			productSearchClass.CartList_items_2.remove(q);
+			productSearchClass.CartList_items_2.remove(select); //removes the slected product from CartList_items_2
 			//String n = Integer.toString(newTotal);
 			
 			
@@ -158,7 +159,7 @@ public class cartClass extends JPanel {
 	 * 
 	 * 
 	 */
-	private void initComponents() {
+	private void initComponents() { //this method initializes all structural elements of the panel
 		JPanel panel = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(this);
 		groupLayout.setHorizontalGroup(
@@ -247,7 +248,7 @@ public class cartClass extends JPanel {
 					.addContainerGap(236, Short.MAX_VALUE))
 		);
 		
-		JListCartList = new JList();
+		JListCartList = new JList(); //this creates a new JList element that will display the Products added to the Shopping List
 		JListCartList.setVisibleRowCount(5);
 		JListCartList.setName("");
 		scrollPane.setViewportView(JListCartList);
