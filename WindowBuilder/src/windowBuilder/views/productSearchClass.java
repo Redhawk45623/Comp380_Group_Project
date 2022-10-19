@@ -53,7 +53,7 @@ public class productSearchClass extends JPanel {
 	private int[] priceArray = new int[50]; //array used to store the prices in order of added to the shopping list after pressing add to list button
 	
 	public static DefaultListModel<Object> ToProductSearchList_items_1; //DefaultListModel list used to create list containing items added to the Search List
-	public static DefaultListModel<Object> CartList_items_2; //DefaultListModel list used to create list containing items added Cart List
+
 	public static DefaultListModel<Object> ToCartShopList_items_3; //DefaultListModel list used to create list containing items added Cart List from Shop List
 	
 	private JComboBox<String> cbProducts_1; //Combobox that lists all products for sale
@@ -263,8 +263,8 @@ public class productSearchClass extends JPanel {
 				int index = cbProducts_1.getSelectedIndex(); //creates variable index to pass to addPrices() method
 				cartClass.addCartprice(index); //calls the	addCartprice() from cartClass with index variable as parameter			
 				cartClass.setCartPriceTotal(); //calls the setCartPriceTotal() from cartClass			
-				CartList_items_2.addElement(cbProducts_1.getSelectedItem()); //adds the product stored in combobox (cbProducts_1) to DefaultListModel -> CartList_items_2
-				cartClass.JListCartList.setModel(CartList_items_2); //places the items in the cart (cartClass.JListCartList) from CartList_items_2
+				cartClass.CartList_items_2.addElement(cbProducts_1.getSelectedItem()); //adds the product stored in combobox (cbProducts_1) to DefaultListModel -> CartList_items_2
+				cartClass.JListCartList.setModel(cartClass.CartList_items_2); //places the items in the cart (cartClass.JListCartList) from CartList_items_2
 				JOptionPane.showMessageDialog(null,"Added selected item to Cart!"); //Displays a pop-up message
 				
 			}
@@ -428,7 +428,6 @@ public class productSearchClass extends JPanel {
 		cbProducts_1.setMaximumRowCount(10);
 		
 		ToProductSearchList_items_1= new DefaultListModel<Object>();
-		CartList_items_2= new DefaultListModel<Object>();
 		ToCartShopList_items_3 = new DefaultListModel<Object>();
 		
 		JLabel lblProducts = new JLabel("Available Products:");

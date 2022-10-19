@@ -8,6 +8,8 @@ package windowBuilder.views;
 
 import javax.swing.JPanel;
 import java.util.Arrays;
+
+import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -24,6 +26,7 @@ import java.awt.event.ActionEvent;
 public class cartClass extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
+	public static DefaultListModel<Object> CartList_items_2; //DefaultListModel list used to create list containing items added Cart List
 	public static JList<Object> JListCartList; //JList element that displays the Products added to the Shopping List
 	public static JTextArea textAreaCartTotal;  // JTextArea that displays the current total of Products added to the Shopping List
 	public static int[] cartPriceArray = new int[20]; //an arrray that is used to tabulate the total amount of the Cart
@@ -62,7 +65,7 @@ public class cartClass extends JPanel {
 		sum = 0; //sets the variable initially to 0
 		for(int i = 0; i < cartPriceArray.length; i++){ //loop to add up the total price that is in cartPriceArray
 			sum += cartPriceArray[i]; //adds up the cartPriceArray[] and stores it in the variable sum
-			}
+		}
 		
 	}
 	
@@ -125,7 +128,7 @@ public class cartClass extends JPanel {
 			public void actionPerformed(ActionEvent e) {	
 			
 			productSearchClass.ToProductSearchList_items_1.removeAllElements(); //this clears all elemnts from DefaultList Model: ProductSearchList_items_1
-			productSearchClass.CartList_items_2.removeAllElements(); //this clears all elements from DefaultListModel: CartList_items_2
+			CartList_items_2.removeAllElements(); //this clears all elements from DefaultListModel: CartList_items_2
 			productSearchClass.ToCartShopList_items_3.removeAllElements(); //this clears all elements from DefaultListModel: ToCartShopList_items_3
 			textAreaCartTotal.setText("$0.00"); //this resets the textAreaCartTotal box back to empty
 			cartPriceArray = new int[10]; // this resets the cartPriceArray[]
@@ -145,19 +148,14 @@ public class cartClass extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 			
 			int select = JListCartList.getSelectedIndex(); //sets temp int variable: select to the selected index from JListCartList
-			int remove = cartPriceArray[select];	//uses select variable as the index for cartPriceArray and assigns to temp variable remove
-			
-			
+			int remove = cartPriceArray[select];	//uses select variable as the index for cartPriceArray and assigns to temp variable remove					
 			rearrangeCart(remove); //calls rearrangeArray() methd and passes variable remove as parameter
-			int added = Arrays.stream(cartPriceArray).sum(); //adds up the total sum of cartPriceArray and assigns it to temp int variable: added
-		
+			int added = Arrays.stream(cartPriceArray).sum(); //adds up the total sum of cartPriceArray and assigns it to temp int variable: added		
 			textAreaCartTotal.setText(""); //empties the textAreaCartTotal text
-			textAreaCartTotal.append("$" + added + ".00"); //sets the textAreaCartTotal text with the variable: added 
-			
-			productSearchClass.CartList_items_2.remove(select); //removes the slected product from CartList_items_2
+			textAreaCartTotal.append("$" + added + ".00"); //sets the textAreaCartTotal text with the variable: added 			
+			CartList_items_2.remove(select); //removes the slected product from CartList_items_2
 			//String n = Integer.toString(newTotal);
-			
-			
+						
 			}
 		});
 		
@@ -258,7 +256,7 @@ public class cartClass extends JPanel {
 							.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 11, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(236, Short.MAX_VALUE))
 		);
-		
+		CartList_items_2= new DefaultListModel<Object>();
 		JListCartList = new JList<Object>(); //this creates a new JList element that will display the Products added to the Shopping List
 		JListCartList.setVisibleRowCount(5);
 		JListCartList.setName("");
