@@ -45,17 +45,18 @@ import javax.swing.JTextPane;
  */
 public class productSearchClass extends JPanel {
 	
+	private static final long serialVersionUID = 1L;
 	public Object[] products; //array that is loaded from file containing Product Names, used to load combobox
 	public Object[] productIDs; //array that is loaded from read file containing Product IDs, used to load combobox
 	public static Object[] prices = new String[20]; //array that is loaded from file containing prices, used to load combobox
 	public static int[] prices2 = new int[20]; ////used to track the order of indexes that were added to the shopping list
 	private int[] priceArray = new int[50]; //array used to store the prices in order of added to the shopping list after pressing add to list button
 	
-	public static DefaultListModel ToProductSearchList_items_1; //DefaultListModel list used to create list containing items added to the Search List
-	public static DefaultListModel CartList_items_2; //DefaultListModel list used to create list containing items added Cart List
-	public static DefaultListModel ToCartShopList_items_3; //DefaultListModel list used to create list containing items added Cart List from Shop List
+	public static DefaultListModel<Object> ToProductSearchList_items_1; //DefaultListModel list used to create list containing items added to the Search List
+	public static DefaultListModel<Object> CartList_items_2; //DefaultListModel list used to create list containing items added Cart List
+	public static DefaultListModel<Object> ToCartShopList_items_3; //DefaultListModel list used to create list containing items added Cart List from Shop List
 	
-	private JComboBox cbProducts_1; //Combobox that lists all products for sale
+	private JComboBox<String> cbProducts_1; //Combobox that lists all products for sale
 	
 	private boolean check = false; // boolean variable that controls visibility to see the product image (rdbtnSeeImage)
 	private boolean check2 = false; // boolean variable that controls visibility to see and use the the Shpping List (rdbtnUseList)
@@ -64,7 +65,6 @@ public class productSearchClass extends JPanel {
 	public static int add = 0; //incremented variable used as index for priceArray, used for btnAddList_1 action event 
 	private int sum; //incremented variable used as index for addPrices() 
 	private int counter = 0; //incremented variable used as index for addPrices() 
-	private int number; ////incremented variable used as index for createEvents -> btnAddList_1
 	
 	private JPanel panel_1; //panel that is used to hold all elements for the Shopping List option
 	private JPanel panel_2; //panel that is used to hold the btnAddCart button and lblAdd2Cart label
@@ -85,7 +85,7 @@ public class productSearchClass extends JPanel {
 	private JLabel lblAddAllToList;       //               //
 	private JLabel lblAddOneToList;       ///////////////////
 	
-	private JList JListShopList_1; //JList element for Shopping List
+	private JList<Object> JListShopList_1; //JList element for Shopping List
 	
 	private JRadioButton rdbtnUseList; //radio button used to list the Shopping List option
 	private JRadioButton rdbtnSeeImage; //radio button to see the product image
@@ -237,15 +237,11 @@ public class productSearchClass extends JPanel {
 		btnAddList_1.addActionListener(new ActionListener() { //button action method that adds item from combobox to Shopping List
 			public void actionPerformed(ActionEvent e) {				
 				
-				int send = cbProducts_1.getSelectedIndex(); //creates variable send to pass to addPrices() method from cbProducts_1
-				
+				int send = cbProducts_1.getSelectedIndex(); //creates variable send to pass to addPrices() method from cbProducts_1				
 				prices2[add] = send; //used to track the order of indexes that were added to the shopping list
-				number = prices2[add];  //assigns variable d the index stored in prices2 array starting at index 0
-				add++; //increments the add variable for next use
-				
+				add++; //increments the add variable for next use				
 				addPrices(send); //calls addPrices method				
-				setPriceTotal(); //calls setPriceTotal method			
-				
+				setPriceTotal(); //calls setPriceTotal method							
 				ToCartShopList_items_3.addElement(cbProducts_1.getSelectedItem()); //	//This adds the selected element from cbProducts to DefaultListModel ToCartShopList_items_3			
 				ToProductSearchList_items_1.addElement(cbProducts_1.getSelectedItem());  //This adds the selected element from cbProducts to DefaultListModel ToProductSearchList_items_1
 				JListShopList_1.setModel(ToProductSearchList_items_1); //this lists the selected DefaultListModel items in the JListShopList shopping list
@@ -361,6 +357,12 @@ public class productSearchClass extends JPanel {
 			}
 		});
 		
+		/**
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
 		rdbtnSeeDescription.addActionListener(new ActionListener() { //radio button action method that togles on or off the Product Desciption area
 			public void actionPerformed(ActionEvent e) {
 				
@@ -374,7 +376,12 @@ public class productSearchClass extends JPanel {
 				
 			}
 		});
-		
+		/**
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
 		rdbtnSeeImage.addActionListener(new ActionListener() { //radio button action method that toggles on or off the See Image area
 			public void actionPerformed(ActionEvent e) {
 				
@@ -398,7 +405,6 @@ public class productSearchClass extends JPanel {
 	 * 
 	 * @throws FileNotFoundException
 	 */
-	@SuppressWarnings("unchecked")
 	private void initComponents() throws FileNotFoundException { ////method that stores components
 		
 		JPanel panel = new JPanel();
@@ -418,12 +424,12 @@ public class productSearchClass extends JPanel {
 					.addContainerGap())
 		);
 		
-		cbProducts_1 = new JComboBox();
+		cbProducts_1 = new JComboBox<String>();
 		cbProducts_1.setMaximumRowCount(10);
 		
-		ToProductSearchList_items_1= new DefaultListModel();
-		CartList_items_2= new DefaultListModel();
-		ToCartShopList_items_3 = new DefaultListModel();
+		ToProductSearchList_items_1= new DefaultListModel<Object>();
+		CartList_items_2= new DefaultListModel<Object>();
+		ToCartShopList_items_3 = new DefaultListModel<Object>();
 		
 		JLabel lblProducts = new JLabel("Available Products:");
 		
@@ -650,7 +656,7 @@ public class productSearchClass extends JPanel {
 		);
 		panel_3.setLayout(gl_panel_3);
 		
-		JListShopList_1 = new JList();
+		JListShopList_1 = new JList<Object>();
 		scrollPane.setViewportView(JListShopList_1);
 		panel_1.setLayout(gl_panel_1);
 		panel.setLayout(gl_panel);

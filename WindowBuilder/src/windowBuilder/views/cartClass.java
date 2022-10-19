@@ -8,14 +8,12 @@ package windowBuilder.views;
 
 import javax.swing.JPanel;
 import java.util.Arrays;
-import java.util.stream.IntStream;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JList;
-import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
 import javax.swing.JButton;
@@ -25,7 +23,8 @@ import java.awt.event.ActionEvent;
 
 public class cartClass extends JPanel {
 	
-	public static JList JListCartList; //JList element that displays the Products added to the Shopping List
+	private static final long serialVersionUID = 1L;
+	public static JList<Object> JListCartList; //JList element that displays the Products added to the Shopping List
 	public static JTextArea textAreaCartTotal;  // JTextArea that displays the current total of Products added to the Shopping List
 	public static int[] cartPriceArray = new int[20]; //an arrray that is used to tabulate the total amount of the Cart
 	public static Object[] prices2 = new String[20]; //used to track the order of indexes that were added to the shopping list
@@ -52,11 +51,11 @@ public class cartClass extends JPanel {
 	 * 
 	 * 
 	 * 
-	 * @param x
+	 * @param index
 	 */
-	public static void addCartprice(int x) {
+	public static void addCartprice(int index) {
 		
-		Object cost = productSearchClass.prices[x]; //this creates an object variable that is initialized from the passed parameter/prices[]
+		Object cost = productSearchClass.prices[index]; //this creates an object variable that is initialized from the passed parameter/prices[]
 		int cost_value = Integer.parseInt(cost.toString()); //this converts the object to integer
 		cartPriceArray[counter] = cost_value; //this loads the cartPriceArray[]
 		counter++; //increments counter variable
@@ -85,13 +84,13 @@ public class cartClass extends JPanel {
 	 * 
 	 * 
 	 * 
-	 * @param x
+	 * @param element
 	 */
-	public static void rearrangeArray(int x) {
+	public static void rearrangeArray(int element) {
 		
 		int[] cartPriceArray2 = new int[cartPriceArray.length -1]; //initializes the temp cartPriceArray2 to the length of cartPriceArray.length -1]
 		for(int i = 0, k = 0; i < cartPriceArray.length; i++){ //loop each element of cartPriceArray
-			if(cartPriceArray[i] != x){ //if statement; if cartPriceArray at index i does not equal parameter x
+			if(cartPriceArray[i] != element){ //if statement; if cartPriceArray at index i does not equal parameter x
 				cartPriceArray2[k] = cartPriceArray[i];	//if statement is true, then load cartPriceArray2 at index k with cartPriceArray at index i
 				k++; //increment k
 			}
@@ -115,7 +114,13 @@ public class cartClass extends JPanel {
 	 * 
 	 */
 	private void createEvents() {
-	
+		
+		/**
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
 		btnEmptyCart.addActionListener(new ActionListener() { //this action method for button: btnEmptyCart emptys the cart
 			public void actionPerformed(ActionEvent e) {	
 			
@@ -130,6 +135,12 @@ public class cartClass extends JPanel {
 			}
 		});
 		
+		/**
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
 		btnRemoveItem.addActionListener(new ActionListener() { //this action method for button: btnRemoveItem removes a selected product from cart
 			public void actionPerformed(ActionEvent e) {
 			
@@ -248,7 +259,7 @@ public class cartClass extends JPanel {
 					.addContainerGap(236, Short.MAX_VALUE))
 		);
 		
-		JListCartList = new JList(); //this creates a new JList element that will display the Products added to the Shopping List
+		JListCartList = new JList<Object>(); //this creates a new JList element that will display the Products added to the Shopping List
 		JListCartList.setVisibleRowCount(5);
 		JListCartList.setName("");
 		scrollPane.setViewportView(JListCartList);

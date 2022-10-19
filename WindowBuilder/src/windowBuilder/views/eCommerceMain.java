@@ -27,9 +27,10 @@ import javax.swing.JLabel;
  */
 public class eCommerceMain extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	JPanel search_panel = new productSearchClass(); //instantiating an object of productSearchClass() which is a JPanel
-	JPanel cart_panel = new cartClass(); //iinstantiating an object of cartClass()
+	JPanel cart_panel = new cartClass(); //instantiating an object of cartClass() which is a JPanel
 	
 	/**
 	 * 
