@@ -24,6 +24,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.AbstractListModel;
 import javax.swing.ListSelectionModel;
+import javax.swing.ImageIcon;
 
 public class cartClass extends JPanel {
 	
@@ -189,6 +190,7 @@ public class cartClass extends JPanel {
 		);
 		
 		JLabel lblNewLabel = new JLabel("Items currently in Cart");
+		lblNewLabel.setIcon(new ImageIcon(cartClass.class.getResource("/icons/Full basket.png")));
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -197,6 +199,7 @@ public class cartClass extends JPanel {
 		textAreaCartTotal.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
 		JLabel lblNewLabel_1 = new JLabel("Total = ");
+		lblNewLabel_1.setIcon(new ImageIcon(cartClass.class.getResource("/icons/Dollar.png")));
 		
 		btnEmptyCart = new JButton("Empty");
 		
@@ -204,35 +207,39 @@ public class cartClass extends JPanel {
 		lblNewLabel_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
 		
 		JLabel lblNewLabel_2 = new JLabel("Empty Cart:");
+		lblNewLabel_2.setIcon(new ImageIcon(cartClass.class.getResource("/icons/Remove from basket.png")));
 		
 		btnRemoveItem = new JButton("Remove");
 	
 		JLabel lblNewLabel_3 = new JLabel("Remove Item:");
+		lblNewLabel_3.setIcon(new ImageIcon(cartClass.class.getResource("/icons/Remove from basket.png")));
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap(40, Short.MAX_VALUE)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+					.addContainerGap(12, Short.MAX_VALUE)
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 								.addComponent(lblNewLabel_3)
 								.addComponent(lblNewLabel_2))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(btnEmptyCart)
-									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 50, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(textAreaCartTotal, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 								.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 273, GroupLayout.PREFERRED_SIZE)
 								.addComponent(btnRemoveItem, Alignment.LEADING)
-								.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE))
+								.addGroup(gl_panel.createSequentialGroup()
+									.addComponent(btnEmptyCart)
+									.addGap(47)
+									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+										.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+											.addComponent(lblNewLabel_1)
+											.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+											.addComponent(textAreaCartTotal, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE))
+										.addComponent(lblNewLabel_1_1, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE))))
 							.addGap(103))
-						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(lblNewLabel)
-							.addGap(173))))
+							.addGap(158))))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -244,8 +251,8 @@ public class cartClass extends JPanel {
 					.addGap(18)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(textAreaCartTotal, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_1)
 						.addComponent(btnEmptyCart)
+						.addComponent(lblNewLabel_1)
 						.addComponent(lblNewLabel_2))
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
@@ -256,7 +263,7 @@ public class cartClass extends JPanel {
 						.addGroup(gl_panel.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 11, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(236, Short.MAX_VALUE))
+					.addContainerGap(228, Short.MAX_VALUE))
 		);
 		CartList_items_2= new DefaultListModel<Object>();
 		JListCartList = new JList<Object>(); //this creates a new JList element that will display the Products added to the Shopping List

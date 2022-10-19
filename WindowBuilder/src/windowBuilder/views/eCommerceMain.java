@@ -33,6 +33,12 @@ public class eCommerceMain extends JFrame {
 	JPanel search_panel = new productSearchClass(); //instantiating an object of productSearchClass() which is a JPanel
 	JPanel cart_panel = new cartClass(); //instantiating an object of cartClass() which is a JPanel
 	
+	ImageIcon homeIcon = new ImageIcon(this.getClass().getResource("/icons/Home.png"));
+	ImageIcon searchIcon = new ImageIcon(this.getClass().getResource("/icons/Search2.png"));
+	ImageIcon cartIcon = new ImageIcon(this.getClass().getResource("/icons/shop-cart-icon.png"));
+	ImageIcon checkoutIcon = new ImageIcon(this.getClass().getResource("/icons/Dollar.png"));
+	ImageIcon helpIcon = new ImageIcon(this.getClass().getResource("/icons/Help.png"));
+	
 	/**
 	 * 
 	 * 
@@ -82,7 +88,6 @@ public class eCommerceMain extends JFrame {
 					.addContainerGap())
 		);
 		
-		ImageIcon homeIcon = new ImageIcon(this.getClass().getResource("/icons/Home.png"));
 		JPanel home_panel = new JPanel();	
 		tabbedPane.addTab("Home", homeIcon, home_panel, null);
 		
@@ -103,11 +108,6 @@ public class eCommerceMain extends JFrame {
 					.addContainerGap(468, Short.MAX_VALUE))
 		);
 		home_panel.setLayout(gl_home_panel); //home tab	
-		
-		ImageIcon searchIcon = new ImageIcon(this.getClass().getResource("/icons/Search2.png"));
-		ImageIcon cartIcon = new ImageIcon(this.getClass().getResource("/icons/basket2.png"));
-		ImageIcon checkoutIcon = new ImageIcon(this.getClass().getResource("/icons/Dollar.png"));
-		ImageIcon helpIcon = new ImageIcon(this.getClass().getResource("/icons/Help.png"));
 				
 		tabbedPane.addTab("Product Search", searchIcon, search_panel, "Click to search for products"); //Product Search tab
 		
