@@ -453,6 +453,8 @@ public class productSearchClass extends JPanel {
 				ToProductSearchList_items_1.clear(); //clears all items from DefaultListModel -> ToProductSearchList_items_1
 				textAreaTotal_1.setText(""); //this resets the textAreaTotal box back to empty
 				priceArray = new int[50]; //resets the priceArray[]
+				txtpnProductDescription.setText(null);
+				displayLabel.setIcon(null);
 				JOptionPane.showMessageDialog(null,"Moved all items in shopping list to Cart!"); //displays pop-up message
 				
 			}
@@ -579,23 +581,13 @@ public class productSearchClass extends JPanel {
 		
 		panel_1 = new JPanel();
 		
-		rdbtnUseList = new JRadioButton("Shop using List");
+		rdbtnUseList = new JRadioButton("Shop using List with Descriptions and Images options");
 		
 		panel_2 = new JPanel();
 	
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(57)
-					.addComponent(lblProducts)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(cbProducts_1, GroupLayout.PREFERRED_SIZE, 302, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(52, Short.MAX_VALUE))
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(rdbtnUseList)
-					.addContainerGap(375, Short.MAX_VALUE))
+			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 510, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -603,6 +595,15 @@ public class productSearchClass extends JPanel {
 					.addContainerGap(222, Short.MAX_VALUE)
 					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE)
 					.addGap(64))
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(15)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(lblProducts)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(cbProducts_1, GroupLayout.PREFERRED_SIZE, 362, GroupLayout.PREFERRED_SIZE))
+						.addComponent(rdbtnUseList))
+					.addContainerGap(34, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -613,11 +614,11 @@ public class productSearchClass extends JPanel {
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(cbProducts_1, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblProducts))
-					.addPreferredGap(ComponentPlacement.RELATED)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 556, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(18, Short.MAX_VALUE))
+					.addContainerGap(12, Short.MAX_VALUE))
 		);
 		
 		JLabel lblAdd2Cart = new JLabel("Add to Cart:");
