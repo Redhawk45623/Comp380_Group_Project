@@ -213,11 +213,19 @@ public class productSearchClass extends JPanel {
 		
 	}
 	
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 * @param number
+	 * @throws IOException
+	 */
 	public void loadImages(int number) throws IOException {
 		
-		String display;
+		String display; //string variable that is used in switch/case below
 		
-		switch (number) {
+		switch (number) { //switch case that chooses which image and description are displayed
 		  case 0:	
 			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/tv.jpg")));			  
 			  if (check3 == true) {				  
@@ -352,6 +360,12 @@ public class productSearchClass extends JPanel {
 	 */
 	private void createEvents() { //method that stores all action events
 		
+		/**
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
 		MouseListener mouseListener = new MouseAdapter() {
 		    public void mouseClicked(MouseEvent e) {
 		        if (e.getClickCount() == 1) {
@@ -372,8 +386,12 @@ public class productSearchClass extends JPanel {
 		    }
 		};
 		
-		
-		
+		/**
+		 * 
+		 * 
+		 * 
+		 * 
+		 */		
 		btnAddList_1.addActionListener(new ActionListener() { //button action method that adds item from combobox to Shopping List
 			public void actionPerformed(ActionEvent e) {				
 				
@@ -461,8 +479,8 @@ public class productSearchClass extends JPanel {
 				ToProductSearchList_items_1.clear(); //clears all items from DefaultListModel -> ToProductSearchList_items_1
 				textAreaTotal_1.setText(""); //this resets the textAreaTotal box back to empty
 				priceArray = new int[50]; //resets the priceArray[]
-				txtpnProductDescription.setText(null);
-				displayLabel.setIcon(null);
+				txtpnProductDescription.setText(null); //resets the description area
+				displayLabel.setIcon(null); //resets the display image area
 				JOptionPane.showMessageDialog(null,"Moved all items in shopping list to Cart!"); //displays pop-up message
 				
 			}
