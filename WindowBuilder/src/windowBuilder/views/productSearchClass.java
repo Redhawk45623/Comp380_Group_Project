@@ -135,8 +135,10 @@ public class productSearchClass extends JPanel {
 	 */
 	public void loadArrayFromTxtFile() throws FileNotFoundException { //method that loads the combobox
 		
-		String namepath = "/Users/Zeina/Desktop/productNames.txt"; //path for the Product Names file
-		File file = new File(namepath);
+		java.net.URL url = getClass().getResource("/productDatabase/productNames.txt");
+		File file = new File(url.getPath());
+		//String namepath = "/Users/Zeina/Desktop/productNames.txt"; //path for the Product Names file stored on my computer locally
+		//File file = new File(namepath);
 			
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			products = br.lines().toArray(); //loads products[] with Product Names 
@@ -146,8 +148,11 @@ public class productSearchClass extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String IDpath = "/Users/Zeina/Desktop/productIDs.txt"; //path for the Product IDs file
-		File file2 = new File(IDpath);
+		
+		java.net.URL url2 = getClass().getResource("/productDatabase/productIDs.txt");
+		File file2 = new File(url2.getPath());
+		//String IDpath = "/Users/Zeina/Desktop/productIDs.txt"; //path for the Product IDs file stored on my computer locally
+		//File file2 = new File(IDpath);
 			
 		try (BufferedReader br2 = new BufferedReader(new FileReader(file2))) {
 			productIDs = br2.lines().toArray(); //loads Product IDs[] with Product IDs
@@ -157,8 +162,11 @@ public class productSearchClass extends JPanel {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		String pricespath = "/Users/Zeina/Desktop/prices.txt"; //path for Product Prices
-		File file3 = new File(pricespath);
+		
+		java.net.URL url3 = getClass().getResource("/productDatabase/prices.txt");
+		File file3 = new File(url3.getPath());
+		//String pricespath = "/Users/Zeina/Desktop/prices.txt"; //path for Product Prices file stored on my computer locally
+		//File file3 = new File(pricespath);
 			
 		try (BufferedReader br3 = new BufferedReader(new FileReader(file3))) {
 			prices = br3.lines().toArray(); //loads prices[] with Product Prices

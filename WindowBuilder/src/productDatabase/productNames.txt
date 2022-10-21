@@ -1,0 +1,10 @@
+Name: Vintage TV
+Name: Vintage Camera
+Name: Atari Games
+Name: 1980s Boombox
+Name: Rotary Phone
+Name: Cassette Tape
+Name: Film Camera
+Name: Vintage Top
+Name: Rustic Sign
+Name: Nintendo Console
