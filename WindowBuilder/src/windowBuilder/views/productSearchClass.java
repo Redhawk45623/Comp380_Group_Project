@@ -24,6 +24,9 @@ import javax.swing.JTextArea;
 import javax.swing.border.BevelBorder;
 import java.awt.Font;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -52,6 +55,7 @@ public class productSearchClass extends JPanel {
 	public static Object[] prices = new String[20]; //array that is loaded from file containing prices, used to load combobox
 	public static int[] prices2 = new int[20]; ////used to track the order of indexes that were added to the shopping list
 	private int[] priceArray = new int[50]; //array used to store the prices in order of added to the shopping list after pressing add to list button
+	public static int[] imagesIndex = new int[20];
 	
 	public static DefaultListModel<Object> ToProductSearchList_items_1; //DefaultListModel list used to create list containing items added to the Search List
 	public static DefaultListModel<Object> ToCartShopList_items_3; //DefaultListModel list used to create list containing items added Cart List from Shop List
@@ -68,7 +72,7 @@ public class productSearchClass extends JPanel {
 	
 	private JPanel panel_1; //panel that is used to hold all elements for the Shopping List option
 	private JPanel panel_2; //panel that is used to hold the btnAddCart button and lblAdd2Cart label
-	private JPanel panel_3; //panel that is used to hold the image diaplay area
+	private JPanel panel_3; //panel that is used to hold the image display area
 	private JPanel panel_4; //panel that is used to hold the product desciption area
 	
 	private JScrollPane scrollPane; //scrollpane element for the Shopping List
@@ -83,7 +87,7 @@ public class productSearchClass extends JPanel {
 	private JLabel lblNewLabel;	          //               //
 	private JLabel lblNoShipAndTaxes;     //  all labels   //
 	private JLabel lblAddAllToList;       //               //
-	private JLabel lblAddOneToList;       ///////////////////
+	private JLabel lblAddOneToList;
 	
 	private JList<Object> JListShopList_1; //JList element for Shopping List
 	
@@ -94,6 +98,9 @@ public class productSearchClass extends JPanel {
 	private JTextPane txtpnProductDescription; //text pane for product description
 	
 	private JTextArea textAreaTotal_1; //text area to display the total cost of the products added to the Shopping List
+	private JLabel displayLabel;
+	ImageIcon image;
+	
 	
 	/**
 	 * 
@@ -159,6 +166,53 @@ public class productSearchClass extends JPanel {
 		}
 		
 	}
+	
+	public void loadImages(int number) throws IOException {
+		
+		image = new ImageIcon();
+		
+		switch (number) {
+		  case 0:	
+			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/tv.jpg")));
+			  break;
+		  case 1:		  
+			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/camera.jpg")));
+			  break;
+		  case 2:
+			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/atari.jpg")));
+			  break;
+		  case 3:
+			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/boombox.jpg")));
+			  break;
+		  case 4:
+			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/phone.jpg")));
+			  break;
+		  case 5:
+			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/cassette.jpg")));
+			  break;
+		  case 6:
+			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/camera2.jpg")));
+			  break;
+		  case 7:
+			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/top.jpg")));
+			  break;
+		  case 8:
+			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/sign.jpg")));
+			  break;
+		  case 9:
+			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/nintendo.jpg")));
+			  break;
+		
+		}
+					
+		
+	}		
+		
+		//JOptionPane.showMessageDialog(null,displayLabel);	
+	
+	
+	
+
 	
 	/**
 	 * 
@@ -234,18 +288,51 @@ public class productSearchClass extends JPanel {
 	 */
 	private void createEvents() { //method that stores all action events
 		
+		MouseListener mouseListener = new MouseAdapter() {
+		    public void mouseClicked(MouseEvent e) {
+		        if (e.getClickCount() == 1) {
+        	           
+		            int x = 0;		
+					int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates an array that stores the selected items in the Shopping List				    
+					int y = selectedIx[x];
+							try {
+								loadImages(y);
+							} catch (IOException e1) {
+								// TODO Auto-generated catch block
+								e1.printStackTrace();
+							}
+
+		        }
+		    }
+		};
+		
+		
+		
 		btnAddList_1.addActionListener(new ActionListener() { //button action method that adds item from combobox to Shopping List
 			public void actionPerformed(ActionEvent e) {				
 				
-				int send = cbProducts_1.getSelectedIndex(); //creates variable send to pass to addPrices() method from cbProducts_1				
+				int send = cbProducts_1.getSelectedIndex(); //creates variable send to pass to addPrices() method from cbProducts_1	
+				
+				if (check == true) {
+					
+					try {
+						loadImages(send);
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+				}
 				prices2[add] = send; //used to track the order of indexes that were added to the shopping list
-				add++; //increments the add variable for next use				
+				add++; //increments the add variable for prices[] for the next use				
 				addPrices(send); //calls addPrices method				
 				setPriceTotal(); //calls setPriceTotal method							
 				ToCartShopList_items_3.addElement(cbProducts_1.getSelectedItem()); //	//This adds the selected element from cbProducts to DefaultListModel ToCartShopList_items_3			
 				ToProductSearchList_items_1.addElement(cbProducts_1.getSelectedItem());  //This adds the selected element from cbProducts to DefaultListModel ToProductSearchList_items_1
 				JListShopList_1.setModel(ToProductSearchList_items_1); //this lists the selected DefaultListModel items in the JListShopList shopping list
-							
+				
+				
+				JListShopList_1.addMouseListener(mouseListener); //??????
 				//JOptionPane.showMessageDialog(null,S);
 				
 			} 
@@ -562,7 +649,7 @@ public class productSearchClass extends JPanel {
 									.addGap(35))))
 						.addGroup(gl_panel_1.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 161, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_1.createSequentialGroup()
 							.addGap(8)
@@ -625,22 +712,21 @@ public class productSearchClass extends JPanel {
 								.addComponent(btnRemoveAll)))
 						.addComponent(lblNoShipAndTaxes, GroupLayout.PREFERRED_SIZE, 11, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 211, GroupLayout.PREFERRED_SIZE)
-						.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 199, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE))
 					.addContainerGap(33, Short.MAX_VALUE))
 		);
 		
 		txtpnProductDescription = new JTextPane();
-		txtpnProductDescription.setText("This is a desciption of an item that will give general details and information for that product. The information will be displayed here if the description radio box is selected.");
+		txtpnProductDescription.setText("This is a desciption of an item that will give general details and information for that product. The information will be displayed here if the 'See Description' radio button is selected.");
 		txtpnProductDescription.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
 		gl_panel_4.setHorizontalGroup(
 			gl_panel_4.createParallelGroup(Alignment.TRAILING)
-				.addGroup(gl_panel_4.createSequentialGroup()
+				.addGroup(Alignment.LEADING, gl_panel_4.createSequentialGroup()
 					.addContainerGap(9, Short.MAX_VALUE)
-					.addComponent(txtpnProductDescription, GroupLayout.PREFERRED_SIZE, 146, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap())
+					.addComponent(txtpnProductDescription, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE))
 		);
 		gl_panel_4.setVerticalGroup(
 			gl_panel_4.createParallelGroup(Alignment.LEADING)
@@ -650,22 +736,24 @@ public class productSearchClass extends JPanel {
 					.addContainerGap(24, Short.MAX_VALUE))
 		);
 		panel_4.setLayout(gl_panel_4);
+	
 		
-		JLabel lblTempLabelForImage = new JLabel("Display Image Here");
+		displayLabel = new JLabel("");
+		
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
 		gl_panel_3.setHorizontalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
 				.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
-					.addContainerGap(77, Short.MAX_VALUE)
-					.addComponent(lblTempLabelForImage)
-					.addGap(74))
+					.addContainerGap(44, Short.MAX_VALUE)
+					.addComponent(displayLabel, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE)
+					.addGap(23))
 		);
 		gl_panel_3.setVerticalGroup(
-			gl_panel_3.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
-					.addContainerGap(94, Short.MAX_VALUE)
-					.addComponent(lblTempLabelForImage)
-					.addGap(89))
+			gl_panel_3.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_panel_3.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(displayLabel, GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+					.addContainerGap())
 		);
 		panel_3.setLayout(gl_panel_3);
 		
@@ -674,6 +762,8 @@ public class productSearchClass extends JPanel {
 		panel_1.setLayout(gl_panel_1);
 		panel.setLayout(gl_panel);
 		setLayout(groupLayout);
+		
+		
 		
 	}
 }
