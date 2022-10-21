@@ -130,6 +130,8 @@ public class cartClass extends JPanel {
 		btnEmptyCart.addActionListener(new ActionListener() { //this action method for button: btnEmptyCart emptys the cart
 			public void actionPerformed(ActionEvent e) {	
 			
+			productSearchClass.txtpnProductDescription.setText(null);
+			productSearchClass.displayLabel.setIcon(null);
 			productSearchClass.ToProductSearchList_items_1.removeAllElements(); //this clears all elemnts from DefaultList Model: ProductSearchList_items_1
 			CartList_items_2.removeAllElements(); //this clears all elements from DefaultListModel: CartList_items_2
 			productSearchClass.ToCartShopList_items_3.removeAllElements(); //this clears all elements from DefaultListModel: ToCartShopList_items_3

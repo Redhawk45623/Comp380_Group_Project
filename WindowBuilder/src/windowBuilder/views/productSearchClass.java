@@ -56,6 +56,8 @@ public class productSearchClass extends JPanel {
 	public static int[] prices2 = new int[20]; ////used to track the order of indexes that were added to the shopping list
 	private int[] priceArray = new int[50]; //array used to store the prices in order of added to the shopping list after pressing add to list button
 	public static int[] imagesIndex = new int[20];
+	public static Object[] descriptionsArray = new String[10];
+	public static int[] trackImages = new int[20];
 	
 	public static DefaultListModel<Object> ToProductSearchList_items_1; //DefaultListModel list used to create list containing items added to the Search List
 	public static DefaultListModel<Object> ToCartShopList_items_3; //DefaultListModel list used to create list containing items added Cart List from Shop List
@@ -69,6 +71,7 @@ public class productSearchClass extends JPanel {
 	public static int add = 0; //incremented variable used as index for priceArray, used for btnAddList_1 action event 
 	private int sum; //incremented variable used as index for addPrices() 
 	private int counter = 0; //incremented variable used as index for addPrices() 
+	private int track = 0;
 	
 	private JPanel panel_1; //panel that is used to hold all elements for the Shopping List option
 	private JPanel panel_2; //panel that is used to hold the btnAddCart button and lblAdd2Cart label
@@ -87,7 +90,8 @@ public class productSearchClass extends JPanel {
 	private JLabel lblNewLabel;	          //               //
 	private JLabel lblNoShipAndTaxes;     //  all labels   //
 	private JLabel lblAddAllToList;       //               //
-	private JLabel lblAddOneToList;
+	private JLabel lblAddOneToList;       //               //
+	public static JLabel displayLabel;    ///////////////////
 	
 	private JList<Object> JListShopList_1; //JList element for Shopping List
 	
@@ -95,11 +99,10 @@ public class productSearchClass extends JPanel {
 	private JRadioButton rdbtnSeeImage; //radio button to see the product image
 	private JRadioButton rdbtnSeeDescription; //radio button to see the product image
 	
-	private JTextPane txtpnProductDescription; //text pane for product description
+	public static JTextPane txtpnProductDescription; //text pane for product description
 	
 	private JTextArea textAreaTotal_1; //text area to display the total cost of the products added to the Shopping List
-	private JLabel displayLabel;
-	ImageIcon image;
+	
 	
 	
 	/**
@@ -112,8 +115,9 @@ public class productSearchClass extends JPanel {
 		
 		initComponents(); //calls initComponents() 
 		createEvents(); //calls createEvents();
-		loadArrayFromTxtFile(); //calls loadArrayFromTxtFile()
+		loadArrayFromTxtFile(); //calls loadArrayFromTxtFile(), reads .txt files for product arrays
 		loadCombobox();	//calls loadCombobox()
+		loadDescriptions();
 		
 		panel_1.setVisible(false); //hides all elements in panel 1 (Shopping List option)
 		panel_2.setVisible(true); //reveals all elemnts in panel_2 (btnAddCart button and associated label)
@@ -167,40 +171,96 @@ public class productSearchClass extends JPanel {
 		
 	}
 	
+	public void loadDescriptions() throws FileNotFoundException {
+		
+		int i;
+		java.net.URL url = getClass().getResource("/productDescriptions/descriptions.txt");
+		File file = new File(url.getPath());
+		
+		for (i = 0; i < descriptionsArray.length; i++) {
+			try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+				descriptionsArray = br.lines().toArray();  
+				//JOptionPane.showMessageDialog(null,descriptionsArray[i]);	
+			} catch (FileNotFoundException e) {
+			throw e;
+			} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			}
+		}
+		
+	}
+	
+	public String setDescriptions(int x) {
+		
+		String descrip = descriptionsArray[x].toString();
+		return descrip;
+		
+	}
+	
+	public void setImageIndex(int number) {
+				
+		trackImages[track] = number;
+		track++;
+		
+	}
+	
 	public void loadImages(int number) throws IOException {
 		
-		image = new ImageIcon();
+		String display;
 		
 		switch (number) {
 		  case 0:	
-			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/tv.jpg")));
+			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/tv.jpg")));			  
+			  if (check3 == true) {				  
+				  display = setDescriptions(number);
+				  txtpnProductDescription.setText(display);
+			  }			  
 			  break;
 		  case 1:		  
 			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/camera.jpg")));
+			  display = setDescriptions(number);
+			  txtpnProductDescription.setText(display);
 			  break;
 		  case 2:
 			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/atari.jpg")));
+			  display = setDescriptions(number);
+			  txtpnProductDescription.setText(display);
 			  break;
 		  case 3:
 			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/boombox.jpg")));
+			  display = setDescriptions(number);
+			  txtpnProductDescription.setText(display);
 			  break;
 		  case 4:
 			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/phone.jpg")));
+			  display = setDescriptions(number);
+			  txtpnProductDescription.setText(display);
 			  break;
 		  case 5:
 			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/cassette.jpg")));
+			  display = setDescriptions(number);
+			  txtpnProductDescription.setText(display);
 			  break;
 		  case 6:
 			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/camera2.jpg")));
+			  display = setDescriptions(number);
+			  txtpnProductDescription.setText(display);
 			  break;
 		  case 7:
 			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/top.jpg")));
+			  display = setDescriptions(number);
+			  txtpnProductDescription.setText(display);
 			  break;
 		  case 8:
 			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/sign.jpg")));
+			  display = setDescriptions(number);
+			  txtpnProductDescription.setText(display);
 			  break;
 		  case 9:
 			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/nintendo.jpg")));
+			  display = setDescriptions(number);
+			  txtpnProductDescription.setText(display);
 			  break;
 		
 		}
@@ -209,11 +269,7 @@ public class productSearchClass extends JPanel {
 	}		
 		
 		//JOptionPane.showMessageDialog(null,displayLabel);	
-	
-	
-	
-
-	
+		
 	/**
 	 * 
 	 * 
@@ -294,13 +350,15 @@ public class productSearchClass extends JPanel {
         	           
 		            int x = 0;		
 					int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates an array that stores the selected items in the Shopping List				    
-					int y = selectedIx[x];
-							try {
-								loadImages(y);
-							} catch (IOException e1) {
-								// TODO Auto-generated catch block
-								e1.printStackTrace();
-							}
+					int image = selectedIx[x];					 
+					image = trackImages[image];
+					
+						try {
+							loadImages(image);
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 
 		        }
 		    }
@@ -312,27 +370,23 @@ public class productSearchClass extends JPanel {
 			public void actionPerformed(ActionEvent e) {				
 				
 				int send = cbProducts_1.getSelectedIndex(); //creates variable send to pass to addPrices() method from cbProducts_1	
-				
-				if (check == true) {
+				setImageIndex(send);
 					
-					try {
-						loadImages(send);
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
-					
+				try {
+					loadImages(send);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
 				}
-				prices2[add] = send; //used to track the order of indexes that were added to the shopping list
+				
+				prices2[add] = send; //used to track prices
 				add++; //increments the add variable for prices[] for the next use				
 				addPrices(send); //calls addPrices method				
 				setPriceTotal(); //calls setPriceTotal method							
 				ToCartShopList_items_3.addElement(cbProducts_1.getSelectedItem()); //	//This adds the selected element from cbProducts to DefaultListModel ToCartShopList_items_3			
 				ToProductSearchList_items_1.addElement(cbProducts_1.getSelectedItem());  //This adds the selected element from cbProducts to DefaultListModel ToProductSearchList_items_1
-				JListShopList_1.setModel(ToProductSearchList_items_1); //this lists the selected DefaultListModel items in the JListShopList shopping list
-				
-				
-				JListShopList_1.addMouseListener(mouseListener); //??????
+				JListShopList_1.setModel(ToProductSearchList_items_1); //this lists the selected DefaultListModel items in the JListShopList shopping list							
+				JListShopList_1.addMouseListener(mouseListener); //a listener that detects when a product is selected in the shopping list
 				//JOptionPane.showMessageDialog(null,S);
 				
 			} 
@@ -386,8 +440,7 @@ public class productSearchClass extends JPanel {
 					
 				}
 				
-				int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates an array that stores the selected items in the Shopping List
-				
+				int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates an array that stores the selected items in the Shopping List				
 				for (int i = 0; i < selectedIx.length; i++) { //loop 
 					
 					int temp = prices2[i]; //sets variable temp for each element in prices[]
@@ -414,9 +467,13 @@ public class productSearchClass extends JPanel {
 		btnRemoveAll.addActionListener(new ActionListener() { //button action method that removes all selected Products in Shopping List
 			public void actionPerformed(ActionEvent e) {
 				
+				txtpnProductDescription.setText(null);
+				displayLabel.setIcon(null);
 				ToProductSearchList_items_1.removeAllElements(); //this clears all elements from DefaultListModel -> ToProductSearchList_items_1
 				textAreaTotal_1.setText("$0.00"); //this resets the textAreaTotal box back to empty
 				priceArray = new int[50]; //this resets the priceArray[]
+				trackImages = new int[20];
+				track = 0;
 			}
 		});
 	
@@ -613,10 +670,10 @@ public class productSearchClass extends JPanel {
 		
 		btnAddOneToCart = new JButton("Add One");
 		
-		lblAddAllToList = new JLabel("Add all from List:");
+		lblAddAllToList = new JLabel("Add all to Cart:");
 		lblAddAllToList.setIcon(new ImageIcon(productSearchClass.class.getResource("/icons/basket2.png")));
 		
-		lblAddOneToList = new JLabel("Add one from List:");
+		lblAddOneToList = new JLabel("Add one to Cart:");
 		lblAddOneToList.setIcon(new ImageIcon(productSearchClass.class.getResource("/icons/basket2.png")));
 		
 		panel_3 = new JPanel();
@@ -719,7 +776,6 @@ public class productSearchClass extends JPanel {
 		);
 		
 		txtpnProductDescription = new JTextPane();
-		txtpnProductDescription.setText("This is a desciption of an item that will give general details and information for that product. The information will be displayed here if the 'See Description' radio button is selected.");
 		txtpnProductDescription.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
 		gl_panel_4.setHorizontalGroup(
