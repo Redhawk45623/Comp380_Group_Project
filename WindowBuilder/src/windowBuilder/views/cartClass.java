@@ -57,6 +57,7 @@ public class cartClass extends JPanel {
 		initComponents(); //calls initComponents() method; builds all structural elements of the panel
 		createEvents(); //calls createEvents()() method; builds all events that happen (actions)
 		textAreaCartTotal.setText("$0.00"); //sets the initial total of the Shopping List to $0.00
+		JListCartQuantity.setModel(ToCartQuantityList_items_4);
 	}
 	
 	/**
@@ -125,7 +126,7 @@ public class cartClass extends JPanel {
 	 * 
 	 * 
 	 */
-	private void createEvents() {
+	private void createEvents() { //this method initializes all event elements of the panel
 		
 		/**
 		 * 
@@ -136,15 +137,16 @@ public class cartClass extends JPanel {
 		btnEmptyCart.addActionListener(new ActionListener() { //this action method for button: btnEmptyCart emptys the cart
 			public void actionPerformed(ActionEvent e) {	
 			
+				//JOptionPane.showMessageDialog(null, JListCartQuantity.getModel());
 				
-				productSearchClass.txtpnProductDescription.setText(null);
-				productSearchClass.displayLabel.setIcon(null);
+				ToCartQuantityList_items_4.removeAllElements(); //empties out the quantity box
+				productSearchClass.txtpnProductDescription.setText(null); //clears out the product description area in productSearchClass 
+				productSearchClass.displayLabel.setIcon(null); //clears out the image displayed in productSearchClass
 				productSearchClass.ToProductSearchList_items_1.removeAllElements(); //this clears all elemnts from DefaultList Model: ProductSearchList_items_1
 				CartList_items_2.removeAllElements(); //this clears all elements from DefaultListModel: CartList_items_2
 				productSearchClass.ToCartShopList_items_3.removeAllElements(); //this clears all elements from DefaultListModel: ToCartShopList_items_3
 				textAreaCartTotal.setText("$0.00"); //this resets the textAreaCartTotal box back to empty
 				cartPriceArray = new int[10]; // this resets the cartPriceArray[]
-				//productSearchClass.remember = 0;
 				sum = 0;//this resets the variable sum	
 			
 			}

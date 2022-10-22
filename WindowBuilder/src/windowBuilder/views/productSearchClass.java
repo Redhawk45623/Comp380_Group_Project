@@ -387,7 +387,7 @@ public class productSearchClass extends JPanel {
 	 * @param from
 	 * @param to
 	 */
-	protected static <T> void addTo(ListModel<T> from, DefaultListModel<T> to) { //method not used 
+	protected static <T> void addTo(ListModel<T> from, DefaultListModel<T> to) { //method used to add one ListModel to another DefaultListModel
 	    for (int index = 0; index < from.getSize(); index++) {
 	        to.addElement(from.getElementAt(index));
 	    }
@@ -407,17 +407,17 @@ public class productSearchClass extends JPanel {
 		 * 
 		 * 
 		 */
-		MouseListener mouseListener = new MouseAdapter() {
+		MouseListener mouseListener = new MouseAdapter() { //mouse action listener to detect when a user clicks on an item in the Shopping List
 		    public void mouseClicked(MouseEvent e) {
-		        if (e.getClickCount() == 1) {
+		        if (e.getClickCount() == 1) { //detects only one click
         	           
 		            int x = 0;		
-					int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates an array that stores the selected items in the Shopping List				    
-					int image = selectedIx[x];					 
-					image = trackImages[image];
+					int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates an array that stores the index of the clicked on product. Will be only one index			    
+					int image = selectedIx[x]; //assigns temp variable: 'image' to the index found at selectedIx[x]					 
+					image = trackImages[image]; //sets the temp variable: 'image' to the index found at trackImages[image]
 					
 						try {
-							loadImages(image);
+							loadImages(image); //calls the loadImages() using the temp variable: 'image' (index of trackImages[image]) to display correct image in panel_3
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -495,12 +495,13 @@ public class productSearchClass extends JPanel {
 		 */
 		btnAddOneToList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				    	           
+				
 				int x = 0;		
-				int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates an array that stores the selected index in the Shopping List				    
-				int image = selectedIx[x];					 
-				image = trackImages[image];					
-				Object productPrice = prices[image];
+				int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates a temp array that stores the selected index in the Shopping List. Will only be one item in array			    
+				int image = selectedIx[x]; //assigns temp variable image to the element at index 0 from temp array selectedIx
+				Object product = JListShopList_1.getSelectedValue(); //gets the selected product info and sets it to the Object variable: product. Used in the pop-up message
+				image = trackImages[image];	//assigns the temp variable 'image' the index stored at trackImages[] using the index: 'image established from the code before				
+				Object productPrice = prices[image]; //
 				
 				total = Integer.parseInt(productPrice.toString());			
 				addPrices2(total); //calls addPrices2() to add up the total in Shopping List after a quantity has been added
@@ -508,10 +509,10 @@ public class productSearchClass extends JPanel {
 			
 				int index = selectedIx[x];
 				Object number = ToQuantityList_items_4.getElementAt(index);
-				int convertedNumber2 = Integer.parseInt(number.toString());
-				int addedUp = convertedNumber2+ 1;				
-				ToQuantityList_items_4.setElementAt(addedUp, index);
-				//JOptionPane.showMessageDialog(null, added);
+				int convertedNumber2 = Integer.parseInt(number.toString()); //converts the Object: 'number' to int: 'convertedNumber2'
+				int addedUp = convertedNumber2+ 1; //adds the price of convertedNumber2	+ 1		
+				ToQuantityList_items_4.setElementAt(addedUp, index); //sets the quantity displayed in quantity box for selected item at the right spot
+				JOptionPane.showMessageDialog(null, "Added one more: " + product); //pop-up message displaying the product which the user added a quantity
 				
 			}
 		});
@@ -541,15 +542,8 @@ public class productSearchClass extends JPanel {
 					
 				}
 				
-				ListModel<Object> model = JListQuantity.getModel();
-				DefaultListModel<Object> list2Model = new DefaultListModel<Object>();
-				for (int i=0; i<model.getSize(); i++) {
-				  list2Model.addElement(model.getElementAt(i));
-				}
-
-				cartClass.JListCartQuantity.setModel(list2Model);
-				
-				ToQuantityList_items_4.removeAllElements();
+				addTo(ToQuantityList_items_4 , cartClass.ToCartQuantityList_items_4); //calls the addTo() which takes a list 'from' and adds it 'to' another list. Basically, sets the quanity in the cart from Shopping List				
+				ToQuantityList_items_4.removeAllElements(); //clears out the quantity box from the Shoppong List
 				cartClass.JListCartList.setModel(ToCartShopList_items_3); //sets the Cart List (JListCartList)  in cartClass with all items from DefaultListModel ToCartShopList_items_3
 				ToProductSearchList_items_1.clear(); //clears all items from DefaultListModel -> ToProductSearchList_items_1
 				textAreaTotal_1.setText(""); //this resets the textAreaTotal box back to empty
@@ -570,9 +564,9 @@ public class productSearchClass extends JPanel {
 		btnRemoveAll.addActionListener(new ActionListener() { //button action method that removes all selected Products in Shopping List
 			public void actionPerformed(ActionEvent e) {
 				
-				txtpnProductDescription.setText(null);
-				displayLabel.setIcon(null);
-				ToQuantityList_items_4.removeAllElements();
+				txtpnProductDescription.setText(null); //clears out the description text area
+				displayLabel.setIcon(null); //clears out the product image from panel_03
+				ToQuantityList_items_4.removeAllElements(); //clears out the DefaultListModel -> ToQuantityList_items_4 (numbers displayed in the quanity box)
 				ToProductSearchList_items_1.removeAllElements(); //this clears all elements from DefaultListModel -> ToProductSearchList_items_1
 				textAreaTotal_1.setText("$0.00"); //this resets the textAreaTotal box back to empty
 				priceArray = new int[50]; //this resets the priceArray[]
@@ -984,6 +978,7 @@ public class productSearchClass extends JPanel {
 		panel_3.setLayout(gl_panel_3);
 		
 		JListShopList_1 = new JList<Object>();
+		JListShopList_1.setToolTipText("Shopping List");
 		scrollPane.setViewportView(JListShopList_1);
 		panel_1.setLayout(gl_panel_1);
 		panel.setLayout(gl_panel);
