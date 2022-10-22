@@ -36,6 +36,7 @@ import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import javax.swing.JTextPane;
 import javax.swing.ImageIcon;
+import javax.swing.AbstractListModel;
 
 /**
  * 
@@ -61,6 +62,7 @@ public class productSearchClass extends JPanel {
 	
 	public static DefaultListModel<Object> ToProductSearchList_items_1; //DefaultListModel list used to create list containing items added to the Search List
 	public static DefaultListModel<Object> ToCartShopList_items_3; //DefaultListModel list used to create list containing items added Cart List from Shop List
+	public static DefaultListModel<Object> ToQuantityList_items_4;
 	
 	private JComboBox<String> cbProducts_1; //Combobox that lists all products for sale
 	
@@ -88,12 +90,12 @@ public class productSearchClass extends JPanel {
 	
 	private JLabel lblRemoveAllFromList;  ///////////////////
 	private JLabel lblNewLabel;	          //               //
-	private JLabel lblNoShipAndTaxes;     //  all labels   //
 	private JLabel lblAddAllToList;       //               //
 	private JLabel lblAddOneToList;       //               //
 	public static JLabel displayLabel;    ///////////////////
 	
 	private JList<Object> JListShopList_1; //JList element for Shopping List
+	private JList<Object> JListQuantity;
 	
 	private JRadioButton rdbtnUseList; //radio button used to list the Shopping List option
 	private JRadioButton rdbtnSeeImage; //radio button to see the product image
@@ -102,6 +104,13 @@ public class productSearchClass extends JPanel {
 	public static JTextPane txtpnProductDescription; //text pane for product description
 	
 	private JTextArea textAreaTotal_1; //text area to display the total cost of the products added to the Shopping List
+	private JScrollPane scrollPane_1;
+	private JButton btnNewButton;
+	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_3;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_4;
+	
 	
 	
 	
@@ -227,11 +236,9 @@ public class productSearchClass extends JPanel {
 		
 		switch (number) { //switch case that chooses which image and description are displayed
 		  case 0:	
-			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/tv.jpg")));			  
-			  if (check3 == true) {				  
-				  display = setDescriptions(number);
-				  txtpnProductDescription.setText(display);
-			  }			  
+			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/tv.jpg")));			  		  
+			  display = setDescriptions(number);
+			  txtpnProductDescription.setText(display);		  		  
 			  break;
 		  case 1:		  
 			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/camera.jpg")));
@@ -411,6 +418,10 @@ public class productSearchClass extends JPanel {
 				setPriceTotal(); //calls setPriceTotal method							
 				ToCartShopList_items_3.addElement(cbProducts_1.getSelectedItem()); //	//This adds the selected element from cbProducts to DefaultListModel ToCartShopList_items_3			
 				ToProductSearchList_items_1.addElement(cbProducts_1.getSelectedItem());  //This adds the selected element from cbProducts to DefaultListModel ToProductSearchList_items_1
+							
+				ToQuantityList_items_4.addElement("1");
+				JListQuantity.setModel(ToQuantityList_items_4);
+				
 				JListShopList_1.setModel(ToProductSearchList_items_1); //this lists the selected DefaultListModel items in the JListShopList shopping list							
 				JListShopList_1.addMouseListener(mouseListener); //a listener that detects when a product is selected in the shopping list
 				//JOptionPane.showMessageDialog(null,S);
@@ -429,7 +440,11 @@ public class productSearchClass extends JPanel {
 				
 				int index = cbProducts_1.getSelectedIndex(); //creates variable index to pass to addPrices() method
 				cartClass.addCartprice(index); //calls the	addCartprice() from cartClass with index variable as parameter			
-				cartClass.setCartPriceTotal(); //calls the setCartPriceTotal() from cartClass			
+				cartClass.setCartPriceTotal(); //calls the setCartPriceTotal() from cartClass
+				
+				cartClass.ToCartQuantityList_items_4.addElement("1");
+				cartClass.JListCartQuantity.setModel(cartClass.ToCartQuantityList_items_4);
+				
 				cartClass.CartList_items_2.addElement(cbProducts_1.getSelectedItem()); //adds the product stored in combobox (cbProducts_1) to DefaultListModel -> CartList_items_2
 				cartClass.JListCartList.setModel(cartClass.CartList_items_2); //places the items in the cart (cartClass.JListCartList) from CartList_items_2
 				JOptionPane.showMessageDialog(null,"Added selected item to Cart!"); //Displays a pop-up message
@@ -497,6 +512,7 @@ public class productSearchClass extends JPanel {
 				
 				txtpnProductDescription.setText(null);
 				displayLabel.setIcon(null);
+				ToQuantityList_items_4.removeAllElements();
 				ToProductSearchList_items_1.removeAllElements(); //this clears all elements from DefaultListModel -> ToProductSearchList_items_1
 				textAreaTotal_1.setText("$0.00"); //this resets the textAreaTotal box back to empty
 				priceArray = new int[50]; //this resets the priceArray[]
@@ -601,13 +617,14 @@ public class productSearchClass extends JPanel {
 		
 		ToProductSearchList_items_1= new DefaultListModel<Object>();
 		ToCartShopList_items_3 = new DefaultListModel<Object>();
+		ToQuantityList_items_4 = new DefaultListModel<Object>();
 		
 		JLabel lblProducts = new JLabel("Products:");
 		lblProducts.setIcon(new ImageIcon(productSearchClass.class.getResource("/icons/Gear.png")));
 		
 		panel_1 = new JPanel();
 		
-		rdbtnUseList = new JRadioButton("Shop using List with Descriptions and Images options");
+		rdbtnUseList = new JRadioButton("Shop using List with Description and Image options");
 		
 		panel_2 = new JPanel();
 	
@@ -682,13 +699,9 @@ public class productSearchClass extends JPanel {
 		lblRemoveAllFromList.setIcon(new ImageIcon(productSearchClass.class.getResource("/icons/Remove from basket.png")));
 		
 		lblNewLabel = new JLabel("Total = ");
-		lblNewLabel.setIcon(new ImageIcon(productSearchClass.class.getResource("/icons/Dollar.png")));
 		
 		textAreaTotal_1 = new JTextArea();
 		textAreaTotal_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
-		
-		lblNoShipAndTaxes = new JLabel("*Does not include S&H or taxes");
-		lblNoShipAndTaxes.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
 		
 		btnAddList_1 = new JButton("Add Now");
 		
@@ -711,131 +724,198 @@ public class productSearchClass extends JPanel {
 		rdbtnSeeImage = new JRadioButton("See Image");
 		
 		panel_4 = new JPanel();
+		
+		scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		
+		JLabel lblQuantity = new JLabel("Qty:");
+		
+		btnNewButton = new JButton("Remove");
+		
+		lblNewLabel_2 = new JLabel("Remove one item:");
+		lblNewLabel_2.setIcon(new ImageIcon(productSearchClass.class.getResource("/icons/Remove from basket.png")));
+		
+		lblNewLabel_4 = new JLabel("*Total does not include S&H or taxes");
+		lblNewLabel_4.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 	
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
+					.addGap(0)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_1.createSequentialGroup()
 							.addGap(14)
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_panel_1.createSequentialGroup()
-									.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-										.addComponent(lblAdd2List)
-										.addComponent(lblAddOneToList)
-										.addComponent(lblAddAllToList)
-										.addComponent(lblRemoveAllFromList))
-									.addGap(4))
-								.addComponent(rdbtnSeeDescription)
-								.addGroup(gl_panel_1.createSequentialGroup()
-									.addComponent(rdbtnSeeImage)
-									.addGap(35))))
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(8)
 							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnAddAll)
-								.addComponent(btnAddOneToCart)))
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-								.addComponent(btnAddList_1, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
 								.addGroup(gl_panel_1.createSequentialGroup()
-									.addGap(6)
 									.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
 										.addGroup(gl_panel_1.createSequentialGroup()
-											.addComponent(lblNewLabel)
+											.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+												.addComponent(lblAddOneToList)
+												.addComponent(lblAddAllToList)
+												.addComponent(lblRemoveAllFromList)
+												.addComponent(lblNewLabel_2))
+											.addGap(4))
+										.addComponent(rdbtnSeeDescription)
+										.addGroup(gl_panel_1.createSequentialGroup()
+											.addComponent(rdbtnSeeImage)
+											.addGap(35)))
+									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_panel_1.createSequentialGroup()
+											.addGap(2)
+											.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+												.addGroup(gl_panel_1.createSequentialGroup()
+													.addComponent(btnAddOneToCart)
+													.addGap(79)
+													.addComponent(lblNewLabel)
+													.addPreferredGap(ComponentPlacement.RELATED)
+													.addComponent(textAreaTotal_1, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
+												.addGroup(gl_panel_1.createSequentialGroup()
+													.addComponent(btnAddAll)
+													.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+													.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE)
+													.addGap(18))
+												.addGroup(gl_panel_1.createSequentialGroup()
+													.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+														.addComponent(btnNewButton)
+														.addComponent(btnRemoveAll, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE))
+													.addGap(18)
+													.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE))))
+										.addGroup(gl_panel_1.createSequentialGroup()
 											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(textAreaTotal_1, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE))
-										.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-										.addComponent(lblNoShipAndTaxes, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)))))
+											.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+											.addPreferredGap(ComponentPlacement.UNRELATED)
+											.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
+												.addComponent(lblQuantity, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+												.addComponent(scrollPane_1, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)))))
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addComponent(lblAdd2List)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(btnAddList_1, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))))
 						.addGroup(gl_panel_1.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel_1.createSequentialGroup()
-									.addGap(6)
-									.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE))
-								.addComponent(btnRemoveAll, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE))))
-					.addGap(50))
+							.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE)))
+					.addGap(21))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblAdd2List)
-						.addComponent(btnAddList_1))
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblAdd2List)
+								.addComponent(btnAddList_1))
 							.addGap(49)
 							.addComponent(rdbtnSeeDescription)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(rdbtnSeeImage))
+							.addComponent(rdbtnSeeImage)
+							.addGap(47))
+						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(14)
-							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(lblQuantity)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblAddOneToList)
-						.addComponent(btnAddOneToCart)
-						.addComponent(textAreaTotal_1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel))
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+							.addComponent(lblAddOneToList)
+							.addComponent(btnAddOneToCart))
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+							.addComponent(textAreaTotal_1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblNewLabel)))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(lblAddAllToList)
-								.addComponent(btnAddAll))
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblRemoveAllFromList)
-								.addComponent(btnRemoveAll)))
-						.addComponent(lblNoShipAndTaxes, GroupLayout.PREFERRED_SIZE, 11, GroupLayout.PREFERRED_SIZE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(panel_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE))
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addComponent(btnAddAll)
+									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+										.addComponent(btnNewButton)
+										.addComponent(lblNewLabel_2))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+										.addComponent(btnRemoveAll)
+										.addComponent(lblRemoveAllFromList))
+									.addGap(12)))
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_1.createSequentialGroup()
+							.addGap(4)
+							.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 13, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 218, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(33, Short.MAX_VALUE))
 		);
 		
+		JListQuantity = new JList<Object>();
+		JListQuantity.setModel(new AbstractListModel() {
+			String[] values = new String[] {};
+			public int getSize() {
+				return values.length;
+			}
+			public Object getElementAt(int index) {
+				return values[index];
+			}
+		});
+		scrollPane_1.setViewportView(JListQuantity);
+		
 		txtpnProductDescription = new JTextPane();
 		txtpnProductDescription.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		
+		lblNewLabel_3 = new JLabel("Product Description");
+		lblNewLabel_3.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		GroupLayout gl_panel_4 = new GroupLayout(panel_4);
 		gl_panel_4.setHorizontalGroup(
-			gl_panel_4.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_panel_4.createSequentialGroup()
-					.addContainerGap(9, Short.MAX_VALUE)
-					.addComponent(txtpnProductDescription, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE))
+			gl_panel_4.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_4.createSequentialGroup()
+					.addContainerGap()
+					.addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_4.createSequentialGroup()
+							.addComponent(txtpnProductDescription, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
+							.addContainerGap())
+						.addGroup(Alignment.TRAILING, gl_panel_4.createSequentialGroup()
+							.addComponent(lblNewLabel_3, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
+							.addGap(67))))
 		);
 		gl_panel_4.setVerticalGroup(
 			gl_panel_4.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_4.createSequentialGroup()
-					.addContainerGap()
-					.addComponent(txtpnProductDescription, GroupLayout.PREFERRED_SIZE, 181, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(24, Short.MAX_VALUE))
+					.addGap(10)
+					.addComponent(lblNewLabel_3, GroupLayout.PREFERRED_SIZE, 13, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(txtpnProductDescription, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(7, Short.MAX_VALUE))
 		);
 		panel_4.setLayout(gl_panel_4);
 	
 		
 		displayLabel = new JLabel("");
 		
+		lblNewLabel_1 = new JLabel("Product Image");
+		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
 		gl_panel_3.setHorizontalGroup(
-			gl_panel_3.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel_3.createSequentialGroup()
-					.addContainerGap(44, Short.MAX_VALUE)
-					.addComponent(displayLabel, GroupLayout.PREFERRED_SIZE, 195, GroupLayout.PREFERRED_SIZE)
-					.addGap(23))
+			gl_panel_3.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel_3.createSequentialGroup()
+					.addContainerGap(82, Short.MAX_VALUE)
+					.addComponent(displayLabel, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
+					.addGap(14))
+				.addGroup(Alignment.LEADING, gl_panel_3.createSequentialGroup()
+					.addGap(65)
+					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(73, Short.MAX_VALUE))
 		);
 		gl_panel_3.setVerticalGroup(
-			gl_panel_3.createParallelGroup(Alignment.TRAILING)
-				.addGroup(Alignment.LEADING, gl_panel_3.createSequentialGroup()
+			gl_panel_3.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel_3.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(displayLabel, GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 13, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(displayLabel, GroupLayout.DEFAULT_SIZE, 183, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		panel_3.setLayout(gl_panel_3);
