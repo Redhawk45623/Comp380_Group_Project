@@ -136,15 +136,16 @@ public class cartClass extends JPanel {
 		btnEmptyCart.addActionListener(new ActionListener() { //this action method for button: btnEmptyCart emptys the cart
 			public void actionPerformed(ActionEvent e) {	
 			
-			productSearchClass.txtpnProductDescription.setText(null);
-			productSearchClass.displayLabel.setIcon(null);
-			productSearchClass.ToProductSearchList_items_1.removeAllElements(); //this clears all elemnts from DefaultList Model: ProductSearchList_items_1
-			CartList_items_2.removeAllElements(); //this clears all elements from DefaultListModel: CartList_items_2
-			productSearchClass.ToCartShopList_items_3.removeAllElements(); //this clears all elements from DefaultListModel: ToCartShopList_items_3
-			textAreaCartTotal.setText("$0.00"); //this resets the textAreaCartTotal box back to empty
-			cartPriceArray = new int[10]; // this resets the cartPriceArray[]
-			//productSearchClass.remember = 0;
-			sum = 0;//this resets the variable sum	
+				
+				productSearchClass.txtpnProductDescription.setText(null);
+				productSearchClass.displayLabel.setIcon(null);
+				productSearchClass.ToProductSearchList_items_1.removeAllElements(); //this clears all elemnts from DefaultList Model: ProductSearchList_items_1
+				CartList_items_2.removeAllElements(); //this clears all elements from DefaultListModel: CartList_items_2
+				productSearchClass.ToCartShopList_items_3.removeAllElements(); //this clears all elements from DefaultListModel: ToCartShopList_items_3
+				textAreaCartTotal.setText("$0.00"); //this resets the textAreaCartTotal box back to empty
+				cartPriceArray = new int[10]; // this resets the cartPriceArray[]
+				//productSearchClass.remember = 0;
+				sum = 0;//this resets the variable sum	
 			
 			}
 		});
@@ -158,14 +159,14 @@ public class cartClass extends JPanel {
 		btnRemoveItem.addActionListener(new ActionListener() { //this action method for button: btnRemoveItem removes a selected product from cart
 			public void actionPerformed(ActionEvent e) {
 			
-			int select = JListCartList.getSelectedIndex(); //sets temp int variable: select to the selected index from JListCartList
-			int remove = cartPriceArray[select];	//uses select variable as the index for cartPriceArray and assigns to temp variable remove					
-			rearrangeCart(remove); //calls rearrangeArray() methd and passes variable remove as parameter
-			int added = Arrays.stream(cartPriceArray).sum(); //adds up the total sum of cartPriceArray and assigns it to temp int variable: added		
-			textAreaCartTotal.setText(""); //empties the textAreaCartTotal text
-			textAreaCartTotal.append("$" + added + ".00"); //sets the textAreaCartTotal text with the variable: added 			
-			CartList_items_2.remove(select); //removes the slected product from CartList_items_2
-			//String n = Integer.toString(newTotal);
+				int select = JListCartList.getSelectedIndex(); //sets temp int variable: select to the selected index from JListCartList
+				int remove = cartPriceArray[select];	//uses select variable as the index for cartPriceArray and assigns to temp variable remove					
+				rearrangeCart(remove); //calls rearrangeArray() methd and passes variable remove as parameter
+				int added = Arrays.stream(cartPriceArray).sum(); //adds up the total sum of cartPriceArray and assigns it to temp int variable: added		
+				textAreaCartTotal.setText(""); //empties the textAreaCartTotal text
+				textAreaCartTotal.append("$" + added + ".00"); //sets the textAreaCartTotal text with the variable: added 			
+				CartList_items_2.remove(select); //removes the slected product from CartList_items_2
+				//String n = Integer.toString(newTotal);
 						
 			}
 		});
