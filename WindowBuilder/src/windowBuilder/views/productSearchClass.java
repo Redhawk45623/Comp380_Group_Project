@@ -56,13 +56,13 @@ public class productSearchClass extends JPanel {
 	public Object[] productIDs; //array that is loaded from read file containing Product IDs, used to load combobox
 	public static Object[] prices = new String[20]; //array that is loaded from file containing prices, used to load combobox
 	public static int[] prices2 = new int[20]; ////used to track the order of indexes that were added to the shopping list
-	private int[] priceArray = new int[50]; //array used to store the prices in order of added to the shopping list after pressing add to list button
+	private static int[] priceArray = new int[50]; //array used to store the prices in order of added to the shopping list after pressing add to list button
 	public static int[] imagesIndex = new int[20];
 	public static Object[] descriptionsArray = new String[10];
 	public static int[] trackImages = new int[20];
 	
 	public static DefaultListModel<Object> ToProductSearchList_items_1; //DefaultListModel list used to create list containing items added to the Search List
-	public static DefaultListModel<Object> ToCartShopList_items_3; //DefaultListModel list used to create list containing items added Cart List from Shop List
+	public static DefaultListModel<Object> ToCartShopList_items_3; //DefaultListModel list used to create list containing items added to Cart List from Shop List
 	public static DefaultListModel<Object> ToQuantityList_items_4;
 	
 	private JComboBox<String> cbProducts_1; //Combobox that lists all products for sale
@@ -72,8 +72,9 @@ public class productSearchClass extends JPanel {
 	private boolean check3 = false; // boolean variable that controls visibility to see the product description (rdbtnSeeDescription)
 		
 	public static int add = 0; //incremented variable used as index for priceArray, used for btnAddList_1 action event 
-	private int sum; //incremented variable used as index for addPrices() 
-	private int counter = 0; //incremented variable used as index for addPrices() 
+	private static int sum; //incremented variable used as index for addPrices() 
+	private int total;
+	private static int counter = 0; //incremented variable used as index for addPrices() 
 	private int track = 0;
 	
 	private JPanel panel_1; //panel that is used to hold all elements for the Shopping List option
@@ -83,7 +84,7 @@ public class productSearchClass extends JPanel {
 	
 	private JScrollPane scrollPane; //scrollpane element for the Shopping List
 	
-	private JButton btnAddList_1; //button to add products from combobox to the Shopping List
+	private JButton btnAddToList; //button to add products from combobox to the Shopping List
 	private JButton btnAddCart; //button to add products straight to cart (radio button -> rdbtnUseList not selected)
 	private JButton btnAddAllToCart; //button used to add all contents of Shopping List to Cart
 	private JButton btnRemoveAll; //button to remove all contents of the Shopping List
@@ -317,13 +318,31 @@ public class productSearchClass extends JPanel {
 	 */
 	public void addPrices(int x) { //method to add up the prices
 		
-		Object first = prices[x]; //this creates an object variable that is initialized from the passed parameter/prices[]
+		Object first = prices[x]; //this creates an object variable that is initialized from the passed parameter, used to get selected index and match to price
 		int second = Integer.parseInt(first.toString()); //this converts the object to integer
 		priceArray[counter] = second; //this loads the priceArray[]
 		counter++; //increments counter variable
 		sum = 0; //sets the variable initially to 0
 		for(int i = 0; i < priceArray.length; i++){ //loop to add up the total price that is in priceArray
-		sum += priceArray[i]; //adds up the priceArray[] and stores it in the variable sum
+			sum += priceArray[i]; //adds up the priceArray[] and stores it in the variable sum
+		}
+		
+	}
+	
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 * @param x
+	 */
+	public void addPrices2(int x) { //method to add up the prices after adding a quantity of one from the shopping list
+		
+		priceArray[counter] = x; //this loads the priceArray[]
+		counter++; //increments counter variable
+		sum = 0; //sets the variable initially to 0
+		for(int i = 0; i < priceArray.length; i++){ //loop to add up the total price that is in priceArray
+			sum += priceArray[i]; //adds up the priceArray[] and stores it in the variable sum
 		}
 		
 	}
@@ -415,22 +434,22 @@ public class productSearchClass extends JPanel {
 		 * 
 		 * 
 		 */		
-		btnAddList_1.addActionListener(new ActionListener() { //button action method that adds item from combobox to Shopping List
+		btnAddToList.addActionListener(new ActionListener() { //button action method that adds item from combobox to Shopping List
 			public void actionPerformed(ActionEvent e) {
 				
-				int send = cbProducts_1.getSelectedIndex(); //creates variable send to pass to addPrices() method from cbProducts_1	
-				setImageIndex(send);
+				int cbIndex = cbProducts_1.getSelectedIndex(); //creates variable send to pass to addPrices() method from cbProducts_1	
+				setImageIndex(cbIndex); //uses cbIndex variable as a parameter to call setImageIndex().  This tracks the order of indexes to be used for the description and image display
 					
 				try {
-					loadImages(send);
+					loadImages(cbIndex);
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-				
-				prices2[add] = send; //used to track prices
+		
+				prices2[add] = cbIndex; //used to track prices
 				add++; //increments the add variable for prices[] for the next use				
-				addPrices(send); //calls addPrices method				
+				addPrices(cbIndex); //calls addPrices method				
 				setPriceTotal(); //calls setPriceTotal method							
 				ToCartShopList_items_3.addElement(cbProducts_1.getSelectedItem()); //	//This adds the selected element from cbProducts to DefaultListModel ToCartShopList_items_3			
 				ToProductSearchList_items_1.addElement(cbProducts_1.getSelectedItem());  //This adds the selected element from cbProducts to DefaultListModel ToProductSearchList_items_1
@@ -458,7 +477,7 @@ public class productSearchClass extends JPanel {
 				cartClass.addCartprice(index); //calls the	addCartprice() from cartClass with index variable as parameter			
 				cartClass.setCartPriceTotal(); //calls the setCartPriceTotal() from cartClass
 				
-				cartClass.ToCartQuantityList_items_4.addElement("1");
+				cartClass.ToCartQuantityList_items_4.addElement("1"); 
 				cartClass.JListCartQuantity.setModel(cartClass.ToCartQuantityList_items_4);
 				
 				cartClass.CartList_items_2.addElement(cbProducts_1.getSelectedItem()); //adds the product stored in combobox (cbProducts_1) to DefaultListModel -> CartList_items_2
@@ -478,14 +497,13 @@ public class productSearchClass extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				    	           
 				int x = 0;		
-				int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates an array that stores the selected items in the Shopping List				    
-				//JOptionPane.showMessageDialog(null, selectedIx[x]);
+				int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates an array that stores the selected index in the Shopping List				    
 				int image = selectedIx[x];					 
 				image = trackImages[image];					
 				Object productPrice = prices[image];
 				
-				int convertedNumber = Integer.parseInt(productPrice.toString());				
-				sum = convertedNumber + sum;								
+				total = Integer.parseInt(productPrice.toString());			
+				addPrices2(total); //calls addPrices2() to add up the total in Shopping List after a quantity has been added
 				setPriceTotal(); //calls setPriceTotal method	
 			
 				int index = selectedIx[x];
@@ -522,6 +540,14 @@ public class productSearchClass extends JPanel {
 					cartClass.setCartPriceTotal(); //calls setCartPriceTotal() from cartClass		
 					
 				}
+				
+				ListModel<Object> model = JListQuantity.getModel();
+				DefaultListModel<Object> list2Model = new DefaultListModel<Object>();
+				for (int i=0; i<model.getSize(); i++) {
+				  list2Model.addElement(model.getElementAt(i));
+				}
+
+				cartClass.JListCartQuantity.setModel(list2Model);
 				
 				ToQuantityList_items_4.removeAllElements();
 				cartClass.JListCartList.setModel(ToCartShopList_items_3); //sets the Cart List (JListCartList)  in cartClass with all items from DefaultListModel ToCartShopList_items_3
@@ -738,7 +764,7 @@ public class productSearchClass extends JPanel {
 		textAreaTotal_1 = new JTextArea();
 		textAreaTotal_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
-		btnAddList_1 = new JButton("Add Now");
+		btnAddToList = new JButton("Add Now");
 		
 		JLabel lblAdd2List = new JLabel("Add to Shopping List:");
 		lblAdd2List.setIcon(new ImageIcon(productSearchClass.class.getResource("/icons/Price list.png")));
@@ -771,7 +797,7 @@ public class productSearchClass extends JPanel {
 		lblNewLabel_2.setIcon(new ImageIcon(productSearchClass.class.getResource("/icons/Remove from basket.png")));
 		
 		lblNewLabel_4 = new JLabel("*Total does not include S&H or taxes");
-		lblNewLabel_4.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
+		lblNewLabel_4.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
 	
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
@@ -828,7 +854,7 @@ public class productSearchClass extends JPanel {
 								.addGroup(gl_panel_1.createSequentialGroup()
 									.addComponent(lblAdd2List)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnAddList_1, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))))
+									.addComponent(btnAddToList, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))))
 						.addGroup(gl_panel_1.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE)))
@@ -842,7 +868,7 @@ public class productSearchClass extends JPanel {
 						.addGroup(gl_panel_1.createSequentialGroup()
 							.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblAdd2List)
-								.addComponent(btnAddList_1))
+								.addComponent(btnAddToList))
 							.addGap(49)
 							.addComponent(rdbtnSeeDescription)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -886,7 +912,8 @@ public class productSearchClass extends JPanel {
 		);
 		
 		JListQuantity = new JList<Object>();
-		JListQuantity.setModel(new AbstractListModel() {
+		JListQuantity.setModel(new AbstractListModel<Object>() {
+			private static final long serialVersionUID = 1L;
 			String[] values = new String[] {};
 			public int getSize() {
 				return values.length;
