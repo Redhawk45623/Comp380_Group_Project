@@ -34,7 +34,7 @@ public class cartClass extends JPanel {
 	
 	public static JList<Object> JListCartList; //JList element that displays the Products added to the Shopping List
 	public static JTextArea textAreaCartTotal;  // JTextArea that displays the current total of Products added to the Shopping List
-	public static JList JListCartQuantity;
+	public static JList<Object> JListCartQuantity;
 	
 	public static int[] cartPriceArray = new int[20]; //an arrray that is used to tabulate the total amount of the Cart
 	public static Object[] prices2 = new String[20]; //used to track the order of indexes that were added to the shopping list
@@ -294,7 +294,7 @@ public class cartClass extends JPanel {
 					.addContainerGap(228, Short.MAX_VALUE))
 		);
 		
-		JListCartQuantity = new JList();
+		JListCartQuantity = new JList<Object>();
 		scrollPane_1.setViewportView(JListCartQuantity);
 		CartList_items_2= new DefaultListModel<Object>();
 		JListCartList = new JList<Object>(); //this creates a new JList element that will display the Products added to the Shopping List

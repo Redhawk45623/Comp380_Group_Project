@@ -37,6 +37,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTextPane;
 import javax.swing.ImageIcon;
 import javax.swing.AbstractListModel;
+import javax.swing.SwingConstants;
 
 /**
  * 
@@ -84,9 +85,9 @@ public class productSearchClass extends JPanel {
 	
 	private JButton btnAddList_1; //button to add products from combobox to the Shopping List
 	private JButton btnAddCart; //button to add products straight to cart (radio button -> rdbtnUseList not selected)
-	private JButton btnAddAll; //button used to add all contents of Shopping List to Cart
+	private JButton btnAddAllToCart; //button used to add all contents of Shopping List to Cart
 	private JButton btnRemoveAll; //button to remove all contents of the Shopping List
-	private JButton btnAddOneToCart; //button to add one selected item from Shopping List to Cart
+	private JButton btnAddOneToList; //button to add one selected item from Shopping List to Cart
 	
 	private JLabel lblRemoveAllFromList;  ///////////////////
 	private JLabel lblNewLabel;	          //               //
@@ -110,6 +111,10 @@ public class productSearchClass extends JPanel {
 	private JLabel lblNewLabel_3;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_4;
+	
+	int p = 0;
+	int variable = 0;
+	
 	
 	
 	
@@ -238,51 +243,61 @@ public class productSearchClass extends JPanel {
 		  case 0:	
 			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/tv.jpg")));			  		  
 			  display = setDescriptions(number);
+			  lblNewLabel_1.setText("    Vintage TV");
 			  txtpnProductDescription.setText(display);		  		  
 			  break;
 		  case 1:		  
 			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/camera.jpg")));
 			  display = setDescriptions(number);
+			  lblNewLabel_1.setText("Vintage Camera");
 			  txtpnProductDescription.setText(display);
 			  break;
 		  case 2:
 			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/atari.jpg")));
 			  display = setDescriptions(number);
+			  lblNewLabel_1.setText("Atari Games");
 			  txtpnProductDescription.setText(display);
 			  break;
 		  case 3:
 			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/boombox.jpg")));
 			  display = setDescriptions(number);
+			  lblNewLabel_1.setText("1980s Boombox");
 			  txtpnProductDescription.setText(display);
 			  break;
 		  case 4:
 			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/phone.jpg")));
 			  display = setDescriptions(number);
+			  lblNewLabel_1.setText("Rotary Phone");
 			  txtpnProductDescription.setText(display);
 			  break;
 		  case 5:
 			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/cassette.jpg")));
 			  display = setDescriptions(number);
+			  lblNewLabel_1.setText("Cassette Tape");
 			  txtpnProductDescription.setText(display);
 			  break;
 		  case 6:
 			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/camera2.jpg")));
 			  display = setDescriptions(number);
+			  lblNewLabel_1.setText("Film Camera");
 			  txtpnProductDescription.setText(display);
 			  break;
 		  case 7:
 			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/top.jpg")));
 			  display = setDescriptions(number);
+			  lblNewLabel_1.setText("Vintage Top");
 			  txtpnProductDescription.setText(display);
 			  break;
 		  case 8:
 			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/sign.jpg")));
 			  display = setDescriptions(number);
+			  lblNewLabel_1.setText("Rustic Sign");
 			  txtpnProductDescription.setText(display);
 			  break;
 		  case 9:
 			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/nintendo.jpg")));
 			  display = setDescriptions(number);
+			  lblNewLabel_1.setText("Nintendo Console");
 			  txtpnProductDescription.setText(display);
 			  break;
 		
@@ -389,7 +404,8 @@ public class productSearchClass extends JPanel {
 							e1.printStackTrace();
 						}
 
-		        }
+		        }	        
+		        
 		    }
 		};
 		
@@ -400,7 +416,7 @@ public class productSearchClass extends JPanel {
 		 * 
 		 */		
 		btnAddList_1.addActionListener(new ActionListener() { //button action method that adds item from combobox to Shopping List
-			public void actionPerformed(ActionEvent e) {				
+			public void actionPerformed(ActionEvent e) {
 				
 				int send = cbProducts_1.getSelectedIndex(); //creates variable send to pass to addPrices() method from cbProducts_1	
 				setImageIndex(send);
@@ -458,9 +474,26 @@ public class productSearchClass extends JPanel {
 		 * 
 		 * 
 		 */
-		btnAddOneToCart.addActionListener(new ActionListener() {
+		btnAddOneToList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				    	           
+				int x = 0;		
+				int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates an array that stores the selected items in the Shopping List				    
+				//JOptionPane.showMessageDialog(null, selectedIx[x]);
+				int image = selectedIx[x];					 
+				image = trackImages[image];					
+				Object productPrice = prices[image];
 				
+				int convertedNumber = Integer.parseInt(productPrice.toString());				
+				sum = convertedNumber + sum;								
+				setPriceTotal(); //calls setPriceTotal method	
+			
+				int index = selectedIx[x];
+				Object number = ToQuantityList_items_4.getElementAt(index);
+				int convertedNumber2 = Integer.parseInt(number.toString());
+				int addedUp = convertedNumber2+ 1;				
+				ToQuantityList_items_4.setElementAt(addedUp, index);
+				//JOptionPane.showMessageDialog(null, added);
 				
 			}
 		});
@@ -471,7 +504,7 @@ public class productSearchClass extends JPanel {
 		 * 
 		 * 
 		 */
-		btnAddAll.addActionListener(new ActionListener() { //button action method that adds all selected Products from Shopping List to Cart
+		btnAddAllToCart.addActionListener(new ActionListener() { //button action method that adds all selected Products from Shopping List to Cart
 			public void actionPerformed(ActionEvent e) {
 								
 				int begn = 0; //sets the beginning point of the selection value
@@ -490,6 +523,7 @@ public class productSearchClass extends JPanel {
 					
 				}
 				
+				ToQuantityList_items_4.removeAllElements();
 				cartClass.JListCartList.setModel(ToCartShopList_items_3); //sets the Cart List (JListCartList)  in cartClass with all items from DefaultListModel ToCartShopList_items_3
 				ToProductSearchList_items_1.clear(); //clears all items from DefaultListModel -> ToProductSearchList_items_1
 				textAreaTotal_1.setText(""); //this resets the textAreaTotal box back to empty
@@ -691,7 +725,7 @@ public class productSearchClass extends JPanel {
 		scrollPane = new JScrollPane();
 		scrollPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
-		btnAddAll = new JButton("Add All");
+		btnAddAllToCart = new JButton("Add All");
 		
 		btnRemoveAll = new JButton("Remove All");
 		
@@ -699,6 +733,7 @@ public class productSearchClass extends JPanel {
 		lblRemoveAllFromList.setIcon(new ImageIcon(productSearchClass.class.getResource("/icons/Remove from basket.png")));
 		
 		lblNewLabel = new JLabel("Total = ");
+		lblNewLabel.setIcon(new ImageIcon(productSearchClass.class.getResource("/icons/Dollar.png")));
 		
 		textAreaTotal_1 = new JTextArea();
 		textAreaTotal_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -708,12 +743,12 @@ public class productSearchClass extends JPanel {
 		JLabel lblAdd2List = new JLabel("Add to Shopping List:");
 		lblAdd2List.setIcon(new ImageIcon(productSearchClass.class.getResource("/icons/Price list.png")));
 		
-		btnAddOneToCart = new JButton("Add One");
+		btnAddOneToList = new JButton("Add One");
 		
 		lblAddAllToList = new JLabel("Add all to Cart:");
 		lblAddAllToList.setIcon(new ImageIcon(productSearchClass.class.getResource("/icons/basket2.png")));
 		
-		lblAddOneToList = new JLabel("Add one to Cart:");
+		lblAddOneToList = new JLabel("Add one to List:");
 		lblAddOneToList.setIcon(new ImageIcon(productSearchClass.class.getResource("/icons/basket2.png")));
 		
 		panel_3 = new JPanel();
@@ -765,22 +800,24 @@ public class productSearchClass extends JPanel {
 											.addGap(2)
 											.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 												.addGroup(gl_panel_1.createSequentialGroup()
-													.addComponent(btnAddOneToCart)
-													.addGap(79)
-													.addComponent(lblNewLabel)
-													.addPreferredGap(ComponentPlacement.RELATED)
-													.addComponent(textAreaTotal_1, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
-												.addGroup(gl_panel_1.createSequentialGroup()
-													.addComponent(btnAddAll)
-													.addPreferredGap(ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-													.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE)
-													.addGap(18))
-												.addGroup(gl_panel_1.createSequentialGroup()
 													.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 														.addComponent(btnNewButton)
 														.addComponent(btnRemoveAll, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE))
 													.addGap(18)
-													.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE))))
+													.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE))
+												.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+													.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+														.addComponent(btnAddAllToCart)
+														.addComponent(btnAddOneToList))
+													.addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+													.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+														.addGroup(gl_panel_1.createSequentialGroup()
+															.addGap(12)
+															.addComponent(lblNewLabel)
+															.addPreferredGap(ComponentPlacement.RELATED)
+															.addComponent(textAreaTotal_1, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
+														.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE))
+													.addGap(11))))
 										.addGroup(gl_panel_1.createSequentialGroup()
 											.addPreferredGap(ComponentPlacement.RELATED)
 											.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
@@ -817,20 +854,18 @@ public class productSearchClass extends JPanel {
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-							.addComponent(lblAddOneToList)
-							.addComponent(btnAddOneToCart))
-						.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
-							.addComponent(textAreaTotal_1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-							.addComponent(lblNewLabel)))
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblAddOneToList)
+						.addComponent(btnAddOneToList)
+						.addComponent(textAreaTotal_1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_1.createSequentialGroup()
 							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
 								.addComponent(lblAddAllToList)
 								.addGroup(gl_panel_1.createSequentialGroup()
-									.addComponent(btnAddAll)
+									.addComponent(btnAddAllToCart)
 									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 									.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 										.addComponent(btnNewButton)
@@ -895,19 +930,20 @@ public class productSearchClass extends JPanel {
 		displayLabel = new JLabel("");
 		
 		lblNewLabel_1 = new JLabel("Product Image");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		
 		GroupLayout gl_panel_3 = new GroupLayout(panel_3);
 		gl_panel_3.setHorizontalGroup(
 			gl_panel_3.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_3.createSequentialGroup()
-					.addContainerGap(82, Short.MAX_VALUE)
-					.addComponent(displayLabel, GroupLayout.PREFERRED_SIZE, 178, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(18, Short.MAX_VALUE)
+					.addComponent(displayLabel, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE)
 					.addGap(14))
 				.addGroup(Alignment.LEADING, gl_panel_3.createSequentialGroup()
-					.addGap(65)
-					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(73, Short.MAX_VALUE))
+					.addGap(54)
+					.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 97, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(57, Short.MAX_VALUE))
 		);
 		gl_panel_3.setVerticalGroup(
 			gl_panel_3.createParallelGroup(Alignment.LEADING)
