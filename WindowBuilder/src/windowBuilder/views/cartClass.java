@@ -45,6 +45,7 @@ public class cartClass extends JPanel {
 	private static String total; //String variable that is used in the setCartPriceTotal() method
 	private static int counter = 0; //int variable that is used in the addCartprice() method
 	public static int sum; ////int variable that is used in the addCartprice() method and rearrangeArray() method
+	private JButton btnAddItem;
 	
 	/**
 	 * 
@@ -189,8 +190,8 @@ public class cartClass extends JPanel {
 			groupLayout.createParallelGroup(Alignment.LEADING)
 				.addGroup(groupLayout.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(panel, GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
-					.addContainerGap())
+					.addComponent(panel, GroupLayout.PREFERRED_SIZE, 512, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(401, Short.MAX_VALUE))
 		);
 		groupLayout.setVerticalGroup(
 			groupLayout.createParallelGroup(Alignment.LEADING)
@@ -202,8 +203,8 @@ public class cartClass extends JPanel {
 		
 		ToCartQuantityList_items_4 = new DefaultListModel<Object>();
 		
-		JLabel lblNewLabel = new JLabel("Items currently in Cart");
-		lblNewLabel.setIcon(new ImageIcon(cartClass.class.getResource("/icons/Full basket.png")));
+		JLabel lblItemsInCart = new JLabel("Items currently in Cart");
+		lblItemsInCart.setIcon(new ImageIcon(cartClass.class.getResource("/icons/Full basket.png")));
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -211,90 +212,105 @@ public class cartClass extends JPanel {
 		textAreaCartTotal = new JTextArea();
 		textAreaCartTotal.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
-		JLabel lblNewLabel_1 = new JLabel("Total = ");
-		lblNewLabel_1.setIcon(new ImageIcon(cartClass.class.getResource("/icons/Dollar.png")));
+		JLabel lblTotal = new JLabel("Total = ");
+		lblTotal.setIcon(new ImageIcon(cartClass.class.getResource("/icons/Dollar.png")));
 		
 		btnEmptyCart = new JButton("Empty");
 		
-		JLabel lblNewLabel_1_1 = new JLabel("*Does not include S&H or taxes");
-		lblNewLabel_1_1.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
+		JLabel lblNoShipOrTaxes = new JLabel("*Does not include S&H or taxes");
+		lblNoShipOrTaxes.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
 		
-		JLabel lblNewLabel_2 = new JLabel("Empty Cart:");
-		lblNewLabel_2.setIcon(new ImageIcon(cartClass.class.getResource("/icons/Remove from basket.png")));
+		JLabel lblEmptyCart = new JLabel("Empty Cart:");
+		lblEmptyCart.setIcon(new ImageIcon(cartClass.class.getResource("/icons/Remove from basket.png")));
 		
 		btnRemoveItem = new JButton("Remove");
 	
-		JLabel lblNewLabel_3 = new JLabel("Remove Item:");
-		lblNewLabel_3.setIcon(new ImageIcon(cartClass.class.getResource("/icons/Remove from basket.png")));
+		JLabel lblRemoveItem = new JLabel("Remove Item:");
+		lblRemoveItem.setIcon(new ImageIcon(cartClass.class.getResource("/icons/Remove from basket.png")));
 		
 		JScrollPane scrollPane_1 = new JScrollPane();
 		scrollPane_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
 		JLabel lblQuantity = new JLabel("Qty:");
+		
+		JLabel lblAddOneToCart = new JLabel("Add One to Cart:");
+		lblAddOneToCart.setIcon(new ImageIcon(cartClass.class.getResource("/icons/basket2.png")));
+		
+		btnAddItem = new JButton("Add One");
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
+			gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap(18, Short.MAX_VALUE)
+					.addGap(18)
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(lblNewLabel_3)
-						.addComponent(lblNewLabel_2))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(btnRemoveItem, Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(btnEmptyCart)
-							.addGap(47)
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(lblNewLabel_1)
-									.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-									.addComponent(textAreaCartTotal, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE))
-								.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE))))
-					.addGap(103))
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+							.addGap(17)
+							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+								.addComponent(lblRemoveItem)
+								.addComponent(lblEmptyCart))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnEmptyCart)
+								.addComponent(btnRemoveItem, GroupLayout.PREFERRED_SIZE, 83, Short.MAX_VALUE)))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(95)
+							.addComponent(lblAddOneToCart)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(btnAddItem, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNoShipOrTaxes, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(lblTotal)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(textAreaCartTotal, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE)))
+					.addGap(521))
+				.addGroup(Alignment.LEADING, gl_panel.createSequentialGroup()
+					.addGap(83)
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(lblItemsInCart)
+							.addGap(81))
+						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 306, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED))
-						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-							.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(lblNewLabel)
-							.addGap(81)))
+							.addPreferredGap(ComponentPlacement.UNRELATED)))
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addComponent(lblQuantity, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 						.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))
-					.addContainerGap(73, Short.MAX_VALUE))
+					.addContainerGap(93, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(14)
+					.addGap(20)
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblQuantity)
-								.addComponent(lblNewLabel))
+								.addComponent(lblItemsInCart))
 							.addGap(6)
 							.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textAreaCartTotal, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnEmptyCart)
-						.addComponent(lblNewLabel_1)
-						.addComponent(lblNewLabel_2))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(18)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnRemoveItem)
-								.addComponent(lblNewLabel_3)))
+							.addGap(30)
+							.addComponent(lblNoShipOrTaxes, GroupLayout.PREFERRED_SIZE, 11, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(btnAddItem)
+								.addComponent(lblAddOneToCart)
+								.addComponent(textAreaCartTotal, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+								.addComponent(lblTotal))
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(lblNewLabel_1_1, GroupLayout.PREFERRED_SIZE, 11, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(228, Short.MAX_VALUE))
+							.addGroup(gl_panel.createSequentialGroup()
+								.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+									.addComponent(btnRemoveItem)
+									.addComponent(lblRemoveItem))
+								.addGap(9)
+								.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+									.addComponent(btnEmptyCart)
+									.addComponent(lblEmptyCart)))))
+					.addContainerGap(209, Short.MAX_VALUE))
 		);
 		
 		JListCartQuantity = new JList<Object>();

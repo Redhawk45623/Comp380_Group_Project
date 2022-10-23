@@ -64,7 +64,7 @@ public class eCommerceMain extends JFrame {
 	 * @throws FileNotFoundException 
 	 */
 	public eCommerceMain() throws FileNotFoundException {
-		setTitle("- Comp380 'Think Tank' Group Project -");
+		setTitle("'Think Tank' Group Project - 'Vintage Shop'");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 700);
