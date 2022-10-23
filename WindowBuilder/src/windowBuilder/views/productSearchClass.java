@@ -71,6 +71,7 @@ public class productSearchClass extends JPanel {
 	private boolean check2 = false; // boolean variable that controls visibility to see and use the the Shpping List (rdbtnUseList)
 	private boolean check3 = false; // boolean variable that controls visibility to see the product description (rdbtnSeeDescription)
 	private boolean addedOne = false;
+	private boolean addedOne2 = false;
 	
 	public static int add = 0; //incremented variable used as index for priceArray, used for btnAddList_1 action event 
 	private static int sum; //incremented variable used as index for addPrices() 
@@ -450,6 +451,7 @@ public class productSearchClass extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				addedOne = true; //sets the boolean variable:'addedOne' to true.  This is to establish at least one product has been added to the Shopping List 
+				addedOne2 = true;
 				
 				int cbIndex = cbProducts_1.getSelectedIndex(); //creates variable send to pass to addPrices() method from cbProducts_1	
 				setImageIndex(cbIndex); //uses cbIndex variable as a parameter to call setImageIndex().  This tracks the order of indexes to be used for the description and image display
@@ -583,6 +585,34 @@ public class productSearchClass extends JPanel {
 				else { //if there is nothing in the Shopping List, then display pop-up message
 					
 					JOptionPane.showMessageDialog(null,"Please add products to the Shopping List first!"); //displays pop-up message
+				}
+			}
+		});
+		
+		btnRemoveOneItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				if ( addedOne2 == true){
+				
+					int x = 0;		
+					int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates a temp array that stores the selected index in the Shopping List. Will only be one item in array			    
+					int image = selectedIx[x]; //assigns temp variable image to the element at index 0 from temp array selectedIx
+					
+					int productPrice = priceArray[image]; //sets int variable:'productPrice' to the price found at priceArray[image]
+					
+					ToCartShopList_items_3.removeElementAt(image);
+					ToProductSearchList_items_1.removeElementAt(image); //removes the Product from Shopping List at index specified by variable: 'index'
+					ToQuantityList_items_4.removeElementAt(image); //removes the quantity amounf from quantity box at index specified by variable: 'index'
+					
+					sum = sum - productPrice;
+					textAreaTotal_1.setText("$" + sum + ".00"); 
+					//JOptionPane.showMessageDialog(null,sum);
+					
+				}
+				else {
+					
+					JOptionPane.showMessageDialog(null,"Please add products to the Shopping List first!");
+					
 				}
 			}
 		});
@@ -971,11 +1001,11 @@ public class productSearchClass extends JPanel {
 			gl_panel_4.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_4.createSequentialGroup()
 					.addContainerGap()
-					.addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel_4.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_panel_4.createSequentialGroup()
 							.addComponent(txtpnProductDescription, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
 							.addContainerGap())
-						.addGroup(Alignment.TRAILING, gl_panel_4.createSequentialGroup()
+						.addGroup(gl_panel_4.createSequentialGroup()
 							.addComponent(lblProductDescrip, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
 							.addGap(67))))
 		);
@@ -985,8 +1015,8 @@ public class productSearchClass extends JPanel {
 					.addGap(10)
 					.addComponent(lblProductDescrip, GroupLayout.PREFERRED_SIZE, 13, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(txtpnProductDescription, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(7, Short.MAX_VALUE))
+					.addComponent(txtpnProductDescription, GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+					.addGap(49))
 		);
 		panel_4.setLayout(gl_panel_4);
 	
