@@ -32,6 +32,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import javax.swing.JTextPane;
@@ -59,7 +60,7 @@ public class productSearchClass extends JPanel {
 	public static int[] priceArray = new int[50]; //array used to store the prices in order of added to the shopping list after pressing add to list button
 	public static int[] imagesIndex = new int[20];
 	public static Object[] descriptionsArray = new String[10];
-	public static int[] trackImages = new int[20];
+	public static Integer[] trackImages = new Integer[10];
 	
 	public static DefaultListModel<Object> ToProductSearchList_items_1; //DefaultListModel list used to create list containing items added to the Search List
 	public static DefaultListModel<Object> ToCartShopList_items_3; //DefaultListModel list used to create list containing items added to Cart List from Shop List
@@ -72,6 +73,7 @@ public class productSearchClass extends JPanel {
 	private boolean check3 = false; // boolean variable that controls visibility to see the product description (rdbtnSeeDescription)
 	private boolean addedOne = false;
 	private boolean addedOne2 = false;
+	private boolean checkRepeats  = false;
 	
 	public static int add = 0; //incremented variable used as index for priceArray, used for btnAddList_1 action event 
 	private static int sum; //incremented variable used as index for addPrices() 
@@ -234,11 +236,33 @@ public class productSearchClass extends JPanel {
 	 * 
 	 * @param number
 	 */
-	public void setImageIndex(int number) {
+	public void setImageIndex(Integer number) {
 				
 		trackImages[track] = number;
 		track++;
 		
+	}
+	
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 * @param number
+	 */
+	public void removeImageIndex(Integer number) { //'number' = the index of the image that is to be removed
+		
+		ArrayList<Integer> arr_new = new ArrayList<>();
+		
+		for (int i=0; i<trackImages.length; i++) {	
+			
+			if (trackImages[i]!=number) {				
+				arr_new.add(trackImages[i]);				
+			}
+			
+		}
+		
+		trackImages = arr_new.toArray(new Integer[0]);
 	}
 	
 	/**
@@ -429,7 +453,7 @@ public class productSearchClass extends JPanel {
 					int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates an array that stores the index of the clicked on product. Will be only one index			    
 					int image = selectedIx[x]; //assigns temp variable: 'image' to the index found at selectedIx[x]					 
 					image = trackImages[image]; //sets the temp variable: 'image' to the index found at trackImages[image]
-					
+					//JOptionPane.showMessageDialog(null,image);
 						try {
 							loadImages(image); //calls the loadImages() using the temp variable: 'image' (index of trackImages[image]) to display correct image in panel_3
 						} catch (IOException e1) {
@@ -451,33 +475,52 @@ public class productSearchClass extends JPanel {
 		btnAddToList.addActionListener(new ActionListener() { //button action method that adds item from combobox to Shopping List
 			public void actionPerformed(ActionEvent e) {
 				
+				checkRepeats = false;
 				addedOne = true; //sets the boolean variable:'addedOne' to true.  This is to establish at least one product has been added to the Shopping List 
 				addedOne2 = true;
 				
 				int cbIndex = cbProducts_1.getSelectedIndex(); //creates variable send to pass to addPrices() method from cbProducts_1	
-				setImageIndex(cbIndex); //uses cbIndex variable as a parameter to call setImageIndex().  This tracks the order of indexes to be used for the description and image display
+				
+				String verify = cbProducts_1.getItemAt(cbIndex);
+				
+				for (int i=0; i<JListShopList_1.getModel().getSize(); i++) {
 					
-				try {
-					loadImages(cbIndex); //calls the loadImages() using 'cbIndex' as a parameter
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					if (ToProductSearchList_items_1.get(i) == verify) {
+						
+						checkRepeats = true;
+						JOptionPane.showMessageDialog(null,"Already Added to Shopping List");
+						
+					}
+					
+					
 				}
-		
-				prices2[add] = cbIndex; //used to track prices
-				add++; //increments the add variable for prices[] for the next use				
-				addPrices(cbIndex); //calls addPrices method				
-				setPriceTotal(); //calls setPriceTotal method							
-				ToCartShopList_items_3.addElement(cbProducts_1.getSelectedItem()); //	//This adds the selected element from cbProducts to DefaultListModel ToCartShopList_items_3			
-				ToProductSearchList_items_1.addElement(cbProducts_1.getSelectedItem());  //This adds the selected element from cbProducts to DefaultListModel ToProductSearchList_items_1
-							
-				ToQuantityList_items_4.addElement("1"); //adds a 1 to the DefaultListModel: 'ToQuantityList_items_4'
-				JListQuantity.setModel(ToQuantityList_items_4); //sets the model of the Shopping List quantity box
+				//JOptionPane.showMessageDialog(null,verify);
 				
-				JListShopList_1.setModel(ToProductSearchList_items_1); //this lists the selected DefaultListModel items in the JListShopList shopping list							
-				JListShopList_1.addMouseListener(mouseListener); //a listener that detects when a product is selected in the shopping list
-				//JOptionPane.showMessageDialog(null,S);
-				
+				if (checkRepeats == false) {
+					
+					setImageIndex(cbIndex); //uses cbIndex variable as a parameter to call setImageIndex().  This tracks the order of indexes to be used for the description and image display
+						
+					try {
+						loadImages(cbIndex); //calls the loadImages() using 'cbIndex' as a parameter
+					} catch (IOException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+			
+					prices2[add] = cbIndex; //used to track prices
+					add++; //increments the add variable for prices[] for the next use				
+					addPrices(cbIndex); //calls addPrices method				
+					setPriceTotal(); //calls setPriceTotal method							
+					ToCartShopList_items_3.addElement(cbProducts_1.getSelectedItem()); //	//This adds the selected element from cbProducts to DefaultListModel ToCartShopList_items_3			
+					ToProductSearchList_items_1.addElement(cbProducts_1.getSelectedItem());  //This adds the selected element from cbProducts to DefaultListModel ToProductSearchList_items_1
+								
+					ToQuantityList_items_4.addElement("1"); //adds a 1 to the DefaultListModel: 'ToQuantityList_items_4'
+					JListQuantity.setModel(ToQuantityList_items_4); //sets the model of the Shopping List quantity box
+					
+					JListShopList_1.setModel(ToProductSearchList_items_1); //this lists the selected DefaultListModel items in the JListShopList shopping list							
+					JListShopList_1.addMouseListener(mouseListener); //a listener that detects when a product is selected in the shopping list
+					//JOptionPane.showMessageDialog(null,S);
+				}
 			} 
 		});
 		
@@ -605,6 +648,11 @@ public class productSearchClass extends JPanel {
 					
 					int productPrice = priceArray[image]; //sets int variable:'productPrice' to the price found at priceArray[image]
 					
+					int w = trackImages[image];
+					removeImageIndex(w);
+					txtpnProductDescription.setText(null); //resets the description area
+					displayLabel.setIcon(null); //resets the display image area
+										
 					ToCartShopList_items_3.removeElementAt(image);
 					ToProductSearchList_items_1.removeElementAt(image); //removes the Product from Shopping List at index specified by variable: 'index'
 					ToQuantityList_items_4.removeElementAt(image); //removes the quantity amounf from quantity box at index specified by variable: 'index'
@@ -640,7 +688,7 @@ public class productSearchClass extends JPanel {
 					ToProductSearchList_items_1.removeAllElements(); //this clears all elements from DefaultListModel -> ToProductSearchList_items_1
 					textAreaTotal_1.setText("$0.00"); //this resets the textAreaTotal box back to empty
 					priceArray = new int[50]; //this resets the priceArray[]
-					trackImages = new int[20]; //this resets the trackImages[]
+					trackImages = new Integer[20]; //this resets the trackImages[]
 					track = 0; //resets track variable to 0
 					JOptionPane.showMessageDialog(null,"Removed all products from Shopping List"); //displays pop-up message 
 					
