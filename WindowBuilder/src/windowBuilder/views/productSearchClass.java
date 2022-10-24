@@ -489,8 +489,7 @@ public class productSearchClass extends JPanel {
 						JOptionPane.showMessageDialog(null,"Already Added to Shopping List");
 						
 					}
-					
-					
+										
 				}
 				//JOptionPane.showMessageDialog(null,verify);
 				
@@ -576,7 +575,7 @@ public class productSearchClass extends JPanel {
 					int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates a temp array that stores the selected index in the Shopping List. Will only be one item in array			    
 					int image = selectedIx[x]; //assigns temp variable image to the element at index 0 from temp array selectedIx
 					//Object product = JListShopList_1.getSelectedValue(); //gets the selected product info and sets it to the Object variable: product. Used in the pop-up message
-					image = trackImages[image];	//assigns the temp variable 'image' the index stored at trackImages[] using the index: 'image established from the code before				
+					image = trackImages[image];	//assigns the temp variable 'image' the index stored at trackImages[] using the index: 'image' established from the code before				
 					Object productPrice = prices[image]; //
 					
 					total = Integer.parseInt(productPrice.toString()); //converts the int variable: 'total' to an int from the Object variable: 'productPrice'	
@@ -861,15 +860,11 @@ public class productSearchClass extends JPanel {
 		JLabel lblAdd2Cart = new JLabel("Add to Cart:");
 		
 		btnAddCart = new JButton("Add To Cart");
-		
-		JRadioButton rdbtnSeeImage_1 = new JRadioButton("See Image & Description when adding to Cart");
-		rdbtnSeeImage_1.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
 			gl_panel_2.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_2.createSequentialGroup()
-					.addComponent(rdbtnSeeImage_1)
-					.addPreferredGap(ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+					.addContainerGap(274, Short.MAX_VALUE)
 					.addComponent(lblAdd2Cart)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnAddCart, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
@@ -879,7 +874,6 @@ public class productSearchClass extends JPanel {
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_2.createSequentialGroup()
 					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-						.addComponent(rdbtnSeeImage_1)
 						.addComponent(btnAddCart)
 						.addComponent(lblAdd2Cart))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -897,7 +891,6 @@ public class productSearchClass extends JPanel {
 		lblRemoveAllFromList.setIcon(new ImageIcon(productSearchClass.class.getResource("/icons/Remove from basket.png")));
 		
 		lblNewLabel = new JLabel("Total = ");
-		lblNewLabel.setIcon(new ImageIcon(productSearchClass.class.getResource("/icons/Dollar.png")));
 		
 		textAreaTotal_1 = new JTextArea();
 		textAreaTotal_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
@@ -962,24 +955,24 @@ public class productSearchClass extends JPanel {
 									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 										.addGroup(gl_panel_1.createSequentialGroup()
 											.addGap(2)
-											.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-												.addGroup(gl_panel_1.createSequentialGroup()
+											.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+												.addGroup(Alignment.LEADING, gl_panel_1.createSequentialGroup()
 													.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 														.addComponent(btnRemoveOneItem)
 														.addComponent(btnRemoveAll, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE))
 													.addGap(18)
 													.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE))
-												.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+												.addGroup(gl_panel_1.createSequentialGroup()
 													.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 														.addComponent(btnAddAllToCart)
 														.addComponent(btnAddOneToList))
-													.addPreferredGap(ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
+													.addPreferredGap(ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
 													.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 														.addGroup(gl_panel_1.createSequentialGroup()
 															.addGap(12)
 															.addComponent(lblNewLabel)
 															.addPreferredGap(ComponentPlacement.RELATED)
-															.addComponent(textAreaTotal_1, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
+															.addComponent(textAreaTotal_1, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
 														.addComponent(lblNoShipNotaxes, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE))
 													.addGap(11))))
 										.addGroup(gl_panel_1.createSequentialGroup()

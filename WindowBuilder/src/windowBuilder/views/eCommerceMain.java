@@ -17,6 +17,7 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import java.awt.Toolkit;
 
 /**
  * 
@@ -64,7 +65,7 @@ public class eCommerceMain extends JFrame {
 	 * @throws FileNotFoundException 
 	 */
 	public eCommerceMain() throws FileNotFoundException {
-		setTitle("'Think Tank' Group Project - 'Vintage Shop'");
+		setTitle("- Comp380 'Think Tank' Group Project -");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 700);
