@@ -66,14 +66,14 @@ public class productSearchClass extends JPanel {
 	public static DefaultListModel<Object> ToCartShopList_items_3; //DefaultListModel list used to create list containing items added to Cart List from Shop List
 	public static DefaultListModel<Object> ToQuantityList_items_4;
 	
-	private JComboBox<String> cbProducts_1; //Combobox that lists all products for sale
+	private JComboBox<String> cbProducts; //Combobox that lists all products for sale
 	
 	private boolean check = false; // boolean variable that controls visibility to see the product image (rdbtnSeeImage)
 	private boolean check2 = false; // boolean variable that controls visibility to see and use the the Shpping List (rdbtnUseList)
 	private boolean check3 = false; // boolean variable that controls visibility to see the product description (rdbtnSeeDescription)
 	private boolean addedOne = false;
-	private boolean addedOne2 = false;
 	private boolean checkRepeats  = false;
+	private boolean checkCartRepeats = false;
 	
 	public static int add = 0; //incremented variable used as index for priceArray, used for btnAddList_1 action event 
 	private static int sum; //incremented variable used as index for addPrices() 
@@ -396,7 +396,7 @@ public class productSearchClass extends JPanel {
 		for(int i = 0; i < products.length; i++) { //method loop
 			String line = productIDs[i].toString(); //pulls Object element from productIDs[] and converts to String variable line
 			String line2 = products[i].toString(); //pulls Object element from products[] and converts to String variable line2
-			cbProducts_1.addItem(line + " - " + line2 + " - " + "Price: " + "$" + prices[i] + ".00"); //loads the JComboBox cbProducts_1 with Products IDs, Product Names, and Prices
+			cbProducts.addItem(line + " - " + line2 + " - " + "Price: " + "$" + prices[i] + ".00"); //loads the JComboBox cbProducts_1 with Products IDs, Product Names, and Prices
 			
 		}
 		
@@ -475,13 +475,11 @@ public class productSearchClass extends JPanel {
 		btnAddToList.addActionListener(new ActionListener() { //button action method that adds item from combobox to Shopping List
 			public void actionPerformed(ActionEvent e) {
 				
-				checkRepeats = false;
+				checkRepeats = false; //sets the boolean to false when button is pressed. This is used to check if the selected product has already been added to Shopping List
 				addedOne = true; //sets the boolean variable:'addedOne' to true.  This is to establish at least one product has been added to the Shopping List 
-				addedOne2 = true;
 				
-				int cbIndex = cbProducts_1.getSelectedIndex(); //creates variable send to pass to addPrices() method from cbProducts_1	
-				
-				String verify = cbProducts_1.getItemAt(cbIndex);
+				int cbIndex = cbProducts.getSelectedIndex(); //creates variable send to pass to addPrices() method from cbProducts_1					
+				String verify = cbProducts.getItemAt(cbIndex); //sets variable: 'verify' to the selected product usine variable: 'cbIndex'
 				
 				for (int i=0; i<JListShopList_1.getModel().getSize(); i++) {
 					
@@ -511,8 +509,8 @@ public class productSearchClass extends JPanel {
 					add++; //increments the add variable for prices[] for the next use				
 					addPrices(cbIndex); //calls addPrices method				
 					setPriceTotal(); //calls setPriceTotal method							
-					ToCartShopList_items_3.addElement(cbProducts_1.getSelectedItem()); //	//This adds the selected element from cbProducts to DefaultListModel ToCartShopList_items_3			
-					ToProductSearchList_items_1.addElement(cbProducts_1.getSelectedItem());  //This adds the selected element from cbProducts to DefaultListModel ToProductSearchList_items_1
+					ToCartShopList_items_3.addElement(cbProducts.getSelectedItem()); //	//This adds the selected element from cbProducts to DefaultListModel ToCartShopList_items_3			
+					ToProductSearchList_items_1.addElement(cbProducts.getSelectedItem());  //This adds the selected element from cbProducts to DefaultListModel ToProductSearchList_items_1
 								
 					ToQuantityList_items_4.addElement("1"); //adds a 1 to the DefaultListModel: 'ToQuantityList_items_4'
 					JListQuantity.setModel(ToQuantityList_items_4); //sets the model of the Shopping List quantity box
@@ -533,18 +531,33 @@ public class productSearchClass extends JPanel {
 		btnAddCart.addActionListener(new ActionListener() { //button action method that adds product from combobox to Cart
 			public void actionPerformed(ActionEvent e) {
 				
-				cartClass.check = true;
-				int index = cbProducts_1.getSelectedIndex(); //creates variable index to pass to addPrices() method
-				cartClass.addCartprice(index); //calls the	addCartprice() from cartClass with index variable as parameter			
-				cartClass.setCartPriceTotal(); //calls the setCartPriceTotal() from cartClass
+				checkCartRepeats = false; //always sets the boolean to false when button is pressed				
+				cartClass.check = true; //always sets the boolean to true when button is pressed
+				int index = cbProducts.getSelectedIndex(); //creates variable index to pass to addPrices() method.  Used to get the selected product from combobox			
+				String verify = cbProducts.getItemAt(index); //sets variable: 'verify' to the selected product usine variable: 'index'
 				
-				cartClass.ToCartQuantityList_items_4.addElement("1"); //adds a 1 to the DefaultListModel: 'ToCartQuantityList_items_4' in the cartClass
-				cartClass.JListCartQuantity.setModel(cartClass.ToCartQuantityList_items_4); //sets the model (cartClass quantity box)
+				for (int i=0; i<cartClass.JListCartList.getModel().getSize(); i++) { //for loop that checks the cartClass.CartList_items_2 for a product (variable: 'verify') already added to the Cart
+					
+					if (cartClass.CartList_items_2.get(i) == verify) { //if statement that looks for a product already added to the Cart
+						
+						checkCartRepeats = true; //if there is already a product a user is attempting to add again, set the boolean to true
+						JOptionPane.showMessageDialog(null,"Already Added to Cart! Add quanity from Cart page..."); //display pop-up message
+						
+					}				
+					
+				}
 				
-				cartClass.CartList_items_2.addElement(cbProducts_1.getSelectedItem()); //adds the product stored in combobox (cbProducts_1) to DefaultListModel -> CartList_items_2
-				cartClass.JListCartList.setModel(cartClass.CartList_items_2); //places the items in the cart (cartClass.JListCartList) from CartList_items_2
-				JOptionPane.showMessageDialog(null,"Added selected item to Cart!"); //Displays a pop-up message
-				
+				if (checkCartRepeats == false) { //if the boolean is false, run the code
+					cartClass.addCartprice(index); //calls the	addCartprice() from cartClass with index variable as parameter			
+					cartClass.setCartPriceTotal(); //calls the setCartPriceTotal() from cartClass
+					
+					cartClass.ToCartQuantityList_items_4.addElement("1"); //adds a 1 to the DefaultListModel: 'ToCartQuantityList_items_4' in the cartClass
+					cartClass.JListCartQuantity.setModel(cartClass.ToCartQuantityList_items_4); //sets the model (cartClass quantity box)
+					
+					cartClass.CartList_items_2.addElement(cbProducts.getSelectedItem()); //adds the product stored in combobox (cbProducts_1) to DefaultListModel -> CartList_items_2
+					cartClass.JListCartList.setModel(cartClass.CartList_items_2); //places the items in the cart (cartClass.JListCartList) from CartList_items_2
+					JOptionPane.showMessageDialog(null,"Added selected item to Cart!"); //Displays a pop-up message
+				}
 			}
 		});
 		
@@ -640,12 +653,11 @@ public class productSearchClass extends JPanel {
 		btnRemoveOneItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if ( addedOne2 == true){
+				if (! JListShopList_1.isSelectionEmpty()){
 				
 					int x = 0;		
 					int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates a temp array that stores the selected index in the Shopping List. Will only be one item in array			    
-					int image = selectedIx[x]; //assigns temp variable image to the element at index 0 from temp array selectedIx
-					
+					int image = selectedIx[x]; //assigns temp variable image to the element at index 0 from temp array selectedIx					
 					int productPrice = priceArray[image]; //sets int variable:'productPrice' to the price found at priceArray[image]
 					
 					int w = trackImages[image];
@@ -659,12 +671,17 @@ public class productSearchClass extends JPanel {
 					
 					sum = sum - productPrice;
 					textAreaTotal_1.setText("$" + sum + ".00"); 
-					//JOptionPane.showMessageDialog(null,sum);
 					
+					if (ToProductSearchList_items_1.isEmpty()) {
+						
+						textAreaTotal_1.setText("$0.00"); //this resets the textAreaTotal box back to empty
+						
+					}					
+					//JOptionPane.showMessageDialog(null,sum);					
 				}
 				else {
 					
-					JOptionPane.showMessageDialog(null,"Please add products to the Shopping List first!");
+					JOptionPane.showMessageDialog(null,"Please select an item to remove!");
 					
 				}
 			}
@@ -792,8 +809,8 @@ public class productSearchClass extends JPanel {
 					.addContainerGap())
 		);
 		
-		cbProducts_1 = new JComboBox<String>();
-		cbProducts_1.setMaximumRowCount(10);
+		cbProducts = new JComboBox<String>();
+		cbProducts.setMaximumRowCount(10);
 		
 		ToProductSearchList_items_1= new DefaultListModel<Object>();
 		ToCartShopList_items_3 = new DefaultListModel<Object>();
@@ -815,18 +832,15 @@ public class productSearchClass extends JPanel {
 					.addComponent(panel_1, GroupLayout.PREFERRED_SIZE, 510, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap(222, Short.MAX_VALUE)
-					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 230, GroupLayout.PREFERRED_SIZE)
-					.addGap(64))
-				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(15)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(panel_2, GroupLayout.DEFAULT_SIZE, 437, Short.MAX_VALUE)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(lblProducts)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(cbProducts_1, GroupLayout.PREFERRED_SIZE, 362, GroupLayout.PREFERRED_SIZE))
+							.addComponent(cbProducts, GroupLayout.PREFERRED_SIZE, 362, GroupLayout.PREFERRED_SIZE))
 						.addComponent(rdbtnUseList))
-					.addContainerGap(34, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
@@ -835,7 +849,7 @@ public class productSearchClass extends JPanel {
 					.addComponent(rdbtnUseList)
 					.addGap(12)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(cbProducts_1, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
+						.addComponent(cbProducts, GroupLayout.PREFERRED_SIZE, 34, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblProducts))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(panel_2, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
@@ -847,23 +861,27 @@ public class productSearchClass extends JPanel {
 		JLabel lblAdd2Cart = new JLabel("Add to Cart:");
 		
 		btnAddCart = new JButton("Add To Cart");
+		
+		JRadioButton rdbtnSeeImage_1 = new JRadioButton("See Image & Description when adding to Cart");
+		rdbtnSeeImage_1.setFont(new Font("Lucida Grande", Font.PLAIN, 10));
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
-			gl_panel_2.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel_2.createSequentialGroup()
-					.addContainerGap(40, Short.MAX_VALUE)
+			gl_panel_2.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel_2.createSequentialGroup()
+					.addComponent(rdbtnSeeImage_1)
+					.addPreferredGap(ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
 					.addComponent(lblAdd2Cart)
-					.addGap(6)
-					.addComponent(btnAddCart, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addComponent(btnAddCart, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
+					.addGap(31))
 		);
 		gl_panel_2.setVerticalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_2.createSequentialGroup()
-					.addGroup(gl_panel_2.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel_2.createSequentialGroup()
-							.addGap(5)
-							.addComponent(lblAdd2Cart))
-						.addComponent(btnAddCart))
+					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
+						.addComponent(rdbtnSeeImage_1)
+						.addComponent(btnAddCart)
+						.addComponent(lblAdd2Cart))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		panel_2.setLayout(gl_panel_2);
