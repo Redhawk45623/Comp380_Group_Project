@@ -53,8 +53,8 @@ import javax.swing.SwingConstants;
 public class productSearchClass extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
-	public Object[] products; //array that is loaded from file containing Product Names, used to load combobox
-	public Object[] productIDs; //array that is loaded from read file containing Product IDs, used to load combobox
+	public static Object[] products; //array that is loaded from file containing Product Names, used to load combobox
+	public static Object[] productIDs; //array that is loaded from read file containing Product IDs, used to load combobox
 	public static Object[] prices = new String[20]; //array that is loaded from file containing prices, used to load combobox
 	public static int[] prices2 = new int[20]; ////used to track the order of indexes that were added to the shopping list
 	public static int[] priceArray = new int[50]; //array used to store the prices in order of added to the shopping list after pressing add to list button
@@ -66,7 +66,7 @@ public class productSearchClass extends JPanel {
 	public static DefaultListModel<Object> ToCartShopList_items_3; //DefaultListModel list used to create list containing items added to Cart List from Shop List
 	public static DefaultListModel<Object> ToQuantityList_items_4;
 	
-	private JComboBox<String> cbProducts; //Combobox that lists all products for sale
+	public static JComboBox<String> cbProducts; //Combobox that lists all products for sale
 	
 	private boolean check = false; // boolean variable that controls visibility to see the product image (rdbtnSeeImage)
 	private boolean check2 = false; // boolean variable that controls visibility to see and use the the Shpping List (rdbtnUseList)
@@ -105,7 +105,7 @@ public class productSearchClass extends JPanel {
 	public static JLabel displayLabel;    //               //
 	private JLabel lblNewLabel_2;         //               //
 	private JLabel lblProductDescrip;     //               //
-	private JLabel lblImageDescrip;       //               //
+	public static JLabel lblImageDescrip;       //               //
 	private JLabel lblNoShipNotaxes;      ///////////////////
 	
 	private JList<Object> JListShopList_1; //JList element for Shopping List
@@ -119,7 +119,7 @@ public class productSearchClass extends JPanel {
 	
 	private JTextArea textAreaTotal_1; //text area to display the total cost of the products added to the Shopping List
 	
-	
+	productClass productObject = new productClass();
 	
 	/**
 	 * 
@@ -131,7 +131,9 @@ public class productSearchClass extends JPanel {
 		
 		initComponents(); //calls initComponents() 
 		createEvents(); //calls createEvents();
-		loadProductsFromTxtFile(); //calls loadArrayFromTxtFile(), reads .txt files for product arrays
+		
+		productObject.loadProductsFromTxtFile();
+		
 		loadProductCombobox();	//calls loadCombobox()
 		loadProductDescriptions(); //calls loadProductDescriptions()
 		
@@ -149,7 +151,7 @@ public class productSearchClass extends JPanel {
 	 * 
 	 * @throws FileNotFoundException
 	 */
-	public void loadProductsFromTxtFile() throws FileNotFoundException { //method that loads the combobox
+	/*public void loadProductsFromTxtFile() throws FileNotFoundException { //method that loads the combobox
 		
 		java.net.URL url = getClass().getResource("/productDatabase/productNames.txt");
 		File file = new File(url.getPath());
@@ -193,7 +195,7 @@ public class productSearchClass extends JPanel {
 			e.printStackTrace();
 		}
 		
-	}
+	}*/
 	
 	public void loadProductDescriptions() throws FileNotFoundException { //method used to load the Descriptions of Products into array
 		

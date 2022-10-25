@@ -42,9 +42,7 @@ public class cartClass extends JPanel {
 	////The 3 elements above will be manipulated from a checkOut class//////////////////////////////////////////
 	
 	public static int[] cartPriceArray = new int[20]; //an arrray that is used to tabulate the total amount of the Cart
-	public static Object[] prices2 = new String[20]; //used to track the order of indexes that were added to the Cart
-	//public static int[] priceValues = new int[20];
-	
+	public static Object[] prices2 = new String[20]; //used to track the order of indexes that were added to the Cart	
 	
 	private JButton btnEmptyCart; //button that empties the Cart
 	private JButton btnRemoveItem; //button that removes selected product from Cart
@@ -163,14 +161,21 @@ public class cartClass extends JPanel {
 		btnAddItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				int selected = JListCartList.getSelectedIndex();						
-				adjustCartPrices(selected);
-				setCartPriceTotal();				
-				Object number = ToCartQuantityList_items_4.getElementAt(selected);
-				int convertedNumber2 = Integer.parseInt(number.toString());
-				int addedUp = convertedNumber2+ 1;
-				ToCartQuantityList_items_4.setElementAt(addedUp, selected);
+				if (! ToCartQuantityList_items_4.isEmpty()) {
 				
+					int selected = JListCartList.getSelectedIndex();						
+					adjustCartPrices(selected);
+					setCartPriceTotal();				
+					Object number = ToCartQuantityList_items_4.getElementAt(selected);
+					int convertedNumber2 = Integer.parseInt(number.toString());
+					int addedUp = convertedNumber2+ 1;
+					ToCartQuantityList_items_4.setElementAt(addedUp, selected);
+					
+				}
+				else {
+					JOptionPane.showMessageDialog(null, "Cart is empty!");
+					
+				}
 			}
 		});
 		
