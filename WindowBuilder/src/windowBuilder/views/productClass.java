@@ -12,13 +12,14 @@ import javax.swing.ImageIcon;
 public class productClass {
 	
 	public static Object[] descriptionsArray = new String[10];
-	public static Integer[] trackImages = new Integer[10];
+	public Integer[] trackImages = new Integer[10];
 	
-	private int track = 0;
+	public int track = 0;
 	
 	public productClass() throws FileNotFoundException {
 		
-		
+		loadProductsFromTxtFile();
+		loadProductDescriptions();
 		
 	}
 	

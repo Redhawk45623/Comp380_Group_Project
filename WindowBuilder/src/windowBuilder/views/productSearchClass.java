@@ -27,12 +27,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import javax.swing.JTextPane;
@@ -80,7 +76,6 @@ public class productSearchClass extends JPanel {
 	private static int total;
 	private static int grandtotal;
 	private static int counter = 0; //incremented variable used as index for addPrices() 
-	private int track = 0;
 	public static int quantAdded;
 	
 	private JPanel panel_1; //panel that is used to hold all elements for the Shopping List option
@@ -100,12 +95,12 @@ public class productSearchClass extends JPanel {
 	
 	private JLabel lblRemoveAllFromList;  ///////////////////
 	private JLabel lblNewLabel;	          //               //
-	private JLabel lblAddAllToList;       //  ALL LABELS   //
+	private JLabel lblAddAllToList;       //               //
 	private JLabel lblAddOneToList;       //               //
-	public static JLabel displayLabel;    //               //
+	public static JLabel displayLabel;    //  ALL LABELS   //
 	private JLabel lblNewLabel_2;         //               //
 	private JLabel lblProductDescrip;     //               //
-	public static JLabel lblImageDescrip;       //               //
+	public static JLabel lblImageDescrip; //               //
 	private JLabel lblNoShipNotaxes;      ///////////////////
 	
 	private JList<Object> JListShopList_1; //JList element for Shopping List
@@ -132,10 +127,11 @@ public class productSearchClass extends JPanel {
 		initComponents(); //calls initComponents() 
 		createEvents(); //calls createEvents();
 		
-		productObject.loadProductsFromTxtFile();
-		
+		//productObject.loadProductsFromTxtFile();
+		//productObject.loadProductDescriptions();
+		       	
 		loadProductCombobox();	//calls loadCombobox()
-		loadProductDescriptions(); //calls loadProductDescriptions()
+		//loadProductDescriptions(); //calls loadProductDescriptions()
 		
 		panel_1.setVisible(false); //hides all elements in panel 1 (Shopping List option)
 		panel_2.setVisible(true); //reveals all elemnts in panel_2 (btnAddCart button and associated label)
@@ -146,7 +142,7 @@ public class productSearchClass extends JPanel {
 		
 	/**
 	 * 
-	 * 
+	 * Added to the product Class....
 	 * 
 	 * 
 	 * @throws FileNotFoundException
@@ -197,7 +193,7 @@ public class productSearchClass extends JPanel {
 		
 	}*/
 	
-	public void loadProductDescriptions() throws FileNotFoundException { //method used to load the Descriptions of Products into array
+	/*public void loadProductDescriptions() throws FileNotFoundException { //method used to load the Descriptions of Products into array
 		
 		int i; //declares int i
 		java.net.URL url = getClass().getResource("/productDescriptions/descriptions.txt"); //sets a java.net.URL variable: 'url' to the .txt file found at the specified path
@@ -214,7 +210,7 @@ public class productSearchClass extends JPanel {
 			}
 		}
 		
-	}
+	}*/
 	
 	/**
 	 * 
@@ -224,12 +220,12 @@ public class productSearchClass extends JPanel {
 	 * @param x
 	 * @return
 	 */
-	public String setDescriptions(int x) { //method used to return a description String using parameter 'x' descriptionsArray.  Converts to String too
+	/*public String setDescriptions(int x) { //method used to return a description String using parameter 'x' descriptionsArray.  Converts to String too
 		
 		String descrip = descriptionsArray[x].toString();
 		return descrip;
 		
-	}
+	}/*
 	
 	/**
 	 * 
@@ -238,12 +234,12 @@ public class productSearchClass extends JPanel {
 	 * 
 	 * @param number
 	 */
-	public void setImageIndex(Integer number) {
+	/*public void setImageIndex(Integer number) {
 				
 		trackImages[track] = number;
 		track++;
 		
-	}
+	}*/
 	
 	/**
 	 * 
@@ -252,7 +248,7 @@ public class productSearchClass extends JPanel {
 	 * 
 	 * @param number
 	 */
-	public void removeImageIndex(Integer number) { //'number' = the index of the image that is to be removed
+	/*public void removeImageIndex(Integer number) { //'number' = the index of the image that is to be removed
 		
 		ArrayList<Integer> arr_new = new ArrayList<>();
 		
@@ -265,7 +261,7 @@ public class productSearchClass extends JPanel {
 		}
 		
 		trackImages = arr_new.toArray(new Integer[0]);
-	}
+	}*/
 	
 	/**
 	 * 
@@ -275,7 +271,7 @@ public class productSearchClass extends JPanel {
 	 * @param number
 	 * @throws IOException
 	 */
-	public void loadImages(int number) throws IOException { //method used to load panel_3 (Image Display Panel) and panel_4 (Product Description Panel)
+	/*public void loadImages(int number) throws IOException { //method used to load panel_3 (Image Display Panel) and panel_4 (Product Description Panel)
 		
 		String display; //string variable that is used in switch/case below
 		
@@ -344,7 +340,7 @@ public class productSearchClass extends JPanel {
 		}
 					
 		
-	}		
+	}*/	
 		
 		//JOptionPane.showMessageDialog(null,displayLabel);	
 		
@@ -454,10 +450,10 @@ public class productSearchClass extends JPanel {
 		            int x = 0;		
 					int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates an array that stores the index of the clicked on product. Will be only one index			    
 					int image = selectedIx[x]; //assigns temp variable: 'image' to the index found at selectedIx[x]					 
-					image = trackImages[image]; //sets the temp variable: 'image' to the index found at trackImages[image]
+					image = productObject.trackImages[image]; //sets the temp variable: 'image' to the index found at trackImages[image]
 					//JOptionPane.showMessageDialog(null,image);
 						try {
-							loadImages(image); //calls the loadImages() using the temp variable: 'image' (index of trackImages[image]) to display correct image in panel_3
+							productObject.loadImages(image); //calls the loadImages() using the temp variable: 'image' (index of trackImages[image]) to display correct image in panel_3
 						} catch (IOException e1) {
 							// TODO Auto-generated catch block
 							e1.printStackTrace();
@@ -497,10 +493,10 @@ public class productSearchClass extends JPanel {
 				
 				if (checkRepeats == false) {
 					
-					setImageIndex(cbIndex); //uses cbIndex variable as a parameter to call setImageIndex().  This tracks the order of indexes to be used for the description and image display
+					productObject.setImageIndex(cbIndex); //uses cbIndex variable as a parameter to call setImageIndex().  This tracks the order of indexes to be used for the description and image display
 						
 					try {
-						loadImages(cbIndex); //calls the loadImages() using 'cbIndex' as a parameter
+						productObject.loadImages(cbIndex); //calls the loadImages() using 'cbIndex' as a parameter
 					} catch (IOException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -577,7 +573,7 @@ public class productSearchClass extends JPanel {
 					int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates a temp array that stores the selected index in the Shopping List. Will only be one item in array			    
 					int image = selectedIx[x]; //assigns temp variable image to the element at index 0 from temp array selectedIx
 					//Object product = JListShopList_1.getSelectedValue(); //gets the selected product info and sets it to the Object variable: product. Used in the pop-up message
-					image = trackImages[image];	//assigns the temp variable 'image' the index stored at trackImages[] using the index: 'image' established from the code before				
+					image = productObject.trackImages[image];	//assigns the temp variable 'image' the index stored at trackImages[] using the index: 'image' established from the code before				
 					Object productPrice = prices[image]; //
 					
 					total = Integer.parseInt(productPrice.toString()); //converts the int variable: 'total' to an int from the Object variable: 'productPrice'	
@@ -661,8 +657,8 @@ public class productSearchClass extends JPanel {
 					int image = selectedIx[x]; //assigns temp variable image to the element at index 0 from temp array selectedIx					
 					int productPrice = priceArray[image]; //sets int variable:'productPrice' to the price found at priceArray[image]
 					
-					int w = trackImages[image];
-					removeImageIndex(w);
+					int w = productObject.trackImages[image];
+					productObject.removeImageIndex(w);
 					txtpnProductDescription.setText(null); //resets the description area
 					displayLabel.setIcon(null); //resets the display image area
 										
@@ -706,8 +702,8 @@ public class productSearchClass extends JPanel {
 					ToProductSearchList_items_1.removeAllElements(); //this clears all elements from DefaultListModel -> ToProductSearchList_items_1
 					textAreaTotal_1.setText("$0.00"); //this resets the textAreaTotal box back to empty
 					priceArray = new int[50]; //this resets the priceArray[]
-					trackImages = new Integer[20]; //this resets the trackImages[]
-					track = 0; //resets track variable to 0
+					productObject.trackImages = new Integer[20]; //this resets the trackImages[]
+					productObject.track = 0; //resets track variable to 0
 					JOptionPane.showMessageDialog(null,"Removed all products from Shopping List"); //displays pop-up message 
 					
 				}
