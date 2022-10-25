@@ -35,25 +35,26 @@ public class cartClass extends JPanel {
 	
 	////The 3 elements below will be manipulated from a checkOut class//////////////////////////////////////////
 	
-	public static JList<Object> JListCartList; //JList element that displays the Products added to the Shopping List
+	public static JList<Object> JListCartList; //JList element that displays the Products added to the Cart
 	public static JTextArea textAreaCartTotal;  // JTextArea that displays the current total of Products added to the Shopping List
-	public static JList<Object> JListCartQuantity;
+	public static JList<Object> JListCartQuantity; //JList element that displays the total quantity of products in the Cart
 	
 	////The 3 elements above will be manipulated from a checkOut class//////////////////////////////////////////
 	
 	public static int[] cartPriceArray = new int[20]; //an arrray that is used to tabulate the total amount of the Cart
-	public static Object[] prices2 = new String[20]; //used to track the order of indexes that were added to the shopping list
-	public static int[] priceValues = new int[20];
+	public static Object[] prices2 = new String[20]; //used to track the order of indexes that were added to the Cart
+	//public static int[] priceValues = new int[20];
 	
 	
 	private JButton btnEmptyCart; //button that empties the Cart
-	private JButton btnRemoveItem; //button that removes selected product from cart
+	private JButton btnRemoveItem; //button that removes selected product from Cart
+	private JButton btnAddItem; //button that adds a quanity of one to a product in the Cart
 	
 	private static String total; //String variable that is used in the setCartPriceTotal() method
 	private static int counter = 0; //int variable that is used in the addCartprice() method
 	public static int sum; ////int variable that is used in the addCartprice() method and rearrangeArray() method
-	public static int newTotal;
-	private JButton btnAddItem;
+	public static int newTotal; //variable used in the adjustCartTotal() method. Used when a product is removed from Cart
+	
 	public static boolean check = true;
 	/**
 	 * 
