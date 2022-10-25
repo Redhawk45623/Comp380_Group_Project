@@ -33,9 +33,13 @@ public class cartClass extends JPanel {
 	public static DefaultListModel<Object> CartList_items_2; //DefaultListModel list used to create list containing items added Cart List
 	public static DefaultListModel<Object> ToCartQuantityList_items_4;
 	
+	////The 3 elements below will be manipulated from a checkOut class//////////////////////////////////////////
+	
 	public static JList<Object> JListCartList; //JList element that displays the Products added to the Shopping List
 	public static JTextArea textAreaCartTotal;  // JTextArea that displays the current total of Products added to the Shopping List
 	public static JList<Object> JListCartQuantity;
+	
+	////The 3 elements above will be manipulated from a checkOut class//////////////////////////////////////////
 	
 	public static int[] cartPriceArray = new int[20]; //an arrray that is used to tabulate the total amount of the Cart
 	public static Object[] prices2 = new String[20]; //used to track the order of indexes that were added to the shopping list

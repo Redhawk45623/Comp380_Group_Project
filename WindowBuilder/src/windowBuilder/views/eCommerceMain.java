@@ -17,7 +17,6 @@ import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import java.awt.Toolkit;
 
 /**
  * 
@@ -34,7 +33,7 @@ public class eCommerceMain extends JFrame {
 	JPanel search_panel = new productSearchClass(); //instantiating an object of productSearchClass() which is a JPanel
 	JPanel cart_panel = new cartClass(); //instantiating an object of cartClass() which is a JPanel
 	
-	ImageIcon homeIcon = new ImageIcon(this.getClass().getResource("/icons/Home.png"));
+	ImageIcon homeIcon = new ImageIcon(this.getClass().getResource("/icons/Home.png")); //sets the icons for the TabbedPane
 	ImageIcon searchIcon = new ImageIcon(this.getClass().getResource("/icons/Search2.png"));
 	ImageIcon cartIcon = new ImageIcon(this.getClass().getResource("/icons/shop-cart-icon.png"));
 	ImageIcon checkoutIcon = new ImageIcon(this.getClass().getResource("/icons/Dollar.png"));
@@ -110,12 +109,14 @@ public class eCommerceMain extends JFrame {
 					.addContainerGap(468, Short.MAX_VALUE))
 		);
 		home_panel.setLayout(gl_home_panel); //home tab	
+		
+		/////Add panels below/////////
 				
 		tabbedPane.addTab("Product Search", searchIcon, search_panel, "Click to search for products"); //Product Search tab
 		
 		tabbedPane.addTab("View Cart", cartIcon, cart_panel, "Click to view Cart"); //View Cart tab
 		
-		JPanel checkout_panel = new JPanel();
+		JPanel checkout_panel = new JPanel(); ///default when TabbedPane was create.....change this like the 'Product Search' and 'View Cart' tabs above
 		tabbedPane.addTab("Checkout", checkoutIcon, checkout_panel, null);
 		
 		JPanel help_panel = new JPanel();
