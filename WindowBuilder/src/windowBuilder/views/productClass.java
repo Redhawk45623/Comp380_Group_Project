@@ -12,8 +12,7 @@ import javax.swing.ImageIcon;
 public class productClass {
 	
 	public static Object[] descriptionsArray = new String[10];
-	public Integer[] trackImages = new Integer[10];
-	
+	public Integer[] trackImages = new Integer[10];	
 	public int track = 0;
 	
 	public productClass() throws FileNotFoundException {
@@ -23,7 +22,7 @@ public class productClass {
 		
 	}
 	
-	public void loadProductsFromTxtFile() throws FileNotFoundException { //method that loads the combobox
+	public void loadProductsFromTxtFile() throws FileNotFoundException { //method that loads the combobox (products in drop-down list)
 		
 		java.net.URL url = getClass().getResource("/productDatabase/productNames.txt");
 		File file = new File(url.getPath());

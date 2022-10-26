@@ -87,6 +87,12 @@ public class cartClass extends JPanel {
 		
 	}
 	
+	/**
+	 * 
+	 * 
+	 * 
+	 * @param index
+	 */
 	public void adjustCartPrices(int index) { //method to add up the prices after adding a quantity of one from the shopping list
 		
 		Object adjust = cartPriceArray[index];
@@ -161,7 +167,7 @@ public class cartClass extends JPanel {
 		btnAddItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if (! ToCartQuantityList_items_4.isEmpty()) {
+				if (! JListCartList.isSelectionEmpty()) {
 				
 					int selected = JListCartList.getSelectedIndex();						
 					adjustCartPrices(selected);
@@ -173,7 +179,7 @@ public class cartClass extends JPanel {
 					
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "Cart is empty!");
+					JOptionPane.showMessageDialog(null, "Cart is empty or no product selected", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message
 					
 				}
 			}
@@ -188,7 +194,6 @@ public class cartClass extends JPanel {
 		btnEmptyCart.addActionListener(new ActionListener() { //this action method for button: btnEmptyCart emptys the cart
 			public void actionPerformed(ActionEvent e) {	
 			
-				//JOptionPane.showMessageDialog(null, JListCartQuantity.getModel());
 				
 				ToCartQuantityList_items_4.removeAllElements(); //empties out the quantity box
 				productSearchClass.txtpnProductDescription.setText(null); //clears out the product description area in productSearchClass 
@@ -263,7 +268,8 @@ public class cartClass extends JPanel {
 						
 				}
 				else {
-					JOptionPane.showMessageDialog(null, "Please select an item to remove");
+					JOptionPane.showMessageDialog(null, "Please select an item to remove", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message
+					
 				}
 			}
 		});

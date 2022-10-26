@@ -55,8 +55,8 @@ public class productSearchClass extends JPanel {
 	public static int[] prices2 = new int[20]; ////used to track the order of indexes that were added to the shopping list
 	public static int[] priceArray = new int[50]; //array used to store the prices in order of added to the shopping list after pressing add to list button
 	public static int[] imagesIndex = new int[20];
-	public static Object[] descriptionsArray = new String[10];
-	public static Integer[] trackImages = new Integer[10];
+	//public static Object[] descriptionsArray = new String[10];
+	//public static Integer[] trackImages = new Integer[10];
 	
 	public static DefaultListModel<Object> ToProductSearchList_items_1; //DefaultListModel list used to create list containing items added to the Search List
 	public static DefaultListModel<Object> ToCartShopList_items_3; //DefaultListModel list used to create list containing items added to Cart List from Shop List
@@ -125,13 +125,8 @@ public class productSearchClass extends JPanel {
 	public productSearchClass() throws FileNotFoundException{
 		
 		initComponents(); //calls initComponents() 
-		createEvents(); //calls createEvents();
-		
-		//productObject.loadProductsFromTxtFile();
-		//productObject.loadProductDescriptions();
-		       	
+		createEvents(); //calls createEvents();				       	
 		loadProductCombobox();	//calls loadCombobox()
-		//loadProductDescriptions(); //calls loadProductDescriptions()
 		
 		panel_1.setVisible(false); //hides all elements in panel 1 (Shopping List option)
 		panel_2.setVisible(true); //reveals all elemnts in panel_2 (btnAddCart button and associated label)
@@ -355,7 +350,7 @@ public class productSearchClass extends JPanel {
 		
 		Object first = prices[x]; //this creates an object variable that is initialized from the passed parameter, used to get selected index and match to price
 		int second = Integer.parseInt(first.toString()); //this converts the object to integer
-		priceArray[counter] = second; //this loads the priceArray[]
+		priceArray[counter] = second; //this loads the priceArray[]		
 		counter++; //increments counter variable
 		sum = 0; //sets the variable initially to 0
 		for(int i = 0; i < priceArray.length; i++){ //loop to add up the total price that is in priceArray
@@ -452,6 +447,15 @@ public class productSearchClass extends JPanel {
 					int image = selectedIx[x]; //assigns temp variable: 'image' to the index found at selectedIx[x]					 
 					image = productObject.trackImages[image]; //sets the temp variable: 'image' to the index found at trackImages[image]
 					//JOptionPane.showMessageDialog(null,image);
+					
+					/*for (int i = 0; i < productObject.trackImages.length; i++) {
+						
+						JOptionPane.showMessageDialog(null,productObject.trackImages[i]);
+						
+					}*/
+					
+					
+					
 						try {
 							productObject.loadImages(image); //calls the loadImages() using the temp variable: 'image' (index of trackImages[image]) to display correct image in panel_3
 						} catch (IOException e1) {
@@ -484,7 +488,7 @@ public class productSearchClass extends JPanel {
 					if (ToProductSearchList_items_1.get(i) == verify) {
 						
 						checkRepeats = true;
-						JOptionPane.showMessageDialog(null,"Already Added to Shopping List");
+						JOptionPane.showMessageDialog(null, "Already added to Shopping List!", "Alert", i);
 						
 					}
 										
@@ -538,7 +542,7 @@ public class productSearchClass extends JPanel {
 					if (cartClass.CartList_items_2.get(i) == verify) { //if statement that looks for a product already added to the Cart
 						
 						checkCartRepeats = true; //if there is already a product a user is attempting to add again, set the boolean to true
-						JOptionPane.showMessageDialog(null,"Already Added to Cart! Add quanity from Cart page..."); //display pop-up message
+						JOptionPane.showMessageDialog(null, "Already Added to Cart! Add quanity from Cart page...", "Alert", JOptionPane.ERROR_MESSAGE); //display pop-up message
 						
 					}				
 					
@@ -553,7 +557,7 @@ public class productSearchClass extends JPanel {
 					
 					cartClass.CartList_items_2.addElement(cbProducts.getSelectedItem()); //adds the product stored in combobox (cbProducts_1) to DefaultListModel -> CartList_items_2
 					cartClass.JListCartList.setModel(cartClass.CartList_items_2); //places the items in the cart (cartClass.JListCartList) from CartList_items_2
-					JOptionPane.showMessageDialog(null,"Added selected item to Cart!"); //Displays a pop-up message
+					JOptionPane.showMessageDialog(null, "Successfully added to Cart!", "Product Added", JOptionPane.INFORMATION_MESSAGE); //Displays a pop-up message
 				}
 			}
 		});
@@ -589,8 +593,8 @@ public class productSearchClass extends JPanel {
 				}
 				
 				else { //if the button is pushed and nothing is selected in the Shopping List, display the pop-up message
-					
-					JOptionPane.showMessageDialog(null, "Please select an item to add!"); //displays pop-up message
+					JOptionPane.showMessageDialog(null, "Please select an item to add!", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message
+		
 				}
 			}
 		});
@@ -640,8 +644,8 @@ public class productSearchClass extends JPanel {
 					//JOptionPane.showMessageDialog(null,"Moved all items in shopping list to Cart!"); //displays pop-up message
 				}
 				else { //if there is nothing in the Shopping List, then display pop-up message
+					JOptionPane.showMessageDialog(null, "Please add products to the Shopping List first!", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message
 					
-					JOptionPane.showMessageDialog(null,"Please add products to the Shopping List first!"); //displays pop-up message
 				}
 				
 			}
@@ -656,7 +660,7 @@ public class productSearchClass extends JPanel {
 					int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates a temp array that stores the selected index in the Shopping List. Will only be one item in array			    
 					int image = selectedIx[x]; //assigns temp variable image to the element at index 0 from temp array selectedIx					
 					int productPrice = priceArray[image]; //sets int variable:'productPrice' to the price found at priceArray[image]
-					
+						
 					int w = productObject.trackImages[image];
 					productObject.removeImageIndex(w);
 					txtpnProductDescription.setText(null); //resets the description area
@@ -666,7 +670,19 @@ public class productSearchClass extends JPanel {
 					ToProductSearchList_items_1.removeElementAt(image); //removes the Product from Shopping List at index specified by variable: 'index'
 					ToQuantityList_items_4.removeElementAt(image); //removes the quantity amounf from quantity box at index specified by variable: 'index'
 					
-					sum = sum - productPrice;
+					productObject.track--; //decrements the variable: 'track' that is used in 'productObject.trackImages[]' to account for the product removed
+				
+					int[] cartPriceArray2 = new int[priceArray.length -1]; //initializes the temp cartPriceArray2 to the length of cartPriceArray.length -1]
+					for(int i = 0, k = 0; i < priceArray.length; i++){ //loop each element of cartPriceArray
+						if(priceArray[i] != productPrice){ //if statement; if cartPriceArray at index i does not equal parameter x
+							cartPriceArray2[k] = priceArray[i];	//if statement is true, then load cartPriceArray2 at index k with cartPriceArray at index i
+							k++; //increment k
+						}
+						
+					}
+					priceArray = cartPriceArray2; //after for loop, set cartPriceArray[] to temp cartPriceArray2[]	
+										
+					sum = sum - productPrice;					
 					textAreaTotal_1.setText("$" + sum + ".00"); 
 					
 					if (ToProductSearchList_items_1.isEmpty()) {
@@ -677,8 +693,7 @@ public class productSearchClass extends JPanel {
 					//JOptionPane.showMessageDialog(null,sum);					
 				}
 				else {
-					
-					JOptionPane.showMessageDialog(null,"Please select an item to remove!");
+					JOptionPane.showMessageDialog(null, "Please select an item to remove!", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message
 					
 				}
 			}
@@ -708,8 +723,7 @@ public class productSearchClass extends JPanel {
 					
 				}
 				else { //if there is nothing added to the Shopping List yet...
-					
-					JOptionPane.showMessageDialog(null,"Nothing in Shopping List to remove!"); //displays pop-up message
+					JOptionPane.showMessageDialog(null, "Nothing in Shopping List to remove!", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message
 					
 				}
 			}
