@@ -55,8 +55,6 @@ public class productSearchClass extends JPanel {
 	public static int[] prices2 = new int[20]; ////used to track the order of indexes that were added to the shopping list
 	public static int[] priceArray = new int[50]; //array used to store the prices in order of added to the shopping list after pressing add to list button
 	public static int[] imagesIndex = new int[20];
-	//public static Object[] descriptionsArray = new String[10];
-	//public static Integer[] trackImages = new Integer[10];
 	
 	public static DefaultListModel<Object> ToProductSearchList_items_1; //DefaultListModel list used to create list containing items added to the Search List
 	public static DefaultListModel<Object> ToCartShopList_items_3; //DefaultListModel list used to create list containing items added to Cart List from Shop List
@@ -134,210 +132,6 @@ public class productSearchClass extends JPanel {
 		panel_4.setVisible(false); //hides the elements in panel_4 (product description area)
 		
 	}
-		
-	/**
-	 * 
-	 * Added to the product Class....
-	 * 
-	 * 
-	 * @throws FileNotFoundException
-	 */
-	/*public void loadProductsFromTxtFile() throws FileNotFoundException { //method that loads the combobox
-		
-		java.net.URL url = getClass().getResource("/productDatabase/productNames.txt");
-		File file = new File(url.getPath());
-		//String namepath = "/Users/Zeina/Desktop/productNames.txt"; //path for the Product Names file stored on my computer locally
-		//File file = new File(namepath);
-			
-		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-			products = br.lines().toArray(); //loads products[] with Product Names 
-		} catch (FileNotFoundException e) {
-			throw e;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		java.net.URL url2 = getClass().getResource("/productDatabase/productIDs.txt");
-		File file2 = new File(url2.getPath());
-		//String IDpath = "/Users/Zeina/Desktop/productIDs.txt"; //path for the Product IDs file stored on my computer locally
-		//File file2 = new File(IDpath);
-			
-		try (BufferedReader br2 = new BufferedReader(new FileReader(file2))) {
-			productIDs = br2.lines().toArray(); //loads Product IDs[] with Product IDs
-		} catch (FileNotFoundException e) {
-			throw e;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		java.net.URL url3 = getClass().getResource("/productDatabase/prices.txt");
-		File file3 = new File(url3.getPath());
-		//String pricespath = "/Users/Zeina/Desktop/prices.txt"; //path for Product Prices file stored on my computer locally
-		//File file3 = new File(pricespath);
-			
-		try (BufferedReader br3 = new BufferedReader(new FileReader(file3))) {
-			prices = br3.lines().toArray(); //loads prices[] with Product Prices
-		} catch (FileNotFoundException e) {
-			throw e;
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-	}*/
-	
-	/*public void loadProductDescriptions() throws FileNotFoundException { //method used to load the Descriptions of Products into array
-		
-		int i; //declares int i
-		java.net.URL url = getClass().getResource("/productDescriptions/descriptions.txt"); //sets a java.net.URL variable: 'url' to the .txt file found at the specified path
-		File file = new File(url.getPath()); //creats a File Object from the 'url' variable
-		
-		for (i = 0; i < descriptionsArray.length; i++) { //for loop using the length of descriptionsArray[]
-			try (BufferedReader br = new BufferedReader(new FileReader(file))) { //BufferedReader to begin reading lines of descriptions.txt
-				descriptionsArray = br.lines().toArray(); //loads the descriptionsArray[] with each line from the descriptions.txt file
-			} catch (FileNotFoundException e) {
-				throw e;
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		
-	}*/
-	
-	/**
-	 * 
-	 * 
-	 * 
-	 * 
-	 * @param x
-	 * @return
-	 */
-	/*public String setDescriptions(int x) { //method used to return a description String using parameter 'x' descriptionsArray.  Converts to String too
-		
-		String descrip = descriptionsArray[x].toString();
-		return descrip;
-		
-	}/*
-	
-	/**
-	 * 
-	 * 
-	 * 
-	 * 
-	 * @param number
-	 */
-	/*public void setImageIndex(Integer number) {
-				
-		trackImages[track] = number;
-		track++;
-		
-	}*/
-	
-	/**
-	 * 
-	 * 
-	 * 
-	 * 
-	 * @param number
-	 */
-	/*public void removeImageIndex(Integer number) { //'number' = the index of the image that is to be removed
-		
-		ArrayList<Integer> arr_new = new ArrayList<>();
-		
-		for (int i=0; i<trackImages.length; i++) {	
-			
-			if (trackImages[i]!=number) {				
-				arr_new.add(trackImages[i]);				
-			}
-			
-		}
-		
-		trackImages = arr_new.toArray(new Integer[0]);
-	}*/
-	
-	/**
-	 * 
-	 * 
-	 * 
-	 * 
-	 * @param number
-	 * @throws IOException
-	 */
-	/*public void loadImages(int number) throws IOException { //method used to load panel_3 (Image Display Panel) and panel_4 (Product Description Panel)
-		
-		String display; //string variable that is used in switch/case below
-		
-		switch (number) { //switch case that chooses which image and description are displayed
-		  case 0:	
-			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/tv.jpg"))); //dispays the image in panel_3			  		  
-			  display = setDescriptions(number); //dispays the description in panel_4 based on the value of the parameter: 'number'
-			  lblImageDescrip.setText("    Vintage TV"); //sets the small label used in the image display area (panel_3)
-			  txtpnProductDescription.setText(display);	//sets the desciption String to be displayed in panel_4	  		  
-			  break;
-		  case 1:		  
-			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/camera.jpg"))); 
-			  display = setDescriptions(number);
-			  lblImageDescrip.setText("Vintage Camera");
-			  txtpnProductDescription.setText(display);
-			  break;
-		  case 2:
-			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/atari.jpg")));
-			  display = setDescriptions(number);
-			  lblImageDescrip.setText("Atari Games");
-			  txtpnProductDescription.setText(display);
-			  break;
-		  case 3:
-			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/boombox.jpg")));
-			  display = setDescriptions(number);
-			  lblImageDescrip.setText("1980s Boombox");
-			  txtpnProductDescription.setText(display);
-			  break;
-		  case 4:
-			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/phone.jpg")));
-			  display = setDescriptions(number);
-			  lblImageDescrip.setText("Rotary Phone");
-			  txtpnProductDescription.setText(display);
-			  break;
-		  case 5:
-			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/cassette.jpg")));
-			  display = setDescriptions(number);
-			  lblImageDescrip.setText("Cassette Tape");
-			  txtpnProductDescription.setText(display);
-			  break;
-		  case 6:
-			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/camera2.jpg")));
-			  display = setDescriptions(number);
-			  lblImageDescrip.setText("Film Camera");
-			  txtpnProductDescription.setText(display);
-			  break;
-		  case 7:
-			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/top.jpg")));
-			  display = setDescriptions(number);
-			  lblImageDescrip.setText("Vintage Top");
-			  txtpnProductDescription.setText(display);
-			  break;
-		  case 8:
-			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/sign.jpg")));
-			  display = setDescriptions(number);
-			  lblImageDescrip.setText("Rustic Sign");
-			  txtpnProductDescription.setText(display);
-			  break;
-		  case 9:
-			  displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/nintendo.jpg")));
-			  display = setDescriptions(number);
-			  lblImageDescrip.setText("Nintendo Console");
-			  txtpnProductDescription.setText(display);
-			  break;
-		
-		}
-					
-		
-	}*/	
-		
-		//JOptionPane.showMessageDialog(null,displayLabel);	
 		
 	/**
 	 * 
@@ -641,7 +435,8 @@ public class productSearchClass extends JPanel {
 					priceArray = new int[50]; //resets the priceArray[]
 					txtpnProductDescription.setText(null); //resets the description area
 					displayLabel.setIcon(null); //resets the display image area
-					//JOptionPane.showMessageDialog(null,"Moved all items in shopping list to Cart!"); //displays pop-up message
+					JOptionPane.showMessageDialog(null, "Moved all items in shopping list to Cart!", "Products Moved", JOptionPane.INFORMATION_MESSAGE);
+					
 				}
 				else { //if there is nothing in the Shopping List, then display pop-up message
 					JOptionPane.showMessageDialog(null, "Please add products to the Shopping List first!", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message
@@ -719,7 +514,7 @@ public class productSearchClass extends JPanel {
 					priceArray = new int[50]; //this resets the priceArray[]
 					productObject.trackImages = new Integer[20]; //this resets the trackImages[]
 					productObject.track = 0; //resets track variable to 0
-					JOptionPane.showMessageDialog(null,"Removed all products from Shopping List"); //displays pop-up message 
+					JOptionPane.showMessageDialog(null, "Removed all products from Shopping List", "Products Removed", JOptionPane.INFORMATION_MESSAGE);
 					
 				}
 				else { //if there is nothing added to the Shopping List yet...

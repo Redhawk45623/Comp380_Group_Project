@@ -113,8 +113,9 @@ public class productClass {
 			
 		}
 		
-		trackImages = arr_new.toArray(new Integer[0]);
+		trackImages = arr_new.toArray(new Integer[0]); //sets the trackImages[] to the newly arranged ArrayList: 'arr_new'
 	}
+	
 	
 	public void loadImages(int number) throws IOException { //method used to load panel_3 (Image Display Panel) and panel_4 (Product Description Panel)
 		
