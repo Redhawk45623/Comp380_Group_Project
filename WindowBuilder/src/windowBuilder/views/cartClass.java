@@ -31,7 +31,7 @@ public class cartClass extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	public static DefaultListModel<Object> CartList_items_2; //DefaultListModel list used to create list containing items added Cart List
-	public static DefaultListModel<Object> ToCartQuantityList_items_4;
+	public static DefaultListModel<Object> ToCartQuantityList_items_4; //DefaultListModel list used to track the quantity of items in the Cart List
 	
 	////The 3 elements below will be manipulated from a checkOut class//////////////////////////////////////////
 	
@@ -53,7 +53,7 @@ public class cartClass extends JPanel {
 	public static int sum; ////int variable that is used in the addCartprice() method and rearrangeArray() method
 	public static int newTotal; //variable used in the adjustCartTotal() method. Used when a product is removed from Cart
 	
-	public static boolean check = true;
+	public static boolean check = true; //boolean variable used for the 'btnRemoveItem' action method
 	/**
 	 * 
 	 * 
@@ -65,7 +65,7 @@ public class cartClass extends JPanel {
 		initComponents(); //calls initComponents() method; builds all structural elements of the panel
 		createEvents(); //calls createEvents()() method; builds all events that happen (actions)
 		textAreaCartTotal.setText("$0.00"); //sets the initial total of the Shopping List to $0.00
-		JListCartQuantity.setModel(ToCartQuantityList_items_4);
+		JListCartQuantity.setModel(ToCartQuantityList_items_4); //sets the Cart quantity using 'ToCartQuantityList_items_4'
 	}
 	
 	/**
@@ -155,10 +155,10 @@ public class cartClass extends JPanel {
 	 */
 	public static void adjustCartTotal(int x) { //method that is used to adjust the Cart Total when an item is removed
 		
-		int selectedPrice = cartPriceArray[x];
-		newTotal = productSearchClass.quantAdded - selectedPrice;
-		productSearchClass.quantAdded = newTotal;		
-		sum = newTotal;
+		int selectedPrice = cartPriceArray[x]; //assigns int varaiable: 'selectedPrice' to the element found at 'cartPriceArray[x]'
+		newTotal = productSearchClass.quantAdded - selectedPrice; //adjusts 'newTotal' by subraction
+		productSearchClass.quantAdded = newTotal; //adjust variable: 'quantAdded' in productSearchClass		
+		sum = newTotal; //sets 'sum' equal to 'newTotal'
 		
 		//JOptionPane.showMessageDialog(null, newTotal);
 	}
@@ -200,8 +200,7 @@ public class cartClass extends JPanel {
 		 */
 		btnEmptyCart.addActionListener(new ActionListener() { //this action method for button: btnEmptyCart emptys the cart
 			public void actionPerformed(ActionEvent e) {	
-			
-				
+							
 				ToCartQuantityList_items_4.removeAllElements(); //empties out the quantity box
 				productSearchClass.txtpnProductDescription.setText(null); //clears out the product description area in productSearchClass 
 				productSearchClass.displayLabel.setIcon(null); //clears out the image displayed in productSearchClass

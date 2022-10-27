@@ -71,7 +71,7 @@ public class productSearchClass extends JPanel {
 	
 	public static int add = 0; //incremented variable used as index for priceArray, used for btnAddList_1 action event 
 	private static int sum; //incremented variable used as index for addPrices() 
-	private static int total;
+	private static int total; //variable used in the 'btnAddOneToList' method
 	private static int grandtotal;
 	private static int counter = 0; //incremented variable used as index for addPrices() 
 	public static int quantAdded;
@@ -89,7 +89,7 @@ public class productSearchClass extends JPanel {
 	private JButton btnAddAllToCart; //button used to add all contents of Shopping List to Cart
 	private JButton btnRemoveAll; //button to remove all contents of the Shopping List
 	private JButton btnAddOneToList; //button to add one selected item from Shopping List to Cart
-	private JButton btnRemoveOneItem;
+	private JButton btnRemoveOneItem; //button to remove one item from the Shopping List
 	
 	private JLabel lblRemoveAllFromList;  ///////////////////
 	private JLabel lblNewLabel;	          //               //
@@ -234,28 +234,14 @@ public class productSearchClass extends JPanel {
 		 */
 		MouseListener mouseListener = new MouseAdapter() { //mouse action listener to detect when a user clicks on an item in the Shopping List
 		    public void mouseClicked(MouseEvent e) {
-		        if (e.getClickCount() == 1) { //detects only one click
+		        if (e.getClickCount() == 1) { //if detects only one click, run the code
         	           
 		            int x = 0;		
 					int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates an array that stores the index of the clicked on product. Will be only one index			    
 					int image = selectedIx[x]; //assigns temp variable: 'image' to the index found at selectedIx[x]					 
 					image = productObject.trackImages[image]; //sets the temp variable: 'image' to the index found at trackImages[image]
-					//JOptionPane.showMessageDialog(null,image);
-					
-					/*for (int i = 0; i < productObject.trackImages.length; i++) {
-						
-						JOptionPane.showMessageDialog(null,productObject.trackImages[i]);
-						
-					}*/
-					
-					
-					
-						try {
-							productObject.loadImages(image); //calls the loadImages() using the temp variable: 'image' (index of trackImages[image]) to display correct image in panel_3
-						} catch (IOException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
-						}
+									
+						productObject.loadImagesAlt(image); //calls the loadImages() using the temp variable: 'image' (index of trackImages[image]) to display correct image in panel_3
 
 		        }	        
 		        
@@ -277,12 +263,12 @@ public class productSearchClass extends JPanel {
 				int cbIndex = cbProducts.getSelectedIndex(); //creates variable send to pass to addPrices() method from cbProducts_1					
 				String verify = cbProducts.getItemAt(cbIndex); //sets variable: 'verify' to the selected product usine variable: 'cbIndex'
 				
-				for (int i=0; i<JListShopList_1.getModel().getSize(); i++) {
+				for (int i=0; i<JListShopList_1.getModel().getSize(); i++) { //for-loop using the size of the 'JListShopList_1'
 					
 					if (ToProductSearchList_items_1.get(i) == verify) {
 						
 						checkRepeats = true;
-						JOptionPane.showMessageDialog(null, "Already added to Shopping List!", "Alert", i);
+						JOptionPane.showMessageDialog(null, "Already added to Shopping List!", "Alert", JOptionPane.ERROR_MESSAGE);
 						
 					}
 										
@@ -293,12 +279,7 @@ public class productSearchClass extends JPanel {
 					
 					productObject.setImageIndex(cbIndex); //uses cbIndex variable as a parameter to call setImageIndex().  This tracks the order of indexes to be used for the description and image display
 						
-					try {
-						productObject.loadImages(cbIndex); //calls the loadImages() using 'cbIndex' as a parameter
-					} catch (IOException e1) {
-						// TODO Auto-generated catch block
-						e1.printStackTrace();
-					}
+					productObject.loadImagesAlt(cbIndex); //calls the loadImages() using 'cbIndex' as a parameter
 			
 					prices2[add] = cbIndex; //used to track prices
 					add++; //increments the add variable for prices[] for the next use				
@@ -336,7 +317,7 @@ public class productSearchClass extends JPanel {
 					if (cartClass.CartList_items_2.get(i) == verify) { //if statement that looks for a product already added to the Cart
 						
 						checkCartRepeats = true; //if there is already a product a user is attempting to add again, set the boolean to true
-						JOptionPane.showMessageDialog(null, "Already Added to Cart! Add quanity from Cart page...", "Alert", JOptionPane.ERROR_MESSAGE); //display pop-up message
+						JOptionPane.showMessageDialog(null, "Already Added to Cart! Add quanity from Cart tab...", "Alert", JOptionPane.ERROR_MESSAGE); //display pop-up message
 						
 					}				
 					
@@ -562,7 +543,7 @@ public class productSearchClass extends JPanel {
 					check3 = true; //set the check3 variable to true (on)									
 				}else { //if check3 is true (on)
 					panel_4.setVisible(false); //turn off panel_4 (product description area)
-					check3 = false;	 //set the check3 variable to false(off)									
+					check3 = false;	 //set the check3 variable to false (off)									
 				}
 				
 			}
@@ -580,8 +561,8 @@ public class productSearchClass extends JPanel {
 					panel_3.setVisible(true); ////turn on panel_3 (display image area)
 					check = true;	//set the check variable to true (on)								
 				}else {//if check is true (on)
-					panel_3.setVisible(false); //turn off panel_3 ((display image area)
-					check = false; //set the check variable to false(off)										
+					panel_3.setVisible(false); //turn off panel_3 (display image area)
+					check = false; //set the check variable to false (off)										
 				}
 				
 			}
