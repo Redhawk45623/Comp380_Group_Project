@@ -383,7 +383,7 @@ public class productSearchClass extends JPanel {
 					int convertedNumber2 = Integer.parseInt(number.toString()); //converts the Object: 'number' to int: 'convertedNumber2'
 					int addedUp = convertedNumber2+ 1; //adds the price of convertedNumber2	+ 1		
 					ToQuantityList_items_4.setElementAt(addedUp, index); //sets the quantity displayed in quantity box for selected item at the right spot
-					//JOptionPane.showMessageDialog(null, "Added one more -> " + products[image]); //pop-up message displaying the product which the user added a quantity
+					JOptionPane.showMessageDialog(null, "Added one more -> " + products[image]); //pop-up message displaying the product which the user added a quantity
 				}
 				
 				else { //if the button is pushed and nothing is selected in the Shopping List, display the pop-up message
