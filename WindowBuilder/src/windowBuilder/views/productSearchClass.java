@@ -28,7 +28,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JRadioButton;
 import javax.swing.JTextPane;
@@ -241,7 +240,7 @@ public class productSearchClass extends JPanel {
 					int image = selectedIx[x]; //assigns temp variable: 'image' to the index found at selectedIx[x]					 
 					image = productObject.trackImages[image]; //sets the temp variable: 'image' to the index found at trackImages[image]
 									
-						productObject.loadImagesAlt(image); //calls the loadImages() using the temp variable: 'image' (index of trackImages[image]) to display correct image in panel_3
+						productObject.loadImages(image); //calls the loadImages() using the temp variable: 'image' (index of trackImages[image]) to display correct image in panel_3
 
 		        }	        
 		        
@@ -265,10 +264,10 @@ public class productSearchClass extends JPanel {
 				
 				for (int i=0; i<JListShopList_1.getModel().getSize(); i++) { //for-loop using the size of the 'JListShopList_1'
 					
-					if (ToProductSearchList_items_1.get(i) == verify) {
+					if (ToProductSearchList_items_1.get(i) == verify) { //if-statement that checks to see if the selected item in the combobox that the user is trying to add to Shopping List is already there
 						
-						checkRepeats = true;
-						JOptionPane.showMessageDialog(null, "Already added to Shopping List!", "Alert", JOptionPane.ERROR_MESSAGE);
+						checkRepeats = true; //if the product is already in the Shopping list, set 'checkRepeats' to true
+						JOptionPane.showMessageDialog(null, "Already added to Shopping List!", "Alert", JOptionPane.ERROR_MESSAGE); //display pop-up message
 						
 					}
 										
@@ -279,7 +278,7 @@ public class productSearchClass extends JPanel {
 					
 					productObject.setImageIndex(cbIndex); //uses cbIndex variable as a parameter to call setImageIndex().  This tracks the order of indexes to be used for the description and image display
 						
-					productObject.loadImagesAlt(cbIndex); //calls the loadImages() using 'cbIndex' as a parameter
+					productObject.loadImages(cbIndex); //calls the loadImages() using 'cbIndex' as a parameter
 			
 					prices2[add] = cbIndex; //used to track prices
 					add++; //increments the add variable for prices[] for the next use				
@@ -427,18 +426,18 @@ public class productSearchClass extends JPanel {
 			}
 		});
 		
-		btnRemoveOneItem.addActionListener(new ActionListener() {
+		btnRemoveOneItem.addActionListener(new ActionListener() { //button action method that removes selected Product from Shopping List
 			public void actionPerformed(ActionEvent e) {
 				
-				if (! JListShopList_1.isSelectionEmpty()){
+				if (! JListShopList_1.isSelectionEmpty()){ //if the Shopping List is not empty, run the code
 				
 					int x = 0;		
 					int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates a temp array that stores the selected index in the Shopping List. Will only be one item in array			    
 					int image = selectedIx[x]; //assigns temp variable image to the element at index 0 from temp array selectedIx					
 					int productPrice = priceArray[image]; //sets int variable:'productPrice' to the price found at priceArray[image]
 						
-					int w = productObject.trackImages[image];
-					productObject.removeImageIndex(w);
+					int w = productObject.trackImages[image]; //sets int variable: 'w' to the index found in 'trackImages[]'
+					productObject.removeImageIndex(w); //calls the removeImageIndex() from productClass using parameter 'w'
 					txtpnProductDescription.setText(null); //resets the description area
 					displayLabel.setIcon(null); //resets the display image area
 										
@@ -456,19 +455,16 @@ public class productSearchClass extends JPanel {
 						}
 						
 					}
-					priceArray = cartPriceArray2; //after for loop, set cartPriceArray[] to temp cartPriceArray2[]	
-										
-					sum = sum - productPrice;					
-					textAreaTotal_1.setText("$" + sum + ".00"); 
+					priceArray = cartPriceArray2; //after for loop, set cartPriceArray[] to temp cartPriceArray2[]									
+					sum = sum - productPrice; //set the variable: 'sum' to sum - the price of the selected item that was removed				
+					textAreaTotal_1.setText("$" + sum + ".00"); //display the new amount of 'sum in 'textAreaTotal_1'
 					
-					if (ToProductSearchList_items_1.isEmpty()) {
-						
-						textAreaTotal_1.setText("$0.00"); //this resets the textAreaTotal box back to empty
-						
+					if (ToProductSearchList_items_1.isEmpty()) { //if the Shopping List is empty, run the code					
+						textAreaTotal_1.setText("$0.00"); //this resets the textAreaTotal box back to empty						
 					}					
 					//JOptionPane.showMessageDialog(null,sum);					
 				}
-				else {
+				else { //if the Shopping List is empty or if an item in the Shopping List is not selected, display the pop-up
 					JOptionPane.showMessageDialog(null, "Please select an item to remove!", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message
 					
 				}
@@ -495,7 +491,7 @@ public class productSearchClass extends JPanel {
 					priceArray = new int[50]; //this resets the priceArray[]
 					productObject.trackImages = new Integer[20]; //this resets the trackImages[]
 					productObject.track = 0; //resets track variable to 0
-					JOptionPane.showMessageDialog(null, "Removed all products from Shopping List", "Products Removed", JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Removed all products from Shopping List", "Products Removed", JOptionPane.INFORMATION_MESSAGE);//Displays a pop-up message
 					
 				}
 				else { //if there is nothing added to the Shopping List yet...

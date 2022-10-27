@@ -14,11 +14,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
-
-import javax.security.auth.x500.X500Principal;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
 
 /**
  * 
@@ -30,18 +26,17 @@ import javax.swing.JOptionPane;
  */
 public class productClass {
 	
-	public static Object[] descriptionsArray = new String[10];
-	public Integer[] trackImages = new Integer[10];
-	public static Object[] namePaths = new String[20];
-	public static Object[] nameDisplay = new String[20];
-	public int track = 0;
+	public static Object[] descriptionsArray = new String[20]; //array used to store the description Strings
+	public Integer[] trackImages = new Integer[20]; //array used to track the indexes of images as they are added or removed from Shopping List
+	public static Object[] namePaths = new String[20]; //array used to store the paths of the images in the source folder
+	public static Object[] nameDisplay = new String[20]; //array used to store the names of the products that are displayed in the image display area of the Shopping List
+	public int track = 0; //variable used int the setImageIndex() method
 	
 	public productClass() throws FileNotFoundException {
 		
 		loadProductsFromTxtFile(); //loads the arrays
-		loadProductDescriptions();
-		
-		loadNamePathsAndDescrip(); //under test...
+		loadProductDescriptions(); //calls loadProductDescriptions() method to load descriptionsArray[]
+		loadNamePathsAndDescrip(); //calls the loadNamePathsAndDescrip() method to load the namePaths[] and nameDisplay[]
 	}
 	
 	/**
@@ -183,9 +178,8 @@ public class productClass {
 		File file = new File(url.getPath()); //creats a File Object from the 'url' variable
 		
 		for (i = 0; i < namePaths.length; i++) { //for loop using the length of namePaths[]
-			try (BufferedReader br = new BufferedReader(new FileReader(file))) { //BufferedReader to begin reading lines of descriptions.txt
-				namePaths = br.lines().toArray(); //loads the descriptionsArray[] with each line from the descriptions.txt file
-				//JOptionPane.showMessageDialog(null,namePaths[i]);
+			try (BufferedReader br = new BufferedReader(new FileReader(file))) { //BufferedReader to begin reading lines of paths.txt
+				namePaths = br.lines().toArray(); //loads the namePaths[] with each line from the paths.txt file
 			} catch (FileNotFoundException e) {
 				throw e;
 			} catch (IOException e) {
@@ -198,9 +192,8 @@ public class productClass {
 		File file2 = new File(url2.getPath()); //creats a File Object from the 'url' variable
 		
 		for (i = 0; i < nameDisplay.length; i++) { //for loop using the length of namePaths[]
-			try (BufferedReader br = new BufferedReader(new FileReader(file2))) { //BufferedReader to begin reading lines of descriptions.txt
-				nameDisplay = br.lines().toArray(); //loads the descriptionsArray[] with each line from the descriptions.txt file
-				//JOptionPane.showMessageDialog(null,nameDisplay[i]);
+			try (BufferedReader br = new BufferedReader(new FileReader(file2))) { //BufferedReader to begin reading lines of displayNames.txt
+				nameDisplay = br.lines().toArray(); //loads the nameDisplay[] with each line from the displayNames.txt file
 			} catch (FileNotFoundException e) {
 				throw e;
 			} catch (IOException e) {
@@ -210,9 +203,15 @@ public class productClass {
 		}
 		
 	}
-	///working on method below....
 	
-	public void loadImagesAlt (int number) {
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 * @param number
+	 */
+	public void loadImages(int number) {
 		
 		String display;		
 		Object namePath = namePaths[number];
