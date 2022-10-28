@@ -72,6 +72,7 @@ public class productSearchClass extends JPanel {
 	private boolean addedOne = false;
 	private boolean checkRepeats  = false;
 	private boolean checkCartRepeats = false;
+	private boolean checkMax = false;
 	
 	public static int add = 0; //incremented variable used as index for priceArray, used for btnAddList_1 action event 
 	private static int sum; //incremented variable used as index for addPrices() 
@@ -89,7 +90,7 @@ public class productSearchClass extends JPanel {
 	private JScrollPane scrollPaneQuantity; //scrollpane element for the Quantity List
 	
 	private JButton btnAddToList; //button to add products from combobox to the Shopping List
-	private JButton btnAddCart; //button to add products straight to cart (radio button -> rdbtnUseList not selected)
+	private JButton btnAddToCart; //button to add products straight to cart (radio button -> rdbtnUseList not selected)
 	private JButton btnAddAllToCart; //button used to add all contents of Shopping List to Cart
 	private JButton btnRemoveAll; //button to remove all contents of the Shopping List
 	private JButton btnAddOneToList; //button to add one selected item from Shopping List to Cart
@@ -237,6 +238,11 @@ public class productSearchClass extends JPanel {
 		btnAddToList.addActionListener(new ActionListener() { //button action method that adds item from combobox to Shopping List
 			public void actionPerformed(ActionEvent e) {
 				
+				if (JListShopList_1.getModel().getSize() > 7) {
+					JOptionPane.showMessageDialog(null, "Maximum products in Shopping List!", "Alert", JOptionPane.ERROR_MESSAGE);
+					checkMax = true;
+				}
+				
 				checkRepeats = false; //sets the boolean to false when button is pressed. This is used to check if the selected product has already been added to Shopping List
 				addedOne = true; //sets the boolean variable:'addedOne' to true.  This is to establish at least one product has been added to the Shopping List 				
 				int cbIndex = cbProducts.getSelectedIndex(); //creates variable send to pass to addPrices() method from cbProducts_1					
@@ -250,7 +256,7 @@ public class productSearchClass extends JPanel {
 				}
 				//JOptionPane.showMessageDialog(null,verify);
 				
-				if (checkRepeats == false) {
+				if (checkRepeats == false & checkMax == false) {
 					
 					productObject.setImageIndex(cbIndex); //uses cbIndex variable as a parameter to call setImageIndex().  This tracks the order of indexes to be used for the description and image display						
 					productObject.loadImages(cbIndex); //calls the loadImages() using 'cbIndex' as a parameter			
@@ -269,7 +275,7 @@ public class productSearchClass extends JPanel {
 			} 
 		});
 		
-		btnAddCart.addActionListener(new ActionListener() { //button action method that adds product from combobox to Cart
+		btnAddToCart.addActionListener(new ActionListener() { //button action method that adds product from combobox to Cart
 			public void actionPerformed(ActionEvent e) {
 				
 				checkCartRepeats = false; //always sets the boolean to false when button is pressed				
@@ -379,6 +385,8 @@ public class productSearchClass extends JPanel {
 		
 		btnRemoveOneItem.addActionListener(new ActionListener() { //button action method that removes selected Product from Shopping List
 			public void actionPerformed(ActionEvent e) {
+				
+				checkMax = false; //boolean variable used to check if max products are in the Shopping List.
 				
 				if (! JListShopList_1.isSelectionEmpty()){ //if the Shopping List is not empty, run the code
 				
@@ -569,7 +577,7 @@ public class productSearchClass extends JPanel {
 		
 		JLabel lblAdd2Cart = new JLabel("Add to Cart:");
 		
-		btnAddCart = new JButton("Add To Cart");
+		btnAddToCart = new JButton("Add To Cart");
 		GroupLayout gl_panel_2 = new GroupLayout(panel_2);
 		gl_panel_2.setHorizontalGroup(
 			gl_panel_2.createParallelGroup(Alignment.TRAILING)
@@ -577,14 +585,14 @@ public class productSearchClass extends JPanel {
 					.addContainerGap(274, Short.MAX_VALUE)
 					.addComponent(lblAdd2Cart)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(btnAddCart, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
+					.addComponent(btnAddToCart, GroupLayout.PREFERRED_SIZE, 108, GroupLayout.PREFERRED_SIZE)
 					.addGap(31))
 		);
 		gl_panel_2.setVerticalGroup(
 			gl_panel_2.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_2.createSequentialGroup()
 					.addGroup(gl_panel_2.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnAddCart)
+						.addComponent(btnAddToCart)
 						.addComponent(lblAdd2Cart))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
@@ -639,6 +647,9 @@ public class productSearchClass extends JPanel {
 		
 		lblNoShipNotaxes = new JLabel("*Total does not include S&H or taxes");
 		lblNoShipNotaxes.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
+		
+		JLabel lblNewLabel_1 = new JLabel("*Maximum 8 Products");
+		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
 	
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
@@ -695,7 +706,9 @@ public class productSearchClass extends JPanel {
 								.addGroup(gl_panel_1.createSequentialGroup()
 									.addComponent(lblAdd2List)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnAddToList, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE))))
+									.addComponent(btnAddToList, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addComponent(lblNewLabel_1))))
 						.addGroup(gl_panel_1.createSequentialGroup()
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE)))
@@ -709,7 +722,8 @@ public class productSearchClass extends JPanel {
 						.addGroup(gl_panel_1.createSequentialGroup()
 							.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
 								.addComponent(lblAdd2List)
-								.addComponent(btnAddToList))
+								.addComponent(btnAddToList)
+								.addComponent(lblNewLabel_1))
 							.addGap(49)
 							.addComponent(rdbtnSeeDescription)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
@@ -825,7 +839,6 @@ public class productSearchClass extends JPanel {
 		panel_3.setLayout(gl_panel_3);
 		
 		JListShopList_1 = new JList<Object>();
-		JListShopList_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		JListShopList_1.setVisibleRowCount(10);
 		JListShopList_1.setToolTipText("");
 		scrollPaneShopList.setViewportView(JListShopList_1);
