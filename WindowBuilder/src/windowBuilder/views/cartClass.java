@@ -22,9 +22,14 @@ import javax.swing.ListSelectionModel;
 import javax.swing.ImageIcon;
 
 /**
+ * This class handles the bulk of tasks associated with viewing the cart.<br>
+ * This includes displaying all products added to Cart from the 'fast' method<br>
+ * from productSearchClass or products added from the Shopping List.  This<br>
+ * class also displays the quantity added of each product as well as the <br>
+ * total price of the Cart.<p>
  * 
- * 
- * 
+ * This class also has buttons that allow the user to add a quantity, remove<br>
+ * a selected product, empty the Cart, or proceed to the checkout area.<p>
  * 
  * @author Ralph Ramirez
  * @version 2022.10.27 
@@ -59,9 +64,10 @@ public class cartClass extends JPanel {
 	public static boolean check = true; //boolean variable used for the 'btnRemoveItem' action method
 	
 	/**
-	 * 
-	 * 
-	 * 
+	 * initComponents() which is a method that contains all initialized (structural) components of the JPanel.<br>
+	 * Calls createEvents() which is a method that holds all 'action' events (listeners).<br>
+	 * Sets the initial total price of the textAreaCartTotal to $0.00.<br>
+	 * Sets the JListCartQuantity to DefaultListModel: 'ToCartQuantityList_items_4'.<br>
 	 * 
 	 */
 	public cartClass() { //constructor 
@@ -73,10 +79,11 @@ public class cartClass extends JPanel {
 	}
 	
 	/**
+	 * Adds the prices of the products added to the Cart from combobox (via productSearchClass).<br>
+	 * Finds the price of the selected product from productSearchClass.prices[index] and adds it to cartPriceArray[].<br>
+	 * Manages a field variable: 'sum' that is used in setPriceTotal() method.<br>
 	 * 
-	 * 
-	 * 
-	 * @param index
+	 * @param index   price of the selected product to add
 	 */
 	public static void addCartprice(int index) { //method that adds up the Cart price
 		
@@ -92,16 +99,17 @@ public class cartClass extends JPanel {
 	}
 	
 	/**
+	 * Adjusts the total price in the Cart after the 'Add One to Cart' button is pushed for selected product.<br>
+	 * Finds the price of the selected product from cartPriceArray[index] and adds it to cartPriceArray[].<br>
+	 * Manages a field variable: 'sum' that is used in setPriceTotal() method.<br>
 	 * 
-	 * 
-	 * 
-	 * @param index
+	 * @param index   price of the selected product to add
 	 */
-	public void adjustCartPrices(int index) { //method to add up the prices after adding a quantity of one from the shopping list
+	public void adjustCartPrices(int index) { //method to add up the prices after adding a quantity of one from the Cart
 		
 		Object adjust = cartPriceArray[index]; //sets Object variable: 'adjust' to the element found at cartPriceArray[] using parameter: 'index'
 		int cost_value = Integer.parseInt(adjust.toString()); //this converts the object to integer
-		cartPriceArray[counter] = cost_value; //this loads the priceArray[]
+		cartPriceArray[counter] = cost_value; //this loads the cartPriceArray[]
 		counter++; //increments counter variable
 		sum = 0; //sets the variable initially to 0
 		for(int i = 0; i < cartPriceArray.length; i++){ //loop to add up the total price that is in priceArray
@@ -111,9 +119,7 @@ public class cartClass extends JPanel {
 	}
 	
 	/**
-	 * 
-	 * 
-	 * 
+	 * Sets the textAreaCartTotal with the total price of all products in the Cart.<br>
 	 * 
 	 */
 	public static void setCartPriceTotal() { //method which sets the Cart Total
@@ -124,11 +130,12 @@ public class cartClass extends JPanel {
 
 	}
 	/**
+	 * Rearranges the cartPriceArray when an item is removed.<br>
+	 * Used only if product was added straight from the 'fast' shipping method (No Shopping List) or if the quantity of selected product is 1.<br>
+	 * Creates temp array to add all prices in cartPriceArray[] minus the price which is passed as a parameter: 'element'.<br>
+	 * Resets textAreaCartTotal, cartPriceArray[], counter, and sum if the total price in the Cart equals 0.<br>
 	 * 
-	 * 
-	 * 
-	 * 
-	 * @param element
+	 * @param element   price of the selected product that is to be removed 
 	 */
 	public static void rearrangeCart(int element) { //method that rearranges the cartPriceArray when an item is removed
 		
@@ -152,14 +159,13 @@ public class cartClass extends JPanel {
 	}
 	
 	/**
+	 * Adjusts the cartPriceArray[] when an item quantity is decremented from the 'Remove' button in cartClass.<br>
 	 * 
-	 * 
-	 * 
-	 * @param x
+	 * @param adjust   price of the selected product that is to be removed 
 	 */
-	public static void adjustCartTotal(int x) { //method that is used to adjust the Cart Total when an item is removed
+	public static void adjustCartTotal(int adjust) { //method that is used to adjust the Cart Total when an item is removed
 		
-		int selectedPrice = cartPriceArray[x]; //assigns int varaiable: 'selectedPrice' to the element found at 'cartPriceArray[x]'
+		int selectedPrice = cartPriceArray[adjust]; //assigns int varaiable: 'selectedPrice' to the element found at 'cartPriceArray[x]'
 		newTotal = productSearchClass.quantAdded - selectedPrice; //adjusts 'newTotal' by subraction
 		productSearchClass.quantAdded = newTotal; //adjust variable: 'quantAdded' in productSearchClass		
 		sum = newTotal; //sets 'sum' equal to 'newTotal'
@@ -167,9 +173,7 @@ public class cartClass extends JPanel {
 		//JOptionPane.showMessageDialog(null, newTotal);
 	}
 	/**
-	 * 
-	 * 
-	 * 
+	 * Holds all 'action' events (listeners).<br>
 	 * 
 	 */
 	private void createEvents() { //this method initializes all event elements of the panel
@@ -287,9 +291,7 @@ public class cartClass extends JPanel {
 	}
 	
 	/**
-	 * 
-	 * 
-	 * 
+	 * Contains all initialized (structural) components of the JPanel.<br>
 	 * 
 	 */
 	private void initComponents() { //this method initializes all structural elements of the panel

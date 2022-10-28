@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 /** 
- * productClass is used to handle most tasks that are regulated to product details. <br>
+ * This class is used to handle most tasks that are regulated to product details. <br>
  * This includes loading arrays that handle product IDs, Names, and Prices that will <br>
  * be dispayed in the combobox in productSearchClass. It also includes methods that<br>
  * handle the manipulation of product specifics such as associated image and description <br>
