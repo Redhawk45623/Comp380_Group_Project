@@ -22,10 +22,10 @@ import javax.swing.ImageIcon;
  */
 public class productClass {
 	
-	public static Object[] descriptionsArray = new String[20]; //array used to store the description Strings
-	public Integer[] trackImages = new Integer[20]; //array used to track the indexes of images as they are added or removed from Shopping List
-	public static Object[] namePaths = new String[20]; //array used to store the paths of the images in the source folder
-	public static Object[] nameDisplay = new String[20]; //array used to store the names of the products that are displayed in the image display area of the Shopping List
+	public static Object[] descriptionsArray = new String[25]; //array used to store the description Strings
+	public Integer[] trackImages = new Integer[25]; //array used to track the indexes of images as they are added or removed from Shopping List
+	public static Object[] namePaths = new String[25]; //array used to store the paths of the images in the source folder
+	public static Object[] nameDisplay = new String[25]; //array used to store the names of the products that are displayed in the image display area of the Shopping List
 	public int track = 0; //variable used int the setImageIndex() method
 	
 	/**

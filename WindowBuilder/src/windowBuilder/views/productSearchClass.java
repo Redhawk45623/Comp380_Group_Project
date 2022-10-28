@@ -54,10 +54,10 @@ public class productSearchClass extends JPanel {
 	private static final long serialVersionUID = 1L;
 	public static Object[] products; //array that is loaded from file containing Product Names, used to load combobox
 	public static Object[] productIDs; //array that is loaded from read file containing Product IDs, used to load combobox
-	public static Object[] prices = new String[20]; //array that is loaded from file containing prices, used to load combobox
-	public static int[] prices2 = new int[20]; ////used to track the order of indexes that were added to the shopping list
+	public static Object[] prices = new String[25]; //array that is loaded from file containing prices, used to load combobox
+	public static int[] prices2 = new int[25]; ////used to track the order of indexes that were added to the shopping list
 	public static int[] priceArray = new int[50]; //array used to store the prices in order of added to the shopping list after pressing add to list button
-	public static int[] imagesIndex = new int[20];
+	public static int[] imagesIndex = new int[25];
 	
 	public static DefaultListModel<Object> ToProductSearchList_items_1; //DefaultListModel list used to create list containing items added to the Search List
 	public static DefaultListModel<Object> ToCartShopList_items_3; //DefaultListModel list used to create list containing items added to Cart List from Shopping List
@@ -664,8 +664,8 @@ public class productSearchClass extends JPanel {
 									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 										.addGroup(gl_panel_1.createSequentialGroup()
 											.addGap(2)
-											.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-												.addGroup(Alignment.LEADING, gl_panel_1.createSequentialGroup()
+											.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+												.addGroup(gl_panel_1.createSequentialGroup()
 													.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 														.addComponent(btnRemoveOneItem)
 														.addComponent(btnRemoveAll, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE))
@@ -747,7 +747,7 @@ public class productSearchClass extends JPanel {
 							.addGap(4)
 							.addComponent(lblNoShipNotaxes, GroupLayout.PREFERRED_SIZE, 13, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 218, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(33, Short.MAX_VALUE))
 		);
 		
