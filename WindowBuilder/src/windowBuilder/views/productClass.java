@@ -33,7 +33,6 @@ public class productClass {
 	 * Calls loadProductDescriptions() method to load descriptionsArray[].<br>
 	 * Calls loadNamePathsAndDescrip() method to load the namePaths[] and nameDisplay[].<br>
 	 * 
-	 * 
 	 * @throws FileNotFoundException
 	 */
 	public productClass() throws FileNotFoundException { //constructor

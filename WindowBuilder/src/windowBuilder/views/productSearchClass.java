@@ -29,9 +29,22 @@ import javax.swing.AbstractListModel;
 import javax.swing.SwingConstants;
 
 /**
+ * This class handles the bulk of tasks associated with the user searching for a product.<br>
+ * It features two modes that are selected by the user: Fast shopping that does not use a <br>
+ * Shopping List and another option that does.<p>
  * 
+ * The 'fast' shopping feature alows the user to browse a combobox which holds all products <br>
+ * for sale.  The combobox displays ID, Name, and Price of product. Once an item is selected, <br>
+ * an 'Add to Cart' button will move the selected product to the Cart. <p>
  * 
+ * The 'Shopping List' option is selected by a radio button at the top of the panel.  Once <br>
+ * selected, the 'Add to cart' button for 'fast' shopping is toggled off and new features toggle on. <br>
+ * These features include: Shopping List, Quantity List, Price Total text area, and several buttons <br>
+ * that manipulate the products in the Shopping List.<p>
  * 
+ * The 'Shopping List' option also includes two radio buttons that toggle on and off two more panels<br>
+ * within the Shopping List area.  One of these panels display a description of the selected product<br>
+ * and another displays the image of the product with a small title caption.<p>
  * 
  * @author Ralph Ramirez
  * @version 2022.10.27
@@ -105,10 +118,13 @@ public class productSearchClass extends JPanel {
 	productClass productObject = new productClass(); //instantiates an object of productClass() called 'productObject'
 	
 	/**
+	 * Calls initComponents() which is a method that contains all initialized (structural) components of the JPanel.<br>
+	 * Calls createEvents() which is a method that holds all 'action' events (listeners).<br>
+	 * Calls loadProductCombobox() which is a method that loads the combobox with products.<br>
+	 * Sets the Shopping List (panel_1) visibility to off upon application load.<br>
+	 * Sets the 'fast' shipping 'Add to Cart' (panel_2) visibility to on upon application load.<br>
+	 * Turns off visibility to panel_3 (display image area) and panel_4 (product description) upon application load.<br>
 	 * 
-	 * 
-	 * 
-	 * Create the panel.
 	 */
 	public productSearchClass() throws FileNotFoundException{ //constructor
 		
@@ -124,15 +140,15 @@ public class productSearchClass extends JPanel {
 	}
 		
 	/**
+	 * Adds the prices of the products added to the Shopping List from combobox.<br>
+	 * Finds the price of the selected product from prices[] and adds it to priceArray[].<br>
+	 * Manages a field variable: 'sum' that is used in setPriceTotal() method.<br>
 	 * 
-	 * 
-	 * 
-	 * 
-	 * @param x
+	 * @param index   used as the index for prices[]
 	 */
-	public void addPrices(int x) { //method to add up the prices
+	public void addPrices(int index) { //method to add up the prices
 		
-		Object first = prices[x]; //this creates an object variable that is initialized from the passed parameter, used to get selected index and match to price
+		Object first = prices[index]; //this creates an object variable that is initialized from the passed parameter, used to get selected index and match to price
 		int second = Integer.parseInt(first.toString()); //this converts the object to integer
 		priceArray[counter] = second; //this loads the priceArray[]		
 		counter++; //increments counter variable
@@ -144,16 +160,14 @@ public class productSearchClass extends JPanel {
 	}
 	
 	/**
+	 * Adds the prices of the products in Shopping List after a quantity has been added using the 'Add One' button.<br>
 	 * 
-	 * 
-	 * 
-	 * 
-	 * @param x
+	 * @param price   price of product to be added
 	 */
-	public void addPrices2(int x) { //method to add up the prices after adding a quantity of one from the shopping list
+	public void addPrices2(int price) { //method to add up the prices after adding a quantity of one from the shopping list
 		
-		grandtotal = x + grandtotal; //sets variable: grandtotal to the sum of grandtotal and the amount of the passed variable 'x'
-		priceArray[counter] = x; //this loads the priceArray[]
+		grandtotal = price + grandtotal; //sets variable: grandtotal to the sum of grandtotal and the amount of the passed variable 'x'
+		priceArray[counter] = price; //this loads the priceArray[]
 		counter++; //increments counter variable
 		sum = 0; //sets the variable initially to 0
 		for(int i = 0; i < priceArray.length; i++){ //loop to add up the total price that is in priceArray
@@ -162,14 +176,12 @@ public class productSearchClass extends JPanel {
 	}
 	
 	/**
-	 * 
-	 * 
-	 * 
+	 * Loads the combobox with products using three arrays (simulated database).<br>
 	 * 
 	 */
 	public void loadProductCombobox() { //method to load the combobox
 		
-		for(int i = 0; i < products.length; i++) { //method loop
+		for(int i = 0; i < products.length; i++) { //for-loop
 			String line = productIDs[i].toString(); //pulls Object element from productIDs[] and converts to String variable line
 			String line2 = products[i].toString(); //pulls Object element from products[] and converts to String variable line2
 			cbProducts.addItem(line + " - " + line2 + " - " + "Price: " + "$" + prices[i] + ".00"); //loads the JComboBox cbProducts_1 with Products IDs, Product Names, and Prices
@@ -178,9 +190,7 @@ public class productSearchClass extends JPanel {
 	}
 	
 	/**
-	 * 
-	 * 
-	 * 
+	 * Sets the textAreaTotal with the total price of all products in the Shopping List<br>
 	 * 
 	 */
 	public void setPriceTotal() { //method that sets the total price text area (textAreaTotal_1) in Shopping List
@@ -192,13 +202,11 @@ public class productSearchClass extends JPanel {
 	}
 	
 	/**
+	 * Used to add one DefaultListModel to another.<br>
 	 * 
-	 * 
-	 * 
-	 * 
-	 * @param <T>
-	 * @param from
-	 * @param to
+	 * @param <T>     used to represent the type of object stored
+	 * @param from    the list that represents the change 'from'
+	 * @param to      the list that represents the change'to'
 	 */
 	protected static <T> void addTo(ListModel<T> from, DefaultListModel<T> to) { //method used to add one ListModel to another DefaultListModel
 	    for (int index = 0; index < from.getSize(); index++) {
@@ -207,17 +215,15 @@ public class productSearchClass extends JPanel {
 	}
 	
 	/**
-	 * 
-	 * 
-	 * 
-	 * 
+	 * Holds all 'action' events (listeners).<br>
+	 * Primarily used for cleaner organization and management.<br>
+	 *
 	 */
 	private void createEvents() { //method that stores all action events
 		
 		/**
-		 * 
-		 * 
-		 * 
+		 * Mouse listener that will execute code upon one click.<br>
+		 * If one click detected, the selected product will display the correct image and description for that product.<br>
 		 * 
 		 */
 		MouseListener mouseListener = new MouseAdapter() { //mouse action listener to detect when a user clicks on an item in the Shopping List
@@ -233,9 +239,12 @@ public class productSearchClass extends JPanel {
 		};
 		
 		/**
-		 * 
-		 * 
-		 * 
+		 * Adds products from the combobox to the Shopping List if option is selected from radiobutton on top.<br>
+		 * Uses boolean variables to not allow repeat adding of a product from combobox if it has already been added to Shopping List.<br>
+		 * Calls setImageIndex() and loadImages() to display image and desciption but only visible if selected via radio buttons.<br>
+		 * Sets the quantity of each added product to the Shopping List.<br>
+		 * Sets the total price of the Shopping List.<br>
+		 * Adds the product to three different DefaultListModels: ToCartShopList_items_3, ToProductSearchList_items_1, and ToQuantityList_items_4.<br>
 		 * 
 		 */		
 		btnAddToList.addActionListener(new ActionListener() { //button action method that adds item from combobox to Shopping List
