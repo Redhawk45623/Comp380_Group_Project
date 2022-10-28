@@ -32,9 +32,9 @@ public class productClass {
 	public static Object[] nameDisplay = new String[20]; //array used to store the names of the products that are displayed in the image display area of the Shopping List
 	public int track = 0; //variable used int the setImageIndex() method
 	
-	public productClass() throws FileNotFoundException {
+	public productClass() throws FileNotFoundException { //constructor
 		
-		loadProductsFromTxtFile(); //loads the arrays
+		loadProductsFromTxtFile(); //loads the arrays that are used to load the combobox in productSearchClass
 		loadProductDescriptions(); //calls loadProductDescriptions() method to load descriptionsArray[]
 		loadNamePathsAndDescrip(); //calls the loadNamePathsAndDescrip() method to load the namePaths[] and nameDisplay[]
 	}
@@ -46,9 +46,9 @@ public class productClass {
 	 * 
 	 * @throws FileNotFoundException
 	 */
-	public void loadProductsFromTxtFile() throws FileNotFoundException { //method that loads the combobox (products in drop-down list)
+	public void loadProductsFromTxtFile() throws FileNotFoundException { //method that loads the arrays used to load combobox (products in drop-down list)
 		
-		java.net.URL url = getClass().getResource("/productDatabase/productNames.txt");
+		java.net.URL url = getClass().getResource("/productDatabase/productNames.txt"); //path to productNames.txt file stored in productDatabase folder in src folder
 		File file = new File(url.getPath());
 		//String namepath = "/Users/Zeina/Desktop/productNames.txt"; //path for the Product Names file stored on my computer locally
 		//File file = new File(namepath);
@@ -62,7 +62,7 @@ public class productClass {
 			e.printStackTrace();
 		}
 		
-		java.net.URL url2 = getClass().getResource("/productDatabase/productIDs.txt");
+		java.net.URL url2 = getClass().getResource("/productDatabase/productIDs.txt"); //path to productIDs.txt file stored in productDatabase folder in src folder
 		File file2 = new File(url2.getPath());
 		//String IDpath = "/Users/Zeina/Desktop/productIDs.txt"; //path for the Product IDs file stored on my computer locally
 		//File file2 = new File(IDpath);
@@ -76,7 +76,7 @@ public class productClass {
 			e.printStackTrace();
 		}
 		
-		java.net.URL url3 = getClass().getResource("/productDatabase/prices.txt");
+		java.net.URL url3 = getClass().getResource("/productDatabase/prices.txt"); //path to prices.txt file stored in productDatabase folder in src folder
 		File file3 = new File(url3.getPath());
 		//String pricespath = "/Users/Zeina/Desktop/prices.txt"; //path for Product Prices file stored on my computer locally
 		//File file3 = new File(pricespath);
@@ -128,8 +128,8 @@ public class productClass {
 	 */
 	public String setDescriptions(int x) { //method used to return a description String using parameter 'x' descriptionsArray.  Converts to String too
 		
-		String descrip = descriptionsArray[x].toString();
-		return descrip;
+		String descrip = descriptionsArray[x].toString(); //sets the String variable: 'descrip' to the String found in descriptionsArray[]
+		return descrip; //returns the String
 		
 	}
 	
@@ -140,10 +140,10 @@ public class productClass {
 	 * 
 	 * @param number
 	 */
-	public void setImageIndex(Integer number) {
+	public void setImageIndex(Integer number) { //method used to set the index order of images as they are added to the Shopping List
 		
-		trackImages[track] = number;
-		track++;
+		trackImages[track] = number; //loads the trackImages[] with the index of the selected item added to the Shopping List
+		track++; //increments the variable: 'track' for next use
 		
 	}
 	
@@ -169,15 +169,20 @@ public class productClass {
 		trackImages = arr_new.toArray(new Integer[0]); //sets the trackImages[] to the newly arranged ArrayList: 'arr_new'
 	}
 	
-	///working on method below....
-	
-	public void loadNamePathsAndDescrip() throws FileNotFoundException {
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 * @throws FileNotFoundException
+	 */
+	public void loadNamePathsAndDescrip() throws FileNotFoundException { //method used to load the paths for the images and titles of products...all found in the productDescriptions folder in src
 		
 		int i; //declares int i
 		java.net.URL url = getClass().getResource("/productDescriptions/paths.txt"); //sets a java.net.URL variable: 'url' to the .txt file found at the specified path
 		File file = new File(url.getPath()); //creats a File Object from the 'url' variable
 		
-		for (i = 0; i < namePaths.length; i++) { //for loop using the length of namePaths[]
+		for (i = 0; i < namePaths.length; i++) { //for-loop using the length of namePaths[]
 			try (BufferedReader br = new BufferedReader(new FileReader(file))) { //BufferedReader to begin reading lines of paths.txt
 				namePaths = br.lines().toArray(); //loads the namePaths[] with each line from the paths.txt file
 			} catch (FileNotFoundException e) {
@@ -189,9 +194,9 @@ public class productClass {
 		}
 		
 		java.net.URL url2 = getClass().getResource("/productDescriptions/displayNames.txt"); //sets a java.net.URL variable: 'url' to the .txt file found at the specified path
-		File file2 = new File(url2.getPath()); //creats a File Object from the 'url' variable
+		File file2 = new File(url2.getPath()); //creats a File Object from the 'url2' variable
 		
-		for (i = 0; i < nameDisplay.length; i++) { //for loop using the length of namePaths[]
+		for (i = 0; i < nameDisplay.length; i++) { //for -oop using the length of nameDisplay[]
 			try (BufferedReader br = new BufferedReader(new FileReader(file2))) { //BufferedReader to begin reading lines of displayNames.txt
 				nameDisplay = br.lines().toArray(); //loads the nameDisplay[] with each line from the displayNames.txt file
 			} catch (FileNotFoundException e) {
@@ -211,20 +216,18 @@ public class productClass {
 	 * 
 	 * @param number
 	 */
-	public void loadImages(int number) {
+	public void loadImages(int number) { //loads images into image display panel and descriptions into descriptions panel
 		
-		String display;		
-		Object namePath = namePaths[number];
-		String path2 = namePath.toString();	
-		
-		Object descrip = nameDisplay[number];
-		String descrip2 = descrip.toString();
-		
-		ImageIcon icon = new ImageIcon(this.getClass().getResource(path2));		
-		productSearchClass.displayLabel.setIcon(icon);
-		display = setDescriptions(number); 
-		productSearchClass.lblImageDescrip.setText(descrip2);
-		productSearchClass.txtpnProductDescription.setText(display);	
+		String display;	 //decalres a String variable: 'display'	
+		Object namePath = namePaths[number]; //assigns an Object variable: 'namePath' to the String path found at namePaths[] using parameter: 'number'
+		String path2 = namePath.toString(); //converts the Object variable: 'namePath' to a String variable: 'path2' 	
+		Object descrip = nameDisplay[number]; //assigns an Object variable: 'descrip' to the String found at nameDisplay[] using parameter: 'number'
+		String descrip2 = descrip.toString(); //converts the Object variable: 'descrip' to a String variable: 'descrip2'		
+		ImageIcon icon = new ImageIcon(this.getClass().getResource(path2)); //assigns the ImageIcon variable: 'icon' to the path found using variable: 'path2'		
+		productSearchClass.displayLabel.setIcon(icon); //displays the icon in the image display panel of productSearchClass
+		display = setDescriptions(number); //assigns the String variable: 'display' using the setDescriptions() method
+		productSearchClass.lblImageDescrip.setText(descrip2); //sets the small label that is the title of the image in the image display panel of productSearchClass
+		productSearchClass.txtpnProductDescription.setText(display); // sets the desciption for the product in the description panel in productSearchClass	
 		
 	}
 	/**

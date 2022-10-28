@@ -18,6 +18,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 /**
  * 
@@ -34,18 +35,18 @@ public class eCommerceMain extends JFrame {
 	JPanel search_panel = new productSearchClass(); //instantiating an object of productSearchClass() which is a JPanel
 	JPanel cart_panel = new cartClass(); //instantiating an object of cartClass() which is a JPanel
 	
-	ImageIcon homeIcon = new ImageIcon(this.getClass().getResource("/icons/Home.png")); //sets the icons for the TabbedPane
-	ImageIcon searchIcon = new ImageIcon(this.getClass().getResource("/icons/Search2.png"));
-	ImageIcon cartIcon = new ImageIcon(this.getClass().getResource("/icons/shop-cart-icon.png"));
-	ImageIcon checkoutIcon = new ImageIcon(this.getClass().getResource("/icons/Dollar.png"));
-	ImageIcon helpIcon = new ImageIcon(this.getClass().getResource("/icons/Help.png"));
+	ImageIcon homeIcon = new ImageIcon(this.getClass().getResource("/icons/Home.png"));            /////////////////////////////////////
+	ImageIcon searchIcon = new ImageIcon(this.getClass().getResource("/icons/Search2.png"));       //                                 //
+	ImageIcon cartIcon = new ImageIcon(this.getClass().getResource("/icons/shop-cart-icon.png"));  //sets the icons for the TabbedPane//
+	ImageIcon checkoutIcon = new ImageIcon(this.getClass().getResource("/icons/Dollar.png"));      //                                 //
+	ImageIcon helpIcon = new ImageIcon(this.getClass().getResource("/icons/Help.png"));            /////////////////////////////////////
 	
 	/**
 	 * 
 	 * 
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args) { //main method
 		try {
 			UIManager.setLookAndFeel("com.apple.laf.AquaLookAndFeel");
 		} catch (Throwable e) {
@@ -69,8 +70,8 @@ public class eCommerceMain extends JFrame {
 	 * Create the frame.
 	 * @throws FileNotFoundException 
 	 */
-	public eCommerceMain() throws FileNotFoundException {
-		setTitle("- Comp380 'Think Tank' Group Project -");
+	public eCommerceMain() throws FileNotFoundException { //constructor
+		setTitle("- Comp380 'Think Tank' Group Project: 'Vintage Shop' -");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 700);
@@ -99,6 +100,10 @@ public class eCommerceMain extends JFrame {
 		tabbedPane.addTab("Home", homeIcon, home_panel, null);
 		
 		JLabel lblNewLabel = new JLabel("This is the Home page that will be modified later...");
+		
+		JLabel lblNewLabel_1 = new JLabel("We could possibly add a custom logo and incorporate");
+		
+		JLabel lblNewLabel_2 = new JLabel("the team name along with team member names...");
 		GroupLayout gl_home_panel = new GroupLayout(home_panel);
 		gl_home_panel.setHorizontalGroup(
 			gl_home_panel.createParallelGroup(Alignment.LEADING)
@@ -106,13 +111,25 @@ public class eCommerceMain extends JFrame {
 					.addGap(96)
 					.addComponent(lblNewLabel)
 					.addContainerGap(99, Short.MAX_VALUE))
+				.addGroup(gl_home_panel.createSequentialGroup()
+					.addGap(85)
+					.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addGap(91))
+				.addGroup(Alignment.TRAILING, gl_home_panel.createSequentialGroup()
+					.addContainerGap(103, Short.MAX_VALUE)
+					.addComponent(lblNewLabel_2)
+					.addGap(101))
 		);
 		gl_home_panel.setVerticalGroup(
 			gl_home_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_home_panel.createSequentialGroup()
 					.addGap(132)
 					.addComponent(lblNewLabel)
-					.addContainerGap(468, Short.MAX_VALUE))
+					.addGap(75)
+					.addComponent(lblNewLabel_1)
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addComponent(lblNewLabel_2)
+					.addContainerGap(349, Short.MAX_VALUE))
 		);
 		home_panel.setLayout(gl_home_panel); //home tab	
 		

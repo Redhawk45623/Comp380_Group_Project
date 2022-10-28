@@ -119,7 +119,7 @@ public class productSearchClass extends JPanel {
 	 * 
 	 * Create the panel.
 	 */
-	public productSearchClass() throws FileNotFoundException{
+	public productSearchClass() throws FileNotFoundException{ //constructor
 		
 		initComponents(); //calls initComponents() 
 		createEvents(); //calls createEvents();				       	
@@ -167,8 +167,7 @@ public class productSearchClass extends JPanel {
 		sum = 0; //sets the variable initially to 0
 		for(int i = 0; i < priceArray.length; i++){ //loop to add up the total price that is in priceArray
 			sum += priceArray[i]; //adds up the priceArray[] and stores it in the variable sum
-		}
-		
+		}		
 	}
 	
 	/**
@@ -184,8 +183,7 @@ public class productSearchClass extends JPanel {
 			String line2 = products[i].toString(); //pulls Object element from products[] and converts to String variable line2
 			cbProducts.addItem(line + " - " + line2 + " - " + "Price: " + "$" + prices[i] + ".00"); //loads the JComboBox cbProducts_1 with Products IDs, Product Names, and Prices
 			
-		}
-		
+		}		
 	}
 	
 	/**
@@ -233,17 +231,13 @@ public class productSearchClass extends JPanel {
 		 */
 		MouseListener mouseListener = new MouseAdapter() { //mouse action listener to detect when a user clicks on an item in the Shopping List
 		    public void mouseClicked(MouseEvent e) {
-		        if (e.getClickCount() == 1) { //if detects only one click, run the code
-        	           
+		        if (e.getClickCount() == 1) { //if detects only one click, run the code      	           
 		            int x = 0;		
 					int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates an array that stores the index of the clicked on product. Will be only one index			    
 					int image = selectedIx[x]; //assigns temp variable: 'image' to the index found at selectedIx[x]					 
-					image = productObject.trackImages[image]; //sets the temp variable: 'image' to the index found at trackImages[image]
-									
-						productObject.loadImages(image); //calls the loadImages() using the temp variable: 'image' (index of trackImages[image]) to display correct image in panel_3
-
-		        }	        
-		        
+					image = productObject.trackImages[image]; //sets the temp variable: 'image' to the index found at trackImages[image]								
+					productObject.loadImages(image); //calls the loadImages() using the temp variable: 'image' (index of trackImages[image]) to display correct image in panel_3
+		        }	        		        
 		    }
 		};
 		
@@ -257,39 +251,30 @@ public class productSearchClass extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				checkRepeats = false; //sets the boolean to false when button is pressed. This is used to check if the selected product has already been added to Shopping List
-				addedOne = true; //sets the boolean variable:'addedOne' to true.  This is to establish at least one product has been added to the Shopping List 
-				
+				addedOne = true; //sets the boolean variable:'addedOne' to true.  This is to establish at least one product has been added to the Shopping List 				
 				int cbIndex = cbProducts.getSelectedIndex(); //creates variable send to pass to addPrices() method from cbProducts_1					
 				String verify = cbProducts.getItemAt(cbIndex); //sets variable: 'verify' to the selected product usine variable: 'cbIndex'
 				
-				for (int i=0; i<JListShopList_1.getModel().getSize(); i++) { //for-loop using the size of the 'JListShopList_1'
-					
-					if (ToProductSearchList_items_1.get(i) == verify) { //if-statement that checks to see if the selected item in the combobox that the user is trying to add to Shopping List is already there
-						
+				for (int i=0; i<JListShopList_1.getModel().getSize(); i++) { //for-loop using the size of the 'JListShopList_1'					
+					if (ToProductSearchList_items_1.get(i) == verify) { //if-statement that checks to see if the selected item in the combobox that the user is trying to add to Shopping List is already there						
 						checkRepeats = true; //if the product is already in the Shopping list, set 'checkRepeats' to true
-						JOptionPane.showMessageDialog(null, "Already added to Shopping List!", "Alert", JOptionPane.ERROR_MESSAGE); //display pop-up message
-						
-					}
-										
+						JOptionPane.showMessageDialog(null, "Already added to Shopping List!", "Alert", JOptionPane.ERROR_MESSAGE); //display pop-up message						
+					}										
 				}
 				//JOptionPane.showMessageDialog(null,verify);
 				
 				if (checkRepeats == false) {
 					
-					productObject.setImageIndex(cbIndex); //uses cbIndex variable as a parameter to call setImageIndex().  This tracks the order of indexes to be used for the description and image display
-						
-					productObject.loadImages(cbIndex); //calls the loadImages() using 'cbIndex' as a parameter
-			
+					productObject.setImageIndex(cbIndex); //uses cbIndex variable as a parameter to call setImageIndex().  This tracks the order of indexes to be used for the description and image display						
+					productObject.loadImages(cbIndex); //calls the loadImages() using 'cbIndex' as a parameter			
 					prices2[add] = cbIndex; //used to track prices
 					add++; //increments the add variable for prices[] for the next use				
 					addPrices(cbIndex); //calls addPrices method				
 					setPriceTotal(); //calls setPriceTotal method							
 					ToCartShopList_items_3.addElement(cbProducts.getSelectedItem()); //	//This adds the selected element from cbProducts to DefaultListModel ToCartShopList_items_3			
-					ToProductSearchList_items_1.addElement(cbProducts.getSelectedItem());  //This adds the selected element from cbProducts to DefaultListModel ToProductSearchList_items_1
-								
+					ToProductSearchList_items_1.addElement(cbProducts.getSelectedItem());  //This adds the selected element from cbProducts to DefaultListModel ToProductSearchList_items_1								
 					ToQuantityList_items_4.addElement("1"); //adds a 1 to the DefaultListModel: 'ToQuantityList_items_4'
-					JListQuantity.setModel(ToQuantityList_items_4); //sets the model of the Shopping List quantity box
-					
+					JListQuantity.setModel(ToQuantityList_items_4); //sets the model of the Shopping List quantity box					
 					JListShopList_1.setModel(ToProductSearchList_items_1); //this lists the selected DefaultListModel items in the JListShopList shopping list							
 					JListShopList_1.addMouseListener(mouseListener); //a listener that detects when a product is selected in the shopping list
 					//JOptionPane.showMessageDialog(null,S);
@@ -313,13 +298,10 @@ public class productSearchClass extends JPanel {
 				
 				for (int i=0; i<cartClass.JListCartList.getModel().getSize(); i++) { //for loop that checks the cartClass.CartList_items_2 for a product (variable: 'verify') already added to the Cart
 					
-					if (cartClass.CartList_items_2.get(i) == verify) { //if statement that looks for a product already added to the Cart
-						
+					if (cartClass.CartList_items_2.get(i) == verify) { //if statement that looks for a product already added to the Cart						
 						checkCartRepeats = true; //if there is already a product a user is attempting to add again, set the boolean to true
-						JOptionPane.showMessageDialog(null, "Already Added to Cart! Add quanity from Cart tab...", "Alert", JOptionPane.ERROR_MESSAGE); //display pop-up message
-						
-					}				
-					
+						JOptionPane.showMessageDialog(null, "Already Added to Cart! Add quanity from Cart tab...", "Alert", JOptionPane.ERROR_MESSAGE); //display pop-up message						
+					}								
 				}
 				
 				if (checkCartRepeats == false) { //if the boolean is false, run the code
@@ -426,6 +408,12 @@ public class productSearchClass extends JPanel {
 			}
 		});
 		
+		/**
+		 * 
+		 * 
+		 * 
+		 * 
+		 */
 		btnRemoveOneItem.addActionListener(new ActionListener() { //button action method that removes selected Product from Shopping List
 			public void actionPerformed(ActionEvent e) {
 				
@@ -550,7 +538,7 @@ public class productSearchClass extends JPanel {
 		 * 
 		 * 
 		 */
-		rdbtnSeeImage.addActionListener(new ActionListener() { //radio button action method that toggles on or off the See Image area
+		rdbtnSeeImage.addActionListener(new ActionListener() { //radio button action method that toggles on or off the 'See Image' area
 			public void actionPerformed(ActionEvent e) {
 				
 				if (check == false) {	//if check is false (off), run the code				

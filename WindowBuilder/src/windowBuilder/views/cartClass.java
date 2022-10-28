@@ -27,19 +27,19 @@ import javax.swing.AbstractListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.ImageIcon;
 
-public class cartClass extends JPanel {
+public class cartClass extends JPanel { 
 	
 	private static final long serialVersionUID = 1L;
 	public static DefaultListModel<Object> CartList_items_2; //DefaultListModel list used to create list containing items added Cart List
 	public static DefaultListModel<Object> ToCartQuantityList_items_4; //DefaultListModel list used to track the quantity of items in the Cart List
 	
-	////The 3 elements below will be manipulated from a checkOut class//////////////////////////////////////////
-	
-	public static JList<Object> JListCartList; //JList element that displays the Products added to the Cart
-	public static JTextArea textAreaCartTotal;  // JTextArea that displays the current total of Products added to the Shopping List
-	public static JList<Object> JListCartQuantity; //JList element that displays the total quantity of products in the Cart
-	
-	////The 3 elements above will be manipulated from a checkOut class//////////////////////////////////////////
+	////The 3 elements below will be manipulated from a checkout class/////////////////////////////////////////////////////////////////
+	                                                                                                                                 //
+	public static JList<Object> JListCartList; //JList element that displays the Products added to the Cart							 //
+	public static JTextArea textAreaCartTotal;  // JTextArea that displays the current total of Products added to the Shopping List  //
+	public static JList<Object> JListCartQuantity; //JList element that displays the total quantity of products in the Cart          //
+																																	 //
+	////The 3 elements above will be manipulated from a checkout class/////////////////////////////////////////////////////////////////
 	
 	public static int[] cartPriceArray = new int[20]; //an arrray that is used to tabulate the total amount of the Cart
 	public static Object[] prices2 = new String[20]; //used to track the order of indexes that were added to the Cart	
@@ -47,6 +47,7 @@ public class cartClass extends JPanel {
 	private JButton btnEmptyCart; //button that empties the Cart
 	private JButton btnRemoveItem; //button that removes selected product from Cart
 	private JButton btnAddItem; //button that adds a quanity of one to a product in the Cart
+	private JButton btnCheckoutNow; //button that initiates the checkout process
 	
 	private static String total; //String variable that is used in the setCartPriceTotal() method
 	private static int counter = 0; //int variable that is used in the addCartprice() method
@@ -54,13 +55,14 @@ public class cartClass extends JPanel {
 	public static int newTotal; //variable used in the adjustCartTotal() method. Used when a product is removed from Cart
 	
 	public static boolean check = true; //boolean variable used for the 'btnRemoveItem' action method
+	
 	/**
 	 * 
 	 * 
 	 * 
 	 * 
 	 */
-	public cartClass() {
+	public cartClass() { //constructor 
 		
 		initComponents(); //calls initComponents() method; builds all structural elements of the panel
 		createEvents(); //calls createEvents()() method; builds all events that happen (actions)
@@ -74,7 +76,7 @@ public class cartClass extends JPanel {
 	 * 
 	 * @param index
 	 */
-	public static void addCartprice(int index) {
+	public static void addCartprice(int index) { //method that adds up the Cart price
 		
 		Object cost = productSearchClass.prices[index]; //this creates an object variable that is initialized from the passed parameter/prices[]
 		int cost_value = Integer.parseInt(cost.toString()); //this converts the object to integer
@@ -95,7 +97,7 @@ public class cartClass extends JPanel {
 	 */
 	public void adjustCartPrices(int index) { //method to add up the prices after adding a quantity of one from the shopping list
 		
-		Object adjust = cartPriceArray[index];
+		Object adjust = cartPriceArray[index]; //sets Object variable: 'adjust' to the element found at cartPriceArray[] using parameter: 'index'
 		int cost_value = Integer.parseInt(adjust.toString()); //this converts the object to integer
 		cartPriceArray[counter] = cost_value; //this loads the priceArray[]
 		counter++; //increments counter variable
@@ -343,7 +345,7 @@ public class cartClass extends JPanel {
 		
 		btnAddItem = new JButton("Add One");
 		
-		JButton btnNewButton = new JButton("Buy Now");
+		btnCheckoutNow = new JButton("Buy Now");
 		
 		JLabel lblNewLabel = new JLabel("To Checkout:");
 		lblNewLabel.setIcon(new ImageIcon(cartClass.class.getResource("/icons/Full basket.png")));
@@ -373,7 +375,7 @@ public class cartClass extends JPanel {
 						.addComponent(lblNewLabel))
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(btnNewButton, 0, 0, Short.MAX_VALUE)
+						.addComponent(btnCheckoutNow, 0, 0, Short.MAX_VALUE)
 						.addComponent(btnEmptyCart, 0, 0, Short.MAX_VALUE)
 						.addComponent(btnRemoveItem, 0, 0, Short.MAX_VALUE)
 						.addComponent(btnAddItem, GroupLayout.PREFERRED_SIZE, 80, Short.MAX_VALUE))
@@ -416,7 +418,7 @@ public class cartClass extends JPanel {
 								.addComponent(lblEmptyCart))
 							.addGap(8)
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(btnNewButton)
+								.addComponent(btnCheckoutNow)
 								.addComponent(lblNewLabel)))
 						.addComponent(lblNoShipOrTaxes, GroupLayout.PREFERRED_SIZE, 11, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(168, Short.MAX_VALUE))
