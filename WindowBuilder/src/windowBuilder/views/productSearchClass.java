@@ -1,11 +1,4 @@
-/**
- * 
- * 
- * 
- * 
- * 
- * 
- */
+
 package windowBuilder.views;
 
 import javax.swing.JPanel;
@@ -40,10 +33,8 @@ import javax.swing.SwingConstants;
  * 
  * 
  * 
- * 
- * 
  * @author Ralph Ramirez
- *
+ * @version 2022.10.27
  */
 public class productSearchClass extends JPanel {
 	
@@ -56,8 +47,8 @@ public class productSearchClass extends JPanel {
 	public static int[] imagesIndex = new int[20];
 	
 	public static DefaultListModel<Object> ToProductSearchList_items_1; //DefaultListModel list used to create list containing items added to the Search List
-	public static DefaultListModel<Object> ToCartShopList_items_3; //DefaultListModel list used to create list containing items added to Cart List from Shop List
-	public static DefaultListModel<Object> ToQuantityList_items_4;
+	public static DefaultListModel<Object> ToCartShopList_items_3; //DefaultListModel list used to create list containing items added to Cart List from Shopping List
+	public static DefaultListModel<Object> ToQuantityList_items_4; //DefaultListModel list used to create list containing quantity of products in the Shopping List
 	
 	public static JComboBox<String> cbProducts; //Combobox that lists all products for sale
 	
@@ -71,7 +62,7 @@ public class productSearchClass extends JPanel {
 	public static int add = 0; //incremented variable used as index for priceArray, used for btnAddList_1 action event 
 	private static int sum; //incremented variable used as index for addPrices() 
 	private static int total; //variable used in the 'btnAddOneToList' method
-	private static int grandtotal;
+	private static int grandtotal; //variable used in the addPrices2() method
 	private static int counter = 0; //incremented variable used as index for addPrices() 
 	public static int quantAdded;
 	
@@ -81,7 +72,7 @@ public class productSearchClass extends JPanel {
 	private JPanel panel_4; //panel that is used to hold the product desciption area
 	
 	private JScrollPane scrollPaneShopList; //scrollpane element for the Shopping List
-	private JScrollPane scrollPaneQuantity;
+	private JScrollPane scrollPaneQuantity; //scrollpane element for the Quantity List
 	
 	private JButton btnAddToList; //button to add products from combobox to the Shopping List
 	private JButton btnAddCart; //button to add products straight to cart (radio button -> rdbtnUseList not selected)
@@ -101,7 +92,7 @@ public class productSearchClass extends JPanel {
 	private JLabel lblNoShipNotaxes;      ///////////////////
 	
 	private JList<Object> JListShopList_1; //JList element for Shopping List
-	private JList<Object> JListQuantity;
+	private JList<Object> JListQuantity; //JList that lists the quantity of products
 	
 	private JRadioButton rdbtnUseList; //radio button used to list the Shopping List option
 	private JRadioButton rdbtnSeeImage; //radio button to see the product image
@@ -111,7 +102,7 @@ public class productSearchClass extends JPanel {
 	
 	private JTextArea textAreaTotal_1; //text area to display the total cost of the products added to the Shopping List
 	
-	productClass productObject = new productClass();
+	productClass productObject = new productClass(); //instantiates an object of productClass() called 'productObject'
 	
 	/**
 	 * 

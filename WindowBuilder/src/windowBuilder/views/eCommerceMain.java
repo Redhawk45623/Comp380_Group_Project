@@ -1,10 +1,4 @@
-/**
- * 
- * 
- * 
- * 
- * 
- */
+
 package windowBuilder.views;
 
 import java.awt.EventQueue;
@@ -25,15 +19,16 @@ import javax.swing.LayoutStyle.ComponentPlacement;
  * 
  * 
  * 
+ * 
  * @author Ralph Ramirez
- *
+ * @version 2022.10.27
  */
 public class eCommerceMain extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	JPanel search_panel = new productSearchClass(); //instantiating an object of productSearchClass() which is a JPanel
-	JPanel cart_panel = new cartClass(); //instantiating an object of cartClass() which is a JPanel
+	JPanel search_panel = new productSearchClass(); //instantiates an object of productSearchClass() which is a JPanel
+	JPanel cart_panel = new cartClass(); //instantiates an object of cartClass() which is a JPanel
 	
 	ImageIcon homeIcon = new ImageIcon(this.getClass().getResource("/icons/Home.png"));            /////////////////////////////////////
 	ImageIcon searchIcon = new ImageIcon(this.getClass().getResource("/icons/Search2.png"));       //                                 //
@@ -46,7 +41,7 @@ public class eCommerceMain extends JFrame {
 	 * 
 	 * Launch the application.
 	 */
-	public static void main(String[] args) { //main method
+	public static void main(String[] args) {
 		try {
 			UIManager.setLookAndFeel("com.apple.laf.AquaLookAndFeel");
 		} catch (Throwable e) {

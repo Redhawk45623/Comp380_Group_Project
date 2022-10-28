@@ -1,10 +1,4 @@
-/**
- * 
- * 
- * 
- * 
- * 
- */
+
 
 package windowBuilder.views;
 
@@ -16,13 +10,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
-/**
- * 
- * 
- * 
+/** 
+ * productClass is used to handle most tasks that are regulated to product details. <br>
+ * This includes loading arrays that handle product IDs, Names, and Prices that will <br>
+ * be dispayed in the combobox in productSearchClass. It also includes methods that<br>
+ * handle the manipulation of product specifics such as associated image and description <br>
+ * features.<br>
  * 
  * @author Ralph Ramirez
- *
+ * @version 2022.10.27 
  */
 public class productClass {
 	
@@ -32,17 +28,25 @@ public class productClass {
 	public static Object[] nameDisplay = new String[20]; //array used to store the names of the products that are displayed in the image display area of the Shopping List
 	public int track = 0; //variable used int the setImageIndex() method
 	
+	/**
+	 * Calls loadProductsFromTxtFile() which loads loads the arrays that are used to load the combobox in productSearchClass.<br>
+	 * Calls loadProductDescriptions() method to load descriptionsArray[].<br>
+	 * Calls loadNamePathsAndDescrip() method to load the namePaths[] and nameDisplay[].<br>
+	 * 
+	 * 
+	 * @throws FileNotFoundException
+	 */
 	public productClass() throws FileNotFoundException { //constructor
 		
-		loadProductsFromTxtFile(); //loads the arrays that are used to load the combobox in productSearchClass
+		loadProductsFromTxtFile(); //loads the arrays that are used to load the combobox in productSearchClass.
 		loadProductDescriptions(); //calls loadProductDescriptions() method to load descriptionsArray[]
 		loadNamePathsAndDescrip(); //calls the loadNamePathsAndDescrip() method to load the namePaths[] and nameDisplay[]
 	}
 	
 	/**
-	 * 
-	 * 
-	 * 
+	 * Loads the arrays used to display products in the combobox for productSearchClass. <br>
+	 * Simulates the database retrieval of crucial product information: ID, Name, and Price.<br>
+	 * Loads this data from the text files loacted in the productDatabase folder.<br>
 	 * 
 	 * @throws FileNotFoundException
 	 */
@@ -93,9 +97,8 @@ public class productClass {
 	}
 	
 	/**
-	 * 
-	 * 
-	 * 
+	 * Loads the descriptionsArray[] which will hold all the String descriptions for our products.<br>
+	 * Loads this data from the text files loacted in the productDescriptions folder.<br>
 	 * 
 	 * @throws FileNotFoundException
 	 */
@@ -119,26 +122,22 @@ public class productClass {
 	}
 	
 	/**
+	 * Used to return the product description that is displayed in panel_04 in productSearchClass.<br>
 	 * 
-	 * 
-	 * 
-	 * 
-	 * @param x
-	 * @return
+	 * @param choose   index used for descriptionsArray[]
+	 * @return         returns the String description for the product
 	 */
-	public String setDescriptions(int x) { //method used to return a description String using parameter 'x' descriptionsArray.  Converts to String too
+	public String setDescriptions(int choose) { //method used to return a description String using parameter 'x' descriptionsArray.  Converts to String too
 		
-		String descrip = descriptionsArray[x].toString(); //sets the String variable: 'descrip' to the String found in descriptionsArray[]
+		String descrip = descriptionsArray[choose].toString(); //sets the String variable: 'descrip' to the String found in descriptionsArray[]
 		return descrip; //returns the String
 		
 	}
 	
 	/**
+	 * Tracks the index order of images as they are added to the Shopping List in productSearchClass.<br>
 	 * 
-	 * 
-	 * 
-	 * 
-	 * @param number
+	 * @param number   loads the trackImages[] array with this Integer
 	 */
 	public void setImageIndex(Integer number) { //method used to set the index order of images as they are added to the Shopping List
 		
@@ -148,37 +147,34 @@ public class productClass {
 	}
 	
 	/**
+	 * Removes image indexes that were stored to trackImages[] to match what is currently in the Shopping List.<br>
+	 * Uses a temp ArrayList to build new array minus the image index then sets trackImages[].<br>
 	 * 
-	 * 
-	 * 
-	 * 
-	 * @param number
+	 * @param number   the index that is to be removed from trackImages[]
 	 */
 	public void removeImageIndex(Integer number) { //'number' = the index of the image that is to be removed
 		
 		ArrayList<Integer> arr_new = new ArrayList<>(); //creates a temp ArrayList: 'arr_new' 
 		
-		for (int i=0; i<trackImages.length; i++) { //for-loop using the length of trackImages
-			
+		for (int i=0; i<trackImages.length; i++) { //for-loop using the length of trackImages		
 			if (trackImages[i]!=number) { //if the element at trackImages[i] does not = the parameter: 'number'			
 				arr_new.add(trackImages[i]); //adds the element found at trackImages[i]	to the ArrayList: 'arr_new'			
-			}
-			
-		}
-		
+			}			
+		}		
 		trackImages = arr_new.toArray(new Integer[0]); //sets the trackImages[] to the newly arranged ArrayList: 'arr_new'
 	}
 	
 	/**
-	 * 
-	 * 
-	 * 
+	 * Loads the namePaths[] with the paths of text files that contain the description
+	 * strings used in panel_04 of productSearchClass.<br>
+	 * Loads the nameDisplay[] with the titles of the products used in panel_03 of productSearchClass.<br>
+	 * Used primarily for the loadImages() method.<br>
 	 * 
 	 * @throws FileNotFoundException
 	 */
 	public void loadNamePathsAndDescrip() throws FileNotFoundException { //method used to load the paths for the images and titles of products...all found in the productDescriptions folder in src
 		
-		int i; //declares int i
+		int i; 
 		java.net.URL url = getClass().getResource("/productDescriptions/paths.txt"); //sets a java.net.URL variable: 'url' to the .txt file found at the specified path
 		File file = new File(url.getPath()); //creats a File Object from the 'url' variable
 		
@@ -205,16 +201,15 @@ public class productClass {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		}
-		
+		}		
 	}
 	
 	/**
+	 * Used to display images of products in panel_03 (image display area) of productSearchClass.<br>
+	 * Displays small label of the Product name in panel_03 above image.<br>
+	 * Displays the description of the product in panel_04.<br>
 	 * 
-	 * 
-	 * 
-	 * 
-	 * @param number
+	 * @param number   index used for namePaths[], nameDisplay[], and setDescriptions() method
 	 */
 	public void loadImages(int number) { //loads images into image display panel and descriptions into descriptions panel
 		
@@ -229,88 +224,6 @@ public class productClass {
 		productSearchClass.lblImageDescrip.setText(descrip2); //sets the small label that is the title of the image in the image display panel of productSearchClass
 		productSearchClass.txtpnProductDescription.setText(display); // sets the desciption for the product in the description panel in productSearchClass	
 		
-	}
-	/**
-	 * 
-	 * 
-	 * 
-	 * 
-	 * @param number
-	 * @throws IOException
-	 */
-	/*public void loadImages(int number) throws IOException { //method used to load panel_3 (Image Display Panel) and panel_4 (Product Description Panel)
-		
-		String display; //string variable that is used in switch/case below
-		
-		switch (number) { //switch case that chooses which image and description are displayed
-		  case 0:
-			  loadImagesAlt(number);
-			  productSearchClass.displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/tv.jpg"))); //dispays the image in panel_3			  		  
-			  display = setDescriptions(number); //dispays the description in panel_4 based on the value of the parameter: 'number'
-			  productSearchClass.lblImageDescrip.setText("Vintage TV"); //sets the small label used in the image display area (panel_3)
-			  productSearchClass.txtpnProductDescription.setText(display);	//sets the desciption String to be displayed in panel_4	  		  
-			  
-			  break;
-		  case 1:
-			  loadImagesAlt(number);
-			  /*productSearchClass.displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/camera.jpg"))); 
-			  display = setDescriptions(number);
-			  productSearchClass.lblImageDescrip.setText("Vintage Camera");
-			  productSearchClass.txtpnProductDescription.setText(display);
-			  
-			  break;
-		  case 2:
-			  productSearchClass.displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/atari.jpg")));
-			  display = setDescriptions(number);
-			  productSearchClass.lblImageDescrip.setText("Atari Games");
-			  productSearchClass.txtpnProductDescription.setText(display);
-			  break;
-		  case 3:
-			  productSearchClass.displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/boombox.jpg")));
-			  display = setDescriptions(number);
-			  productSearchClass.lblImageDescrip.setText("1980s Boombox");
-			  productSearchClass.txtpnProductDescription.setText(display);
-			  break;
-		  case 4:
-			  productSearchClass.displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/phone.jpg")));
-			  display = setDescriptions(number);
-			  productSearchClass.lblImageDescrip.setText("Rotary Phone");
-			  productSearchClass.txtpnProductDescription.setText(display);
-			  break;
-		  case 5:
-			  productSearchClass.displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/cassette.jpg")));
-			  display = setDescriptions(number);
-			  productSearchClass.lblImageDescrip.setText("Cassette Tape");
-			  productSearchClass.txtpnProductDescription.setText(display);
-			  break;
-		  case 6:
-			  productSearchClass.displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/camera2.jpg")));
-			  display = setDescriptions(number);
-			  productSearchClass.lblImageDescrip.setText("Film Camera");
-			  productSearchClass.txtpnProductDescription.setText(display);
-			  break;
-		  case 7:
-			  productSearchClass.displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/top.jpg")));
-			  display = setDescriptions(number);
-			  productSearchClass.lblImageDescrip.setText("Vintage Top");
-			  productSearchClass.txtpnProductDescription.setText(display);
-			  break;
-		  case 8:
-			  productSearchClass.displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/sign.jpg")));
-			  display = setDescriptions(number);
-			  productSearchClass.lblImageDescrip.setText("Rustic Sign");
-			  productSearchClass.txtpnProductDescription.setText(display);
-			  break;
-		  case 9:
-			  productSearchClass.displayLabel.setIcon(new ImageIcon(this.getClass().getResource("/images/nintendo.jpg")));
-			  display = setDescriptions(number);
-			  productSearchClass.lblImageDescrip.setText("Nintendo Console");
-			  productSearchClass.txtpnProductDescription.setText(display);
-			  break;
-		
-		}
-
-	}*/
-	
+	}	
 	
 }

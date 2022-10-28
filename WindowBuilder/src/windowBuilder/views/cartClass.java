@@ -1,14 +1,8 @@
-/**
- * 
- * 
- * 
- * 
- */
+
 package windowBuilder.views;
 
 import javax.swing.JPanel;
 import java.util.Arrays;
-
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -27,6 +21,14 @@ import javax.swing.AbstractListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.ImageIcon;
 
+/**
+ * 
+ * 
+ * 
+ * 
+ * @author Ralph Ramirez
+ * @version 2022.10.27 
+ */
 public class cartClass extends JPanel { 
 	
 	private static final long serialVersionUID = 1L;
@@ -227,8 +229,8 @@ public class cartClass extends JPanel {
 				
 				if (! JListCartList.isSelectionEmpty()){ //if the Cart List is not empty, run the code
 				 
-					if ( check == true) { //if the item to be removed from cart was added straight from the 'add to cart' button from productSearchClass (not using the Shopping List)
-					
+					if ( check == true) { //if the item to be removed from cart was added straight from the 'add to cart' button from productSearchClass (not using the Shopping List)		
+						
 						int select = JListCartList.getSelectedIndex(); //sets temp int variable: select to the selected index from JListCartList
 						ToCartQuantityList_items_4.removeElementAt(select); //removes the quantity from ToCartQuantityList_items_4 using temp variable: 'select'
 						int remove = cartPriceArray[select];	//uses select variable as the index for cartPriceArray and assigns to temp variable remove									
