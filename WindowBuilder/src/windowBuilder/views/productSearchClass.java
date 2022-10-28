@@ -27,6 +27,7 @@ import javax.swing.JTextPane;
 import javax.swing.ImageIcon;
 import javax.swing.AbstractListModel;
 import javax.swing.SwingConstants;
+import javax.swing.ListSelectionModel;
 
 /**
  * This class handles the bulk of tasks associated with the user searching for a product.<br>
@@ -518,7 +519,7 @@ public class productSearchClass extends JPanel {
 		);
 		
 		cbProducts = new JComboBox<String>();
-		cbProducts.setMaximumRowCount(10);
+		cbProducts.setMaximumRowCount(20);
 		
 		ToProductSearchList_items_1= new DefaultListModel<Object>();
 		ToCartShopList_items_3 = new DefaultListModel<Object>();
@@ -824,6 +825,8 @@ public class productSearchClass extends JPanel {
 		panel_3.setLayout(gl_panel_3);
 		
 		JListShopList_1 = new JList<Object>();
+		JListShopList_1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		JListShopList_1.setVisibleRowCount(10);
 		JListShopList_1.setToolTipText("");
 		scrollPaneShopList.setViewportView(JListShopList_1);
 		panel_1.setLayout(gl_panel_1);
