@@ -221,11 +221,6 @@ public class productSearchClass extends JPanel {
 	 */
 	private void createEvents() { //method that stores all action events
 		
-		/**
-		 * Mouse listener that will execute code upon one click.<br>
-		 * If one click detected, the selected product will display the correct image and description for that product.<br>
-		 * 
-		 */
 		MouseListener mouseListener = new MouseAdapter() { //mouse action listener to detect when a user clicks on an item in the Shopping List
 		    public void mouseClicked(MouseEvent e) {
 		        if (e.getClickCount() == 1) { //if detects only one click, run the code      	           
@@ -237,16 +232,7 @@ public class productSearchClass extends JPanel {
 		        }	        		        
 		    }
 		};
-		
-		/**
-		 * Adds products from the combobox to the Shopping List if option is selected from radiobutton on top.<br>
-		 * Uses boolean variables to not allow repeat adding of a product from combobox if it has already been added to Shopping List.<br>
-		 * Calls setImageIndex() and loadImages() to display image and desciption but only visible if selected via radio buttons.<br>
-		 * Sets the quantity of each added product to the Shopping List.<br>
-		 * Sets the total price of the Shopping List.<br>
-		 * Adds the product to three different DefaultListModels: ToCartShopList_items_3, ToProductSearchList_items_1, and ToQuantityList_items_4.<br>
-		 * 
-		 */		
+			
 		btnAddToList.addActionListener(new ActionListener() { //button action method that adds item from combobox to Shopping List
 			public void actionPerformed(ActionEvent e) {
 				
@@ -282,12 +268,6 @@ public class productSearchClass extends JPanel {
 			} 
 		});
 		
-		/**
-		 * 
-		 * 
-		 * 
-		 * 
-		 */
 		btnAddCart.addActionListener(new ActionListener() { //button action method that adds product from combobox to Cart
 			public void actionPerformed(ActionEvent e) {
 				
@@ -318,12 +298,6 @@ public class productSearchClass extends JPanel {
 			}
 		});
 		
-		/**
-		 * 
-		 * 
-		 * 
-		 * 
-		 */
 		btnAddOneToList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -355,12 +329,6 @@ public class productSearchClass extends JPanel {
 			}
 		});
 		
-		/**
-		 * 
-		 * 
-		 * 
-		 * 
-		 */
 		btnAddAllToCart.addActionListener(new ActionListener() { //button action method that adds all selected Products from Shopping List to Cart
 			public void actionPerformed(ActionEvent e) {
 				
@@ -408,12 +376,6 @@ public class productSearchClass extends JPanel {
 			}
 		});
 		
-		/**
-		 * 
-		 * 
-		 * 
-		 * 
-		 */
 		btnRemoveOneItem.addActionListener(new ActionListener() { //button action method that removes selected Product from Shopping List
 			public void actionPerformed(ActionEvent e) {
 				
@@ -459,12 +421,6 @@ public class productSearchClass extends JPanel {
 			}
 		});
 		
-		/**
-		 * 
-		 * 
-		 * 
-		 * 
-		 */
 		btnRemoveAll.addActionListener(new ActionListener() { //button action method that removes all selected Products in Shopping List
 			public void actionPerformed(ActionEvent e) {
 				
@@ -489,12 +445,6 @@ public class productSearchClass extends JPanel {
 			}
 		});
 	
-		/**
-		 * 
-		 * 
-		 * 
-		 * 
-		 */
 		rdbtnUseList.addActionListener(new ActionListener() { //radio button action method that toggles on or off the Shopping List 
 			public void actionPerformed(ActionEvent e) {
 				
@@ -513,12 +463,6 @@ public class productSearchClass extends JPanel {
 			}
 		});
 		
-		/**
-		 * 
-		 * 
-		 * 
-		 * 
-		 */
 		rdbtnSeeDescription.addActionListener(new ActionListener() { //radio button action method that togles on or off the Product Desciption area
 			public void actionPerformed(ActionEvent e) {
 				
@@ -532,12 +476,7 @@ public class productSearchClass extends JPanel {
 				
 			}
 		});
-		/**
-		 * 
-		 * 
-		 * 
-		 * 
-		 */
+	
 		rdbtnSeeImage.addActionListener(new ActionListener() { //radio button action method that toggles on or off the 'See Image' area
 			public void actionPerformed(ActionEvent e) {
 				
@@ -555,9 +494,7 @@ public class productSearchClass extends JPanel {
 	}
 	
 	/**
-	 * 
-	 * 
-	 * 
+	 * Contains all initialized (structural) components of the JPanel.<br>
 	 * 
 	 * @throws FileNotFoundException
 	 */

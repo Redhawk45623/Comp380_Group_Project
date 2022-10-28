@@ -50,6 +50,7 @@ public class eCommerceMain extends JFrame {
 	
 	/**
 	 * Launches the application.<br>
+	 * Manages 'Look and Feel' of the running application<br>
 	 * Creates the tabbedPane frame that holds the major panels of the application.<br>
 	 * 
 	 */
@@ -72,14 +73,14 @@ public class eCommerceMain extends JFrame {
 	}
 
 	/**
-	 * Initializes all components of the GUI tabbedPane and creates the working frame.<br>
+	 * Initializes all components of the GUI tabbedPane and creates the working frame with tabbedPane.<br>
 	 * Code largely written by WindowBuilder design.<br>
 	 * Only modified code exists for custom tabs with icons.<br>
 	 *
 	 * @throws FileNotFoundException 
 	 */
 	public eCommerceMain() throws FileNotFoundException { //constructor
-		setTitle("- Comp380 'Think Tank' Group Project: 'Vintage Shop' -");
+		setTitle("- 'Think Tank' Group Project: 'Vintage Shop' -");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 560, 700);

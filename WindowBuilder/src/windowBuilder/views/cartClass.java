@@ -199,13 +199,7 @@ public class cartClass extends JPanel {
 				}
 			}
 		});
-		
-		/**
-		 * 
-		 * 
-		 * 
-		 * 
-		 */
+
 		btnEmptyCart.addActionListener(new ActionListener() { //this action method for button: btnEmptyCart emptys the cart
 			public void actionPerformed(ActionEvent e) {	
 							
@@ -222,12 +216,6 @@ public class cartClass extends JPanel {
 			}
 		});
 		
-		/**
-		 * 
-		 * 
-		 * 
-		 * 
-		 */
 		btnRemoveItem.addActionListener(new ActionListener() { //this action method for button: btnRemoveItem removes a selected product from cart
 			public void actionPerformed(ActionEvent e) {
 				
