@@ -18,7 +18,7 @@ import javax.swing.ImageIcon;
  * features.<br>
  * 
  * @author Ralph Ramirez
- * @version 2022.10.27 
+ * @version 2022.10.28 
  */
 public class productClass {
 	
@@ -34,6 +34,7 @@ public class productClass {
 	 * Calls loadNamePathsAndDescrip() method to load the namePaths[] and nameDisplay[].<br>
 	 * 
 	 * @throws FileNotFoundException
+	 * @wbp.parser.entryPoint
 	 */
 	public productClass() throws FileNotFoundException { //constructor
 		

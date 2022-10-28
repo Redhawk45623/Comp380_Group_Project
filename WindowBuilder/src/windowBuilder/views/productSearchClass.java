@@ -47,7 +47,7 @@ import javax.swing.SwingConstants;
  * and another displays the image of the product with a small title caption.<p>
  * 
  * @author Ralph Ramirez
- * @version 2022.10.27
+ * @version 2022.10.28
  */
 public class productSearchClass extends JPanel {
 	

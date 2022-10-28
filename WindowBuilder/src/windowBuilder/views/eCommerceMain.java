@@ -33,7 +33,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
  * At the release of this version, the 'Checkout' tab and 'Help' tab are still under construction.<br>
  * 
  * @author Ralph Ramirez
- * @version 2022.10.27
+ * @version 2022.10.28
  */
 public class eCommerceMain extends JFrame {
 
