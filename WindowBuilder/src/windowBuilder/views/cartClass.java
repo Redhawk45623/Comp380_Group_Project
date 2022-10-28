@@ -32,7 +32,7 @@ import javax.swing.ImageIcon;
  * a selected product, empty the Cart, or proceed to the checkout area.<p>
  * 
  * @author Ralph Ramirez
- * @version 2022.10.27 
+ * @version 2022.10.28 
  */
 public class cartClass extends JPanel { 
 	
