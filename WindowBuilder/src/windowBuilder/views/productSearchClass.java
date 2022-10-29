@@ -75,7 +75,7 @@ public class productSearchClass extends JPanel {
 	
 	public static int add = 0; //incremented variable used as index for priceArray, used for btnAddList_1 action event 
 	private static int sum; //incremented variable used as index for addPrices() 
-	private static int total; //variable used in the 'btnAddOneToList' method
+	//private static int total; //variable used in the 'btnAddOneToList' method
 	private static int grandtotal; //variable used in the addPrices2() method
 	private static int counter = 0; //incremented variable used as index for addPrices() 
 	public static int quantAdded;
@@ -126,18 +126,17 @@ public class productSearchClass extends JPanel {
 	 * Sets the 'fast' shipping 'Add to Cart' (panel_2) visibility to on upon application load.<br>
 	 * Turns off visibility to panel_3 (display image area) and panel_4 (product description) upon application load.<br>
 	 * 
+	 *@throws FileNotFoundException
 	 */
 	public productSearchClass() throws FileNotFoundException{ //constructor
 		
 		initComponents(); //calls initComponents() 
 		createEvents(); //calls createEvents();				       	
-		loadProductCombobox();	//calls loadCombobox()
-		
+		loadProductCombobox();	//calls loadCombobox()		
 		panel_1.setVisible(false); //hides all elements in panel 1 (Shopping List option)
 		panel_2.setVisible(true); //reveals all elemnts in panel_2 (btnAddCart button and associated label)
 		panel_3.setVisible(false); //hides the elements in panel_3 (display image area)
-		panel_4.setVisible(false); //hides the elements in panel_4 (product description area)
-		
+		panel_4.setVisible(false); //hides the elements in panel_4 (product description area)		
 	}
 		
 	/**
@@ -156,8 +155,7 @@ public class productSearchClass extends JPanel {
 		sum = 0; //sets the variable initially to 0
 		for(int i = 0; i < priceArray.length; i++){ //loop to add up the total price that is in priceArray
 			sum += priceArray[i]; //adds up the priceArray[] and stores it in the variable sum
-		}
-		
+		}		
 	}
 	
 	/**
@@ -177,6 +175,19 @@ public class productSearchClass extends JPanel {
 	}
 	
 	/**
+	 * Adjusts the Shopping List total when a product has a quantity greater than 1.<br>
+	 * 
+	 * @param adjust   index used to track selected item for price removal
+	 */
+	public static void adjustListTotal(int adjust) { //method that is used to adjust the Shopping List Total when an item is removed
+		
+		int selectedPrice = priceArray[adjust]; //assigns int varaiable: 'selectedPrice' to the element found at 'priceArray[adjust]'
+		int total = sum - selectedPrice; //adjusts 'newTotal' by subraction		
+		sum = total; //sets 'sum' equal to 'newTotal'
+
+	}
+	
+	/**
 	 * Loads the combobox with products using three arrays (simulated database).<br>
 	 * 
 	 */
@@ -185,8 +196,7 @@ public class productSearchClass extends JPanel {
 		for(int i = 0; i < products.length; i++) { //for-loop
 			String line = productIDs[i].toString(); //pulls Object element from productIDs[] and converts to String variable line
 			String line2 = products[i].toString(); //pulls Object element from products[] and converts to String variable line2
-			cbProducts.addItem(line + " - " + line2 + " - " + "Price: " + "$" + prices[i] + ".00"); //loads the JComboBox cbProducts_1 with Products IDs, Product Names, and Prices
-			
+			cbProducts.addItem(line + " - " + line2 + " - " + "Price: " + "$" + prices[i] + ".00"); //loads the JComboBox cbProducts_1 with Products IDs, Product Names, and Prices			
 		}		
 	}
 	
@@ -198,8 +208,7 @@ public class productSearchClass extends JPanel {
 		
 		textAreaTotal_1.setText(""); //clears text from textAreaTotal
 		String z = Integer.toString(sum); //converts integer to String needed to display in textAreaTotal box
-		textAreaTotal_1.append("$" + z + ".00"); //displays the current total price from the shopping list in the textAreaTotal box
-		
+		textAreaTotal_1.append("$" + z + ".00"); //displays the current total price from the shopping list in the textAreaTotal box		
 	}
 	
 	/**
@@ -240,8 +249,7 @@ public class productSearchClass extends JPanel {
 				if (JListShopList_1.getModel().getSize() > 7) {
 					JOptionPane.showMessageDialog(null, "Maximum products in Shopping List!", "Alert", JOptionPane.ERROR_MESSAGE);
 					checkMax = true;
-				}
-				
+				}			
 				checkRepeats = false; //sets the boolean to false when button is pressed. This is used to check if the selected product has already been added to Shopping List
 				addedOne = true; //sets the boolean variable:'addedOne' to true.  This is to establish at least one product has been added to the Shopping List 				
 				int cbIndex = cbProducts.getSelectedIndex(); //creates variable send to pass to addPrices() method from cbProducts_1					
@@ -282,14 +290,12 @@ public class productSearchClass extends JPanel {
 				int index = cbProducts.getSelectedIndex(); //creates variable index to pass to addPrices() method.  Used to get the selected product from combobox			
 				String verify = cbProducts.getItemAt(index); //sets variable: 'verify' to the selected product usine variable: 'index'
 				
-				for (int i=0; i<cartClass.JListCartList.getModel().getSize(); i++) { //for loop that checks the cartClass.CartList_items_2 for a product (variable: 'verify') already added to the Cart
-					
+				for (int i=0; i<cartClass.JListCartList.getModel().getSize(); i++) { //for loop that checks the cartClass.CartList_items_2 for a product (variable: 'verify') already added to the Cart					
 					if (cartClass.CartList_items_2.get(i) == verify) { //if statement that looks for a product already added to the Cart						
 						checkCartRepeats = true; //if there is already a product a user is attempting to add again, set the boolean to true
 						JOptionPane.showMessageDialog(null, "Already Added to Cart! Add quanity from Cart tab...", "Alert", JOptionPane.ERROR_MESSAGE); //display pop-up message						
 					}								
-				}
-				
+				}			
 				if (checkCartRepeats == false) { //if the boolean is false, run the code
 					cartClass.addCartprice(index); //calls the	addCartprice() from cartClass with index variable as parameter			
 					cartClass.setCartPriceTotal(); //calls the setCartPriceTotal() from cartClass
@@ -307,8 +313,7 @@ public class productSearchClass extends JPanel {
 		btnAddOneToList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if (! JListShopList_1.isSelectionEmpty()){ //if an item is selected in the Shopping List, then run the following code
-					
+				if (! JListShopList_1.isSelectionEmpty()){ //if an item is selected in the Shopping List, then run the following code					
 					int x = 0;		
 					int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates a temp array that stores the selected index in the Shopping List. Will only be one item in array			    
 					int image = selectedIx[x]; //assigns temp variable image to the element at index 0 from temp array selectedIx
@@ -316,7 +321,7 @@ public class productSearchClass extends JPanel {
 					image = productObject.trackImages[image];	//assigns the temp variable 'image' the index stored at trackImages[] using the index: 'image' established from the code before				
 					Object productPrice = prices[image]; //
 					
-					total = Integer.parseInt(productPrice.toString()); //converts the int variable: 'total' to an int from the Object variable: 'productPrice'	
+					int total = Integer.parseInt(productPrice.toString()); //converts the int variable: 'total' to an int from the Object variable: 'productPrice'	
 					addPrices2(total); //calls addPrices2() to add up the total in Shopping List after a quantity has been added
 					setPriceTotal(); //calls setPriceTotal method	
 				
@@ -326,11 +331,9 @@ public class productSearchClass extends JPanel {
 					int addedUp = convertedNumber2+ 1; //adds the price of convertedNumber2	+ 1		
 					ToQuantityList_items_4.setElementAt(addedUp, index); //sets the quantity displayed in quantity box for selected item at the right spot
 					JOptionPane.showMessageDialog(null, "Added one more -> " + products[image]); //pop-up message displaying the product which the user added a quantity
-				}
-				
+				}				
 				else { //if the button is pushed and nothing is selected in the Shopping List, display the pop-up message
-					JOptionPane.showMessageDialog(null, "Please select an item to add!", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message
-		
+					JOptionPane.showMessageDialog(null, "Please select an item to add!", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message		
 				}
 			}
 		});
@@ -343,8 +346,7 @@ public class productSearchClass extends JPanel {
 				int begn = 0; //sets the beginning point of the selection value
 				int end = JListShopList_1.getModel().getSize() - 1; //sets the end point of the selection value
 				if (end >= 0) { //loop to select all items in the shopping using begn and end variables
-					JListShopList_1.setSelectionInterval(begn, end); //selects all items in the Shopping List (JListShopList_1) at once
-					
+					JListShopList_1.setSelectionInterval(begn, end); //selects all items in the Shopping List (JListShopList_1) at once					
 				}
 				
 				int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates an array that stores the selected items in the Shopping List				
@@ -354,8 +356,7 @@ public class productSearchClass extends JPanel {
 					
 						int temp = prices2[i]; //sets variable temp for each element in prices[]
 						cartClass.addCartprice(temp); //calls addCartprice() from cartClass passing u variable as a parameter
-						cartClass.setCartPriceTotal(); //calls setCartPriceTotal() from cartClass		
-					
+						cartClass.setCartPriceTotal(); //calls setCartPriceTotal() from cartClass							
 					}
 					
 					quantAdded = cartClass.sum + grandtotal; //sets temp variable: 'quantAdded' to the total of 'cartClass.sum' and 'grandtotal'
@@ -375,10 +376,8 @@ public class productSearchClass extends JPanel {
 					
 				}
 				else { //if there is nothing in the Shopping List, then display pop-up message
-					JOptionPane.showMessageDialog(null, "Please add products to the Shopping List first!", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message
-					
-				}
-				
+					JOptionPane.showMessageDialog(null, "Please add products to the Shopping List first!", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message					
+				}				
 			}
 		});
 		
@@ -393,38 +392,66 @@ public class productSearchClass extends JPanel {
 					int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates a temp array that stores the selected index in the Shopping List. Will only be one item in array			    
 					int image = selectedIx[x]; //assigns temp variable image to the element at index 0 from temp array selectedIx					
 					int productPrice = priceArray[image]; //sets int variable:'productPrice' to the price found at priceArray[image]
-						
-					int w = productObject.trackImages[image]; //sets int variable: 'w' to the index found in 'trackImages[]'
-					productObject.removeImageIndex(w); //calls the removeImageIndex() from productClass using parameter 'w'
-					txtpnProductDescription.setText(null); //resets the description area
-					displayLabel.setIcon(null); //resets the display image area
-										
-					ToCartShopList_items_3.removeElementAt(image);
-					ToProductSearchList_items_1.removeElementAt(image); //removes the Product from Shopping List at index specified by variable: 'index'
-					ToQuantityList_items_4.removeElementAt(image); //removes the quantity amounf from quantity box at index specified by variable: 'index'
+
 					
-					productObject.track--; //decrements the variable: 'track' that is used in 'productObject.trackImages[]' to account for the product removed
-				
-					int[] cartPriceArray2 = new int[priceArray.length -1]; //initializes the temp cartPriceArray2 to the length of cartPriceArray.length -1]
-					for(int i = 0, k = 0; i < priceArray.length; i++){ //loop each element of cartPriceArray
-						if(priceArray[i] != productPrice){ //if statement; if cartPriceArray at index i does not equal parameter x
-							cartPriceArray2[k] = priceArray[i];	//if statement is true, then load cartPriceArray2 at index k with cartPriceArray at index i
-							k++; //increment k
+					////working on below////////
+					
+					Object quantity = ToQuantityList_items_4.get(image);
+					int quantity2 = Integer.parseInt(quantity.toString());
+					
+					if (quantity2 == 1) {
+					
+						int w = productObject.trackImages[image]; //sets int variable: 'w' to the index found in 'trackImages[]'
+						productObject.removeImageIndex(w); //calls the removeImageIndex() from productClass using parameter 'w'
+						txtpnProductDescription.setText(null); //resets the description area
+						displayLabel.setIcon(null); //resets the display image area										
+						
+						ToCartShopList_items_3.removeElementAt(image);
+						ToProductSearchList_items_1.removeElementAt(image); //removes the Product from Shopping List at index specified by variable: 'index'
+						ToQuantityList_items_4.removeElementAt(image); //removes the quantity amounf from quantity box at index specified by variable: 'index'
+						
+						productObject.track--; //decrements the variable: 'track' that is used in 'productObject.trackImages[]' to account for the product removed
+					
+						int[] cartPriceArray2 = new int[priceArray.length -1]; //initializes the temp cartPriceArray2 to the length of cartPriceArray.length -1]
+						for(int i = 0, k = 0; i < priceArray.length; i++){ //loop each element of cartPriceArray
+							if(priceArray[i] != productPrice){ //if statement; if cartPriceArray at index i does not equal parameter x
+								cartPriceArray2[k] = priceArray[i];	//if statement is true, then load cartPriceArray2 at index k with cartPriceArray at index i
+								k++; //increment k
+							}						
 						}
+						priceArray = cartPriceArray2; //after for loop, set cartPriceArray[] to temp cartPriceArray2[]									
+						sum = sum - productPrice; //set the variable: 'sum' to sum - the price of the selected item that was removed				
+						textAreaTotal_1.setText("$" + sum + ".00"); //display the new amount of 'sum in 'textAreaTotal_1'
+						
+						if (ToProductSearchList_items_1.isEmpty()) { //if the Shopping List is empty, run the code					
+							textAreaTotal_1.setText("$0.00"); //this resets the textAreaTotal box back to empty						
+						}
+					
+					}
+					else { //if the quantity of the product to be removed is greater than 1, run the code
+						
+						Object evaluatedValue = ToQuantityList_items_4.getElementAt(image); //assign Object: 'evaluatedValue' to the element using index variable: 'image'				
+						int valueInt2 = Integer.parseInt(evaluatedValue.toString()); //convert Object to int
+						valueInt2 = valueInt2 - 1; //subract 'valueInt2' by 1 
+						ToQuantityList_items_4.set( image, valueInt2); //adjust the quantity using index 'image' by inserting 'valueInt2'					
+						adjustListTotal(image); //call the adjustListTotal() using the parameter: 'image'
+						setPriceTotal(); //adjust the Shopping List price total
 						
 					}
-					priceArray = cartPriceArray2; //after for loop, set cartPriceArray[] to temp cartPriceArray2[]									
-					sum = sum - productPrice; //set the variable: 'sum' to sum - the price of the selected item that was removed				
-					textAreaTotal_1.setText("$" + sum + ".00"); //display the new amount of 'sum in 'textAreaTotal_1'
 					
-					if (ToProductSearchList_items_1.isEmpty()) { //if the Shopping List is empty, run the code					
-						textAreaTotal_1.setText("$0.00"); //this resets the textAreaTotal box back to empty						
-					}					
-					//JOptionPane.showMessageDialog(null,sum);					
+					if (sum == 0) { //if all products have been removed from the Shopping List
+						
+						addedOne = false; //resets the boolean variable: 'addedOne' to false. this establishes that no product has been added to the Shopping List
+						ToProductSearchList_items_1.removeAllElements(); //this clears all elements from DefaultListModel -> ToProductSearchList_items_1
+						priceArray = new int[50]; //this resets the priceArray[]
+						grandtotal = 0;
+						counter = 0;
+						
+					}
+					
 				}
 				else { //if the Shopping List is empty or if an item in the Shopping List is not selected, display the pop-up
-					JOptionPane.showMessageDialog(null, "Please select an item to remove!", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message
-					
+					JOptionPane.showMessageDialog(null, "Please select an item to remove!", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message				
 				}
 			}
 		});
@@ -447,8 +474,7 @@ public class productSearchClass extends JPanel {
 					
 				}
 				else { //if there is nothing added to the Shopping List yet...
-					JOptionPane.showMessageDialog(null, "Nothing in Shopping List to remove!", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message
-					
+					JOptionPane.showMessageDialog(null, "Nothing in Shopping List to remove!", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message					
 				}
 			}
 		});
@@ -466,8 +492,7 @@ public class productSearchClass extends JPanel {
 					panel_1.setVisible(false); //turn off panel_1 (Shopping List option)
 					check2 = false;	 //set the check2 variable to false (off)				
 					panel_2.setVisible(true); //turn on panel_2 (btnAddCart button and associated label)
-				}				
-				
+				}								
 			}
 		});
 		
@@ -480,8 +505,7 @@ public class productSearchClass extends JPanel {
 				}else { //if check3 is true (on)
 					panel_4.setVisible(false); //turn off panel_4 (product description area)
 					check3 = false;	 //set the check3 variable to false (off)									
-				}
-				
+				}			
 			}
 		});
 	
@@ -494,11 +518,9 @@ public class productSearchClass extends JPanel {
 				}else {//if check is true (on)
 					panel_3.setVisible(false); //turn off panel_3 (display image area)
 					check = false; //set the check variable to false (off)										
-				}
-				
+				}				
 			}
-		});
-		
+		});		
 	}
 	
 	/**
@@ -654,64 +676,61 @@ public class productSearchClass extends JPanel {
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(0)
+					.addGap(14)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(14)
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
 								.addGroup(gl_panel_1.createSequentialGroup()
 									.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-										.addGroup(gl_panel_1.createSequentialGroup()
-											.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
-												.addComponent(lblAddOneToList)
-												.addComponent(lblAddAllToList)
-												.addComponent(lblRemoveAllFromList)
-												.addComponent(lblNewLabel_2))
-											.addGap(4))
-										.addComponent(rdbtnSeeDescription)
-										.addGroup(gl_panel_1.createSequentialGroup()
-											.addComponent(rdbtnSeeImage)
-											.addGap(35)))
+										.addComponent(lblAddOneToList)
+										.addComponent(lblAddAllToList)
+										.addComponent(lblRemoveAllFromList)
+										.addComponent(lblNewLabel_2))
+									.addGap(4))
+								.addComponent(rdbtnSeeDescription)
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addComponent(rdbtnSeeImage)
+									.addGap(35)))
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel_1.createSequentialGroup()
+									.addGap(2)
 									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 										.addGroup(gl_panel_1.createSequentialGroup()
-											.addGap(2)
+											.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+												.addComponent(btnRemoveOneItem)
+												.addComponent(btnRemoveAll, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE))
+											.addGap(18)
+											.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE))
+										.addGroup(gl_panel_1.createSequentialGroup()
+											.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+												.addComponent(btnAddAllToCart)
+												.addComponent(btnAddOneToList))
+											.addPreferredGap(ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
 											.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 												.addGroup(gl_panel_1.createSequentialGroup()
-													.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-														.addComponent(btnRemoveOneItem)
-														.addComponent(btnRemoveAll, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE))
-													.addGap(18)
-													.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE))
-												.addGroup(gl_panel_1.createSequentialGroup()
-													.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-														.addComponent(btnAddAllToCart)
-														.addComponent(btnAddOneToList))
-													.addPreferredGap(ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-													.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-														.addGroup(gl_panel_1.createSequentialGroup()
-															.addGap(12)
-															.addComponent(lblNewLabel)
-															.addPreferredGap(ComponentPlacement.RELATED)
-															.addComponent(textAreaTotal_1, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
-														.addComponent(lblNoShipNotaxes, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE))
-													.addGap(11))))
-										.addGroup(gl_panel_1.createSequentialGroup()
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(scrollPaneShopList, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-											.addPreferredGap(ComponentPlacement.UNRELATED)
-											.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
-												.addComponent(lblQuantity, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(scrollPaneQuantity, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)))))
+													.addGap(12)
+													.addComponent(lblNewLabel)
+													.addPreferredGap(ComponentPlacement.RELATED)
+													.addComponent(textAreaTotal_1, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
+												.addComponent(lblNoShipNotaxes, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE))
+											.addGap(11))))
 								.addGroup(gl_panel_1.createSequentialGroup()
-									.addComponent(lblAdd2List)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(btnAddToList, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+									.addComponent(scrollPaneShopList, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 									.addPreferredGap(ComponentPlacement.UNRELATED)
-									.addComponent(lblNewLabel_1))))
+									.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING, false)
+										.addComponent(lblQuantity, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(scrollPaneQuantity, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)))))
 						.addGroup(gl_panel_1.createSequentialGroup()
+							.addComponent(lblAdd2List)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 245, GroupLayout.PREFERRED_SIZE)))
+							.addComponent(btnAddToList, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(lblNewLabel_1)))
 					.addGap(21))
+				.addGroup(gl_panel_1.createSequentialGroup()
+					.addContainerGap()
+					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 259, GroupLayout.PREFERRED_SIZE))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -755,14 +774,14 @@ public class productSearchClass extends JPanel {
 										.addComponent(btnRemoveAll)
 										.addComponent(lblRemoveAllFromList))
 									.addGap(12)))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 176, GroupLayout.PREFERRED_SIZE))
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 						.addGroup(gl_panel_1.createSequentialGroup()
 							.addGap(4)
 							.addComponent(lblNoShipNotaxes, GroupLayout.PREFERRED_SIZE, 13, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(33, Short.MAX_VALUE))
+					.addContainerGap(33, GroupLayout.PREFERRED_SIZE))
 		);
 		
 		JListQuantity = new JList<Object>();
@@ -787,14 +806,14 @@ public class productSearchClass extends JPanel {
 		gl_panel_4.setHorizontalGroup(
 			gl_panel_4.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_4.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel_4.createParallelGroup(Alignment.TRAILING)
+					.addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_4.createSequentialGroup()
-							.addComponent(txtpnProductDescription, GroupLayout.DEFAULT_SIZE, 233, Short.MAX_VALUE)
-							.addContainerGap())
+							.addContainerGap()
+							.addComponent(txtpnProductDescription, GroupLayout.PREFERRED_SIZE, 239, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_panel_4.createSequentialGroup()
-							.addComponent(lblProductDescrip, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)
-							.addGap(67))))
+							.addGap(77)
+							.addComponent(lblProductDescrip, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(14, Short.MAX_VALUE))
 		);
 		gl_panel_4.setVerticalGroup(
 			gl_panel_4.createParallelGroup(Alignment.LEADING)

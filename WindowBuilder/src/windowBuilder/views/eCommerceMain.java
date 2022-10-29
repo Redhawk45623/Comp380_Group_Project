@@ -34,7 +34,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
  * 
  * @author Ralph Ramirez
  * @version 2022.10.28
- */
+ */ 
 public class eCommerceMain extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -148,7 +148,7 @@ public class eCommerceMain extends JFrame {
 		
 		tabbedPane.addTab("View Cart", cartIcon, cart_panel, "Click to view Cart"); //View Cart tab
 		
-		JPanel checkout_panel = new JPanel(); ///default when TabbedPane was create.....change this like the 'Product Search' and 'View Cart' tabs above
+		JPanel checkout_panel = new JPanel(); ///default when TabbedPane was created.....change this like the 'Product Search' and 'View Cart' tabs above
 		tabbedPane.addTab("Checkout", checkoutIcon, checkout_panel, null);
 		
 		JPanel help_panel = new JPanel();

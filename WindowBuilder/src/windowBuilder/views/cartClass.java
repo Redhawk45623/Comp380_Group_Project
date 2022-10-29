@@ -248,7 +248,7 @@ public class cartClass extends JPanel {
 							ToCartQuantityList_items_4.set( select2, valueInt2); //adjust the quantity using index 'select2' by inserting 'valueInt2'					
 							adjustCartTotal(select2); //call the adjustCartTotal() using the parameter: 'select2'
 							setCartPriceTotal(); //adjust the cart price total
-							//JOptionPane.showMessageDialog(null, f);
+							//JOptionPane.showMessageDialog(null, select2);
 							
 						}	
 							
