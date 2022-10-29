@@ -27,7 +27,6 @@ import javax.swing.JTextPane;
 import javax.swing.ImageIcon;
 import javax.swing.AbstractListModel;
 import javax.swing.SwingConstants;
-import javax.swing.ListSelectionModel;
 
 /**
  * This class handles the bulk of tasks associated with the user searching for a product.<br>
