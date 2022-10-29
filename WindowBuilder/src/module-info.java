@@ -2,7 +2,7 @@
  * 
  */
 /**
- * @author Zeina
+ * @author Ralph Ramirez
  *
  */
 module WindowBuilder {

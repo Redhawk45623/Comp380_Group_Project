@@ -1,0 +1,19 @@
+Name: Vintage TV
+Name: Vintage Camera
+Name: Atari Games
+Name: 1980s Boombox
+Name: Rotary Phone
+Name: Cassette Tape
+Name: Film Camera
+Name: Vintage Top
+Name: Rustic Sign
+Name: Nintendo ConsoleName: 8mm Camera
+Name: Retro Clock
+Name: BarberShop Box
+Name: Clapperboard
+Name: Polaroid Camera
+Name: Classic Radio
+Name: Retro TV
+Name: Slide Projector
+Name: Typewriter
+Name: Necklace Watch
