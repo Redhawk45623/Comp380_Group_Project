@@ -669,7 +669,7 @@ public class productSearchClass extends JPanel {
 		lblNoShipNotaxes = new JLabel("*Total does not include S&H or taxes");
 		lblNoShipNotaxes.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
 		
-		JLabel lblNewLabel_1 = new JLabel("*Maximum 8 Products");
+		JLabel lblNewLabel_1 = new JLabel("*Maximum 8 Products (for now)");
 		lblNewLabel_1.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
 	
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
@@ -725,7 +725,7 @@ public class productSearchClass extends JPanel {
 							.addComponent(lblAdd2List)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnAddToList, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblNewLabel_1)))
 					.addGap(21))
 				.addGroup(gl_panel_1.createSequentialGroup()

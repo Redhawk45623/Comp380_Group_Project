@@ -238,7 +238,7 @@ public class cartClass extends JPanel {
 						int select2 = JListCartList.getSelectedIndex(); //get the selected index from the Cart list and assign to variable: 'select2'
 						Object value = ToCartQuantityList_items_4.getElementAt(select2); //use the variable: 'select2' as an index to get the element from 'ToCartQuantityList_items_4' and assign that to Object: 'value' 
 						int valueInt = Integer.parseInt(value.toString()); //convert the Object: 'value' to the int variable: 'valueInt'
-						//JOptionPane.showMessageDialog(null, valueInt);
+						JOptionPane.showMessageDialog(null, valueInt);
 						
 						if ( valueInt > 1) { //if 'valueInt' is greater than 1, run the code
 							
