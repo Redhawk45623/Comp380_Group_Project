@@ -75,10 +75,10 @@ public class productSearchClass extends JPanel {
 	
 	public static int add = 0; //incremented variable used as index for priceArray, used for btnAddList_1 action event 
 	private static int sum; //incremented variable used as index for addPrices() 
-	//private static int total; //variable used in the 'btnAddOneToList' method
 	private static int grandtotal; //variable used in the addPrices2() method
 	private static int counter = 0; //incremented variable used as index for addPrices() 
 	public static int quantAdded;
+	private static int increment = 0;
 	
 	private JPanel panel_1; //panel that is used to hold all elements for the Shopping List option
 	private JPanel panel_2; //panel that is used to hold the btnAddCart button and lblAdd2Cart label
@@ -288,12 +288,12 @@ public class productSearchClass extends JPanel {
 				checkCartRepeats = false; //always sets the boolean to false when button is pressed				
 				cartClass.check = true; //always sets the boolean to true when button is pressed
 				int index = cbProducts.getSelectedIndex(); //creates variable index to pass to addPrices() method.  Used to get the selected product from combobox			
-				String verify = cbProducts.getItemAt(index); //sets variable: 'verify' to the selected product usine variable: 'index'
+				String verify = cbProducts.getItemAt(index); //sets variable: 'verify' to the selected product using variable: 'index'
 				
 				for (int i=0; i<cartClass.JListCartList.getModel().getSize(); i++) { //for loop that checks the cartClass.CartList_items_2 for a product (variable: 'verify') already added to the Cart					
 					if (cartClass.CartList_items_2.get(i) == verify) { //if statement that looks for a product already added to the Cart						
 						checkCartRepeats = true; //if there is already a product a user is attempting to add again, set the boolean to true
-						JOptionPane.showMessageDialog(null, "Already Added to Cart! Add quanity from Cart tab...", "Alert", JOptionPane.ERROR_MESSAGE); //display pop-up message						
+						JOptionPane.showMessageDialog(null, "Already Added to Cart! Add quantity from Cart tab...", "Alert", JOptionPane.ERROR_MESSAGE); //display pop-up message						
 					}								
 				}			
 				if (checkCartRepeats == false) { //if the boolean is false, run the code
@@ -302,6 +302,11 @@ public class productSearchClass extends JPanel {
 					
 					cartClass.ToCartQuantityList_items_4.addElement("1"); //adds a 1 to the DefaultListModel: 'ToCartQuantityList_items_4' in the cartClass
 					cartClass.JListCartQuantity.setModel(cartClass.ToCartQuantityList_items_4); //sets the model (cartClass quantity box)
+					
+					
+					cartClass.prices[increment] = prices[index];
+					increment++;
+					
 					
 					cartClass.CartList_items_2.addElement(cbProducts.getSelectedItem()); //adds the product stored in combobox (cbProducts_1) to DefaultListModel -> CartList_items_2
 					cartClass.JListCartList.setModel(cartClass.CartList_items_2); //places the items in the cart (cartClass.JListCartList) from CartList_items_2
