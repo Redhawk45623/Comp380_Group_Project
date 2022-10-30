@@ -265,9 +265,12 @@ public class productSearchClass extends JPanel {
 				
 				if (checkRepeats == false & checkMax == false) {
 					
+					cartClass.prices[increment] = prices[cbIndex];
+					increment++;
+					
 					productObject.setImageIndex(cbIndex); //uses cbIndex variable as a parameter to call setImageIndex().  This tracks the order of indexes to be used for the description and image display						
 					productObject.loadImages(cbIndex); //calls the loadImages() using 'cbIndex' as a parameter			
-					prices2[add] = cbIndex; //used to track prices
+					prices2[add] = cbIndex; //used to track price index
 					add++; //increments the add variable for prices[] for the next use				
 					addPrices(cbIndex); //calls addPrices method				
 					setPriceTotal(); //calls setPriceTotal method							
@@ -322,7 +325,7 @@ public class productSearchClass extends JPanel {
 					int x = 0;		
 					int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates a temp array that stores the selected index in the Shopping List. Will only be one item in array			    
 					int image = selectedIx[x]; //assigns temp variable image to the element at index 0 from temp array selectedIx
-					//Object product = JListShopList_1.getSelectedValue(); //gets the selected product info and sets it to the Object variable: product. Used in the pop-up message
+					
 					image = productObject.trackImages[image];	//assigns the temp variable 'image' the index stored at trackImages[] using the index: 'image' established from the code before				
 					Object productPrice = prices[image]; //
 					
