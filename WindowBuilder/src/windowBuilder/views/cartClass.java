@@ -215,9 +215,9 @@ public class cartClass extends JPanel {
 
 		}
 		
-		for(int i = 0; i < cartPriceArray.length; i++) {						
-			System.out.println("Removed Array (fast shop method): " + cartPriceArray[i]);					
-		}
+//		for(int i = 0; i < cartPriceArray.length; i++) { //for-loop used for de-bugging						
+//			System.out.println("Removed Array (fast shop method): " + cartPriceArray[i]);					
+//		}
 		
 	}
 	
@@ -258,9 +258,9 @@ public class cartClass extends JPanel {
 		
 		}
 		
-		for(int i = 0; i < cartPriceArray.length; i++) {						
-			System.out.println("Removed Array (Shop List method): " + cartPriceArray[i]);					
-		}
+//		for(int i = 0; i < cartPriceArray.length; i++) { //for-loop used for de-bugging							
+//			System.out.println("Removed Array (Shop List method): " + cartPriceArray[i]);					
+//		}
 	}
 	
 	/**

@@ -74,16 +74,15 @@ public class productSearchClass extends JPanel {
 	private boolean check = false; // boolean variable that controls visibility to see the product image (rdbtnSeeImage)
 	private boolean check2 = false; // boolean variable that controls visibility to see and use the the Shpping List (rdbtnUseList)
 	private boolean check3 = false; // boolean variable that controls visibility to see the product description (rdbtnSeeDescription)
-	private static boolean addedOne = false;
-	private boolean checkRepeats  = false;
-	private boolean checkCartRepeats = false;
-	private boolean checkMax = false;
+	private static boolean addedOne = false; //boolean to establish AT LEAST ONE product has been added to the Shopping List or not
+	private boolean checkRepeats  = false;  //boolean used to check if the selected product has ALREADY BEEN added to Shopping List
+	private boolean checkCartRepeats = false; //boolean used to check if the product is already in the Cart, fast shop method (no Shopping List)
+	private boolean checkMax = false; //temp...will be deleted later after debugging
 	
 	public static int add = 0; //incremented variable used as index for priceArray, used for btnAddList_1 action event 
-	private static int sum; //	
+	private static int sum; // the sum total of the Shopping List
 	private static int counter = 0; //incremented variable used as index for addPrices() 
-	public static int quantAdded;
-	private static int increment = 0;
+	private static int increment = 0; //incremented variable used for trackPrices[] in this class and in cartClass.trackPrices[] 
 	
 	private JPanel panel_1; //panel that is used to hold all elements for the Shopping List option
 	private JPanel panel_2; //panel that is used to hold the btnAddCart button and lblAdd2Cart label
@@ -124,9 +123,9 @@ public class productSearchClass extends JPanel {
 	productClass productObject = new productClass(); //instantiates an object of productClass() called 'productObject'
 	
 	/**
-	 * Calls initComponents() which is a method that contains all initialized (structural) components of the JPanel.<br>
-	 * Calls createEvents() which is a method that holds all 'action' events (listeners).<br>
-	 * Calls loadProductCombobox() which is a method that loads the combobox with products.<br>
+	 * Calls initComponents() which is a method that contains all initialized (structural) GUI components of the JPanel.<br>
+	 * Calls createEvents() which is a method that holds all 'action' events (listeners) in the GUI.<br>
+	 * Calls loadProductCombobox() which is a method that loads the combobox with products from the (simulated) database.<br>
 	 * Sets the Shopping List (panel_1) visibility to off upon application load.<br>
 	 * Sets the 'fast' shipping 'Add to Cart' (panel_2) visibility to on upon application load.<br>
 	 * Turns off visibility to panel_3 (display image area) and panel_4 (product description) upon application load.<br>
@@ -147,7 +146,7 @@ public class productSearchClass extends JPanel {
 	/**
 	 * Adds the prices of the products added to the Shopping List from combobox.<br>
 	 * Finds the price of the selected product from prices[] and adds it to priceArray[].<br>
-	 * Manages a field variable: 'sum' that is used in setPriceTotal() method.<br>
+	 * Manages a field variable: 'sum' that is the total amount of all prices in priceArray[].<br>
 	 * 
 	 * @param index   used as the index for prices[]
 	 */
@@ -164,11 +163,11 @@ public class productSearchClass extends JPanel {
 	}
 	
 	/**
+	 * Method that adds a quantity of one for the selected product in the Shopping List.<br>
+	 * Uses the array trackPrices[] with passed parameter as the index to know how much to add to the priceArray[].<br>
+	 * Updates the variable 'sum' to the new overall total of all product prices in priceArray[].<br>
 	 * 
-	 * 
-	 * 
-	 * 
-	 * @param index
+	 * @param index   used to set index for both trackPrices[] and priceArray[]
 	 */
 	public void addOne(int index) {
 		
@@ -186,11 +185,11 @@ public class productSearchClass extends JPanel {
 	}
 	
 	/**
+	 * Method that removes a quantity of one for the selected product in the Shopping List.<br>
+	 * Uses the array trackPrices[] with passed parameter as the index to know how much to remove from the priceArray[].<br>
+	 * Updates the variable 'sum' to the new overall total of all product prices in priceArray[].<br>
 	 * 
-	 * 
-	 * 
-	 * 
-	 * @param index
+	 * @param index   used to set index for both trackPrices[] and priceArray[]
 	 */
 	public void removeOne(int index) {
 		
@@ -208,13 +207,20 @@ public class productSearchClass extends JPanel {
 	}
 	
 	/**
+	 * Adjusts the Shopping List prices after an item that is selected to remove only has a quantity of 1.<br>
+	 * Finds the price (using the passed parameter 'element') in the priceArray[] and builds a temp<br>
+	 * array without that price in it.<p>
 	 * 
+	 * Resets priceArray[] to the newly built temp array.<br>
+	 * Rebuilds trackPrices[] to match priceArray[].<br>
+	 * Sets the variable 'sum' to the new, total price in the Cart.<p>
 	 * 
+	 * Checks to see (after the selected product is removed) if the Shopping List is completely empty.<br>
+	 * If the Shopping List is empty, resets crucial arrays, variables, and GUI elements.<br>
 	 * 
-	 * 
-	 * @param element
+	 * @param element   the price of the selected product to be removed from the Shopping List
 	 */
-	public static void rearrangeCart(int element) { //method that rearranges the cartPriceArray when an item is removed
+	public static void rearrangeList(int element) { //method that rearranges the cartPriceArray when an item is removed
 		
 		int[] tempArray = new int[priceArray.length -1]; //initializes the temp cartPriceArray2 to the length of cartPriceArray.length -1]
 		for(int i = 0, k = 0; i < priceArray.length; i++){ //loop each element of cartPriceArray
@@ -225,7 +231,7 @@ public class productSearchClass extends JPanel {
 		}
 		priceArray = tempArray; //after for loop, set cartPriceArray[] to temp cartPriceArray2[]	
 		
-		for (int i = 0; i < priceArray.length; i++) {      //for-loop to match the priceArray[] to trackPrices[]
+		for (int i = 0; i < priceArray.length; i++) {  //for-loop to match the priceArray[] to trackPrices[]
             trackPrices[i] = String.valueOf(priceArray[i]);
         }
 		 
@@ -285,6 +291,28 @@ public class productSearchClass extends JPanel {
 	    for (int index = 0; index < from.getSize(); index++) {
 	        to.addElement(from.getElementAt(index));
 	    }
+	}
+	
+	/**
+	 * Method used to reset all crucial GUI elements, arrays, and variables after the 'Remove All' button is pressed.<br>
+	 * 
+	 */
+	public void removeAll() {
+		
+		txtpnProductDescription.setText(null); //clears out the description text area
+		displayLabel.setIcon(null); //clears out the product image from panel_03					
+		ToQuantityList_items_4.removeAllElements(); //clears out the DefaultListModel -> ToQuantityList_items_4 (numbers displayed in the quanity box)
+		ToProductSearchList_items_1.removeAllElements(); //this clears all elements from DefaultListModel -> ToProductSearchList_items_1					
+		ToCartShopList_items_3.removeAllElements();
+		textAreaTotal.setText("$0.00"); //this resets the textAreaTotal box back to displaying $0.00
+		priceArray = new int[10]; //this resets the priceArray[]
+		productObject.trackImages = new Integer[20]; //this resets the trackImages[] in productClass					
+		productObject.track = 0; //resets track variable to 0 in productClass
+		add = 0;
+		sum = 0;
+		counter = 0;
+		increment = 0;		
+		
 	}
 	
 	/**
@@ -468,7 +496,7 @@ public class productSearchClass extends JPanel {
 						productObject.track--; //decrements the variable: 'track' that is used in 'productObject.trackImages[]' to account for the product removed
 															
 						int remove = priceArray[selectedIx];
-						rearrangeCart(remove);						
+						rearrangeList(remove);						
 						setPriceTotal(); //adjust the Shopping List price total	
 												
 						ToCartShopList_items_3.removeElementAt(selectedIx);
@@ -506,21 +534,7 @@ public class productSearchClass extends JPanel {
 				if ( addedOne == true){ //checks to see if at least one product is in the Shopping List before trying to clear the Shopping List
 					
 					addedOne = false; //resets the boolean variable: 'addedOne' to false. this establishes that no product has been added to the Shopping List				
-					txtpnProductDescription.setText(null); //clears out the description text area
-					displayLabel.setIcon(null); //clears out the product image from panel_03					
-					ToQuantityList_items_4.removeAllElements(); //clears out the DefaultListModel -> ToQuantityList_items_4 (numbers displayed in the quanity box)
-					ToProductSearchList_items_1.removeAllElements(); //this clears all elements from DefaultListModel -> ToProductSearchList_items_1					
-					textAreaTotal.setText("$0.00"); //this resets the textAreaTotal box back to empty
-					pricesIndex = new int[25];
-					priceArray = new int[10]; //this resets the priceArray[]
-					productObject.trackImages = new Integer[20]; //this resets the trackImages[]					
-					productObject.track = 0; //resets track variable to 0
-					add = 0;
-					sum = 0;
-					counter = 0;
-					quantAdded = 0;
-					increment = 0;
-					
+					removeAll();
 					JOptionPane.showMessageDialog(null, "Removed all products from Shopping List", "Products Removed", JOptionPane.INFORMATION_MESSAGE);//Displays a pop-up message
 					
 				}
