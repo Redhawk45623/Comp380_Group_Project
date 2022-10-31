@@ -217,9 +217,9 @@ public class cartClass extends JPanel {
 
 		}
 		
-		/*for(int i = 0; i < cartPriceArray.length; i++) {						
+		for(int i = 0; i < cartPriceArray.length; i++) {						
 			System.out.println("Removed Array (fast shop method): " + cartPriceArray[i]);					
-		}*/
+		}
 		
 	}
 	
@@ -260,9 +260,9 @@ public class cartClass extends JPanel {
 		
 		}
 		
-		/*for(int i = 0; i < cartPriceArray.length; i++) {						
+		for(int i = 0; i < cartPriceArray.length; i++) {						
 			System.out.println("Removed Array (Shop List method): " + cartPriceArray[i]);					
-		}*/
+		}
 	}
 	
 	/**
@@ -286,9 +286,9 @@ public class cartClass extends JPanel {
 						int addedUp = convertedNumber2+ 1; //increments the variable: 'addedUp' by 1
 						ToCartQuantityList_items_4.setElementAt(addedUp, index); //sets the Quantity 					
 					
-					/*for(int i = 0; i < cartPriceArray.length; i++) {						
+					for(int i = 0; i < cartPriceArray.length; i++) {						
 						System.out.println("Added Array: " + cartPriceArray[i]);												
-					}*/
+					}
 										
 				}
 				else { //if the Cart List is empty or no product is selected in the Cart, display the pop-up
