@@ -56,7 +56,7 @@ public class productSearchClass extends JPanel {
 	public static Object[] productIDs; //array that is loaded from read file containing Product IDs, used to load combobox
 	public static Object[] prices = new String[25]; //array that is loaded from file containing prices, used to load combobox
 	public static int[] prices2 = new int[25]; ////used to track the order of indexes that were added to the shopping list
-	public static int[] priceArray = new int[50]; //array used to store the prices in order of added to the shopping list after pressing add to list button
+	public static int[] priceArray = new int[10]; //array used to store the prices in order of added to the shopping list after pressing add to list button
 	public static int[] imagesIndex = new int[25];
 	
 	public static DefaultListModel<Object> ToProductSearchList_items_1; //DefaultListModel list used to create list containing items added to the Search List
@@ -156,6 +156,20 @@ public class productSearchClass extends JPanel {
 		for(int i = 0; i < priceArray.length; i++){ //loop to add up the total price that is in priceArray
 			sum += priceArray[i]; //adds up the priceArray[] and stores it in the variable sum
 		}		
+	}
+	public void addOne(int index) {
+		
+		Object priceFound = prices2[index];
+		int priceOfProduct = Integer.parseInt(priceFound.toString()); 				
+		Object adjust = priceArray[index]; //sets Object variable: 'adjust' to the element found at cartPriceArray[] using parameter: 'index'
+		int currentPrice = Integer.parseInt(adjust.toString()); //this converts the object to integer
+		int added = currentPrice + priceOfProduct;
+		priceArray[index] = added; //this loads the cartPriceArray[]
+		sum = 0; //sets the variable initially to 0
+		for(int i = 0; i < priceArray.length; i++){ //loop to add up the total price that is in priceArray
+			sum += priceArray[i]; //adds up the priceArray[] and stores it in the variable sum
+		}
+		
 	}
 	
 	/**
@@ -271,7 +285,8 @@ public class productSearchClass extends JPanel {
 					productObject.setImageIndex(cbIndex); //uses cbIndex variable as a parameter to call setImageIndex().  This tracks the order of indexes to be used for the description and image display						
 					productObject.loadImages(cbIndex); //calls the loadImages() using 'cbIndex' as a parameter			
 					prices2[add] = cbIndex; //used to track price index
-					add++; //increments the add variable for prices[] for the next use				
+					add++; //increments the add variable for prices[] for the next use	
+					
 					addPrices(cbIndex); //calls addPrices method				
 					setPriceTotal(); //calls setPriceTotal method							
 					ToCartShopList_items_3.addElement(cbProducts.getSelectedItem()); //	//This adds the selected element from cbProducts to DefaultListModel ToCartShopList_items_3			
@@ -282,6 +297,10 @@ public class productSearchClass extends JPanel {
 					JListShopList_1.addMouseListener(mouseListener); //a listener that detects when a product is selected in the shopping list
 					//JOptionPane.showMessageDialog(null,S);
 				}
+				
+				for(int i = 0; i < priceArray.length; i++) {						
+					System.out.println("Added to List Array: " + priceArray[i]);												
+					}
 			} 
 		});
 		
@@ -322,27 +341,26 @@ public class productSearchClass extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				
 				if (! JListShopList_1.isSelectionEmpty()){ //if an item is selected in the Shopping List, then run the following code					
-					int x = 0;		
-					int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates a temp array that stores the selected index in the Shopping List. Will only be one item in array			    
-					int image = selectedIx[x]; //assigns temp variable image to the element at index 0 from temp array selectedIx
-					
-					image = productObject.trackImages[image];	//assigns the temp variable 'image' the index stored at trackImages[] using the index: 'image' established from the code before				
-					Object productPrice = prices[image]; //
-					
-					int total = Integer.parseInt(productPrice.toString()); //converts the int variable: 'total' to an int from the Object variable: 'productPrice'	
-					addPrices2(total); //calls addPrices2() to add up the total in Shopping List after a quantity has been added
+						
+					int selectedIx = JListShopList_1.getSelectedIndex(); //creates a temp array that stores the selected index in the Shopping List. Will only be one item in array			    
+																							
+					addOne(selectedIx); //calls addPrices2() to add up the total in Shopping List after a quantity has been added
 					setPriceTotal(); //calls setPriceTotal method	
-				
-					int index = selectedIx[x]; ////assigns temp variable: 'index' to the element at index 0 from temp array selectedIx
-					Object number = ToQuantityList_items_4.getElementAt(index); //sets Object variable: 'number' to the price stored at ToQuantityList_items_4
-					int convertedNumber2 = Integer.parseInt(number.toString()); //converts the Object: 'number' to int: 'convertedNumber2'
-					int addedUp = convertedNumber2+ 1; //adds the price of convertedNumber2	+ 1		
-					ToQuantityList_items_4.setElementAt(addedUp, index); //sets the quantity displayed in quantity box for selected item at the right spot
-					JOptionPane.showMessageDialog(null, "Added one more -> " + products[image]); //pop-up message displaying the product which the user added a quantity
+									
+					Object number = ToQuantityList_items_4.getElementAt(selectedIx); //sets Object variable: 'number' to the price stored at ToQuantityList_items_4
+					int convertedNumber = Integer.parseInt(number.toString()); //converts the Object: 'number' to int: 'convertedNumber2'
+					int addedUp = convertedNumber + 1; //adds the price of convertedNumber2	+ 1		
+					ToQuantityList_items_4.setElementAt(addedUp, selectedIx); //sets the quantity displayed in quantity box for selected item at the right spot
+					//JOptionPane.showMessageDialog(null, "Added one more -> " + products[image]); //pop-up message displaying the product which the user added a quantity
 				}				
 				else { //if the button is pushed and nothing is selected in the Shopping List, display the pop-up message
 					JOptionPane.showMessageDialog(null, "Please select an item to add!", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message		
 				}
+				
+				for(int i = 0; i < priceArray.length; i++) {						
+					System.out.println("Added One Array: " + priceArray[i]);												
+					}
+				
 			}
 		});
 		

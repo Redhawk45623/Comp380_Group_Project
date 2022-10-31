@@ -24,11 +24,11 @@ import javax.swing.ImageIcon;
 /**
  * This class handles the bulk of tasks associated with viewing the cart.<br>
  * This includes displaying all products added to Cart from the 'fast' method<br>
- * from productSearchClass or products added from the Shopping List.  This<br>
- * class also displays the quantity added of each product as well as the <br>
- * total price of the Cart.<p>
+ * from productSearchClass (not using the Shopping List) or products added from <br>
+ * the Shopping List.  This class also displays the quantity added of each product <br>
+ * as well as the total price of the Cart.<p>
  * 
- * This class also has buttons that allow the user to add a quantity, remove<br>
+ * This class has buttons that allow the user to add a quantity, remove<br>
  * a selected product, empty the Cart, or proceed to the checkout area.<p>
  * 
  * @author Ralph Ramirez
@@ -130,13 +130,11 @@ public class cartClass extends JPanel {
 	public void adjCartPricesRemove(int index) {
 		
 		Object priceFound = prices[index];
-		int priceOfProduct = Integer.parseInt(priceFound.toString()); 
-				
+		int priceOfProduct = Integer.parseInt(priceFound.toString()); 				
 		Object adjust = cartPriceArray[index]; //sets Object variable: 'adjust' to the element found at cartPriceArray[] using parameter: 'index'
 		int currentPrice = Integer.parseInt(adjust.toString()); //this converts the object to integer
 		int remove = currentPrice - priceOfProduct;
 		cartPriceArray[index] = remove; //this loads the cartPriceArray[]
-		//counter++; //increments counter variable
 		sum = 0; //sets the variable initially to 0
 		for(int i = 0; i < cartPriceArray.length; i++){ //loop to add up the total price that is in priceArray
 			sum += cartPriceArray[i]; //adds up the priceArray[] and stores it in the variable sum
@@ -170,14 +168,14 @@ public class cartClass extends JPanel {
 			if(cartPriceArray[i] != element){ //if statement; if cartPriceArray at index i does not equal parameter x
 				cartPriceArray2[k] = cartPriceArray[i];	//if statement is true, then load cartPriceArray2 at index k with cartPriceArray at index i
 				k++; //increment k
-			}
-			
+			}			
 		}
 		cartPriceArray = cartPriceArray2; //after for loop, set cartPriceArray[] to temp cartPriceArray2[]	
 		int addedUp = Arrays.stream(cartPriceArray).sum(); //add  up the total sum of cartPriceArray and set it to temp int variable: addedUp		
 		if (addedUp == 0) {	//if addUp is equal to 0			
 			textAreaCartTotal.setText("$0.00"); //this resets the textAreaCartTotal box back to empty
 			cartPriceArray = new int[15]; // this resets the cartPriceArray[]
+			prices = new String[20];
 			counter = 0; //this resets the variabale counter
 			sum = 0; //this resets the variable sum			
 		}
@@ -220,8 +218,7 @@ public class cartClass extends JPanel {
 		}
 		
 		/*for(int i = 0; i < cartPriceArray.length; i++) {						
-			System.out.println("Removed Array (fast shop method): " + cartPriceArray[i]);
-			//JOptionPane.showMessageDialog(null, cartPriceArray[i]);						
+			System.out.println("Removed Array (fast shop method): " + cartPriceArray[i]);					
 		}*/
 		
 	}
@@ -264,17 +261,9 @@ public class cartClass extends JPanel {
 		}
 		
 		/*for(int i = 0; i < cartPriceArray.length; i++) {						
-			System.out.println("Removed Array (Shop List method): " + cartPriceArray[i]);
-			//JOptionPane.showMessageDialog(null, cartPriceArray[i]);						
+			System.out.println("Removed Array (Shop List method): " + cartPriceArray[i]);					
 		}*/
 	}
-	
-	/**
-	 * 
-	 * 
-	 * 
-	 * @param adjust
-	 */
 	
 	/**
 	 * Holds all 'action' events (listeners).<br>
@@ -298,8 +287,7 @@ public class cartClass extends JPanel {
 						ToCartQuantityList_items_4.setElementAt(addedUp, index); //sets the Quantity 					
 					
 					/*for(int i = 0; i < cartPriceArray.length; i++) {						
-						System.out.println("Added Array: " + cartPriceArray[i]);
-												
+						System.out.println("Added Array: " + cartPriceArray[i]);												
 					}*/
 										
 				}
@@ -316,17 +304,12 @@ public class cartClass extends JPanel {
 				
 				if (! JListCartList.isSelectionEmpty()){ //if the Cart List is not empty, run the code
 				 
-					if ( check == true) { //if the item to be removed from cart was added straight from the 'add to cart' button from productSearchClass (not using the Shopping List)		
-						
-						removeItemFastShop();
-						
+					if ( check == true) { //if the item to be removed from cart was added straight from the 'add to cart' button from productSearchClass (not using the Shopping List)								
+						removeItemFastShop();						
 					}
-					else { //if the item to be removed was added from the Shopping list from productSearchClass
-					
-						removeItemShopList();						
-					
-					}	
-																
+					else { //if the item to be removed was added from the Shopping list from productSearchClass					
+						removeItemShopList();											
+					}																	
 				}
 				else { //if no product is selected in the Cart List, display the pop-up
 					
