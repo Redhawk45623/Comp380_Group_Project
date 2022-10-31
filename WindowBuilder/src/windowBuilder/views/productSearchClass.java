@@ -53,6 +53,7 @@ import javax.swing.SwingConstants;
 public class productSearchClass extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
+	
 	public static Object[] products; //array that is loaded from file containing Product Names, used to load combobox (simulated database)
 	public static Object[] productIDs; //array that is loaded from read file containing Product IDs, used to load combobox (simulated database)
 	public static Object[] prices = new String[25]; //array that is loaded from file containing prices, used to load combobox (simulated database)
@@ -89,7 +90,7 @@ public class productSearchClass extends JPanel {
 	private JScrollPane scrollPaneQuantity; //scrollpane element for the Quantity List
 	
 	private JButton btnAddToList; //button to add products from combobox to the Shopping List
-	private JButton btnAddToCart; //button to add products straight to cart (radio button -> rdbtnUseList not selected)
+	private JButton btnAddToCart; //button to add products straight to cart (radio button -> rdbtnUseList not selected), 'fast' shop method
 	private JButton btnAddAllToCart; //button used to add all contents of Shopping List to Cart
 	private JButton btnRemoveAll; //button to remove all contents of the Shopping List
 	private JButton btnAddOneToList; //button to add one selected item from Shopping List to Cart
@@ -105,7 +106,7 @@ public class productSearchClass extends JPanel {
 	public static JLabel lblImageDescrip; //               //
 	private JLabel lblNoShipNotaxes;      ///////////////////
 	
-	private JList<Object> JListShopList_1; //JList element for Shopping List
+	private JList<Object> JListShopList; //JList element for Shopping List
 	private JList<Object> JListQuantity; //JList that lists the quantity of products
 	
 	private JRadioButton rdbtnUseList; //radio button used to list the Shopping List option
@@ -230,14 +231,13 @@ public class productSearchClass extends JPanel {
 		for (int i = 0; i < priceArray.length; i++) {  //for-loop to match the priceArray[] to trackPrices[]
             trackPrices[i] = String.valueOf(priceArray[i]);
         }
-		 
+		
 		sum = 0;
 		for(int i = 0; i < priceArray.length; i++){  //for-loop to set the sum variable to the total of the Shopping List
 			sum += priceArray[i]; 
 		}		
 		
-		int addedUp = Arrays.stream(priceArray).sum(); //add  up the total sum of cartPriceArray and set it to temp int variable: addedUp
-		
+		int addedUp = Arrays.stream(priceArray).sum(); //add  up the total sum of cartPriceArray and set it to temp int variable: addedUp		
 		if (addedUp == 0) {	//if addUp is equal to 0			
 			textAreaTotal.setText("$0.00"); //this resets the textAreaCartTotal box back to empty
 			priceArray = new int[15]; // this resets the cartPriceArray[]
@@ -247,10 +247,8 @@ public class productSearchClass extends JPanel {
 			counter = 0;
 			sum = 0; //this resets the variable sum	
 		}
-
 	}
-	
-	
+		
 	/**
 	 * Loads the combobox with products using three arrays (simulated database).<br>
 	 * 
@@ -301,6 +299,7 @@ public class productSearchClass extends JPanel {
 		ToCartShopList_items_3.removeAllElements();
 		textAreaTotal.setText("$0.00"); //this resets the textAreaTotal box back to displaying $0.00
 		priceArray = new int[15]; //this resets the priceArray[]
+		trackPrices = new String[20];
 		productObject.trackImages = new Integer[20]; //this resets the trackImages[] in productClass					
 		productObject.track = 0; //resets track variable to 0 in productClass
 		add = 0;
@@ -321,7 +320,7 @@ public class productSearchClass extends JPanel {
 		    public void mouseClicked(MouseEvent e) {
 		        if (e.getClickCount() == 1) { //if detects only one click, run the code      	           
 		            int x = 0;		
-					int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates an array that stores the index of the clicked on product. Will be only one index			    
+					int[] selectedIx = JListShopList.getSelectedIndices(); //creates an array that stores the index of the clicked on product. Will be only one index			    
 					int image = selectedIx[x]; //assigns temp variable: 'image' to the index found at selectedIx[x]					 
 					image = productObject.trackImages[image]; //sets the temp variable: 'image' to the index found at trackImages[image]								
 					productObject.loadImages(image); //calls the loadImages() using the temp variable: 'image' (index of trackImages[image]) to display correct image in panel_3
@@ -332,7 +331,7 @@ public class productSearchClass extends JPanel {
 		btnAddToList.addActionListener(new ActionListener() { //button action method that adds item from combobox to Shopping List
 			public void actionPerformed(ActionEvent e) {
 				
-				if (JListShopList_1.getModel().getSize() > 7) {
+				if (JListShopList.getModel().getSize() > 7) {
 					JOptionPane.showMessageDialog(null, "Maximum products in Shopping List!", "Alert", JOptionPane.ERROR_MESSAGE);
 					checkMax = true;
 				}			
@@ -341,7 +340,7 @@ public class productSearchClass extends JPanel {
 				int cbIndex = cbProducts.getSelectedIndex(); //creates variable send to pass to addPrices() method from cbProducts_1					
 				String verify = cbProducts.getItemAt(cbIndex); //sets variable: 'verify' to the selected product usine variable: 'cbIndex'
 				
-				for (int i=0; i<JListShopList_1.getModel().getSize(); i++) { //for-loop using the size of the 'JListShopList_1'					
+				for (int i=0; i<JListShopList.getModel().getSize(); i++) { //for-loop using the size of the 'JListShopList_1'					
 					if (ToProductSearchList_items_1.get(i) == verify) { //if-statement that checks to see if the selected item in the combobox that the user is trying to add to Shopping List is already there						
 						checkRepeats = true; //if the product is already in the Shopping list, set 'checkRepeats' to true
 						JOptionPane.showMessageDialog(null, "Already added to Shopping List!", "Alert", JOptionPane.ERROR_MESSAGE); //display pop-up message						
@@ -367,8 +366,8 @@ public class productSearchClass extends JPanel {
 					ToProductSearchList_items_1.addElement(cbProducts.getSelectedItem());  //This adds the selected element from cbProducts to DefaultListModel ToProductSearchList_items_1								
 					ToQuantityList_items_4.addElement("1"); //adds a 1 to the DefaultListModel: 'ToQuantityList_items_4'
 					JListQuantity.setModel(ToQuantityList_items_4); //sets the model of the Shopping List quantity box					
-					JListShopList_1.setModel(ToProductSearchList_items_1); //this lists the selected DefaultListModel items in the JListShopList shopping list							
-					JListShopList_1.addMouseListener(mouseListener); //a listener that detects when a product is selected in the shopping list
+					JListShopList.setModel(ToProductSearchList_items_1); //this lists the selected DefaultListModel items in the JListShopList shopping list							
+					JListShopList.addMouseListener(mouseListener); //a listener that detects when a product is selected in the shopping list
 					//JOptionPane.showMessageDialog(null,S);
 				}
 				
@@ -410,9 +409,9 @@ public class productSearchClass extends JPanel {
 		btnAddOneToList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if (! JListShopList_1.isSelectionEmpty()){ //if an item is selected in the Shopping List, then run the following code					
+				if (! JListShopList.isSelectionEmpty()){ //if an item is selected in the Shopping List, then run the following code					
 						
-					int selectedIx = JListShopList_1.getSelectedIndex(); //creates a temp array that stores the selected index in the Shopping List. Will only be one item in array			    										
+					int selectedIx = JListShopList.getSelectedIndex(); //creates a temp array that stores the selected index in the Shopping List. Will only be one item in array			    										
 					addOne(selectedIx); 					
 					setPriceTotal(); //calls setPriceTotal method										
 					Object number = ToQuantityList_items_4.getElementAt(selectedIx); //sets Object variable: 'number' to the price stored at ToQuantityList_items_4
@@ -467,9 +466,9 @@ public class productSearchClass extends JPanel {
 				
 				checkMax = false; //boolean variable used to check if max products are in the Shopping List.
 				
-				if (! JListShopList_1.isSelectionEmpty()){ //if the Shopping List is not empty, run the code
+				if (! JListShopList.isSelectionEmpty()){ //if the Shopping List is not empty, run the code
 											
-					int selectedIx = JListShopList_1.getSelectedIndex(); //creates a temp array that stores the selected index in the Shopping List. Will only be one item in array			    					
+					int selectedIx = JListShopList.getSelectedIndex(); //creates a temp array that stores the selected index in the Shopping List. Will only be one item in array			    					
 					Object quantity = ToQuantityList_items_4.get(selectedIx);
 					int quantity2 = Integer.parseInt(quantity.toString());
 					
@@ -907,10 +906,10 @@ public class productSearchClass extends JPanel {
 		);
 		panel_3.setLayout(gl_panel_3);
 		
-		JListShopList_1 = new JList<Object>();
-		JListShopList_1.setVisibleRowCount(10);
-		JListShopList_1.setToolTipText("");
-		scrollPaneShopList.setViewportView(JListShopList_1);
+		JListShopList = new JList<Object>();
+		JListShopList.setVisibleRowCount(10);
+		JListShopList.setToolTipText("");
+		scrollPaneShopList.setViewportView(JListShopList);
 		panel_1.setLayout(gl_panel_1);
 		panel.setLayout(gl_panel);
 		setLayout(groupLayout);
