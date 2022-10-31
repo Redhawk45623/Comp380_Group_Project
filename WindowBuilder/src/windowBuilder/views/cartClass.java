@@ -49,7 +49,7 @@ public class cartClass extends JPanel {
 	////The 3 elements above will be manipulated from a checkout class/////////////////////////////////////////////////////////////////
 	
 	public static int[] cartPriceArray = new int[15]; //an arrray that is used to tabulate the total amount of the Cart
-	public static Object[] prices = new String[20]; //used to track the order of indexes that were added to the Cart	
+	public static Object[] trackPrices = new String[20]; //used to track the order of indexes that were added to the Cart	
 	
 	private JButton btnEmptyCart; //button that empties the Cart
 	private JButton btnRemoveItem; //button that removes selected product from Cart
@@ -58,9 +58,7 @@ public class cartClass extends JPanel {
 	
 	private static String total; //String variable that is used in the setCartPriceTotal() method
 	private static int counter = 0; //int variable that is used in the addCartprice() method
-	public static int sum; ////int variable that is used in the addCartprice() method and rearrangeArray() method
-	public static int newTotal; //variable used in the adjustCartTotal() method. Used when a product is removed from Cart
-	
+	public static int sum; ////int variable that is used in the addCartprice() method and rearrangeArray() method	
 	public static boolean check = true; //boolean variable used for the 'btnRemoveItem' action method
 	
 	/**
@@ -107,7 +105,7 @@ public class cartClass extends JPanel {
 	 */
 	public void adjCartPricesAdd(int index) { //method to add up the prices after adding a quantity of one from the Cart
 		
-		Object priceFound = prices[index];
+		Object priceFound = trackPrices[index];
 		int priceOfProduct = Integer.parseInt(priceFound.toString()); 				
 		Object adjust = cartPriceArray[index]; //sets Object variable: 'adjust' to the element found at cartPriceArray[] using parameter: 'index'
 		int currentPrice = Integer.parseInt(adjust.toString()); //this converts the object to integer
@@ -129,7 +127,7 @@ public class cartClass extends JPanel {
 	 */
 	public void adjCartPricesRemove(int index) {
 		
-		Object priceFound = prices[index];
+		Object priceFound = trackPrices[index];
 		int priceOfProduct = Integer.parseInt(priceFound.toString()); 				
 		Object adjust = cartPriceArray[index]; //sets Object variable: 'adjust' to the element found at cartPriceArray[] using parameter: 'index'
 		int currentPrice = Integer.parseInt(adjust.toString()); //this converts the object to integer
@@ -175,7 +173,7 @@ public class cartClass extends JPanel {
 		if (addedUp == 0) {	//if addUp is equal to 0			
 			textAreaCartTotal.setText("$0.00"); //this resets the textAreaCartTotal box back to empty
 			cartPriceArray = new int[15]; // this resets the cartPriceArray[]
-			prices = new String[20];
+			trackPrices = new String[20];
 			counter = 0; //this resets the variabale counter
 			sum = 0; //this resets the variable sum			
 		}
@@ -327,7 +325,7 @@ public class cartClass extends JPanel {
 				productSearchClass.ToCartShopList_items_3.removeAllElements(); //this clears all elements from DefaultListModel: ToCartShopList_items_3
 				textAreaCartTotal.setText("$0.00"); //this resets the textAreaCartTotal box back to empty
 				cartPriceArray = new int[15]; // this resets the cartPriceArray[]
-				prices = new String[20];
+				trackPrices = new String[20];
 				sum = 0;//this resets the variable sum	
 			
 			}
