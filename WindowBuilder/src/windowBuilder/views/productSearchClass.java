@@ -418,7 +418,7 @@ public class productSearchClass extends JPanel {
 					int convertedNumber = Integer.parseInt(number.toString()); //converts the Object: 'number' to int: 'convertedNumber2'
 					int addedUp = convertedNumber + 1; //adds the price of convertedNumber2	+ 1		
 					ToQuantityList_items_4.setElementAt(addedUp, selectedIx); //sets the quantity displayed in quantity box for selected item at the right spot
-					//JOptionPane.showMessageDialog(null, "Added one more -> " + products[image]); //pop-up message displaying the product which the user added a quantity
+					JOptionPane.showMessageDialog(null, "Added one more -> " + products[selectedIx], "Added One", JOptionPane.INFORMATION_MESSAGE);
 					
 //					for(int i = 0; i < priceArray.length; i++) { //for-loop for de-bugging purposes							
 //						System.out.println("Added one to priceArray[]: " + priceArray[i] + "   trackPrices[] Array: " + trackPrices[i] + "   Sum: " + sum);											
@@ -499,6 +499,7 @@ public class productSearchClass extends JPanel {
 						removeOne(selectedIx); 			
 						setPriceTotal(); //adjust the Shopping List price total
 						
+						JOptionPane.showMessageDialog(null, "Removed one -> " + products[selectedIx], "Removed One", JOptionPane.INFORMATION_MESSAGE);
 					}
 					
 					

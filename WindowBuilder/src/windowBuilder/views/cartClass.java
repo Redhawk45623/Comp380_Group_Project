@@ -223,9 +223,11 @@ public class cartClass extends JPanel {
 	}
 	
 	/**
-	 * 
-	 * 
-	 * 
+	 * This method is run if the product that is selected to remove was added from the Shopping List in productSearchClass.<br>
+	 * Includes two 'if' checks that determine if the quantity of the selected product is equal or greater than 1.<br>
+	 * If the quantity is greater than one, decrement the quantity by 1 and then call adjCartPricesRemove() to adjust the total price of the Cart.<br>
+	 * If the quantity equals one, then remove that product from Cart list and clear the associated quantity amount.<br>
+	 * Calls rearrangeCart() to adjust the total price of the cart after product is removed.<br>
 	 * 
 	 */
 	public void removeItemShopList() {

@@ -12,8 +12,7 @@ import javax.swing.ImageIcon;
 
 /** 
  * This class is used to handle most tasks that are regulated to product details.<br>
- * This includes loading arrays that handle product IDs, Names, and Prices (simulated database) that will
- * be dispayed in the combobox in productSearchClass.<br>
+ * This includes loading arrays that handle product IDs, Names, and Prices (simulated database) that will be dispayed in the combobox in productSearchClass.<br>
  *  It also includes methods that handle the manipulation of product specifics such as associated image and description features.<br>
  * 
  * @author Ralph Ramirez
