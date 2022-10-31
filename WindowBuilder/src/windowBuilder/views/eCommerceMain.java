@@ -53,6 +53,7 @@ public class eCommerceMain extends JFrame {
 	 * Manages 'Look and Feel' of the running application<br>
 	 * Creates the tabbedPane frame that holds the major panels of the application.<br>
 	 * 
+	 * @param args
 	 */
 	public static void main(String[] args) {
 		try {

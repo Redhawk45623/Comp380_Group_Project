@@ -11,14 +11,13 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
 /** 
- * This class is used to handle most tasks that are regulated to product details. <br>
- * This includes loading arrays that handle product IDs, Names, and Prices that will <br>
- * be dispayed in the combobox in productSearchClass. It also includes methods that<br>
- * handle the manipulation of product specifics such as associated image and description <br>
- * features.<br>
+ * This class is used to handle most tasks that are regulated to product details.<br>
+ * This includes loading arrays that handle product IDs, Names, and Prices (simulated database) that will
+ * be dispayed in the combobox in productSearchClass.<br>
+ *  It also includes methods that handle the manipulation of product specifics such as associated image and description features.<br>
  * 
  * @author Ralph Ramirez
- * @version 2022.10.28 
+ * @version 2022.10.31 
  */
 public class productClass {
 	
@@ -29,7 +28,7 @@ public class productClass {
 	public int track = 0; //variable used int the setImageIndex() method
 	
 	/**
-	 * Calls loadProductsFromTxtFile() which loads loads the arrays that are used to load the combobox in productSearchClass.<br>
+	 * Calls loadProductsFromTxtFile() which loads loads the arrays that are used to load the combobox (simulated database) in productSearchClass.<br>
 	 * Calls loadProductDescriptions() method to load descriptionsArray[].<br>
 	 * Calls loadNamePathsAndDescrip() method to load the namePaths[] and nameDisplay[].<br>
 	 * 
@@ -97,8 +96,8 @@ public class productClass {
 	}
 	
 	/**
-	 * Loads the descriptionsArray[] which will hold all the String descriptions for our products.<br>
-	 * Loads this data from the text files loacted in the productDescriptions folder.<br>
+	 * Loads the descriptionsArray[] which holds all the String descriptions for our products.<br>
+	 * Loads this data from the text files located in the productDescriptions folder.<br>
 	 * 
 	 * @throws FileNotFoundException
 	 */
@@ -127,7 +126,7 @@ public class productClass {
 	 * @param choose   index used for descriptionsArray[]
 	 * @return         returns the String description for the product
 	 */
-	public String setDescriptions(int choose) { //method used to return a description String using parameter 'x' descriptionsArray.  Converts to String too
+	public String getDescriptions(int choose) { //method used to return a description String using parameter 'x' descriptionsArray.  Converts to String too
 		
 		String descrip = descriptionsArray[choose].toString(); //sets the String variable: 'descrip' to the String found in descriptionsArray[]
 		return descrip; //returns the String
@@ -209,18 +208,18 @@ public class productClass {
 	 * Displays small label of the Product name in panel_03 above image.<br>
 	 * Displays the description of the product in panel_04.<br>
 	 * 
-	 * @param number   index used for namePaths[], nameDisplay[], and setDescriptions() method
+	 * @param number   index used for namePaths[], nameDisplay[], and passed paramter for setDescriptions() method
 	 */
 	public void loadImages(int number) { //loads images into image display panel and descriptions into descriptions panel
 		
-		String display;	 //decalres a String variable: 'display'	
+		String display;	 //declares a String variable: 'display'	
 		Object namePath = namePaths[number]; //assigns an Object variable: 'namePath' to the String path found at namePaths[] using parameter: 'number'
 		String path2 = namePath.toString(); //converts the Object variable: 'namePath' to a String variable: 'path2' 	
 		Object descrip = nameDisplay[number]; //assigns an Object variable: 'descrip' to the String found at nameDisplay[] using parameter: 'number'
 		String descrip2 = descrip.toString(); //converts the Object variable: 'descrip' to a String variable: 'descrip2'		
 		ImageIcon icon = new ImageIcon(this.getClass().getResource(path2)); //assigns the ImageIcon variable: 'icon' to the path found using variable: 'path2'		
 		productSearchClass.displayLabel.setIcon(icon); //displays the icon in the image display panel of productSearchClass
-		display = setDescriptions(number); //assigns the String variable: 'display' using the setDescriptions() method
+		display = getDescriptions(number); //assigns the String variable: 'display' using the setDescriptions() method
 		productSearchClass.lblImageDescrip.setText(descrip2); //sets the small label that is the title of the image in the image display panel of productSearchClass
 		productSearchClass.txtpnProductDescription.setText(display); // sets the desciption for the product in the description panel in productSearchClass	
 		
