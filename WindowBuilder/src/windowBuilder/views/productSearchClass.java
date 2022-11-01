@@ -318,7 +318,7 @@ public class productSearchClass extends JPanel {
 		
 		MouseListener mouseListener = new MouseAdapter() { //mouse action listener to detect when a user clicks on an item in the Shopping List
 		    public void mouseClicked(MouseEvent e) {
-		        if (e.getClickCount() == 1) { //if detects only one click, run the code      	           
+		        if (e.getClickCount() == 1) { //if detected only one click, run the code      	           
 		            int x = 0;		
 					int[] selectedIx = JListShopList.getSelectedIndices(); //creates an array that stores the index of the clicked on product. Will be only one index			    
 					int image = selectedIx[x]; //assigns temp variable: 'image' to the index found at selectedIx[x]					 
@@ -501,8 +501,7 @@ public class productSearchClass extends JPanel {
 						
 						//JOptionPane.showMessageDialog(null, "Removed one -> " + products[selectedIx], "Removed One", JOptionPane.INFORMATION_MESSAGE);
 					}
-					
-					
+										
 //					for(int i = 0; i < priceArray.length; i++) { //for-loop for de-bugging purposes						
 //						System.out.println("Removed one from priceArray[]: " + priceArray[i] + "   trackPrices[] Array: " + trackPrices[i] + "   Sum: " + sum);												
 //						}
