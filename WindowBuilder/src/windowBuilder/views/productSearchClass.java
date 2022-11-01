@@ -312,7 +312,9 @@ public class productSearchClass extends JPanel {
 	/**
 	 * Holds all 'action' events (listeners).<br>
 	 * Primarily used for cleaner organization and management.<br>
-	 *
+	 * Contains a MouseListener that detects one click in the Shopping List and displays image and description for that selected product.<br>
+	 * 
+	 * 
 	 */
 	private void createEvents() { //method that stores all action events
 		
