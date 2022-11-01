@@ -50,8 +50,11 @@ public class productClass {
 	 */
 	public void loadProductsFromTxtFile() throws FileNotFoundException { //method that loads the arrays used to load combobox (products in drop-down list)
 		
-		java.net.URL url = getClass().getResource("/productDatabase/productNames.txt"); //path to productNames.txt file stored in productDatabase folder in src folder
-		File file = new File(url.getPath());
+		//java.net.URL url = getClass().getResource("/productDatabase/productNames.txt"); 
+		//File file = new File(url.getPath());
+			
+		File file = new File(System.getProperty("user.dir") + "/src/productDatabase/productNames.txt"); //path to productNames.txt file stored in productDatabase folder in src folder
+		
 		//String namepath = "/Users/Zeina/Desktop/productNames.txt"; //path for the Product Names file stored on my computer locally
 		//File file = new File(namepath);
 			
@@ -64,13 +67,15 @@ public class productClass {
 			e.printStackTrace();
 		}
 		
-		java.net.URL url2 = getClass().getResource("/productDatabase/productIDs.txt"); //path to productIDs.txt file stored in productDatabase folder in src folder
-		File file2 = new File(url2.getPath());
+		//java.net.URL url2 = getClass().getResource("/productDatabase/productIDs.txt"); //path to productIDs.txt file stored in productDatabase folder in src folder
+		//File file2 = new File(url2.getPath());
 		//String IDpath = "/Users/Zeina/Desktop/productIDs.txt"; //path for the Product IDs file stored on my computer locally
 		//File file2 = new File(IDpath);
-			
-		try (BufferedReader br2 = new BufferedReader(new FileReader(file2))) {
-			productSearchClass.productIDs = br2.lines().toArray(); //loads Product IDs[] with Product IDs
+		
+		File file2 = new File(System.getProperty("user.dir") + "/src/productDatabase/productIDs.txt");  //path to productIDs.txt file stored in productDatabase folder in src folder
+		
+		try (BufferedReader br = new BufferedReader(new FileReader(file2))) {
+			productSearchClass.productIDs = br.lines().toArray(); //loads Product IDs[] with Product IDs
 		} catch (FileNotFoundException e) {
 			throw e;
 		} catch (IOException e) {
@@ -78,11 +83,13 @@ public class productClass {
 			e.printStackTrace();
 		}
 		
-		java.net.URL url3 = getClass().getResource("/productDatabase/prices.txt"); //path to prices.txt file stored in productDatabase folder in src folder
-		File file3 = new File(url3.getPath());
+		//java.net.URL url3 = getClass().getResource("/productDatabase/prices.txt"); //path to prices.txt file stored in productDatabase folder in src folder
+		//File file3 = new File(url3.getPath());
 		//String pricespath = "/Users/Zeina/Desktop/prices.txt"; //path for Product Prices file stored on my computer locally
 		//File file3 = new File(pricespath);
-			
+		
+		File file3 = new File(System.getProperty("user.dir") + "/src/productDatabase/prices.txt"); //path to prices.txt file stored in productDatabase folder in src folder
+		
 		try (BufferedReader br3 = new BufferedReader(new FileReader(file3))) {
 			productSearchClass.prices = br3.lines().toArray(); //loads prices[] with Product Prices
 		} catch (FileNotFoundException e) {
@@ -103,8 +110,10 @@ public class productClass {
 	public void loadProductDescriptions() throws FileNotFoundException { //method used to load the Descriptions of Products into array
 		
 		int i; //declares int i
-		java.net.URL url = getClass().getResource("/productDescriptions/descriptions.txt"); //sets a java.net.URL variable: 'url' to the .txt file found at the specified path
-		File file = new File(url.getPath()); //creats a File Object from the 'url' variable
+		//java.net.URL url = getClass().getResource("/productDescriptions/descriptions.txt"); //sets a java.net.URL variable: 'url' to the .txt file found at the specified path
+		//File file = new File(url.getPath()); //creats a File Object from the 'url' variable
+		
+		File file = new File(System.getProperty("user.dir") + "/src/productDescriptions/descriptions.txt");
 		
 		for (i = 0; i < descriptionsArray.length; i++) { //for loop using the length of descriptionsArray[]
 			try (BufferedReader br = new BufferedReader(new FileReader(file))) { //BufferedReader to begin reading lines of descriptions.txt
@@ -173,8 +182,10 @@ public class productClass {
 	public void loadNamePathsAndDescrip() throws FileNotFoundException { //method used to load the paths for the images and titles of products...all found in the productDescriptions folder in src
 		
 		int i; 
-		java.net.URL url = getClass().getResource("/productDescriptions/paths.txt"); //sets a java.net.URL variable: 'url' to the .txt file found at the specified path
-		File file = new File(url.getPath()); //creats a File Object from the 'url' variable
+		//java.net.URL url = getClass().getResource("/productDescriptions/paths.txt"); //sets a java.net.URL variable: 'url' to the .txt file found at the specified path
+		//File file = new File(url.getPath()); //creats a File Object from the 'url' variable
+		
+		File file = new File(System.getProperty("user.dir") + "/src/productDescriptions/paths.txt");
 		
 		for (i = 0; i < namePaths.length; i++) { //for-loop using the length of namePaths[]
 			try (BufferedReader br = new BufferedReader(new FileReader(file))) { //BufferedReader to begin reading lines of paths.txt
@@ -187,8 +198,10 @@ public class productClass {
 			}
 		}
 		
-		java.net.URL url2 = getClass().getResource("/productDescriptions/displayNames.txt"); //sets a java.net.URL variable: 'url' to the .txt file found at the specified path
-		File file2 = new File(url2.getPath()); //creats a File Object from the 'url2' variable
+		//java.net.URL url2 = getClass().getResource("/productDescriptions/displayNames.txt"); //sets a java.net.URL variable: 'url' to the .txt file found at the specified path
+		//File file2 = new File(url2.getPath()); //creats a File Object from the 'url2' variable
+		
+		File file2 = new File(System.getProperty("user.dir") + "/src/productDescriptions/displayNames.txt");
 		
 		for (i = 0; i < nameDisplay.length; i++) { //for -oop using the length of nameDisplay[]
 			try (BufferedReader br = new BufferedReader(new FileReader(file2))) { //BufferedReader to begin reading lines of displayNames.txt
