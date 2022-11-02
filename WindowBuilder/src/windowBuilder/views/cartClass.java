@@ -74,6 +74,7 @@ public class cartClass extends JPanel {
 		textAreaCartTotal.setText("$0.00"); //sets the initial total of the Shopping List to $0.00
 		JListCartQuantity.setModel(ToCartQuantityList_items_4); //sets the Cart quantity using 'ToCartQuantityList_items_4'
 		
+		
 	}
 	
 	/**
@@ -268,6 +269,24 @@ public class cartClass extends JPanel {
 	}
 	
 	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
+	public static void emptyCart() {
+		
+		ToCartQuantityList_items_4.removeAllElements(); //empties out the quantity box
+		CartList_items_2.removeAllElements(); //this clears all elements from DefaultListModel: CartList_items_2
+		productSearchClass.ToCartShopList_items_3.removeAllElements(); //this clears all elements from DefaultListModel: ToCartShopList_items_3
+		textAreaCartTotal.setText("$0.00"); //this resets the textAreaCartTotal box back to empty
+		cartPriceArray = new int[15]; // this resets the cartPriceArray[]
+		trackPrices = new String[20];
+		sum = 0;//this resets the variable sum	
+		
+	}
+	
+	/**
 	 * Holds all 'action' events (listeners) for the GUI.<br>
 	 * Primarily used for cleaner organization and management.<br>
 	 * As of this current release, it holds three actions for three buttons: 'Add One', 'Remove', and 'Empty'.<p>
@@ -335,13 +354,7 @@ public class cartClass extends JPanel {
 		btnEmptyCart.addActionListener(new ActionListener() { //this action method for button: btnEmptyCart emptys the cart
 			public void actionPerformed(ActionEvent e) {	
 							
-				ToCartQuantityList_items_4.removeAllElements(); //empties out the quantity box
-				CartList_items_2.removeAllElements(); //this clears all elements from DefaultListModel: CartList_items_2
-				productSearchClass.ToCartShopList_items_3.removeAllElements(); //this clears all elements from DefaultListModel: ToCartShopList_items_3
-				textAreaCartTotal.setText("$0.00"); //this resets the textAreaCartTotal box back to empty
-				cartPriceArray = new int[15]; // this resets the cartPriceArray[]
-				trackPrices = new String[20];
-				sum = 0;//this resets the variable sum	
+				emptyCart();
 			
 			}
 		});

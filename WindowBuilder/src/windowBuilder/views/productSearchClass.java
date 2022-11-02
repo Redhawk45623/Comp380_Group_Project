@@ -311,6 +311,16 @@ public class productSearchClass extends JPanel {
 		
 	}
 	
+	public void emptyTheCartWhenSwitching () {
+		
+		if (! cartClass.ToCartQuantityList_items_4.isEmpty()) {
+			
+			cartClass.emptyCart();
+			
+		}
+		
+	}
+	
 	/**
 	 * Holds all 'action' events (listeners).<br>
 	 * Primarily used for cleaner organization and management.<br>
@@ -541,19 +551,22 @@ public class productSearchClass extends JPanel {
 				int x = JOptionPane.showOptionDialog(null, "Will remove any products already added to Cart. Continue?",
 		                "ALERT", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
 				
-				if (x == 0 & shopMethod == true) {
+				if (x == 0 & shopMethod == true) { //NO, don't empty the Cart while using the 'Fast" shopping method...
 					
 					shopMethod = true;
 					check2 = true;
 					rdbtnUseList.setSelected(false);
 				}
-				if (x == 0 & shopMethod == false) {
+				if (x == 0 & shopMethod == false) { //NO, don't empty the Cart while using the Shopping List...
 					
 					shopMethod = false;			
 					check2 = false;
 					rdbtnUseList.setSelected(false);
 				}
 				
+				//Otherwise, YES, empty the Cart and switch shopping method...
+				
+				emptyTheCartWhenSwitching();
 					
 				if (check2 == false) { //if check2 is false (off), run the code				
 					panel_1.setVisible(true); //turn on panel_1 (Shopping List option)
