@@ -61,7 +61,6 @@ public class productClass {
 		} catch (FileNotFoundException e) {
 			throw e;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -89,7 +88,6 @@ public class productClass {
 		} catch (FileNotFoundException e) {
 			throw e;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -97,7 +95,7 @@ public class productClass {
 	
 	/**
 	 * Loads the descriptionsArray[] which will hold all the String descriptions for our products.<br>
-	 * Loads this data from the text files loacted in the productDescriptions folder.<br>
+	 * Loads this data from the text files located in the productDescriptions folder.<br>
 	 * 
 	 * @throws FileNotFoundException
 	 */
@@ -115,7 +113,6 @@ public class productClass {
 		} catch (FileNotFoundException e) {
 			throw e;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -127,10 +124,10 @@ public class productClass {
 	 * @param choose   index used for descriptionsArray[]
 	 * @return         returns the String description for the product
 	 */
-	public String setDescriptions(int choose) { //method used to return a description String using parameter 'x' descriptionsArray.  Converts to String too
+	public String setDescriptions(int choose) { // Method used to return a description String using parameter 'x' descriptionsArray.  Converts to String too
 		
-		String descrip = descriptionsArray[choose].toString(); //sets the String variable: 'descrip' to the String found in descriptionsArray[]
-		return descrip; //returns the String
+		//String descrip = descriptionsArray[choose].toString(); // Sets the String variable: 'descrip' to the String found in descriptionsArray[]
+		return descriptionsArray[choose].toString(); // Returns the String found in descriptionsArray[choose]
 		
 	}
 	
@@ -139,10 +136,10 @@ public class productClass {
 	 * 
 	 * @param number   loads the trackImages[] array with this Integer
 	 */
-	public void setImageIndex(Integer number) { //method used to set the index order of images as they are added to the Shopping List
+	public void setImageIndex(Integer number) { // Method used to set the index order of images as they are added to the Shopping List
 		
-		trackImages[track] = number; //loads the trackImages[] with the index of the selected item added to the Shopping List
-		track++; //increments the variable: 'track' for next use
+		trackImages[track] = number; // Loads the trackImages[] with the index of the selected item added to the Shopping List
+		track++; // Increments the variable: 'track' for next use
 		
 	}
 	
@@ -172,8 +169,7 @@ public class productClass {
 	 * 
 	 * @throws FileNotFoundException
 	 */
-
-	public void loadNamePathsAndDescrip() throws FileNotFoundException { // method used to load the paths for the images and titles of products...all found in the productDescriptions folder in src
+	public void loadNamePathsAndDescrip() throws FileNotFoundException { // Method used to load the paths for the images and titles of products...all found in the productDescriptions folder in src
 		 
 		//java.net.URL url = getClass().getResource("/productDescriptions/paths.txt"); //sets a java.net.URL variable: 'url' to the .txt file found at the specified path
 		//File file = new File(url.getPath()); //creats a File Object from the 'url' variable
