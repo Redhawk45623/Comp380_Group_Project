@@ -1,5 +1,3 @@
-
-
 package windowBuilder.views;
 
 import java.io.BufferedReader;

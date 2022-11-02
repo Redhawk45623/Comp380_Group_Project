@@ -1,4 +1,3 @@
-
 package windowBuilder.views;
 
 import javax.swing.JPanel;
@@ -34,7 +33,7 @@ import javax.swing.SwingConstants;
  * It features two modes that are selected by the user: Fast shopping that does not use a <br>
  * Shopping List and another option that does.<p>
  * 
- * The 'fast' shopping feature alows the user to browse a combobox which holds all products <br>
+ * The 'fast' shopping feature allows the user to browse a combobox which holds all products <br>
  * for sale.  The combobox displays ID, Name, and Price of product. Once an item is selected, <br>
  * an 'Add to Cart' button will move the selected product to the Cart. <p>
  * 
@@ -53,21 +52,21 @@ import javax.swing.SwingConstants;
 public class productSearchClass extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
-	public static Object[] products; //array that is loaded from file containing Product Names, used to load combobox
-	public static Object[] productIDs; //array that is loaded from read file containing Product IDs, used to load combobox
-	public static Object[] prices = new String[25]; //array that is loaded from file containing prices, used to load combobox
-	public static int[] pricesIndex = new int[25]; ////used to track the order of indexes that were added to the shopping list
-	public static int[] priceArray = new int[10]; //array used to store the prices in order of added to the shopping list after pressing add to list button
+	public static Object[] products; // Array that is loaded from file containing Product Names, used to load combobox
+	public static Object[] productIDs; // Array that is loaded from read file containing Product IDs, used to load combobox
+	public static Object[] prices = new String[25]; // Array that is loaded from file containing prices, used to load combobox
+	public static int[] pricesIndex = new int[25]; // Used to track the order of indexes that were added to the shopping list
+	public static int[] priceArray = new int[10]; // Array used to store the prices in order of added to the shopping list after pressing add to list button
 	public static int[] imagesIndex = new int[25];
 	public static Object[] trackPrices = new String[10];
 	
 	
 	
-	public static DefaultListModel<Object> ToProductSearchList_items_1; //DefaultListModel list used to create list containing items added to the Search List
-	public static DefaultListModel<Object> ToCartShopList_items_3; //DefaultListModel list used to create list containing items added to Cart List from Shopping List
-	public static DefaultListModel<Object> ToQuantityList_items_4; //DefaultListModel list used to create list containing quantity of products in the Shopping List
+	public static DefaultListModel<Object> ToProductSearchList_items_1; // DefaultListModel list used to create list containing items added to the Search List
+	public static DefaultListModel<Object> ToCartShopList_items_3; // DefaultListModel list used to create list containing items added to Cart List from Shopping List
+	public static DefaultListModel<Object> ToQuantityList_items_4; // DefaultListModel list used to create list containing quantity of products in the Shopping List
 	
-	public static JComboBox<String> cbProducts; //Combobox that lists all products for sale
+	public static JComboBox<String> cbProducts; // Combobox that lists all products for sale
 	
 	private boolean check = false; // boolean variable that controls visibility to see the product image (rdbtnSeeImage)
 	private boolean check2 = false; // boolean variable that controls visibility to see and use the the Shpping List (rdbtnUseList)
@@ -77,27 +76,27 @@ public class productSearchClass extends JPanel {
 	private boolean checkCartRepeats = false;
 	private boolean checkMax = false;
 	
-	public static int add = 0; //incremented variable used as index for priceArray, used for btnAddList_1 action event 
-	private static int sum; //incremented variable used as index for addPrices() 
-	private static int grandtotal; //variable used in the addPrices2() method
-	private static int counter = 0; //incremented variable used as index for addPrices() 
+	public static int add = 0; // Incremented variable used as index for priceArray, used for btnAddList_1 action event 
+	private static int sum; // Incremented variable used as index for addPrices() 
+	private static int grandtotal; // Variable used in the addPrices2() method
+	private static int counter = 0; // Incremented variable used as index for addPrices() 
 	public static int quantAdded;
 	private static int increment = 0;
 	
-	private JPanel panel_1; //panel that is used to hold all elements for the Shopping List option
-	private JPanel panel_2; //panel that is used to hold the btnAddCart button and lblAdd2Cart label
-	private JPanel panel_3; //panel that is used to hold the image display area
-	private JPanel panel_4; //panel that is used to hold the product desciption area
+	private JPanel panel_1; // Panel that is used to hold all elements for the Shopping List option
+	private JPanel panel_2; // Panel that is used to hold the btnAddCart button and lblAdd2Cart label
+	private JPanel panel_3; // Panel that is used to hold the image display area
+	private JPanel panel_4; // Panel that is used to hold the product description area
 	
-	private JScrollPane scrollPaneShopList; //scrollpane element for the Shopping List
-	private JScrollPane scrollPaneQuantity; //scrollpane element for the Quantity List
+	private JScrollPane scrollPaneShopList; // ScrollPane element for the Shopping List
+	private JScrollPane scrollPaneQuantity; // ScrollPane element for the Quantity List
 	
-	private JButton btnAddToList; //button to add products from combobox to the Shopping List
-	private JButton btnAddToCart; //button to add products straight to cart (radio button -> rdbtnUseList not selected)
-	private JButton btnAddAllToCart; //button used to add all contents of Shopping List to Cart
-	private JButton btnRemoveAll; //button to remove all contents of the Shopping List
-	private JButton btnAddOneToList; //button to add one selected item from Shopping List to Cart
-	private JButton btnRemoveOneItem; //button to remove one item from the Shopping List
+	private JButton btnAddToList; // Button to add products from combobox to the Shopping List
+	private JButton btnAddToCart; // Button to add products straight to cart (radio button -> rdbtnUseList not selected)
+	private JButton btnAddAllToCart; // Button used to add all contents of Shopping List to Cart
+	private JButton btnRemoveAll; // Button to remove all contents of the Shopping List
+	private JButton btnAddOneToList; // Button to add one selected item from Shopping List to Cart
+	private JButton btnRemoveOneItem; // Button to remove one item from the Shopping List
 	
 	private JLabel lblRemoveAllFromList;  ///////////////////
 	private JLabel lblNewLabel;	          //               //
@@ -109,18 +108,18 @@ public class productSearchClass extends JPanel {
 	public static JLabel lblImageDescrip; //               //
 	private JLabel lblNoShipNotaxes;      ///////////////////
 	
-	private JList<Object> JListShopList_1; //JList element for Shopping List
-	private JList<Object> JListQuantity; //JList that lists the quantity of products
+	private JList<Object> JListShopList_1; // JList element for Shopping List
+	private JList<Object> JListQuantity; // JList that lists the quantity of products
 	
-	private JRadioButton rdbtnUseList; //radio button used to list the Shopping List option
-	private JRadioButton rdbtnSeeImage; //radio button to see the product image
-	private JRadioButton rdbtnSeeDescription; //radio button to see the product image
+	private JRadioButton rdbtnUseList; // Radio button used to list the Shopping List option
+	private JRadioButton rdbtnSeeImage; // Radio button to see the product image
+	private JRadioButton rdbtnSeeDescription; // Radio button to see the product image
 	
-	public static JTextPane txtpnProductDescription; //text pane for product description
+	public static JTextPane txtpnProductDescription; // Text pane for product description
 	
-	private static JTextArea textAreaTotal; //text area to display the total cost of the products added to the Shopping List
+	private static JTextArea textAreaTotal; // Text area to display the total cost of the products added to the Shopping List
 	
-	productClass productObject = new productClass(); //instantiates an object of productClass() called 'productObject'
+	productClass productObject = new productClass(); // Instantiates an object of productClass() called 'productObject'
 	
 	/**
 	 * Calls initComponents() which is a method that contains all initialized (structural) components of the JPanel.<br>
@@ -132,15 +131,15 @@ public class productSearchClass extends JPanel {
 	 * 
 	 *@throws FileNotFoundException
 	 */
-	public productSearchClass() throws FileNotFoundException{ //constructor
+	public productSearchClass() throws FileNotFoundException{ // Constructor
 		
-		initComponents(); //calls initComponents() 
-		createEvents(); //calls createEvents();				       	
-		loadProductCombobox();	//calls loadCombobox()		
-		panel_1.setVisible(false); //hides all elements in panel 1 (Shopping List option)
-		panel_2.setVisible(true); //reveals all elemnts in panel_2 (btnAddCart button and associated label)
-		panel_3.setVisible(false); //hides the elements in panel_3 (display image area)
-		panel_4.setVisible(false); //hides the elements in panel_4 (product description area)		
+		initComponents(); // Calls initComponents() 
+		createEvents(); // Calls createEvents();				       	
+		loadProductCombobox();	// Calls loadCombobox()		
+		panel_1.setVisible(false); // Hides all elements in panel 1 (Shopping List option)
+		panel_2.setVisible(true); // Reveals all elements in panel_2 (btnAddCart button and associated label)
+		panel_3.setVisible(false); // Hides the elements in panel_3 (display image area)
+		panel_4.setVisible(false); // Hides the elements in panel_4 (product description area)		
 	}
 		
 	/**
@@ -150,15 +149,15 @@ public class productSearchClass extends JPanel {
 	 * 
 	 * @param index   used as the index for prices[]
 	 */
-	public void addPrices(int index) { //method to add up the prices
+	public void addPrices(int index) { // Method to add up the prices
 		
-		Object first = prices[index]; //this creates an object variable that is initialized from the passed parameter, used to get selected index and match to price
-		int second = Integer.parseInt(first.toString()); //this converts the object to integer
-		priceArray[counter] = second; //this loads the priceArray[]		
-		counter++; //increments counter variable
-		sum = 0; //sets the variable initially to 0
-		for(int i = 0; i < priceArray.length; i++){ //loop to add up the total price that is in priceArray
-			sum += priceArray[i]; //adds up the priceArray[] and stores it in the variable sum
+		Object first = prices[index]; // This creates an object variable that is initialized from the passed parameter, used to get selected index and match to price
+		int second = Integer.parseInt(first.toString()); // This converts the object to integer
+		priceArray[counter] = second; // This loads the priceArray[]		
+		counter++; // Increments counter variable
+		sum = 0; // Sets the variable initially to 0
+		for (int i = 0; i < priceArray.length; i++) { // Loop to add up the total price that is in priceArray
+			sum += priceArray[i]; // Adds up the priceArray[] and stores it in the variable sum
 		}		
 	}
 	
@@ -173,13 +172,13 @@ public class productSearchClass extends JPanel {
 		
 		Object priceFound = trackPrices[index];
 		int priceOfProduct = Integer.parseInt(priceFound.toString()); 				
-		Object adjust = priceArray[index]; //sets Object variable: 'adjust' to the element found at cartPriceArray[] using parameter: 'index'
-		int currentPrice = Integer.parseInt(adjust.toString()); //this converts the object to integer
+		Object adjust = priceArray[index]; // Sets Object variable: 'adjust' to the element found at cartPriceArray[] using parameter: 'index'
+		int currentPrice = Integer.parseInt(adjust.toString()); // This converts the object to integer
 		int added = currentPrice + priceOfProduct;
-		priceArray[index] = added; //this loads the cartPriceArray[]
-		sum = 0; //sets the variable initially to 0
-		for(int i = 0; i < priceArray.length; i++){ //loop to add up the total price that is in priceArray
-			sum += priceArray[i]; //adds up the priceArray[] and stores it in the variable sum
+		priceArray[index] = added; // This loads the cartPriceArray[]
+		sum = 0; // Sets the variable initially to 0
+		for (int i = 0; i < priceArray.length; i++) { // Loop to add up the total price that is in priceArray
+			sum += priceArray[i]; // Adds up the priceArray[] and stores it in the variable sum
 		}
 		
 	}
@@ -195,13 +194,13 @@ public class productSearchClass extends JPanel {
 		
 		Object priceFound = trackPrices[index];
 		int priceOfProduct = Integer.parseInt(priceFound.toString()); 				
-		Object adjust = priceArray[index]; //sets Object variable: 'adjust' to the element found at cartPriceArray[] using parameter: 'index'
-		int currentPrice = Integer.parseInt(adjust.toString()); //this converts the object to integer
+		Object adjust = priceArray[index]; // Sets Object variable: 'adjust' to the element found at cartPriceArray[] using parameter: 'index'
+		int currentPrice = Integer.parseInt(adjust.toString()); // This converts the object to integer
 		int remove = currentPrice - priceOfProduct;
-		priceArray[index] = remove; //this loads the cartPriceArray[]
-		sum = 0; //sets the variable initially to 0
-		for(int i = 0; i < priceArray.length; i++){ //loop to add up the total price that is in priceArray
-			sum += priceArray[i]; //adds up the priceArray[] and stores it in the variable sum
+		priceArray[index] = remove; // This loads the cartPriceArray[]
+		sum = 0; // Sets the variable initially to 0
+		for (int i = 0; i < priceArray.length; i++) { // Loop to add up the total price that is in priceArray
+			sum += priceArray[i]; // Adds up the priceArray[] and stores it in the variable sum
 		}
 		
 	}
@@ -213,26 +212,26 @@ public class productSearchClass extends JPanel {
 	 * 
 	 * @param element
 	 */
-	public static void rearrangeCart(int element) { //method that rearranges the cartPriceArray when an item is removed
+	public static void rearrangeCart(int element) { // Method that rearranges the cartPriceArray when an item is removed
 		
-		int[] cartPriceArray2 = new int[priceArray.length -1]; //initializes the temp cartPriceArray2 to the length of cartPriceArray.length -1]
-		for(int i = 0, k = 0; i < priceArray.length; i++){ //loop each element of cartPriceArray
-			if(priceArray[i] != element){ //if statement; if cartPriceArray at index i does not equal parameter x
-				cartPriceArray2[k] = priceArray[i];	//if statement is true, then load cartPriceArray2 at index k with cartPriceArray at index i
-				k++; //increment k
+		int[] cartPriceArray2 = new int[priceArray.length -1]; // Initializes the temp cartPriceArray2 to the length of cartPriceArray.length -1]
+		for (int i = 0, k = 0; i < priceArray.length; i++) { // Loop each element of cartPriceArray
+			if(priceArray[i] != element){ // if statement; if cartPriceArray at index i does not equal parameter x
+				cartPriceArray2[k] = priceArray[i];	// if statement is true, then load cartPriceArray2 at index k with cartPriceArray at index i
+				k++; // Increment k
 			}			
 		}
-		priceArray = cartPriceArray2; //after for loop, set cartPriceArray[] to temp cartPriceArray2[]	
-		int addedUp = Arrays.stream(priceArray).sum(); //add  up the total sum of cartPriceArray and set it to temp int variable: addedUp		
-		if (addedUp == 0) {	//if addUp is equal to 0			
-			textAreaTotal.setText("$0.00"); //this resets the textAreaCartTotal box back to empty
-			priceArray = new int[15]; // this resets the cartPriceArray[]
+		priceArray = cartPriceArray2; // After for loop, set cartPriceArray[] to temp cartPriceArray2[]	
+		int addedUp = Arrays.stream(priceArray).sum(); // Add up the total sum of cartPriceArray and set it to temp int variable: addedUp		
+		if (addedUp == 0) {	// If addedUp is equal to 0			
+			textAreaTotal.setText("$0.00"); // This resets the textAreaCartTotal box back to empty
+			priceArray = new int[15]; // This resets the cartPriceArray[]
 			prices = new String[20];
-			addedOne = false; //resets the boolean variable: 'addedOne' to false. this establishes that no product has been added to the Shopping List
-			ToProductSearchList_items_1.removeAllElements(); //this clears all elements from DefaultListModel -> ToProductSearchList_items_1
+			addedOne = false; // Resets the boolean variable: 'addedOne' to false. this establishes that no product has been added to the Shopping List
+			ToProductSearchList_items_1.removeAllElements(); // This clears all elements from DefaultListModel -> ToProductSearchList_items_1
 			grandtotal = 0;
 			counter = 0;
-			sum = 0; //this resets the variable sum	
+			sum = 0; // This resets the variable sum	
 		}
 
 	}
@@ -242,12 +241,12 @@ public class productSearchClass extends JPanel {
 	 * Loads the combobox with products using three arrays (simulated database).<br>
 	 * 
 	 */
-	public void loadProductCombobox() { //method to load the combobox
+	public void loadProductCombobox() { // Method to load the combobox
 		
-		for(int i = 0; i < products.length; i++) { //for-loop
-			String line = productIDs[i].toString(); //pulls Object element from productIDs[] and converts to String variable line
-			String line2 = products[i].toString(); //pulls Object element from products[] and converts to String variable line2
-			cbProducts.addItem(line + " - " + line2 + " - " + "Price: " + "$" + prices[i] + ".00"); //loads the JComboBox cbProducts_1 with Products IDs, Product Names, and Prices			
+		for (int i = 0; i < products.length; i++) { // for-loop
+			String line = productIDs[i].toString(); // Pulls Object element from productIDs[] and converts to String variable line
+			String line2 = products[i].toString(); // Pulls Object element from products[] and converts to String variable line2
+			cbProducts.addItem(line + " - " + line2 + " - " + "Price: " + "$" + prices[i] + ".00"); // Loads the JComboBox cbProducts_1 with Products IDs, Product Names, and Prices			
 		}		
 	}
 	
@@ -255,11 +254,11 @@ public class productSearchClass extends JPanel {
 	 * Sets the textAreaTotal with the total price of all products in the Shopping List<br>
 	 * 
 	 */
-	public void setPriceTotal() { //method that sets the total price text area (textAreaTotal_1) in Shopping List
+	public void setPriceTotal() { // Method that sets the total price text area (textAreaTotal_1) in Shopping List
 		
-		textAreaTotal.setText(""); //clears text from textAreaTotal
-		String z = Integer.toString(sum); //converts integer to String needed to display in textAreaTotal box
-		textAreaTotal.append("$" + z + ".00"); //displays the current total price from the shopping list in the textAreaTotal box		
+		textAreaTotal.setText(""); // Clears text from textAreaTotal
+		String z = Integer.toString(sum); // Converts integer to String needed to display in textAreaTotal box
+		textAreaTotal.append("$" + z + ".00"); // Displays the current total price from the shopping list in the textAreaTotal box		
 	}
 	
 	/**
@@ -269,7 +268,7 @@ public class productSearchClass extends JPanel {
 	 * @param from    the list that represents the change 'from'
 	 * @param to      the list that represents the change'to'
 	 */
-	protected static <T> void addTo(ListModel<T> from, DefaultListModel<T> to) { //method used to add one ListModel to another DefaultListModel
+	protected static <T> void addTo(ListModel<T> from, DefaultListModel<T> to) { // Method used to add one ListModel to another DefaultListModel
 	    for (int index = 0; index < from.getSize(); index++) {
 	        to.addElement(from.getElementAt(index));
 	    }
@@ -280,36 +279,36 @@ public class productSearchClass extends JPanel {
 	 * Primarily used for cleaner organization and management.<br>
 	 *
 	 */
-	private void createEvents() { //method that stores all action events
+	private void createEvents() { // Method that stores all action events
 		
-		MouseListener mouseListener = new MouseAdapter() { //mouse action listener to detect when a user clicks on an item in the Shopping List
+		MouseListener mouseListener = new MouseAdapter() { // Mouse action listener to detect when a user clicks on an item in the Shopping List
 		    public void mouseClicked(MouseEvent e) {
-		        if (e.getClickCount() == 1) { //if detects only one click, run the code      	           
+		        if (e.getClickCount() == 1) { // if detects only one click, run the code      	           
 		            int x = 0;		
-					int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates an array that stores the index of the clicked on product. Will be only one index			    
-					int image = selectedIx[x]; //assigns temp variable: 'image' to the index found at selectedIx[x]					 
-					image = productObject.trackImages[image]; //sets the temp variable: 'image' to the index found at trackImages[image]								
-					productObject.loadImages(image); //calls the loadImages() using the temp variable: 'image' (index of trackImages[image]) to display correct image in panel_3
+					int[] selectedIx = JListShopList_1.getSelectedIndices(); // Creates an array that stores the index of the clicked on product. Will be only one index			    
+					int image = selectedIx[x]; // Assigns temp variable: 'image' to the index found at selectedIx[x]					 
+					image = productObject.trackImages[image]; // Sets the temp variable: 'image' to the index found at trackImages[image]								
+					productObject.loadImages(image); // Calls the loadImages() using the temp variable: 'image' (index of trackImages[image]) to display correct image in panel_3
 		        }	        		        
 		    }
 		};
 			
-		btnAddToList.addActionListener(new ActionListener() { //button action method that adds item from combobox to Shopping List
+		btnAddToList.addActionListener(new ActionListener() { // Button action method that adds item from combobox to Shopping List
 			public void actionPerformed(ActionEvent e) {
 				
 				if (JListShopList_1.getModel().getSize() > 7) {
 					JOptionPane.showMessageDialog(null, "Maximum products in Shopping List!", "Alert", JOptionPane.ERROR_MESSAGE);
 					checkMax = true;
 				}			
-				checkRepeats = false; //sets the boolean to false when button is pressed. This is used to check if the selected product has already been added to Shopping List
-				addedOne = true; //sets the boolean variable:'addedOne' to true.  This is to establish at least one product has been added to the Shopping List 				
-				int cbIndex = cbProducts.getSelectedIndex(); //creates variable send to pass to addPrices() method from cbProducts_1					
-				String verify = cbProducts.getItemAt(cbIndex); //sets variable: 'verify' to the selected product usine variable: 'cbIndex'
+				checkRepeats = false; // Sets the boolean to false when button is pressed. This is used to check if the selected product has already been added to Shopping List
+				addedOne = true; // Sets the boolean variable:'addedOne' to true.  This is to establish at least one product has been added to the Shopping List 				
+				int cbIndex = cbProducts.getSelectedIndex(); // Creates variable send to pass to addPrices() method from cbProducts_1					
+				String verify = cbProducts.getItemAt(cbIndex); // Sets variable: 'verify' to the selected product usine variable: 'cbIndex'
 				
-				for (int i=0; i<JListShopList_1.getModel().getSize(); i++) { //for-loop using the size of the 'JListShopList_1'					
-					if (ToProductSearchList_items_1.get(i) == verify) { //if-statement that checks to see if the selected item in the combobox that the user is trying to add to Shopping List is already there						
-						checkRepeats = true; //if the product is already in the Shopping list, set 'checkRepeats' to true
-						JOptionPane.showMessageDialog(null, "Already added to Shopping List!", "Alert", JOptionPane.ERROR_MESSAGE); //display pop-up message						
+				for (int i = 0; i<JListShopList_1.getModel().getSize(); i++) { // for-loop using the size of the 'JListShopList_1'					
+					if (ToProductSearchList_items_1.get(i) == verify) { // if-statement that checks to see if the selected item in the combobox that the user is trying to add to Shopping List is already there						
+						checkRepeats = true; // if the product is already in the Shopping list, set 'checkRepeats' to true
+						JOptionPane.showMessageDialog(null, "Already added to Shopping List!", "Alert", JOptionPane.ERROR_MESSAGE); // Display pop-up message						
 					}										
 				}
 				//JOptionPane.showMessageDialog(null,verify);
@@ -321,19 +320,19 @@ public class productSearchClass extends JPanel {
 					cartClass.prices[increment] = prices[cbIndex];
 					increment++;
 					
-					productObject.setImageIndex(cbIndex); //uses cbIndex variable as a parameter to call setImageIndex().  This tracks the order of indexes to be used for the description and image display						
-					productObject.loadImages(cbIndex); //calls the loadImages() using 'cbIndex' as a parameter			
-					pricesIndex[add] = cbIndex; //used to track price index
-					add++; //increments the add variable for prices[] for the next use	
+					productObject.setImageIndex(cbIndex); // Uses cbIndex variable as a parameter to call setImageIndex().  This tracks the order of indexes to be used for the description and image display						
+					productObject.loadImages(cbIndex); // Calls the loadImages() using 'cbIndex' as a parameter			
+					pricesIndex[add] = cbIndex; // Used to track price index
+					add++; // Increments the add variable for prices[] for the next use	
 					
-					addPrices(cbIndex); //calls addPrices method				
-					setPriceTotal(); //calls setPriceTotal method							
-					ToCartShopList_items_3.addElement(cbProducts.getSelectedItem()); //	//This adds the selected element from cbProducts to DefaultListModel ToCartShopList_items_3			
-					ToProductSearchList_items_1.addElement(cbProducts.getSelectedItem());  //This adds the selected element from cbProducts to DefaultListModel ToProductSearchList_items_1								
-					ToQuantityList_items_4.addElement("1"); //adds a 1 to the DefaultListModel: 'ToQuantityList_items_4'
-					JListQuantity.setModel(ToQuantityList_items_4); //sets the model of the Shopping List quantity box					
-					JListShopList_1.setModel(ToProductSearchList_items_1); //this lists the selected DefaultListModel items in the JListShopList shopping list							
-					JListShopList_1.addMouseListener(mouseListener); //a listener that detects when a product is selected in the shopping list
+					addPrices(cbIndex); // Calls addPrices method				
+					setPriceTotal(); // Calls setPriceTotal method							
+					ToCartShopList_items_3.addElement(cbProducts.getSelectedItem()); // This adds the selected element from cbProducts to DefaultListModel ToCartShopList_items_3			
+					ToProductSearchList_items_1.addElement(cbProducts.getSelectedItem());  // This adds the selected element from cbProducts to DefaultListModel ToProductSearchList_items_1								
+					ToQuantityList_items_4.addElement("1"); // Adds a 1 to the DefaultListModel: 'ToQuantityList_items_4'
+					JListQuantity.setModel(ToQuantityList_items_4); // Sets the model of the Shopping List quantity box					
+					JListShopList_1.setModel(ToProductSearchList_items_1); // This lists the selected DefaultListModel items in the JListShopList shopping list							
+					JListShopList_1.addMouseListener(mouseListener); // A listener that detects when a product is selected in the shopping list
 					//JOptionPane.showMessageDialog(null,S);
 				}
 				
@@ -344,35 +343,35 @@ public class productSearchClass extends JPanel {
 			} 
 		});
 		
-		btnAddToCart.addActionListener(new ActionListener() { //button action method that adds product from combobox to Cart
+		btnAddToCart.addActionListener(new ActionListener() { // Button action method that adds product from combobox to Cart
 			public void actionPerformed(ActionEvent e) {
 				
-				checkCartRepeats = false; //always sets the boolean to false when button is pressed				
-				cartClass.check = true; //always sets the boolean to true when button is pressed
-				int index = cbProducts.getSelectedIndex(); //creates variable index to pass to addPrices() method.  Used to get the selected product from combobox			
-				String verify = cbProducts.getItemAt(index); //sets variable: 'verify' to the selected product using variable: 'index'
+				checkCartRepeats = false; // Always sets the boolean to false when button is pressed				
+				cartClass.check = true; // Always sets the boolean to true when button is pressed
+				int index = cbProducts.getSelectedIndex(); // Creates variable index to pass to addPrices() method.  Used to get the selected product from combobox			
+				String verify = cbProducts.getItemAt(index); // Sets variable: 'verify' to the selected product using variable: 'index'
 				
-				for (int i=0; i<cartClass.JListCartList.getModel().getSize(); i++) { //for loop that checks the cartClass.CartList_items_2 for a product (variable: 'verify') already added to the Cart					
-					if (cartClass.CartList_items_2.get(i) == verify) { //if statement that looks for a product already added to the Cart						
-						checkCartRepeats = true; //if there is already a product a user is attempting to add again, set the boolean to true
-						JOptionPane.showMessageDialog(null, "Already Added to Cart! Add quantity from Cart tab...", "Alert", JOptionPane.ERROR_MESSAGE); //display pop-up message						
+				for (int i = 0; i < cartClass.JListCartList.getModel().getSize(); i++) { // for loop that checks the cartClass.CartList_items_2 for a product (variable: 'verify') already added to the Cart					
+					if (cartClass.CartList_items_2.get(i) == verify) { // if statement that looks for a product already added to the Cart						
+						checkCartRepeats = true; // If there is already a product a user is attempting to add again, set the boolean to true
+						JOptionPane.showMessageDialog(null, "Already Added to Cart! Add quantity from Cart tab...", "Alert", JOptionPane.ERROR_MESSAGE); // Display pop-up message						
 					}								
 				}			
-				if (checkCartRepeats == false) { //if the boolean is false, run the code
-					cartClass.addCartprice(index); //calls the	addCartprice() from cartClass with index variable as parameter			
-					cartClass.setCartPriceTotal(); //calls the setCartPriceTotal() from cartClass
+				if (checkCartRepeats == false) { // If the boolean is false, run the code
+					cartClass.addCartprice(index); // Calls the	addCartprice() from cartClass with index variable as parameter			
+					cartClass.setCartPriceTotal(); // Calls the setCartPriceTotal() from cartClass
 					
-					cartClass.ToCartQuantityList_items_4.addElement("1"); //adds a 1 to the DefaultListModel: 'ToCartQuantityList_items_4' in the cartClass
-					cartClass.JListCartQuantity.setModel(cartClass.ToCartQuantityList_items_4); //sets the model (cartClass quantity box)
+					cartClass.ToCartQuantityList_items_4.addElement("1"); // Adds a 1 to the DefaultListModel: 'ToCartQuantityList_items_4' in the cartClass
+					cartClass.JListCartQuantity.setModel(cartClass.ToCartQuantityList_items_4); // Sets the model (cartClass quantity box)
 					
 					
 					cartClass.prices[increment] = prices[index];
 					increment++;
 					
 					
-					cartClass.CartList_items_2.addElement(cbProducts.getSelectedItem()); //adds the product stored in combobox (cbProducts_1) to DefaultListModel -> CartList_items_2
-					cartClass.JListCartList.setModel(cartClass.CartList_items_2); //places the items in the cart (cartClass.JListCartList) from CartList_items_2
-					JOptionPane.showMessageDialog(null, "Successfully added to Cart!", "Product Added", JOptionPane.INFORMATION_MESSAGE); //Displays a pop-up message
+					cartClass.CartList_items_2.addElement(cbProducts.getSelectedItem()); // Adds the product stored in combobox (cbProducts_1) to DefaultListModel -> CartList_items_2
+					cartClass.JListCartList.setModel(cartClass.CartList_items_2); // Places the items in the cart (cartClass.JListCartList) from CartList_items_2
+					JOptionPane.showMessageDialog(null, "Successfully added to Cart!", "Product Added", JOptionPane.INFORMATION_MESSAGE); // Displays a pop-up message
 				}
 			}
 		});
@@ -380,21 +379,12 @@ public class productSearchClass extends JPanel {
 		btnAddOneToList.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if (! JListShopList_1.isSelectionEmpty()){ //if an item is selected in the Shopping List, then run the following code					
+				if (! JListShopList_1.isSelectionEmpty()) { // If an item is selected in the Shopping List, then run the following code					
 						
-					int selectedIx = JListShopList_1.getSelectedIndex(); //creates a temp array that stores the selected index in the Shopping List. Will only be one item in array			    
-					
-					
-					
-					
-					
-					
+					int selectedIx = JListShopList_1.getSelectedIndex(); // Creates a temp array that stores the selected index in the Shopping List. Will only be one item in array			    
+										
 					addOne(selectedIx); 
-					
-					
-					
-					
-					
+										
 					setPriceTotal(); //calls setPriceTotal method	
 									
 					Object number = ToQuantityList_items_4.getElementAt(selectedIx); //sets Object variable: 'number' to the price stored at ToQuantityList_items_4
@@ -403,182 +393,172 @@ public class productSearchClass extends JPanel {
 					ToQuantityList_items_4.setElementAt(addedUp, selectedIx); //sets the quantity displayed in quantity box for selected item at the right spot
 					//JOptionPane.showMessageDialog(null, "Added one more -> " + products[image]); //pop-up message displaying the product which the user added a quantity
 					
-					for(int i = 0; i < priceArray.length; i++) {						
+					for (int i = 0; i < priceArray.length; i++) {						
 						System.out.println("Added one to priceArray[]: " + priceArray[i] + "  prices2[] Array: " + trackPrices[i]);												
-						}
+					}
 					
-				}				
-				else { //if the button is pushed and nothing is selected in the Shopping List, display the pop-up message
-					JOptionPane.showMessageDialog(null, "Please select an item to add!", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message		
+				} else { // If the button is pushed and nothing is selected in the Shopping List, display the pop-up message
+					JOptionPane.showMessageDialog(null, "Please select an item to add!", "Alert", JOptionPane.ERROR_MESSAGE); // Displays a pop-up message		
 				}
 				
 			}
 		});
 		
-		btnAddAllToCart.addActionListener(new ActionListener() { //button action method that adds all selected Products from Shopping List to Cart
+		btnAddAllToCart.addActionListener(new ActionListener() { // Button action method that adds all selected Products from Shopping List to Cart
 			public void actionPerformed(ActionEvent e) {
 				
 				cartClass.check = false;
 				
-				int begn = 0; //sets the beginning point of the selection value
-				int end = JListShopList_1.getModel().getSize() - 1; //sets the end point of the selection value
-				if (end >= 0) { //loop to select all items in the shopping using begn and end variables
-					JListShopList_1.setSelectionInterval(begn, end); //selects all items in the Shopping List (JListShopList_1) at once					
+				int begn = 0; // Sets the beginning point of the selection value
+				int end = JListShopList_1.getModel().getSize() - 1; // Sets the end point of the selection value
+				if (end >= 0) { // Loop to select all items in the shopping using begin and end variables
+					JListShopList_1.setSelectionInterval(begn, end); // Selects all items in the Shopping List (JListShopList_1) at once					
 				}
 				
-				int[] selectedIx = JListShopList_1.getSelectedIndices(); //creates an array that stores the selected items in the Shopping List				
+				int[] selectedIx = JListShopList_1.getSelectedIndices(); // Creates an array that stores the selected items in the Shopping List				
 				
-				if (! JListShopList_1.isSelectionEmpty()){ //checks to see if there is at least one item in the Shopping List to add to Cart
-					for (int i = 0; i < selectedIx.length; i++) { //loop 
+				if (! JListShopList_1.isSelectionEmpty()){ // Checks to see if there is at least one item in the Shopping List to add to Cart
+					for (int i = 0; i < selectedIx.length; i++) { // Loop 
 					
-						int temp = pricesIndex[i]; //sets variable temp for each element in prices[]
-						cartClass.addCartprice(temp); //calls addCartprice() from cartClass passing u variable as a parameter
-						cartClass.setCartPriceTotal(); //calls setCartPriceTotal() from cartClass							
+						int temp = pricesIndex[i]; // Sets variable temp for each element in prices[]
+						cartClass.addCartprice(temp); // Calls addCartprice() from cartClass passing u variable as a parameter
+						cartClass.setCartPriceTotal(); // Calls setCartPriceTotal() from cartClass							
 					}
 					
-					quantAdded = cartClass.sum + grandtotal; //sets temp variable: 'quantAdded' to the total of 'cartClass.sum' and 'grandtotal'
+					quantAdded = cartClass.sum + grandtotal; // Sets temp variable: 'quantAdded' to the total of 'cartClass.sum' and 'grandtotal'
 					
-					cartClass.textAreaCartTotal.setText(""); //resets the textAreaCartTotal in case there has been a quantity added
-					cartClass.textAreaCartTotal.append("$" + quantAdded + ".00"); //sets the textAreaCartTotal to the variable: 'quantAdded' to account for any added items from the Shopping List				
-					addTo(ToQuantityList_items_4 , cartClass.ToCartQuantityList_items_4); //calls the addTo() which takes a list 'from' and adds it 'to' another list. Basically, sets the quanity in the cart from Shopping List								
-					cartClass.JListCartList.setModel(ToCartShopList_items_3); //sets the Cart List (JListCartList)  in cartClass with all items from DefaultListModel ToCartShopList_items_3
+					cartClass.textAreaCartTotal.setText(""); // Resets the textAreaCartTotal in case there has been a quantity added
+					cartClass.textAreaCartTotal.append("$" + quantAdded + ".00"); // Sets the textAreaCartTotal to the variable: 'quantAdded' to account for any added items from the Shopping List				
+					addTo(ToQuantityList_items_4 , cartClass.ToCartQuantityList_items_4); // Calls the addTo() which takes a list 'from' and adds it 'to' another list. Basically, sets the quanity in the cart from Shopping List								
+					cartClass.JListCartList.setModel(ToCartShopList_items_3); // Sets the Cart List (JListCartList)  in cartClass with all items from DefaultListModel ToCartShopList_items_3
 					
-					ToQuantityList_items_4.removeAllElements(); //clears out the quantity box from the Shoppong List
-					ToProductSearchList_items_1.clear(); //clears all items from DefaultListModel -> ToProductSearchList_items_1
-					textAreaTotal.setText(""); //this resets the textAreaTotal box back to empty
-					priceArray = new int[50]; //resets the priceArray[]
-					txtpnProductDescription.setText(null); //resets the description area
-					displayLabel.setIcon(null); //resets the display image area
+					ToQuantityList_items_4.removeAllElements(); // Clears out the quantity box from the Shopping List
+					ToProductSearchList_items_1.clear(); // Clears all items from DefaultListModel -> ToProductSearchList_items_1
+					textAreaTotal.setText(""); // This resets the textAreaTotal box back to empty
+					priceArray = new int[50]; // Resets the priceArray[]
+					txtpnProductDescription.setText(null); // Resets the description area
+					displayLabel.setIcon(null); // Resets the display image area
 					JOptionPane.showMessageDialog(null, "Moved all items in shopping list to Cart!", "Products Moved", JOptionPane.INFORMATION_MESSAGE);
 					
-				}
-				else { //if there is nothing in the Shopping List, then display pop-up message
-					JOptionPane.showMessageDialog(null, "Please add products to the Shopping List first!", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message					
+				} else { // if there is nothing in the Shopping List, then display pop-up message
+					JOptionPane.showMessageDialog(null, "Please add products to the Shopping List first!", "Alert", JOptionPane.ERROR_MESSAGE); // Displays a pop-up message					
 				}				
 			}
 		});
 		
-		btnRemoveOneItem.addActionListener(new ActionListener() { //button action method that removes selected Product from Shopping List
+		btnRemoveOneItem.addActionListener(new ActionListener() { // Button action method that removes selected Product from Shopping List
 			public void actionPerformed(ActionEvent e) {
 				
-				checkMax = false; //boolean variable used to check if max products are in the Shopping List.
+				checkMax = false; // Boolean variable used to check if max products are in the Shopping List.
 				
-				if (! JListShopList_1.isSelectionEmpty()){ //if the Shopping List is not empty, run the code
+				if (! JListShopList_1.isSelectionEmpty()){ // If the Shopping List is not empty, run the code
 											
-					int selectedIx = JListShopList_1.getSelectedIndex(); //creates a temp array that stores the selected index in the Shopping List. Will only be one item in array			    
+					int selectedIx = JListShopList_1.getSelectedIndex(); // Creates a temp array that stores the selected index in the Shopping List. Will only be one item in array			    
 					
 					Object quantity = ToQuantityList_items_4.get(selectedIx);
 					int quantity2 = Integer.parseInt(quantity.toString());
 					
 					if (quantity2 == 1) {
 					
-						int image = productObject.trackImages[selectedIx]; //sets int variable: 'w' to the index found in 'trackImages[]'
-						productObject.removeImageIndex(image); //calls the removeImageIndex() from productClass using parameter 'w'
-						txtpnProductDescription.setText(null); //resets the description area
-						displayLabel.setIcon(null); //resets the display image area										
+						int image = productObject.trackImages[selectedIx]; // Sets int variable: 'w' to the index found in 'trackImages[]'
+						productObject.removeImageIndex(image); // Calls the removeImageIndex() from productClass using parameter 'w'
+						txtpnProductDescription.setText(null); // Resets the description area
+						displayLabel.setIcon(null); // Resets the display image area										
 						
 						ToCartShopList_items_3.removeElementAt(selectedIx);
-						ToProductSearchList_items_1.removeElementAt(selectedIx); //removes the Product from Shopping List at index specified by variable: 'index'
-						ToQuantityList_items_4.removeElementAt(selectedIx); //removes the quantity amounf from quantity box at index specified by variable: 'index'
+						ToProductSearchList_items_1.removeElementAt(selectedIx); // Removes the Product from Shopping List at index specified by variable: 'index'
+						ToQuantityList_items_4.removeElementAt(selectedIx); // Removes the quantity amount from quantity box at index specified by variable: 'index'
 						
-						productObject.track--; //decrements the variable: 'track' that is used in 'productObject.trackImages[]' to account for the product removed
+						productObject.track--; // Decrements the variable: 'track' that is used in 'productObject.trackImages[]' to account for the product removed
 						
 						int remove = priceArray[selectedIx];
 						rearrangeCart(remove);
 														
 					
-					}
-					else { //if the quantity of the product to be removed is greater than 1, run the code
+					} else { // If the quantity of the product to be removed is greater than 1, run the code
 						
-						Object evaluatedValue = ToQuantityList_items_4.getElementAt(selectedIx); //assign Object: 'evaluatedValue' to the element using index variable: 'image'				
-						int valueInt2 = Integer.parseInt(evaluatedValue.toString()); //convert Object to int
-						valueInt2 = valueInt2 - 1; //subract 'valueInt2' by 1 
-						ToQuantityList_items_4.set( selectedIx, valueInt2); //adjust the quantity using index 'image' by inserting 'valueInt2'					
-						
-						
+						Object evaluatedValue = ToQuantityList_items_4.getElementAt(selectedIx); // Assign Object: 'evaluatedValue' to the element using index variable: 'image'				
+						int valueInt2 = Integer.parseInt(evaluatedValue.toString()); // Convert Object to int
+						valueInt2 = valueInt2 - 1; // Subtract 'valueInt2' by 1 
+						ToQuantityList_items_4.set( selectedIx, valueInt2); // Adjust the quantity using index 'image' by inserting 'valueInt2'					
 						
 						removeOne(selectedIx); 
 						
-						
-						
-						setPriceTotal(); //adjust the Shopping List price total
+						setPriceTotal(); // Adjust the Shopping List price total
 						
 					}
 					
-					
-					for(int i = 0; i < priceArray.length; i++) {						
+					for (int i = 0; i < priceArray.length; i++) {						
 						System.out.println("Removed one from priceArray[]: " + priceArray[i] + "  prices2[] Array: " + trackPrices[i]);												
-						}
+					}
 					
-				}
-				else { //if the Shopping List is empty or if an item in the Shopping List is not selected, display the pop-up
+				} else { // If the Shopping List is empty or if an item in the Shopping List is not selected, display the pop-up
 					JOptionPane.showMessageDialog(null, "Please select an item to remove!", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message				
 				}
 			}
 		});
 		
-		btnRemoveAll.addActionListener(new ActionListener() { //button action method that removes all selected Products in Shopping List
+		btnRemoveAll.addActionListener(new ActionListener() { // Button action method that removes all selected Products in Shopping List
 			public void actionPerformed(ActionEvent e) {
 				
-				if ( addedOne == true){ //checks to see if at least one product is in the Shopping List before trying to clear the Shopping List
+				if (addedOne == true){ // Checks to see if at least one product is in the Shopping List before trying to clear the Shopping List
 					
-					addedOne = false; //resets the boolean variable: 'addedOne' to false. this establishes that no product has been added to the Shopping List
-					txtpnProductDescription.setText(null); //clears out the description text area
-					displayLabel.setIcon(null); //clears out the product image from panel_03
-					ToQuantityList_items_4.removeAllElements(); //clears out the DefaultListModel -> ToQuantityList_items_4 (numbers displayed in the quanity box)
-					ToProductSearchList_items_1.removeAllElements(); //this clears all elements from DefaultListModel -> ToProductSearchList_items_1
-					textAreaTotal.setText("$0.00"); //this resets the textAreaTotal box back to empty
-					priceArray = new int[50]; //this resets the priceArray[]
-					productObject.trackImages = new Integer[20]; //this resets the trackImages[]
-					productObject.track = 0; //resets track variable to 0
-					JOptionPane.showMessageDialog(null, "Removed all products from Shopping List", "Products Removed", JOptionPane.INFORMATION_MESSAGE);//Displays a pop-up message
+					addedOne = false; // Resets the boolean variable: 'addedOne' to false. this establishes that no product has been added to the Shopping List
+					txtpnProductDescription.setText(null); // Clears out the description text area
+					displayLabel.setIcon(null); // Clears out the product image from panel_03
+					ToQuantityList_items_4.removeAllElements(); // Clears out the DefaultListModel -> ToQuantityList_items_4 (numbers displayed in the quanity box)
+					ToProductSearchList_items_1.removeAllElements(); // This clears all elements from DefaultListModel -> ToProductSearchList_items_1
+					textAreaTotal.setText("$0.00"); // This resets the textAreaTotal box back to empty
+					priceArray = new int[50]; // This resets the priceArray[]
+					productObject.trackImages = new Integer[20]; // This resets the trackImages[]
+					productObject.track = 0; // Resets track variable to 0
+					JOptionPane.showMessageDialog(null, "Removed all products from Shopping List", "Products Removed", JOptionPane.INFORMATION_MESSAGE); // Displays a pop-up message
 					
-				}
-				else { //if there is nothing added to the Shopping List yet...
-					JOptionPane.showMessageDialog(null, "Nothing in Shopping List to remove!", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message					
+				} else { // if there is nothing added to the Shopping List yet...
+					JOptionPane.showMessageDialog(null, "Nothing in Shopping List to remove!", "Alert", JOptionPane.ERROR_MESSAGE); // Displays a pop-up message					
 				}
 			}
 		});
 	
-		rdbtnUseList.addActionListener(new ActionListener() { //radio button action method that toggles on or off the Shopping List 
+		rdbtnUseList.addActionListener(new ActionListener() { // Radio button action method that toggles on or off the Shopping List 
 			public void actionPerformed(ActionEvent e) {
 				
-				textAreaTotal.setText("$0.00"); //sets the inital value of Shopping List (textAreaTotal_1) upon first use
+				textAreaTotal.setText("$0.00"); // Sets the inital value of Shopping List (textAreaTotal_1) upon first use
 				
-				if (check2 == false) { //if check2 is false (off), run the code				
-					panel_1.setVisible(true); //turn on panel_1 (Shopping List option)
-					check2 = true; //set the check2 variable to true (on)				
-					panel_2.setVisible(false); //turn off panel_2 (btnAddCart button and associated label)				
-				}else {	//if check2 is true (on)				
-					panel_1.setVisible(false); //turn off panel_1 (Shopping List option)
-					check2 = false;	 //set the check2 variable to false (off)				
-					panel_2.setVisible(true); //turn on panel_2 (btnAddCart button and associated label)
+				if (check2 == false) { // If check2 is false (off), run the code				
+					panel_1.setVisible(true); // Turn on panel_1 (Shopping List option)
+					check2 = true; // Set the check2 variable to true (on)				
+					panel_2.setVisible(false); // Turn off panel_2 (btnAddCart button and associated label)				
+				} else {	// If check2 is true (on)				
+					panel_1.setVisible(false); // Turn off panel_1 (Shopping List option)
+					check2 = false;	// Set the check2 variable to false (off)				
+					panel_2.setVisible(true); // Turn on panel_2 (btnAddCart button and associated label)
 				}								
 			}
 		});
 		
-		rdbtnSeeDescription.addActionListener(new ActionListener() { //radio button action method that togles on or off the Product Desciption area
+		rdbtnSeeDescription.addActionListener(new ActionListener() { // Radio button action method that toggles on or off the Product Description area
 			public void actionPerformed(ActionEvent e) {
 				
-				if (check3 == false) {	//if check3 is false (off), run the code				
-					panel_4.setVisible(true); //turn on panel_4 (product description area)
-					check3 = true; //set the check3 variable to true (on)									
-				}else { //if check3 is true (on)
-					panel_4.setVisible(false); //turn off panel_4 (product description area)
-					check3 = false;	 //set the check3 variable to false (off)									
+				if (check3 == false) {	// If check3 is false (off), run the code				
+					panel_4.setVisible(true); // Turn on panel_4 (product description area)
+					check3 = true; // Set the check3 variable to true (on)									
+				} else { // If check3 is true (on)
+					panel_4.setVisible(false); // Turn off panel_4 (product description area)
+					check3 = false;	// Set the check3 variable to false (off)									
 				}			
 			}
 		});
 	
-		rdbtnSeeImage.addActionListener(new ActionListener() { //radio button action method that toggles on or off the 'See Image' area
+		rdbtnSeeImage.addActionListener(new ActionListener() { // Radio button action method that toggles on or off the 'See Image' area
 			public void actionPerformed(ActionEvent e) {
 				
-				if (check == false) {	//if check is false (off), run the code				
-					panel_3.setVisible(true); ////turn on panel_3 (display image area)
-					check = true;	//set the check variable to true (on)								
-				}else {//if check is true (on)
-					panel_3.setVisible(false); //turn off panel_3 (display image area)
-					check = false; //set the check variable to false (off)										
+				if (check == false) { // If check is false (off), run the code				
+					panel_3.setVisible(true); // Turn on panel_3 (display image area)
+					check = true; // Set the check variable to true (on)								
+				} else { // if check is true (on)
+					panel_3.setVisible(false); // Turn off panel_3 (display image area)
+					check = false; // Set the check variable to false (off)										
 				}				
 			}
 		});		
@@ -589,7 +569,7 @@ public class productSearchClass extends JPanel {
 	 * 
 	 * @throws FileNotFoundException
 	 */
-	private void initComponents() throws FileNotFoundException { ////method that stores components
+	private void initComponents() throws FileNotFoundException { // Method that stores components
 		
 		JPanel panel = new JPanel();
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -887,7 +867,6 @@ public class productSearchClass extends JPanel {
 		);
 		panel_4.setLayout(gl_panel_4);
 	
-		
 		displayLabel = new JLabel("");
 		
 		lblImageDescrip = new JLabel("Product Image");
@@ -924,8 +903,6 @@ public class productSearchClass extends JPanel {
 		panel_1.setLayout(gl_panel_1);
 		panel.setLayout(gl_panel);
 		setLayout(groupLayout);
-		
-		
 		
 	}
 }

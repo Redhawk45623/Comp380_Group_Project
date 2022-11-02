@@ -1,4 +1,3 @@
-
 package windowBuilder.views;
 
 import java.awt.EventQueue;
@@ -39,8 +38,8 @@ public class eCommerceMain extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	JPanel search_panel = new productSearchClass(); //instantiates an object of productSearchClass() which is a JPanel
-	JPanel cart_panel = new cartClass(); //instantiates an object of cartClass() which is a JPanel
+	JPanel search_panel = new productSearchClass(); // Instantiates an object of productSearchClass() which is a JPanel
+	JPanel cart_panel = new cartClass(); // Instantiates an object of cartClass() which is a JPanel
 	
 	ImageIcon homeIcon = new ImageIcon(this.getClass().getResource("/icons/Home.png"));            /////////////////////////////////////
 	ImageIcon searchIcon = new ImageIcon(this.getClass().getResource("/icons/Search2.png"));       //                                 //
@@ -79,7 +78,7 @@ public class eCommerceMain extends JFrame {
 	 *
 	 * @throws FileNotFoundException 
 	 */
-	public eCommerceMain() throws FileNotFoundException { //constructor
+	public eCommerceMain() throws FileNotFoundException { // Constructor
 		setTitle("- 'Think Tank' Group Project: 'Vintage Shop' -");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -140,15 +139,15 @@ public class eCommerceMain extends JFrame {
 					.addComponent(lblNewLabel_2)
 					.addContainerGap(349, Short.MAX_VALUE))
 		);
-		home_panel.setLayout(gl_home_panel); //home tab	
+		home_panel.setLayout(gl_home_panel); // Home tab	
 		
 		/////Add panels below/////////
 				
-		tabbedPane.addTab("Product Search", searchIcon, search_panel, "Click to search for products"); //Product Search tab
+		tabbedPane.addTab("Product Search", searchIcon, search_panel, "Click to search for products"); // Product Search tab
 		
-		tabbedPane.addTab("View Cart", cartIcon, cart_panel, "Click to view Cart"); //View Cart tab
+		tabbedPane.addTab("View Cart", cartIcon, cart_panel, "Click to view Cart"); // View Cart tab
 		
-		JPanel checkout_panel = new JPanel(); ///default when TabbedPane was created.....change this like the 'Product Search' and 'View Cart' tabs above
+		JPanel checkout_panel = new JPanel(); /// Default when TabbedPane was created.....change this like the 'Product Search' and 'View Cart' tabs above
 		tabbedPane.addTab("Checkout", checkoutIcon, checkout_panel, null);
 		
 		JPanel help_panel = new JPanel();
