@@ -311,16 +311,6 @@ public class productSearchClass extends JPanel {
 		
 	}
 	
-	public void emptyTheCartWhenSwitching () {
-		
-		if (! cartClass.ToCartQuantityList_items_4.isEmpty()) {
-			
-			cartClass.emptyCart();
-			
-		}
-		
-	}
-	
 	/**
 	 * Holds all 'action' events (listeners).<br>
 	 * Primarily used for cleaner organization and management.<br>
@@ -566,7 +556,7 @@ public class productSearchClass extends JPanel {
 				
 				//Otherwise, YES, empty the Cart and switch shopping method...
 				
-				emptyTheCartWhenSwitching();
+				cartClass.emptyCart();
 					
 				if (check2 == false) { //if check2 is false (off), run the code				
 					panel_1.setVisible(true); //turn on panel_1 (Shopping List option)
