@@ -69,12 +69,13 @@ public class productSearchClass extends JPanel {
 	public static JComboBox<String> cbProducts; //Combobox that lists all products for sale
 	
 	private boolean check = false; // boolean variable that controls visibility to see the product image (rdbtnSeeImage)
-	private boolean check2 = false; // boolean variable that controls visibility to see and use the the Shpping List (rdbtnUseList)
+	private boolean check2 = false; // boolean variable that controls visibility to see and use the the Shopping List (rdbtnUseList)
 	private boolean check3 = false; // boolean variable that controls visibility to see the product description (rdbtnSeeDescription)
 	private static boolean addedOne = false; //boolean to establish AT LEAST ONE product has been added to the Shopping List or not
 	private boolean checkRepeats  = false;  //boolean used to check if the selected product has ALREADY BEEN added to Shopping List
 	private boolean checkCartRepeats = false; //boolean used to check if the product is already in the Cart, fast shop method (no Shopping List)
 	private boolean checkMax = false; //temp...will be deleted later after debugging
+	private boolean shopMethod = true; //boolean use to track whattype of shopping method is being used. True for fast shopping, false for Shopping List
 	
 	private static int add = 0; //incremented variable used as index for priceArray, used for btnAddList_1 action event 
 	private static int sum; // the sum total of the Shopping List
@@ -436,17 +437,17 @@ public class productSearchClass extends JPanel {
 		
 		btnAddAllToCart.addActionListener(new ActionListener() { //button action method that adds all selected Products from Shopping List to Cart
 			public void actionPerformed(ActionEvent e) {
-				
-				cartClass.check = false;			
-				
+											
 				if (! ToProductSearchList_items_1.isEmpty()){ //checks to see if there is at least one item in the Shopping List to add to Cart
-										
+					
+					cartClass.check = false;
 					cartClass.cartPriceArray = priceArray;
 					cartClass.trackPrices = trackPrices;
 					cartClass.sum = sum;
 					cartClass.setCartPriceTotal();
 					cartClass.JListCartList.setModel(ToCartShopList_items_3); //sets the Cart List (JListCartList)  in cartClass with all items from DefaultListModel ToCartShopList_items_3				
 					addTo(ToQuantityList_items_4 , cartClass.ToCartQuantityList_items_4); //calls the addTo() which takes a list 'from' and adds it 'to' another list. Basically, sets the quanity in the cart from Shopping List															
+					
 					ToQuantityList_items_4.removeAllElements(); //clears out the quantity box from the Shopping List
 					ToProductSearchList_items_1.clear(); //clears all items from DefaultListModel -> ToProductSearchList_items_1
 					textAreaTotal.setText(""); //this resets the textAreaTotal box back to empty
@@ -536,15 +537,37 @@ public class productSearchClass extends JPanel {
 				
 				textAreaTotal.setText("$0.00"); //sets the inital value of Shopping List (textAreaTotal_1) upon first use
 				
+				String[] options = {"No", "Yes"};
+				int x = JOptionPane.showOptionDialog(null, "Will remove any products already added to Cart. Continue?",
+		                "ALERT", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
+				
+				if (x == 0 & shopMethod == true) {
+					
+					shopMethod = true;
+					check2 = true;
+					rdbtnUseList.setSelected(false);
+				}
+				if (x == 0 & shopMethod == false) {
+					
+					shopMethod = false;			
+					check2 = false;
+					rdbtnUseList.setSelected(false);
+				}
+				
+					
 				if (check2 == false) { //if check2 is false (off), run the code				
 					panel_1.setVisible(true); //turn on panel_1 (Shopping List option)
 					check2 = true; //set the check2 variable to true (on)				
-					panel_2.setVisible(false); //turn off panel_2 (btnAddCart button and associated label)				
+					panel_2.setVisible(false); //turn off panel_2 (btnAddCart button and associated label)	
+					rdbtnUseList.setSelected(true);
+					shopMethod = false;
 				}else {	//if check2 is true (on)				
 					panel_1.setVisible(false); //turn off panel_1 (Shopping List option)
 					check2 = false;	 //set the check2 variable to false (off)				
 					panel_2.setVisible(true); //turn on panel_2 (btnAddCart button and associated label)
-				}								
+					shopMethod = true;
+				}
+				
 			}
 		});
 		

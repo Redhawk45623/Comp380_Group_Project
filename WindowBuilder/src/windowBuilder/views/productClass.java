@@ -44,7 +44,7 @@ public class productClass {
 	/**
 	 * Loads the arrays used to display products in the combobox for productSearchClass. <br>
 	 * Simulates the database retrieval of crucial product information: ID, Name, and Price.<br>
-	 * Loads this data from the text files loacted in the productDatabase folder.<br>
+	 * Loads this data from the text files located in the productDatabase folder.<br>
 	 * 
 	 * @throws FileNotFoundException
 	 */

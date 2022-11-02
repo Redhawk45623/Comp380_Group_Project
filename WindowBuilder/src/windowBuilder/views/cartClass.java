@@ -37,7 +37,7 @@ import javax.swing.ImageIcon;
 public class cartClass extends JPanel { 
 	
 	private static final long serialVersionUID = 1L;
-	public static DefaultListModel<Object> CartList_items_2; //DefaultListModel list used to create list containing items added Cart List from 'fast' shopping method in productSearchClass
+	public static DefaultListModel<Object> CartList_items_2; //DefaultListModel list used to create list containing items added to Cart List from 'fast' shopping method in productSearchClass
 	public static DefaultListModel<Object> ToCartQuantityList_items_4; //DefaultListModel list used to track the quantity of items in the Cart List
 	
 	////The 3 elements below will be manipulated from a checkout class/////////////////////////////////////////////////////////////////
@@ -73,6 +73,7 @@ public class cartClass extends JPanel {
 		createEvents(); //calls createEvents()() method; builds all events that happen (actions)
 		textAreaCartTotal.setText("$0.00"); //sets the initial total of the Shopping List to $0.00
 		JListCartQuantity.setModel(ToCartQuantityList_items_4); //sets the Cart quantity using 'ToCartQuantityList_items_4'
+		
 	}
 	
 	/**
