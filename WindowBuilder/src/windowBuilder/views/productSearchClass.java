@@ -131,7 +131,7 @@ public class productSearchClass extends JPanel {
 	 */
 	public productSearchClass() throws FileNotFoundException{ //constructor
 		
-		initComponents(); //calls initComponents() 
+		initComponents(); //calls initComponents() which holds/builds all the code for the GUI
 		createEvents(); //calls createEvents();				       	
 		loadProductCombobox();	//calls loadCombobox()		
 		panel_1.setVisible(false); //hides all elements in panel 1 (Shopping List option)
@@ -300,7 +300,8 @@ public class productSearchClass extends JPanel {
 		textAreaTotal.setText("$0.00"); //this resets the textAreaTotal box back to displaying $0.00
 		priceArray = new int[15]; //this resets the priceArray[]
 		trackPrices = new String[20];
-		productObject.trackImages = new Integer[20]; //this resets the trackImages[] in productClass					
+		pricesIndex = new int[25];
+		productObject.trackImages = new Integer[25]; //this resets the trackImages[] in productClass					
 		productObject.track = 0; //resets track variable to 0 in productClass
 		add = 0;
 		sum = 0;
@@ -312,9 +313,8 @@ public class productSearchClass extends JPanel {
 	/**
 	 * Holds all 'action' events (listeners).<br>
 	 * Primarily used for cleaner organization and management.<br>
-	 * Contains a MouseListener that detects one click in the Shopping List and displays image and description for that selected product.<br>
-	 * 
-	 * 
+	 * Contains a MouseListener that detects one click in the Shopping List and displays image and description for that selected product.<br> 
+	 * 	 
 	 */
 	private void createEvents() { //method that stores all action events
 		
@@ -757,13 +757,14 @@ public class productSearchClass extends JPanel {
 											.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 												.addComponent(btnAddAllToCart)
 												.addComponent(btnAddOneToList))
-											.addPreferredGap(ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+											.addGap(34)
 											.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 												.addGroup(gl_panel_1.createSequentialGroup()
 													.addGap(12)
 													.addComponent(lblNewLabel)
 													.addPreferredGap(ComponentPlacement.RELATED)
-													.addComponent(textAreaTotal, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
+													.addComponent(textAreaTotal, GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+													.addGap(54))
 												.addComponent(lblNoShipNotaxes, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE))
 											.addGap(11))))
 								.addGroup(gl_panel_1.createSequentialGroup()
