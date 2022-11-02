@@ -13,8 +13,8 @@ import javax.swing.ImageIcon;
  * This includes loading arrays that handle product IDs, Names, and Prices (simulated database) that will be displayed in the combobox in productSearchClass.<br>
  * It also includes methods that handle the manipulation of product specifics such as associated image and description features.<br>
  * 
- * @author Ralph Ramirez
- * @version 2022.10.28 
+ * @author Ralph Ramirez, Matthew Bellman
+ * @version 2022.11.02 
  */
 public class productClass {
 	
@@ -128,7 +128,6 @@ public class productClass {
 		
 		//String descrip = descriptionsArray[choose].toString(); // Sets the String variable: 'descrip' to the String found in descriptionsArray[]
 		return descriptionsArray[choose].toString(); // Returns the String found in descriptionsArray[choose]
-		
 	}
 	
 	/**
@@ -140,7 +139,6 @@ public class productClass {
 		
 		trackImages[track] = number; // Loads the trackImages[] with the index of the selected item added to the Shopping List
 		track++; // Increments the variable: 'track' for next use
-		
 	}
 	
 	/**
@@ -212,7 +210,7 @@ public class productClass {
 	 */
 	public void loadImages(int number) { // Loads images into image display panel and descriptions into descriptions panel
 		
-		String display;	 // Declares a String variable: 'display'	
+		/*
 		Object namePath = namePaths[number]; // Assigns an Object variable: 'namePath' to the String path found at namePaths[] using parameter: 'number'
 		String path2 = namePath.toString(); // Converts the Object variable: 'namePath' to a String variable: 'path2' 	
 		Object descrip = nameDisplay[number]; // Assigns an Object variable: 'descrip' to the String found at nameDisplay[] using parameter: 'number'
@@ -221,7 +219,19 @@ public class productClass {
 		productSearchClass.displayLabel.setIcon(icon); // Displays the icon in the image display panel of productSearchClass
 		display = setDescriptions(number); // Assigns the String variable: 'display' using the setDescriptions() method
 		productSearchClass.lblImageDescrip.setText(descrip2); // Sets the small label that is the title of the image in the image display panel of productSearchClass
-		productSearchClass.txtpnProductDescription.setText(display); // Sets the description for the product in the description panel in productSearchClass	
+		productSearchClass.txtpnProductDescription.setText(display); // Sets the description for the product in the description panel in productSearchClass
+		*/
+		
+		String display = setDescriptions(number); // Assigns a string variable using the setDesctions() method
+		String descrip = nameDisplay[number].toString(); // Assigns a converted string using nameDisplay[number]
+		String path = namePaths[number].toString(); // Assigns a converted string using namePaths[number]
+		
+		ImageIcon icon = new ImageIcon(this.getClass().getResource(path)); // Displays the icon in the image display panel of productSearchClass
+		
+		productSearchClass.displayLabel.setIcon(icon); // Displays the icon in the image display panel of productSearchClass
+		productSearchClass.lblImageDescrip.setText(descrip); // Sets the small label that is the title of the image in the image display panel of productSearchClass
+		productSearchClass.txtpnProductDescription.setText(display); // Sets the description for the product in the description panel in productSearchClass
+		
 		
 	}	
 	
