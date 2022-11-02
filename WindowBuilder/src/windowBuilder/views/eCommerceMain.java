@@ -25,12 +25,12 @@ import javax.swing.LayoutStyle.ComponentPlacement;
  * 
  * The 'Home', 'Checkout', and 'Help' tabs are still under construction as of the release of this version.<p>
  * 
+ * The 'Product Search' and 'View Cart' tabs are undergoing debugging.<p>
+ * 
  * The 'Product Search' tab uses a JPanel object of productSearchClass which holds the constructor<br>
  * and methods necessary to allow a user to search for a product with added features. The <br>
  * 'View Cart' tab uses a JPanel object of cartClass which holds the constructor and methods<br>
  * necessary to allow a user to view products added to the cart with some features and ability to begin checkout process.<p>
- * 
- * At the release of this version, the 'Checkout' tab and 'Help' tab are still under construction.<br>
  * 
  * @author Ralph Ramirez
  * @version 2022.10.28

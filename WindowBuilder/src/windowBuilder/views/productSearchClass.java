@@ -76,7 +76,7 @@ public class productSearchClass extends JPanel {
 	private boolean checkCartRepeats = false; //boolean used to check if the product is already in the Cart, fast shop method (no Shopping List)
 	private boolean checkMax = false; //temp...will be deleted later after debugging
 	
-	public static int add = 0; //incremented variable used as index for priceArray, used for btnAddList_1 action event 
+	private static int add = 0; //incremented variable used as index for priceArray, used for btnAddList_1 action event 
 	private static int sum; // the sum total of the Shopping List
 	private static int counter = 0; //incremented variable used as index for addPrices() 
 	private static int increment = 0; //incremented variable used for trackPrices[] in this class and in cartClass.trackPrices[] 
