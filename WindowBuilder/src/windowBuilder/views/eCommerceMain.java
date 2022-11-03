@@ -55,10 +55,11 @@ public class eCommerceMain extends JFrame {
 	 */
 	public static void main(String[] args) {
 		try {
-			UIManager.setLookAndFeel("com.apple.laf.AquaLookAndFeel");
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
+		
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
