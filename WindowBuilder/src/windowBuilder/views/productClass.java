@@ -47,14 +47,8 @@ public class productClass {
 	 * @throws FileNotFoundException
 	 */
 	public void loadProductsFromTxtFile() throws FileNotFoundException { // Method that loads the arrays used to load combobox (products in drop-down list)
-		
-		//java.net.URL url = getClass().getResource("/productDatabase/productNames.txt"); 
-		//File file = new File(url.getPath());
 			
 		File file = new File(System.getProperty("user.dir") + "/src/productDatabase/productNames.txt"); // Path to productNames.txt file stored in src/productDatabase
-
-		//String namepath = "/Users/Zeina/Desktop/productNames.txt"; //path for the Product Names file stored on my computer locally
-		//File file = new File(namepath);
 			
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
 			productSearchClass.products = br.lines().toArray(); // Loads products[] with Product Names 
@@ -63,9 +57,6 @@ public class productClass {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
-		//String IDpath = "/Users/Zeina/Desktop/productIDs.txt"; //path for the Product IDs file stored on my computer locally
-		//File file2 = new File(IDpath);
 		
 		File file2 = new File(System.getProperty("user.dir") + "/src/productDatabase/productIDs.txt");  // Path to productIDs.txt file stored src/productDatabase
 		
@@ -77,9 +68,6 @@ public class productClass {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//String pricespath = "/Users/Zeina/Desktop/prices.txt"; //path for Product Prices file stored on my computer locally
-		//File file3 = new File(pricespath);
 		
 		File file3 = new File(System.getProperty("user.dir") + "/src/productDatabase/prices.txt"); // Path to prices.txt file stored in src/productDatabase
 		
@@ -100,10 +88,6 @@ public class productClass {
 	 * @throws FileNotFoundException
 	 */
 	public void loadProductDescriptions() throws FileNotFoundException { // Method used to load the Descriptions of Products into array
-		
-		//int i; //declares int i
-		//java.net.URL url = getClass().getResource("/productDescriptions/descriptions.txt"); //sets a java.net.URL variable: 'url' to the .txt file found at the specified path
-		//File file = new File(url.getPath()); //creats a File Object from the 'url' variable
 		
 		File file = new File(System.getProperty("user.dir") + "/src/productDescriptions/descriptions.txt");
 		
@@ -168,10 +152,7 @@ public class productClass {
 	 * @throws FileNotFoundException
 	 */
 	public void loadNamePathsAndDescrip() throws FileNotFoundException { // Method used to load the paths for the images and titles of products...all found in the productDescriptions folder in src
-		 
-		//java.net.URL url = getClass().getResource("/productDescriptions/paths.txt"); //sets a java.net.URL variable: 'url' to the .txt file found at the specified path
-		//File file = new File(url.getPath()); //creats a File Object from the 'url' variable
-		
+		 	
 		File file = new File(System.getProperty("user.dir") + "/src/productDescriptions/paths.txt");
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) { // BufferedReader to begin reading lines of paths.txt
@@ -180,12 +161,8 @@ public class productClass {
 		} catch (FileNotFoundException e) {
 			throw e;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		//java.net.URL url2 = getClass().getResource("/productDescriptions/displayNames.txt"); //sets a java.net.URL variable: 'url' to the .txt file found at the specified path
-		//File file2 = new File(url2.getPath()); //creats a File Object from the 'url2' variable
 		
 		File file2 = new File(System.getProperty("user.dir") + "/src/productDescriptions/displayNames.txt");
 		
