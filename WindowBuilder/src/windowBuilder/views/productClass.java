@@ -32,7 +32,7 @@ public class productClass {
 	 * @throws FileNotFoundException
 	 * @wbp.parser.entryPoint
 	 */
-	public productClass() throws FileNotFoundException { //constructor
+	public productClass() throws FileNotFoundException { // Constructor
 		
 		loadProductsFromTxtFile(); // Loads the arrays that are used to load the combobox in productSearchClass.
 		loadProductDescriptions(); // Calls loadProductDescriptions() method to load descriptionsArray[]
