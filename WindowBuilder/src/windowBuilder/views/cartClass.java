@@ -253,7 +253,7 @@ public class cartClass extends JPanel {
 			
 		if ( valueInt == 1) { //when the quantity of the selected product in the Cart List = 1, run this code
 			
-			productSearchClass.ToCartShopList_items_3.removeElementAt(select2); //remove the selected element from 'ToCartShopList_items_3'
+			CartList_items_2.removeElementAt(select2); //remove the selected element from 'ToCartShopList_items_3'
 			ToCartQuantityList_items_4.removeElementAt(select2); //remove the selected element from 'ToCartQuantityList_items_4'
 			int remove2 = cartPriceArray[select2];	//uses select variable as the index for cartPriceArray and assigns to temp variable remove									
 			rearrangeCart(remove2);						
@@ -269,10 +269,9 @@ public class cartClass extends JPanel {
 	}
 	
 	/**
-	 * 
-	 * 
-	 * 
-	 * 
+	 * Removes all content of the Cart.<br>
+	 * Resets crucial code for the operation of Cart such as lists, arrays, and variables.<br>
+	 *
 	 */
 	public static void emptyCart() {
 		

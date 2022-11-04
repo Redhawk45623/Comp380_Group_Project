@@ -218,16 +218,16 @@ public class productSearchClass extends JPanel {
 	 * 
 	 * @param element   the price of the selected product to be removed from the Shopping List
 	 */
-	public static void rearrangeList(int element) { //method that rearranges the cartPriceArray when an item is removed
+	public static void rearrangeList(int element) { //method that rearranges the priceArray when an item is removed
 		
-		int[] tempArray = new int[priceArray.length -1]; //initializes the temp cartPriceArray2 to the length of cartPriceArray.length -1]
-		for(int i = 0, k = 0; i < priceArray.length; i++){ //loop each element of cartPriceArray
-			if(priceArray[i] != element){ //if statement; if cartPriceArray at index i does not equal parameter x
-				tempArray[k] = priceArray[i];	//if statement is true, then load cartPriceArray2 at index k with cartPriceArray at index i
+		int[] tempArray = new int[priceArray.length -1]; //initializes the tempArrayto the length of priceArray.length -1]
+		for(int i = 0, k = 0; i < priceArray.length; i++){ //loop each element of priceArray
+			if(priceArray[i] != element){ //if statement; if priceArray at index i does not equal parameter element
+				tempArray[k] = priceArray[i];	//if statement is true, then load tempArray at index k with priceArray at index i
 				k++; //increment k
 			}			
 		}
-		priceArray = tempArray; //after for loop, set cartPriceArray[] to temp cartPriceArray2[]	
+		priceArray = tempArray; //after for loop, set priceArray[] to tempArray[]	
 		
 		for (int i = 0; i < priceArray.length; i++) {  //for-loop to match the priceArray[] to trackPrices[]
             trackPrices[i] = String.valueOf(priceArray[i]);
@@ -238,10 +238,10 @@ public class productSearchClass extends JPanel {
 			sum += priceArray[i]; 
 		}		
 		
-		int addedUp = Arrays.stream(priceArray).sum(); //add  up the total sum of cartPriceArray and set it to temp int variable: addedUp		
+		int addedUp = Arrays.stream(priceArray).sum(); //add  up the total sum of priceArray and set it to temp int variable: addedUp		
 		if (addedUp == 0) {	//if addUp is equal to 0			
-			textAreaTotal.setText("$0.00"); //this resets the textAreaCartTotal box back to empty
-			priceArray = new int[15]; // this resets the cartPriceArray[]
+			textAreaTotal.setText("$0.00"); //this resets the textAreaTotal box back to empty
+			priceArray = new int[15]; // this resets the priceArray[]
 			trackPrices = new String[20];
 			addedOne = false; //resets the boolean variable: 'addedOne' to false. this establishes that no product has been added to the Shopping List
 			ToProductSearchList_items_1.removeAllElements(); //this clears all elements from DefaultListModel -> ToProductSearchList_items_1
@@ -308,6 +308,30 @@ public class productSearchClass extends JPanel {
 		sum = 0;
 		counter = 0;
 		increment = 0;			
+		
+	}
+	
+	public void addArrays() {
+		
+		for (int i = 0, j = 0; i < cartClass.cartPriceArray.length; i++) {
+			
+			if (cartClass.cartPriceArray[i] == 0) {
+				
+				cartClass.cartPriceArray[i] = priceArray[j];
+				j++;
+			}
+			
+		}
+		
+		for (int i = 0, j = 0; i < cartClass.trackPrices.length; i++) {
+			
+			if (cartClass.trackPrices[i] == null) {
+				
+				cartClass.trackPrices[i] = trackPrices[j];
+				j++;
+			}
+			
+		}
 		
 	}
 	
@@ -437,17 +461,27 @@ public class productSearchClass extends JPanel {
 		
 		btnAddAllToCart.addActionListener(new ActionListener() { //button action method that adds all selected Products from Shopping List to Cart
 			public void actionPerformed(ActionEvent e) {
+				
+				if (ToProductSearchList_items_1.isEmpty() & ! cartClass.ToCartQuantityList_items_4.isEmpty()) { 
+					JOptionPane.showMessageDialog(null, "Please add products to the Shopping List first!", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message					
+				}
+				
+				if (ToProductSearchList_items_1.isEmpty() & cartClass.ToCartQuantityList_items_4.isEmpty()) { 
+					JOptionPane.showMessageDialog(null, "Please add products to the Shopping List first!", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message					
+				}
 											
-				if (! ToProductSearchList_items_1.isEmpty()){ //checks to see if there is at least one item in the Shopping List to add to Cart
+				if (! ToProductSearchList_items_1.isEmpty() & cartClass.ToCartQuantityList_items_4.isEmpty()){ //checks to see if there is at least one item in the Shopping List to add to Cart
 					
 					cartClass.check = false;
 					cartClass.cartPriceArray = priceArray;
 					cartClass.trackPrices = trackPrices;
 					cartClass.sum = sum;
-					cartClass.setCartPriceTotal();
-					cartClass.JListCartList.setModel(ToCartShopList_items_3); //sets the Cart List (JListCartList)  in cartClass with all items from DefaultListModel ToCartShopList_items_3				
+					cartClass.setCartPriceTotal();					
+					addTo(ToCartShopList_items_3, cartClass.CartList_items_2);
 					addTo(ToQuantityList_items_4 , cartClass.ToCartQuantityList_items_4); //calls the addTo() which takes a list 'from' and adds it 'to' another list. Basically, sets the quanity in the cart from Shopping List															
-					
+					cartClass.JListCartList.setModel(cartClass.CartList_items_2); //sets the Cart List (JListCartList)  in cartClass with all items from DefaultListModel ToCartShopList_items_3				
+										
+					ToCartShopList_items_3.removeAllElements();
 					ToQuantityList_items_4.removeAllElements(); //clears out the quantity box from the Shopping List
 					ToProductSearchList_items_1.clear(); //clears all items from DefaultListModel -> ToProductSearchList_items_1
 					textAreaTotal.setText(""); //this resets the textAreaTotal box back to empty
@@ -458,9 +492,34 @@ public class productSearchClass extends JPanel {
 					JOptionPane.showMessageDialog(null, "Moved all items in shopping list to Cart!", "Products Moved", JOptionPane.INFORMATION_MESSAGE);
 					
 				}
-				else { //if there is nothing in the Shopping List, then display pop-up message
-					JOptionPane.showMessageDialog(null, "Please add products to the Shopping List first!", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up message					
-				}				
+				
+	//////Working on below
+				
+				if (! ToProductSearchList_items_1.isEmpty() & ! cartClass.ToCartQuantityList_items_4.isEmpty()){
+					
+					cartClass.check = false;
+					addArrays();
+					cartClass.sum = cartClass.sum + sum;
+					cartClass.setCartPriceTotal();	
+					addTo(ToCartShopList_items_3, cartClass.CartList_items_2);
+					addTo(ToQuantityList_items_4 , cartClass.ToCartQuantityList_items_4); //calls the addTo() which takes a list 'from' and adds it 'to' another list. Basically, sets the quanity in the cart from Shopping List															
+					cartClass.JListCartList.setModel(cartClass.CartList_items_2); //sets the Cart List (JListCartList)  in cartClass with all items from DefaultListModel ToCartShopList_items_3				
+					
+					//JOptionPane.showMessageDialog(null,"Cart is not empty...");
+					
+					ToCartShopList_items_3.removeAllElements();
+					ToQuantityList_items_4.removeAllElements(); //clears out the quantity box from the Shopping List
+					ToProductSearchList_items_1.clear(); //clears all items from DefaultListModel -> ToProductSearchList_items_1
+					textAreaTotal.setText(""); //this resets the textAreaTotal box back to empty
+					priceArray = new int[15]; //resets the priceArray[]
+					trackPrices = new String[20]; //resets the trackPrices[]
+					txtpnProductDescription.setText(null); //resets the description area
+					displayLabel.setIcon(null); //resets the display image area
+					JOptionPane.showMessageDialog(null, "Moved all items in shopping list to Cart!", "Products Moved", JOptionPane.INFORMATION_MESSAGE);
+				}
+				
+	///////Working on above			
+								
 			}
 		});
 		
@@ -538,7 +597,7 @@ public class productSearchClass extends JPanel {
 				textAreaTotal.setText("$0.00"); //sets the inital value of Shopping List (textAreaTotal_1) upon first use
 				
 				String[] options = {"No", "Yes"};
-				int x = JOptionPane.showOptionDialog(null, "Will remove any products already added to Cart. Continue?",
+				int x = JOptionPane.showOptionDialog(null, "This switch will remove any products already added to Cart. Continue?",
 		                "ALERT", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[1]);
 				
 				if (x == 0 & shopMethod == true) { //NO, don't empty the Cart while using the 'Fast" shopping method...

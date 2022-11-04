@@ -12,6 +12,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 /**
@@ -57,11 +58,22 @@ public class eCommerceMain extends JFrame {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		try {
-			UIManager.setLookAndFeel("com.apple.laf.AquaLookAndFeel");
-		} catch (Throwable e) {
-			e.printStackTrace();
-		}
+		for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+	        if ("Windows".equals(info.getName())) {
+	            try {
+	                javax.swing.UIManager.setLookAndFeel(info.getClassName());
+	            } catch (ClassNotFoundException e) {
+	                e.printStackTrace();
+	            } catch (InstantiationException e) {
+	                e.printStackTrace();
+	            } catch (IllegalAccessException e) {
+	                e.printStackTrace();
+	            } catch (UnsupportedLookAndFeelException e) {
+	                e.printStackTrace();
+	            }
+	            break;
+	        }
+	    }
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
