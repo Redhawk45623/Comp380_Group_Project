@@ -78,7 +78,7 @@ public class cartClass extends JPanel {
 			
 		System.out.println("Products going to checkout: " + CartList_items_2);
 		System.out.println("Quantity going to checkout: " + ToCartQuantityList_items_4);
-		System.out.println("Total Price going to checkout: " + sum );
+		System.out.println("Total Price going to checkout: " + sum);
 		
 	}
 	
