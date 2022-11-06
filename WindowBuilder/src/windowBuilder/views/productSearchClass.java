@@ -377,8 +377,7 @@ public class productSearchClass extends JPanel {
 				
 				if (checkRepeats == false & checkMax == false) {
 					
-					trackPrices[increment] = prices[cbIndex];
-					
+					trackPrices[increment] = prices[cbIndex];					
 					cartClass.trackPrices[increment] = prices[cbIndex];
 					increment++;
 					
@@ -472,6 +471,10 @@ public class productSearchClass extends JPanel {
 											
 				if (! ToProductSearchList_items_1.isEmpty() & cartClass.ToCartQuantityList_items_4.isEmpty()){ //checks to see if there is at least one item in the Shopping List to add to Cart
 					
+					for(int i = 0; i < priceArray.length; i++) { //for-loop for de-bugging purposes							
+						System.out.println("List priceArray[]: " + priceArray[i] + "   List trackPrices[] Array: " + trackPrices[i]);											
+					}
+					
 					cartClass.check = false;
 					cartClass.cartPriceArray = priceArray;
 					cartClass.trackPrices = trackPrices;
@@ -489,13 +492,26 @@ public class productSearchClass extends JPanel {
 					trackPrices = new String[20]; //resets the trackPrices[]
 					txtpnProductDescription.setText(null); //resets the description area
 					displayLabel.setIcon(null); //resets the display image area
+					add = 0;
+					counter = 0;
+					productObject.track = 0;
 					JOptionPane.showMessageDialog(null, "Moved all items in shopping list to Cart!", "Products Moved", JOptionPane.INFORMATION_MESSAGE);
+					
+					for(int i = 0; i < priceArray.length; i++) { //for-loop for de-bugging purposes							
+						System.out.println("Cart priceArray[]: " + cartClass.cartPriceArray[i] + "   Cart trackPrices[] Array: " + cartClass.trackPrices[i]);											
+					}
+					
+					
 					
 				}
 				
 	//////Working on below
 				
 				if (! ToProductSearchList_items_1.isEmpty() & ! cartClass.ToCartQuantityList_items_4.isEmpty()){
+					
+					for(int i = 0; i < priceArray.length; i++) { //for-loop for de-bugging purposes							
+						System.out.println("List priceArray[]: " + priceArray[i] + "   List trackPrices[] Array: " + trackPrices[i]);											
+					}
 					
 					cartClass.check = false;
 					addArrays();
@@ -515,8 +531,19 @@ public class productSearchClass extends JPanel {
 					trackPrices = new String[20]; //resets the trackPrices[]
 					txtpnProductDescription.setText(null); //resets the description area
 					displayLabel.setIcon(null); //resets the display image area
+					add = 0;
+					counter = 0;
+					productObject.track = 0;
 					JOptionPane.showMessageDialog(null, "Moved all items in shopping list to Cart!", "Products Moved", JOptionPane.INFORMATION_MESSAGE);
+					
+					for(int i = 0; i < priceArray.length; i++) { //for-loop for de-bugging purposes							
+						System.out.println("Cart priceArray[]: " + cartClass.cartPriceArray[i] + "   Cart trackPrices[] Array: " + cartClass.trackPrices[i] );											
+					}
+					
+					
+					
 				}
+				
 				
 	///////Working on above			
 								
