@@ -12,7 +12,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
+
 import javax.swing.LayoutStyle.ComponentPlacement;
 
 /**
@@ -46,7 +46,7 @@ public class eCommerceMain extends JFrame {
 	
 	ImageIcon homeIcon = new ImageIcon(this.getClass().getResource("/icons/Home.png"));            /////////////////////////////////////
 	ImageIcon searchIcon = new ImageIcon(this.getClass().getResource("/icons/Search2.png"));       //                                 //
-	ImageIcon cartIcon = new ImageIcon(this.getClass().getResource("/icons/shop-cart-icon.png"));  //sets the icons for the TabbedPane//
+	ImageIcon cartIcon = new ImageIcon(this.getClass().getResource("/icons/basket.png"));          //sets the icons for the TabbedPane//
 	ImageIcon checkoutIcon = new ImageIcon(this.getClass().getResource("/icons/Dollar.png"));      //                                 //
 	ImageIcon helpIcon = new ImageIcon(this.getClass().getResource("/icons/Help.png"));            /////////////////////////////////////
 	
@@ -58,22 +58,13 @@ public class eCommerceMain extends JFrame {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-	        if ("Windows".equals(info.getName())) {
-	            try {
-	                javax.swing.UIManager.setLookAndFeel(info.getClassName());
-	            } catch (ClassNotFoundException e) {
-	                e.printStackTrace();
-	            } catch (InstantiationException e) {
-	                e.printStackTrace();
-	            } catch (IllegalAccessException e) {
-	                e.printStackTrace();
-	            } catch (UnsupportedLookAndFeelException e) {
-	                e.printStackTrace();
-	            }
-	            break;
-	        }
-	    }
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Throwable e) {
+			e.printStackTrace();
+		}
+	
+	    
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
