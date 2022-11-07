@@ -41,11 +41,11 @@ public class eCommerceMain extends JFrame {
 	private JPanel contentPane;
 	JPanel search_panel = new productSearchClass(); //instantiates an object of productSearchClass() which is a JPanel
 	JPanel cart_panel = new cartClass(); //instantiates an object of cartClass() which is a JPanel
-	                                     // <---will be the instantiation of an object of checkoutClass() which will be a JPanel
+	JPanel checkout_panel = new checkoutClass();                                     // <---will be the instantiation of an object of checkoutClass() which will be a JPanel
 	
 	ImageIcon homeIcon = new ImageIcon(this.getClass().getResource("/icons/Home.png"));            /////////////////////////////////////
 	ImageIcon searchIcon = new ImageIcon(this.getClass().getResource("/icons/Search2.png"));       //                                 //
-	ImageIcon cartIcon = new ImageIcon(this.getClass().getResource("/icons/shop-cart-icon.png"));  //sets the icons for the TabbedPane//
+	ImageIcon cartIcon = new ImageIcon(this.getClass().getResource("/icons/basket.png"));  //sets the icons for the TabbedPane//
 	ImageIcon checkoutIcon = new ImageIcon(this.getClass().getResource("/icons/Dollar.png"));      //                                 //
 	ImageIcon helpIcon = new ImageIcon(this.getClass().getResource("/icons/Help.png"));            /////////////////////////////////////
 	
@@ -150,7 +150,7 @@ public class eCommerceMain extends JFrame {
 		
 		tabbedPane.addTab("View Cart", cartIcon, cart_panel, "Click to view Cart"); //View Cart tab
 		
-		JPanel checkout_panel = new JPanel(); ///default when TabbedPane was created.....change this to like the 'Product Search' and 'View Cart' tabs above
+		
 		tabbedPane.addTab("Checkout", checkoutIcon, checkout_panel, null); //this will change too to look like the existing tabs above fore 'Product Search' and 'View Cart'
 		
 		JPanel help_panel = new JPanel();
