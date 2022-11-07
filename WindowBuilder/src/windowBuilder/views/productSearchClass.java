@@ -244,8 +244,7 @@ public class productSearchClass extends JPanel {
 			textAreaTotal.setText("$0.00"); //this resets the textAreaTotal box back to empty
 			priceArray = new int[15]; // this resets the priceArray[]
 			trackPrices = new String[20];
-			addedOne = false; //resets the boolean variable: 'addedOne' to false. this establishes that no product has been added to the Shopping List
-			ToProductSearchList_items_1.removeAllElements(); //this clears all elements from DefaultListModel -> ToProductSearchList_items_1
+			addedOne = false; //resets the boolean variable: 'addedOne' to false. this establishes that no product has been added to the Shopping List			
 			counter = 0;
 			sum = 0; //this resets the variable sum	
 		}
@@ -313,9 +312,11 @@ public class productSearchClass extends JPanel {
 	}
 	
 	/**
-	 * 
-	 * 
-	 * 
+	 * Used to copy arrays from productSearchClass to cartClass.<br>
+	 * The copied array: priceArray[] to cartClass.cartPriceArray[] is used to tabulate the total 
+	 * amount of the products that were added to Cart.<br>
+	 * The copied array: trackPrices[] to cartClass.trackPrices[] is used to track the prices and 
+	 * index of the products as a reference for quantities added or removed when in the Cart.<br>
 	 * 
 	 */
 	public void copyArrays() {
