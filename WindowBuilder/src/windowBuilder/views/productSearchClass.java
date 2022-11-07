@@ -311,6 +311,12 @@ public class productSearchClass extends JPanel {
 		
 	}
 	
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 */
 	public void addArrays() {
 		
 		for (int i = 0, j = 0; i < cartClass.cartPriceArray.length; i++) {
