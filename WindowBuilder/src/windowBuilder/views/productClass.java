@@ -183,9 +183,9 @@ public class productClass {
 	 */
 	public void loadImages(int number) { // Loads images into image display panel and descriptions into descriptions panel
 		
-		String display = descriptionsArray[number].toString(); //setDescriptions(number); // Assigns a string variable using the setDescriptions() method
-		String descrip = nameDisplay[number].toString(); // Assigns a converted string using nameDisplay[number]
-		String path = System.getProperty("user.dir").toString() + "/src" + namePaths[number].toString(); // Assigns a converted string using namePaths[number]
+		String display = descriptionsArray[number].toString(); // Assigns a String variable using desciptionsArray[number]
+		String descrip = nameDisplay[number].toString(); // Assigns a converted String using nameDisplay[number]
+		String path = System.getProperty("user.dir").toString() + "/src" + namePaths[number].toString(); // Constructs a path String using namePaths[number]
 		
 		ImageIcon icon = new ImageIcon(path); // Displays the icon in the image display panel of productSearchClass
 		
