@@ -24,43 +24,37 @@ import javax.swing.ImageIcon;
 /**
  * This class handles the bulk of tasks associated with viewing the cart.<br>
  * This includes displaying all products added to Cart from the 'fast' method<br>
- * from productSearchClass or products added from the Shopping List.  This<br>
- * class also displays the quantity added of each product as well as the <br>
- * total price of the Cart.<p>
+ * from productSearchClass (not using the Shopping List) or products added from <br>
+ * the Shopping List.  This class also displays the quantity added of each product <br>
+ * as well as the total price of the Cart.<p>
  * 
- * This class also has buttons that allow the user to add a quantity, remove<br>
+ * This class has buttons that allow the user to add a quantity, remove<br>
  * a selected product, empty the Cart, or proceed to the checkout area.<p>
  * 
  * @author Ralph Ramirez
- * @version 2022.10.28 
+ * @version 2022.10.31 
  */
 public class cartClass extends JPanel { 
 	
 	private static final long serialVersionUID = 1L;
-	public static DefaultListModel<Object> CartList_items_2; //DefaultListModel list used to create list containing items added Cart List
+	
+	public static DefaultListModel<Object> CartList_items_2; //DefaultListModel list used to create list containing items added to Cart List from 'fast' shopping method in productSearchClass
 	public static DefaultListModel<Object> ToCartQuantityList_items_4; //DefaultListModel list used to track the quantity of items in the Cart List
-	
-	////The 3 elements below will be manipulated from a checkout class/////////////////////////////////////////////////////////////////
-	                                                                                                                                 //
-	public static JList<Object> JListCartList; //JList element that displays the Products added to the Cart							 //
-	public static JTextArea textAreaCartTotal;  // JTextArea that displays the current total of Products added to the Shopping List  //
-	public static JList<Object> JListCartQuantity; //JList element that displays the total quantity of products in the Cart          //
-																																	 //
-	////The 3 elements above will be manipulated from a checkout class/////////////////////////////////////////////////////////////////
-	
-	public static int[] cartPriceArray = new int[20]; //an arrray that is used to tabulate the total amount of the Cart
-	//public static Object[] prices = new String[20]; //used to track the order of indexes that were added to the Cart	
+	                                                                                                                                 
+	public static JList<Object> JListCartList; //JList element that displays the Products added to the Cart							 
+	public static JTextArea textAreaCartTotal;  // JTextArea that displays the current total of Products added to the Shopping List  
+	public static JList<Object> JListCartQuantity; //JList element that displays the total quantity of products in the Cart          
+																																		
+	public static int[] cartPriceArray = new int[15]; //an arrray that is used to tabulate the total amount of the Cart
+	public static Object[] trackPrices = new String[20]; //used to track the order of indexes that were added to the Cart	
 	
 	private JButton btnEmptyCart; //button that empties the Cart
 	private JButton btnRemoveItem; //button that removes selected product from Cart
 	private JButton btnAddItem; //button that adds a quanity of one to a product in the Cart
 	private JButton btnCheckoutNow; //button that initiates the checkout process
 	
-	private static String total; //String variable that is used in the setCartPriceTotal() method
 	private static int counter = 0; //int variable that is used in the addCartprice() method
-	public static int sum; ////int variable that is used in the addCartprice() method and rearrangeArray() method
-	public static int newTotal; //variable used in the adjustCartTotal() method. Used when a product is removed from Cart
-	
+	public static int sum; ////int variable that is used in the addCartprice() method and rearrangeArray() method	
 	public static boolean check = true; //boolean variable used for the 'btnRemoveItem' action method
 	
 	/**
@@ -76,6 +70,16 @@ public class cartClass extends JPanel {
 		createEvents(); //calls createEvents()() method; builds all events that happen (actions)
 		textAreaCartTotal.setText("$0.00"); //sets the initial total of the Shopping List to $0.00
 		JListCartQuantity.setModel(ToCartQuantityList_items_4); //sets the Cart quantity using 'ToCartQuantityList_items_4'
+		
+		
+	}
+	
+	public void checkoutElements() {
+			
+		System.out.println("Products going to checkout: " + CartList_items_2);
+		System.out.println("Quantity going to checkout: " + ToCartQuantityList_items_4);
+		System.out.println("Total Price going to checkout: " + sum);
+		
 	}
 	
 	/**
@@ -105,17 +109,41 @@ public class cartClass extends JPanel {
 	 * 
 	 * @param index   price of the selected product to add
 	 */
-	public void adjustCartPrices(int index) { //method to add up the prices after adding a quantity of one from the Cart
+	public void adjCartPricesAdd(int index) { //method to add up the prices after adding a quantity of one from the Cart
 		
+		Object priceFound = trackPrices[index];
+		int priceOfProduct = Integer.parseInt(priceFound.toString()); 				
 		Object adjust = cartPriceArray[index]; //sets Object variable: 'adjust' to the element found at cartPriceArray[] using parameter: 'index'
-		int cost_value = Integer.parseInt(adjust.toString()); //this converts the object to integer
-		cartPriceArray[counter] = cost_value; //this loads the cartPriceArray[]
-		counter++; //increments counter variable
+		int currentPrice = Integer.parseInt(adjust.toString()); //this converts the object to integer
+		int added = currentPrice + priceOfProduct;
+		cartPriceArray[index] = added; //this loads the cartPriceArray[]
 		sum = 0; //sets the variable initially to 0
 		for(int i = 0; i < cartPriceArray.length; i++){ //loop to add up the total price that is in priceArray
 			sum += cartPriceArray[i]; //adds up the priceArray[] and stores it in the variable sum
 		}
 		
+	}
+	
+	/**
+	 * Adjusts the total price in the Cart after the 'Remove One Item' button is pushed for selected product.<br>
+	 * Finds the price of the selected product from cartPriceArray[index] and removes it from cartPriceArray[].<br>
+	 * Manages a field variable: 'sum' that is used in setPriceTotal() method.<br>
+	 * 
+	 * @param index    price of the selected product to remove
+	 */
+	public void adjCartPricesRemove(int index) {
+		
+		Object priceFound = trackPrices[index];
+		int priceOfProduct = Integer.parseInt(priceFound.toString()); 				
+		Object adjust = cartPriceArray[index]; //sets Object variable: 'adjust' to the element found at cartPriceArray[] using parameter: 'index'
+		int currentPrice = Integer.parseInt(adjust.toString()); //this converts the object to integer
+		int remove = currentPrice - priceOfProduct;
+		cartPriceArray[index] = remove; //this loads the cartPriceArray[]
+		sum = 0; //sets the variable initially to 0
+		for(int i = 0; i < cartPriceArray.length; i++){ //loop to add up the total price that is in priceArray
+			sum += cartPriceArray[i]; //adds up the priceArray[] and stores it in the variable sum
+		}
+			
 	}
 	
 	/**
@@ -125,7 +153,7 @@ public class cartClass extends JPanel {
 	public static void setCartPriceTotal() { //method which sets the Cart Total
 	
 		textAreaCartTotal.setText(""); //clears text from textAreaTotal
-		total = Integer.toString(sum); //converts integer to String needed to display in textAreaTotal box
+		String total = Integer.toString(sum); //converts integer to String needed to display in textAreaTotal box
 		textAreaCartTotal.append("$" + total + ".00"); //displays the current total price from the shopping list in the textAreaTotal box
 
 	}
@@ -144,14 +172,14 @@ public class cartClass extends JPanel {
 			if(cartPriceArray[i] != element){ //if statement; if cartPriceArray at index i does not equal parameter x
 				cartPriceArray2[k] = cartPriceArray[i];	//if statement is true, then load cartPriceArray2 at index k with cartPriceArray at index i
 				k++; //increment k
-			}
-			
+			}			
 		}
 		cartPriceArray = cartPriceArray2; //after for loop, set cartPriceArray[] to temp cartPriceArray2[]	
 		int addedUp = Arrays.stream(cartPriceArray).sum(); //add  up the total sum of cartPriceArray and set it to temp int variable: addedUp		
 		if (addedUp == 0) {	//if addUp is equal to 0			
 			textAreaCartTotal.setText("$0.00"); //this resets the textAreaCartTotal box back to empty
-			cartPriceArray = new int[10]; // this resets the cartPriceArray[]
+			cartPriceArray = new int[15]; // this resets the cartPriceArray[]
+			trackPrices = new String[20];
 			counter = 0; //this resets the variabale counter
 			sum = 0; //this resets the variable sum			
 		}
@@ -159,38 +187,145 @@ public class cartClass extends JPanel {
 	}
 	
 	/**
-	 * Adjusts the cartPriceArray[] when an item quantity is decremented from the 'Remove' button in cartClass.<br>
+	 * This method is run if the product that is selected to remove was added from the 'fast' method in productSearchClass (No Shopping List).<br>
+	 * Includes two 'if' checks that determine if the quantity of the selected product is equal or greater than 1.<br>
+	 * If the quantity is greater than one, decrement the quantity by 1 and then call adjCartPricesRemove() to adjust the total price of the Cart.<br>
+	 * If the quantity equals one, then remove that product from Cart list and clear the associated quantity amount.<br>
+	 * Calls rearrangeCart() to adjust the total price of the cart after product is removed.<br>
 	 * 
-	 * @param adjust   price of the selected product that is to be removed 
 	 */
-	public static void adjustCartTotal(int adjust) { //method that is used to adjust the Cart Total when an item is removed
+	public void removeItemFastShop() {
 		
-		int selectedPrice = cartPriceArray[adjust]; //assigns int varaiable: 'selectedPrice' to the element found at 'cartPriceArray[x]'
-		newTotal = productSearchClass.quantAdded - selectedPrice; //adjusts 'newTotal' by subraction
-		productSearchClass.quantAdded = newTotal; //adjust variable: 'quantAdded' in productSearchClass		
-		sum = newTotal; //sets 'sum' equal to 'newTotal'
+		int select = JListCartList.getSelectedIndex(); //sets temp int variable: select to the selected index from JListCartList
+		Object value = ToCartQuantityList_items_4.getElementAt(select);
+		int valueInt = Integer.parseInt(value.toString());
 		
-		//JOptionPane.showMessageDialog(null, newTotal);
+		if ( valueInt > 1) { //if 'valueInt' is greater than 1, run the code
+			
+			Object evaluatedValue = ToCartQuantityList_items_4.getElementAt(select); 
+			int valueInt2 = Integer.parseInt(evaluatedValue.toString());
+			valueInt2 = valueInt2 - 1; 
+			ToCartQuantityList_items_4.set( select, valueInt2); 
+			adjCartPricesRemove(select);
+			setCartPriceTotal();
+					
+		}
+		
+		if ( valueInt == 1) { 
+								
+			ToCartQuantityList_items_4.removeElementAt(select); //removes the quantity from ToCartQuantityList_items_4 using temp variable: 'select'
+			int remove = cartPriceArray[select];	//uses select variable as the index for cartPriceArray and assigns to temp variable remove									
+			rearrangeCart(remove); //calls rearrangeArray() methd and passes variable remove as parameter
+			CartList_items_2.remove(select); //removes the selected product from CartList_items_2
+			int added = Arrays.stream(cartPriceArray).sum(); //adds up the total sum of cartPriceArray and assigns it to temp int variable: added		
+			textAreaCartTotal.setText(""); //empties the textAreaCartTotal text
+			textAreaCartTotal.append("$" + added + ".00"); //sets the textAreaCartTotal text with the variable: added 
+
+		}
+		
+		for(int i = 0; i < cartPriceArray.length; i++) { //for-loop used for de-bugging						
+			System.out.println("Removed Array (fast shop method): " + cartPriceArray[i]);					
+		}
+		
 	}
+	
 	/**
-	 * Holds all 'action' events (listeners).<br>
+	 * This method is run if the product that is selected to remove was added from the Shopping List in productSearchClass.<br>
+	 * Includes two 'if' checks that determine if the quantity of the selected product is equal or greater than 1.<br>
+	 * If the quantity is greater than one, decrement the quantity by 1 and then call adjCartPricesRemove() to adjust the total price of the Cart.<br>
+	 * If the quantity equals one, then remove that product from Cart list and clear the associated quantity amount.<br>
+	 * Calls rearrangeCart() to adjust the total price of the cart after product is removed.<br>
+	 * 
+	 */
+	public void removeItemShopList() {
+		
+		int select2 = JListCartList.getSelectedIndex(); //get the selected index from the Cart list and assign to variable: 'select2'
+		Object value = ToCartQuantityList_items_4.getElementAt(select2); //use the variable: 'select2' as an index to get the element from 'ToCartQuantityList_items_4' and assign that to Object: 'value' 
+		int valueInt = Integer.parseInt(value.toString()); //convert the Object: 'value' to the int variable: 'valueInt'
+		//JOptionPane.showMessageDialog(null, valueInt);
+		
+		if ( valueInt > 1) { //if 'valueInt' is greater than 1, run the code
+			
+			Object evaluatedValue = ToCartQuantityList_items_4.getElementAt(select2); //assign Object: 'evaluatedValue' to the element using index variable: 'select2'				
+			int valueInt2 = Integer.parseInt(evaluatedValue.toString()); //convert Object to int
+			valueInt2 = valueInt2 - 1; //subract 'valueInt2' by 1 
+			ToCartQuantityList_items_4.set( select2, valueInt2); //adjust the quantity using index 'select2' by inserting 'valueInt2'					
+			adjCartPricesRemove(select2); //call the adjustCartTotal() using the parameter: 'select2'
+			setCartPriceTotal(); //adjust the cart price total
+			//JOptionPane.showMessageDialog(null, select2);
+										
+		}	
+			
+		if ( valueInt == 1) { //when the quantity of the selected product in the Cart List = 1, run this code
+			
+			CartList_items_2.removeElementAt(select2); //remove the selected element from 'ToCartShopList_items_3'
+			ToCartQuantityList_items_4.removeElementAt(select2); //remove the selected element from 'ToCartQuantityList_items_4'
+			int remove2 = cartPriceArray[select2];	//uses select variable as the index for cartPriceArray and assigns to temp variable remove									
+			rearrangeCart(remove2);						
+			int added = Arrays.stream(cartPriceArray).sum(); 												
+			textAreaCartTotal.setText(""); //empties the textAreaCartTotal text
+			textAreaCartTotal.append("$" + added + ".00"); //sets the textAreaCartTotal text with the variable: added 
+		
+		}
+		
+		for(int i = 0; i < cartPriceArray.length; i++) { //for-loop used for de-bugging							
+			System.out.println("Removed Array (Shop List method): " + cartPriceArray[i]);					
+		}
+	}
+	
+	/**
+	 * Removes all content of the Cart.<br>
+	 * Resets crucial code for the operation of Cart such as lists, arrays, and variables.<br>
+	 *
+	 */
+	public static void emptyCart() {
+		
+		ToCartQuantityList_items_4.removeAllElements(); //empties out the quantity box
+		CartList_items_2.removeAllElements(); //this clears all elements from DefaultListModel: CartList_items_2
+		productSearchClass.ToCartShopList_items_3.removeAllElements(); //this clears all elements from DefaultListModel: ToCartShopList_items_3
+		textAreaCartTotal.setText("$0.00"); //this resets the textAreaCartTotal box back to empty
+		cartPriceArray = new int[15]; // this resets the cartPriceArray[]
+		trackPrices = new String[20];
+		sum = 0;//this resets the variable sum	
+		
+	}
+	
+	/**
+	 * Holds all 'action' events (listeners) for the GUI.<br>
+	 * Primarily used for cleaner organization and management.<br>
+	 * As of this current release, it holds three actions for three buttons: 'Add One', 'Remove', and 'Empty'.<p>
+	 * 
+	 * 'Add One' button first checks to see if there is at least one product in the Cart.  If there is, the total<br>
+	 * price of the cart is calculated by calling adjCartPricesAdd() and then sdisplays the new total.<p>
+	 * 
+	 * 'Remove' button first checks to see if there is at least one product in the Cart. If there is, the selected<br>
+	 * product is checked to see if it was added from the 'fast' shop method (no Shopping List used) or if it was<br>
+	 * added using the Shopping List. the item is then removed from the Cart and the total price is recalculated.<p>
+	 * 
+	 * 'Empty' button removes all products from the Cart and resets all associated variables, lists, and arrays.<br>
 	 * 
 	 */
 	private void createEvents() { //this method initializes all event elements of the panel
 		
 		btnAddItem.addActionListener(new ActionListener() { //this action method for button: 'btnAddItem' adds a quantity of one to Cart 
 			public void actionPerformed(ActionEvent e) {
-				
+								
 				if (! JListCartList.isSelectionEmpty()) { //if the Cart List is not empty, run the code
-				
-					int selected = JListCartList.getSelectedIndex(); //assigns the variable: 'selected' with the index selected from the Cart list						
-					adjustCartPrices(selected); //calls the adjustCartPrices() using the variable: 'selected' as the parameter
-					setCartPriceTotal(); //adjusts the Cart total				
-					Object number = ToCartQuantityList_items_4.getElementAt(selected); //assigns Object varaiable: 'number' with the product selected
-					int convertedNumber2 = Integer.parseInt(number.toString()); //converts Object to int
-					int addedUp = convertedNumber2+ 1; //increments the variable: 'addedUp' by 1
-					ToCartQuantityList_items_4.setElementAt(addedUp, selected); //sets the Quantity 
+								
+					int index = JListCartList.getSelectedIndex(); //assigns the variable: 'index' with the index selected from the Cart list											
+						
+						adjCartPricesAdd(index); 
+						setCartPriceTotal(); 
+						
+						Object number = ToCartQuantityList_items_4.getElementAt(index); //assigns Object varaiable: 'number' with the product selected
+						int convertedNumber2 = Integer.parseInt(number.toString()); //converts Object to int
+						int addedUp = convertedNumber2+ 1; //increments the variable: 'addedUp' by 1
+						ToCartQuantityList_items_4.setElementAt(addedUp, index); //sets the Quantity 					
 					
+					for(int i = 0; i < cartPriceArray.length; i++) { //loop for de-bugging purposes						
+						System.out.println("Added Array: " + cartPriceArray[i]);												
+					}
+										
 				}
 				else { //if the Cart List is empty or no product is selected in the Cart, display the pop-up
 					
@@ -199,73 +334,18 @@ public class cartClass extends JPanel {
 				}
 			}
 		});
-
-		btnEmptyCart.addActionListener(new ActionListener() { //this action method for button: btnEmptyCart emptys the cart
-			public void actionPerformed(ActionEvent e) {	
-							
-				ToCartQuantityList_items_4.removeAllElements(); //empties out the quantity box
-				productSearchClass.txtpnProductDescription.setText(null); //clears out the product description area in productSearchClass 
-				productSearchClass.displayLabel.setIcon(null); //clears out the image displayed in productSearchClass
-				productSearchClass.ToProductSearchList_items_1.removeAllElements(); //this clears all elemnts from DefaultList Model: ProductSearchList_items_1
-				CartList_items_2.removeAllElements(); //this clears all elements from DefaultListModel: CartList_items_2
-				productSearchClass.ToCartShopList_items_3.removeAllElements(); //this clears all elements from DefaultListModel: ToCartShopList_items_3
-				textAreaCartTotal.setText("$0.00"); //this resets the textAreaCartTotal box back to empty
-				cartPriceArray = new int[10]; // this resets the cartPriceArray[]
-				sum = 0;//this resets the variable sum	
-			
-			}
-		});
 		
 		btnRemoveItem.addActionListener(new ActionListener() { //this action method for button: btnRemoveItem removes a selected product from cart
 			public void actionPerformed(ActionEvent e) {
 				
 				if (! JListCartList.isSelectionEmpty()){ //if the Cart List is not empty, run the code
 				 
-					if ( check == true) { //if the item to be removed from cart was added straight from the 'add to cart' button from productSearchClass (not using the Shopping List)		
-						
-						int select = JListCartList.getSelectedIndex(); //sets temp int variable: select to the selected index from JListCartList
-						ToCartQuantityList_items_4.removeElementAt(select); //removes the quantity from ToCartQuantityList_items_4 using temp variable: 'select'
-						int remove = cartPriceArray[select];	//uses select variable as the index for cartPriceArray and assigns to temp variable remove									
-						rearrangeCart(remove); //calls rearrangeArray() methd and passes variable remove as parameter
-						CartList_items_2.remove(select); //removes the selected product from CartList_items_2
-						int added = Arrays.stream(cartPriceArray).sum(); //adds up the total sum of cartPriceArray and assigns it to temp int variable: added		
-						textAreaCartTotal.setText(""); //empties the textAreaCartTotal text
-						textAreaCartTotal.append("$" + added + ".00"); //sets the textAreaCartTotal text with the variable: added 
-				
+					if ( check == true) { //if the item to be removed from cart was added straight from the 'add to cart' button from productSearchClass (not using the Shopping List)								
+						removeItemFastShop();						
 					}
-					else { //if the item to be removed was added from the Shopping list from productSearchClass
-					
-						int select2 = JListCartList.getSelectedIndex(); //get the selected index from the Cart list and assign to variable: 'select2'
-						Object value = ToCartQuantityList_items_4.getElementAt(select2); //use the variable: 'select2' as an index to get the element from 'ToCartQuantityList_items_4' and assign that to Object: 'value' 
-						int valueInt = Integer.parseInt(value.toString()); //convert the Object: 'value' to the int variable: 'valueInt'
-						//JOptionPane.showMessageDialog(null, valueInt);
-						
-						if ( valueInt > 1) { //if 'valueInt' is greater than 1, run the code
-							
-							Object evaluatedValue = ToCartQuantityList_items_4.getElementAt(select2); //assign Object: 'evaluatedValue' to the element using index variable: 'select2'				
-							int valueInt2 = Integer.parseInt(evaluatedValue.toString()); //convert Object to int
-							valueInt2 = valueInt2 - 1; //subract 'valueInt2' by 1 
-							ToCartQuantityList_items_4.set( select2, valueInt2); //adjust the quantity using index 'select2' by inserting 'valueInt2'					
-							adjustCartTotal(select2); //call the adjustCartTotal() using the parameter: 'select2'
-							setCartPriceTotal(); //adjust the cart price total
-							//JOptionPane.showMessageDialog(null, select2);
-							
-						}	
-							
-						if ( valueInt == 1) { //when the quantity of the selected product in the Cart List = 1, run this code
-							
-							productSearchClass.ToCartShopList_items_3.removeElementAt(select2); //remove the selected element from 'ToCartShopList_items_3'
-							ToCartQuantityList_items_4.removeElementAt(select2); //remove the selected element from 'ToCartQuantityList_items_4'
-							int remove2 = cartPriceArray[select2];	//uses select variable as the index for cartPriceArray and assigns to temp variable remove									
-							rearrangeCart(remove2);						
-							int added = Arrays.stream(cartPriceArray).sum(); 												
-							textAreaCartTotal.setText(""); //empties the textAreaCartTotal text
-							textAreaCartTotal.append("$" + added + ".00"); //sets the textAreaCartTotal text with the variable: added 
-						
-						}									
-					
-					}	
-						
+					else { //if the item to be removed was added from the Shopping list from productSearchClass					
+						removeItemShopList();											
+					}																	
 				}
 				else { //if no product is selected in the Cart List, display the pop-up
 					
@@ -275,11 +355,27 @@ public class cartClass extends JPanel {
 			}
 		});
 		
+		btnEmptyCart.addActionListener(new ActionListener() { //this action method for button: btnEmptyCart emptys the cart
+			public void actionPerformed(ActionEvent e) {	
+							
+				emptyCart();
+			
+			}
+		});
+		
+		btnCheckoutNow.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				checkoutElements();
+				
+			}
+		});
 	
 	}
 	
 	/**
 	 * Contains all initialized (structural) components of the JPanel.<br>
+	 * This code largely generated by WindowBuilder.<br>
 	 * 
 	 */
 	private void initComponents() { //this method initializes all structural elements of the panel

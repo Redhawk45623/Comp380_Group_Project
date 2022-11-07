@@ -23,14 +23,14 @@ import javax.swing.LayoutStyle.ComponentPlacement;
  * At the release of this version, the tabs are: Home, Product Search, View Cart,<br>
  * Checkout, and Help.<p>
  * 
- * The 'Home' tab will is still under construction as of the release of this version.<p>
+ * The 'Home', 'Checkout', and 'Help' tabs are still under construction as of the release of this version.<p>
+ * 
+ * The 'Product Search' and 'View Cart' tabs are undergoing debugging.<p>
  * 
  * The 'Product Search' tab uses a JPanel object of productSearchClass which holds the constructor<br>
  * and methods necessary to allow a user to search for a product with added features. The <br>
  * 'View Cart' tab uses a JPanel object of cartClass which holds the constructor and methods<br>
- * necessary to allow a user to view products added to the cart with some features.<p>
- * 
- * At the release of this version, the 'Checkout' tab and 'Help' tab are still under construction.<br>
+ * necessary to allow a user to view products added to the cart with some features and ability to begin checkout process.<p>
  * 
  * @author Ralph Ramirez
  * @version 2022.10.28
@@ -41,10 +41,11 @@ public class eCommerceMain extends JFrame {
 	private JPanel contentPane;
 	JPanel search_panel = new productSearchClass(); //instantiates an object of productSearchClass() which is a JPanel
 	JPanel cart_panel = new cartClass(); //instantiates an object of cartClass() which is a JPanel
+	                                     // <---will be the instantiation of an object of checkoutClass() which will be a JPanel
 	
 	ImageIcon homeIcon = new ImageIcon(this.getClass().getResource("/icons/Home.png"));            /////////////////////////////////////
 	ImageIcon searchIcon = new ImageIcon(this.getClass().getResource("/icons/Search2.png"));       //                                 //
-	ImageIcon cartIcon = new ImageIcon(this.getClass().getResource("/icons/shop-cart-icon.png"));  //sets the icons for the TabbedPane//
+	ImageIcon cartIcon = new ImageIcon(this.getClass().getResource("/icons/basket.png"));          //sets the icons for the TabbedPane//
 	ImageIcon checkoutIcon = new ImageIcon(this.getClass().getResource("/icons/Dollar.png"));      //                                 //
 	ImageIcon helpIcon = new ImageIcon(this.getClass().getResource("/icons/Help.png"));            /////////////////////////////////////
 	
@@ -53,13 +54,16 @@ public class eCommerceMain extends JFrame {
 	 * Manages 'Look and Feel' of the running application<br>
 	 * Creates the tabbedPane frame that holds the major panels of the application.<br>
 	 * 
+	 * @param args
 	 */
 	public static void main(String[] args) {
 		try {
-			UIManager.setLookAndFeel("com.apple.laf.AquaLookAndFeel");
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
+	
+	    
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
@@ -148,8 +152,8 @@ public class eCommerceMain extends JFrame {
 		
 		tabbedPane.addTab("View Cart", cartIcon, cart_panel, "Click to view Cart"); //View Cart tab
 		
-		JPanel checkout_panel = new JPanel(); ///default when TabbedPane was created.....change this like the 'Product Search' and 'View Cart' tabs above
-		tabbedPane.addTab("Checkout", checkoutIcon, checkout_panel, null);
+		JPanel checkout_panel = new JPanel(); ///default when TabbedPane was created.....change this to like the 'Product Search' and 'View Cart' tabs above
+		tabbedPane.addTab("Checkout", checkoutIcon, checkout_panel, null); //this will change too to look like the existing tabs above fore 'Product Search' and 'View Cart'
 		
 		JPanel help_panel = new JPanel();
 		tabbedPane.addTab("Help", helpIcon, help_panel, null);
