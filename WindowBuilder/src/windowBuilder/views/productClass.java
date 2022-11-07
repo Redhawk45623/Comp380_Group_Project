@@ -10,7 +10,7 @@ import javax.swing.ImageIcon;
 
 /** 
  * This class is used to handle most tasks that are regulated to product details.<br>
- * This includes loading arrays that handle product IDs, Names, and Prices (simulated database) that will be displayed in the combobox in productSearchClass.<br>
+ * This includes loading arrays that handle product IDs, Names, and Prices (simulated database) that will be displayed in the combo box in productSearchClass.<br>
  * It also includes methods that handle the manipulation of product specifics such as associated image and description features.<br>
  * 
  * @author Ralph Ramirez, Matthew Bellman
@@ -25,7 +25,7 @@ public class productClass {
 	public int track = 0; // Variable used int the setImageIndex() method
 	
 	/**
-	 * Calls loadProductsFromTxtFile() which loads loads the arrays that are used to load the combobox in productSearchClass.<br>
+	 * Calls loadProductsFromTxtFile() which loads loads the arrays that are used to load the combo box in productSearchClass.<br>
 	 * Calls loadProductDescriptions() method to load descriptionsArray[].<br>
 	 * Calls loadNamePathsAndDescrip() method to load the namePaths[] and nameDisplay[].<br>
 	 * 
@@ -34,19 +34,19 @@ public class productClass {
 	 */
 	public productClass() throws FileNotFoundException { // Constructor
 		
-		loadProductsFromTxtFile(); // Loads the arrays that are used to load the combobox in productSearchClass.
+		loadProductsFromTxtFile(); // Loads the arrays that are used to load the combo box in productSearchClass.
 		loadProductDescriptions(); // Calls loadProductDescriptions() method to load descriptionsArray[]
 		loadNamePathsAndDescrip(); // Calls the loadNamePathsAndDescrip() method to load the namePaths[] and nameDisplay[]
 	}
 	
 	/**
-	 * Loads the arrays used to display products in the combobox for productSearchClass. <br>
+	 * Loads the arrays used to display products in the combo box for productSearchClass. <br>
 	 * Simulates the database retrieval of crucial product information: ID, Name, and Price.<br>
 	 * Loads this data from the text files located in the productDatabase folder.<br>
 	 * 
 	 * @throws FileNotFoundException
 	 */
-	public void loadProductsFromTxtFile() throws FileNotFoundException { // Method that loads the arrays used to load combobox (products in drop-down list)
+	public void loadProductsFromTxtFile() throws FileNotFoundException { // Method that loads the arrays used to load combo box (products in drop-down list)
 			
 		File file = new File(System.getProperty("user.dir") + "/src/productDatabase/productNames.txt"); // Path to productNames.txt file stored in src/productDatabase
 			
@@ -92,8 +92,7 @@ public class productClass {
 		File file = new File(System.getProperty("user.dir") + "/src/productDescriptions/descriptions.txt");
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) {
-			for (int i = 0; i < descriptionsArray.length; i++)
-				descriptionsArray = br.lines().toArray();
+			descriptionsArray = br.lines().toArray();			
 		} catch (FileNotFoundException e) {
 			throw e;
 		} catch (IOException e) {
@@ -108,9 +107,9 @@ public class productClass {
 	 * @param choose   index used for descriptionsArray[]
 	 * @return         returns the String description for the product
 	 */
-	public String setDescriptions(int choose) { // Method used to return a description String using parameter 'x' descriptionsArray.  Converts to String too
+	public String setDescriptions(int choose) { // Method used to return a description String using parameter 'x' descriptionsArray. Converts to String too
 		
-		//String descrip = descriptionsArray[choose].toString(); // Sets the String variable: 'descrip' to the String found in descriptionsArray[]
+		// TODO - Fix the ArrayIndexOutOfBoundsException //
 		return descriptionsArray[choose].toString(); // Returns the String found in descriptionsArray[choose]
 	}
 	
@@ -156,8 +155,7 @@ public class productClass {
 		File file = new File(System.getProperty("user.dir") + "/src/productDescriptions/paths.txt");
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(file))) { // BufferedReader to begin reading lines of paths.txt
-			for (int i = 0; i < namePaths.length; i++) // for-loop using the length of namePaths[]
-				namePaths = br.lines().toArray(); // Loads the namePaths[] with each line from the paths.txt file
+			namePaths = br.lines().toArray(); // Loads the namePaths[] with each line from the paths.txt file
 		} catch (FileNotFoundException e) {
 			throw e;
 		} catch (IOException e) {
@@ -167,12 +165,10 @@ public class productClass {
 		File file2 = new File(System.getProperty("user.dir") + "/src/productDescriptions/displayNames.txt");
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(file2))) { // BufferedReader to begin reading lines of displayNames.txt
-			for (int i = 0; i < nameDisplay.length; i++) // for-loop using the length of nameDisplay[]
-				nameDisplay = br.lines().toArray(); // Loads the nameDisplay[] with each line from the displayNames.txt file
+			nameDisplay = br.lines().toArray(); // Loads the nameDisplay[] with each line from the displayNames.txt file
 		} catch (FileNotFoundException e) {
 			throw e;
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -187,23 +183,11 @@ public class productClass {
 	 */
 	public void loadImages(int number) { // Loads images into image display panel and descriptions into descriptions panel
 		
-		/*
-		Object namePath = namePaths[number]; // Assigns an Object variable: 'namePath' to the String path found at namePaths[] using parameter: 'number'
-		String path2 = namePath.toString(); // Converts the Object variable: 'namePath' to a String variable: 'path2' 	
-		Object descrip = nameDisplay[number]; // Assigns an Object variable: 'descrip' to the String found at nameDisplay[] using parameter: 'number'
-		String descrip2 = descrip.toString(); // Converts the Object variable: 'descrip' to a String variable: 'descrip2'		
-		ImageIcon icon = new ImageIcon(this.getClass().getResource(path2)); // Assigns the ImageIcon variable: 'icon' to the path found using variable: 'path2'		
-		productSearchClass.displayLabel.setIcon(icon); // Displays the icon in the image display panel of productSearchClass
-		display = setDescriptions(number); // Assigns the String variable: 'display' using the setDescriptions() method
-		productSearchClass.lblImageDescrip.setText(descrip2); // Sets the small label that is the title of the image in the image display panel of productSearchClass
-		productSearchClass.txtpnProductDescription.setText(display); // Sets the description for the product in the description panel in productSearchClass
-		*/
-		
-		String display = setDescriptions(number); // Assigns a string variable using the setDesctions() method
+		String display = descriptionsArray[number].toString(); //setDescriptions(number); // Assigns a string variable using the setDescriptions() method
 		String descrip = nameDisplay[number].toString(); // Assigns a converted string using nameDisplay[number]
-		String path = namePaths[number].toString(); // Assigns a converted string using namePaths[number]
+		String path = System.getProperty("user.dir").toString() + "/src" + namePaths[number].toString(); // Assigns a converted string using namePaths[number]
 		
-		ImageIcon icon = new ImageIcon(this.getClass().getResource(path)); // Displays the icon in the image display panel of productSearchClass
+		ImageIcon icon = new ImageIcon(path); // Displays the icon in the image display panel of productSearchClass
 		
 		productSearchClass.displayLabel.setIcon(icon); // Displays the icon in the image display panel of productSearchClass
 		productSearchClass.lblImageDescrip.setText(descrip); // Sets the small label that is the title of the image in the image display panel of productSearchClass

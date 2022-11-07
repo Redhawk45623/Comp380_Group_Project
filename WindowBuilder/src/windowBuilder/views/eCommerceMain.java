@@ -41,11 +41,12 @@ public class eCommerceMain extends JFrame {
 	JPanel search_panel = new productSearchClass(); // Instantiates an object of productSearchClass() which is a JPanel
 	JPanel cart_panel = new cartClass(); // Instantiates an object of cartClass() which is a JPanel
 	
-	ImageIcon homeIcon = new ImageIcon(this.getClass().getResource("/icons/Home.png"));            /////////////////////////////////////
-	ImageIcon searchIcon = new ImageIcon(this.getClass().getResource("/icons/Search2.png"));       //                                 //
-	ImageIcon cartIcon = new ImageIcon(this.getClass().getResource("/icons/shop-cart-icon.png"));  //sets the icons for the TabbedPane//
-	ImageIcon checkoutIcon = new ImageIcon(this.getClass().getResource("/icons/Dollar.png"));      //                                 //
-	ImageIcon helpIcon = new ImageIcon(this.getClass().getResource("/icons/Help.png"));            /////////////////////////////////////
+	// Sets the icons for the TabbedPane
+	ImageIcon homeIcon = new ImageIcon(this.getClass().getResource("/icons/Home.png"));
+	ImageIcon searchIcon = new ImageIcon(this.getClass().getResource("/icons/Search2.png"));
+	ImageIcon cartIcon = new ImageIcon(this.getClass().getResource("/icons/shop-cart-icon.png"));
+	ImageIcon checkoutIcon = new ImageIcon(this.getClass().getResource("/icons/Dollar.png"));
+	ImageIcon helpIcon = new ImageIcon(this.getClass().getResource("/icons/Help.png"));
 	
 	/**
 	 * Launches the application.<br>
@@ -81,6 +82,7 @@ public class eCommerceMain extends JFrame {
 	 * @throws FileNotFoundException 
 	 */
 	public eCommerceMain() throws FileNotFoundException { // Constructor
+		
 		setTitle("- 'Think Tank' Group Project: 'Vintage Shop' -");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -108,14 +110,13 @@ public class eCommerceMain extends JFrame {
 		);
 		
 		JPanel home_panel = new JPanel();	
-		tabbedPane.addTab("Home", homeIcon, home_panel, null);
-		
+		tabbedPane.addTab("Home", homeIcon, home_panel, null);		
 		JLabel lblNewLabel = new JLabel("This is the Home page that will be modified later...");
-		
 		JLabel lblNewLabel_1 = new JLabel("We could possibly add a custom logo and incorporate");
-		
 		JLabel lblNewLabel_2 = new JLabel("the team name along with team member names...");
+		
 		GroupLayout gl_home_panel = new GroupLayout(home_panel);
+		
 		gl_home_panel.setHorizontalGroup(
 			gl_home_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_home_panel.createSequentialGroup()
@@ -131,6 +132,7 @@ public class eCommerceMain extends JFrame {
 					.addComponent(lblNewLabel_2)
 					.addGap(101))
 		);
+		
 		gl_home_panel.setVerticalGroup(
 			gl_home_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_home_panel.createSequentialGroup()
@@ -144,11 +146,11 @@ public class eCommerceMain extends JFrame {
 		);
 		home_panel.setLayout(gl_home_panel); // Home tab	
 		
-		/////Add panels below/////////
+		///// Add panels below /////////
 				
 		tabbedPane.addTab("Product Search", searchIcon, search_panel, "Click to search for products"); // Product Search tab
 		
-		tabbedPane.addTab("View Cart", new ImageIcon(eCommerceMain.class.getResource("/icons/shop-cart-icon.png")), cart_panel, "Click to view Cart"); // View Cart tab
+		tabbedPane.addTab("View Cart", cartIcon, cart_panel, "Click to view Cart"); // View Cart tab
 		
 		JPanel checkout_panel = new JPanel(); /// Default when TabbedPane was created.....change this like the 'Product Search' and 'View Cart' tabs above
 		tabbedPane.addTab("Checkout", checkoutIcon, checkout_panel, null);

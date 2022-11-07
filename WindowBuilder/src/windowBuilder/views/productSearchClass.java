@@ -52,9 +52,9 @@ import javax.swing.SwingConstants;
 public class productSearchClass extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
-	public static Object[] products; // Array that is loaded from file containing Product Names, used to load combobox
-	public static Object[] productIDs; // Array that is loaded from read file containing Product IDs, used to load combobox
-	public static Object[] prices = new String[25]; // Array that is loaded from file containing prices, used to load combobox
+	public static Object[] products; // Array that is loaded from file containing Product Names, used to load combo box
+	public static Object[] productIDs; // Array that is loaded from read file containing Product IDs, used to load combo box
+	public static Object[] prices = new String[25]; // Array that is loaded from file containing prices, used to load combo box
 	public static int[] pricesIndex = new int[25]; // Used to track the order of indexes that were added to the shopping list
 	public static int[] priceArray = new int[10]; // Array used to store the prices in order of added to the shopping list after pressing add to list button
 	public static int[] imagesIndex = new int[25];
@@ -66,7 +66,7 @@ public class productSearchClass extends JPanel {
 	public static DefaultListModel<Object> ToCartShopList_items_3; // DefaultListModel list used to create list containing items added to Cart List from Shopping List
 	public static DefaultListModel<Object> ToQuantityList_items_4; // DefaultListModel list used to create list containing quantity of products in the Shopping List
 	
-	public static JComboBox<String> cbProducts; // Combobox that lists all products for sale
+	public static JComboBox<String> cbProducts; // Combo box that lists all products for sale
 	
 	private boolean check = false; // boolean variable that controls visibility to see the product image (rdbtnSeeImage)
 	private boolean check2 = false; // boolean variable that controls visibility to see and use the the Shopping List (rdbtnUseList)
@@ -91,7 +91,7 @@ public class productSearchClass extends JPanel {
 	private JScrollPane scrollPaneShopList; // ScrollPane element for the Shopping List
 	private JScrollPane scrollPaneQuantity; // ScrollPane element for the Quantity List
 	
-	private JButton btnAddToList; // Button to add products from combobox to the Shopping List
+	private JButton btnAddToList; // Button to add products from combo box to the Shopping List
 	private JButton btnAddToCart; // Button to add products straight to cart (radio button -> rdbtnUseList not selected)
 	private JButton btnAddAllToCart; // Button used to add all contents of Shopping List to Cart
 	private JButton btnRemoveAll; // Button to remove all contents of the Shopping List
@@ -320,6 +320,7 @@ public class productSearchClass extends JPanel {
 					cartClass.prices[increment] = prices[cbIndex];
 					increment++;
 					
+					// TODO - Issue Somewhere here or before
 					productObject.setImageIndex(cbIndex); // Uses cbIndex variable as a parameter to call setImageIndex().  This tracks the order of indexes to be used for the description and image display						
 					productObject.loadImages(cbIndex); // Calls the loadImages() using 'cbIndex' as a parameter			
 					pricesIndex[add] = cbIndex; // Used to track price index
