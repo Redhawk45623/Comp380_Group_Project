@@ -503,9 +503,9 @@ public class productSearchClass extends JPanel {
 					productObject.track = 0;
 					JOptionPane.showMessageDialog(null, "Moved all items in shopping list to Cart!", "Products Moved", JOptionPane.INFORMATION_MESSAGE);
 					
-					for(int i = 0; i < priceArray.length; i++) { //for-loop for de-bugging purposes							
-						System.out.println("Cart priceArray[]: " + cartClass.cartPriceArray[i] + "   Cart trackPrices[] Array: " + cartClass.trackPrices[i]);											
-					}
+//					for(int i = 0; i < priceArray.length; i++) { //for-loop for de-bugging purposes							
+//						System.out.println("Cart priceArray[]: " + cartClass.cartPriceArray[i] + "   Cart trackPrices[] Array: " + cartClass.trackPrices[i]);											
+//					}
 					
 					
 					
@@ -515,9 +515,9 @@ public class productSearchClass extends JPanel {
 				
 				if (! ToProductSearchList_items_1.isEmpty() & ! cartClass.ToCartQuantityList_items_4.isEmpty()){
 					
-					for(int i = 0; i < priceArray.length; i++) { //for-loop for de-bugging purposes							
-						System.out.println("List priceArray[]: " + priceArray[i] + "   List trackPrices[] Array: " + trackPrices[i]);											
-					}
+//					for(int i = 0; i < priceArray.length; i++) { //for-loop for de-bugging purposes							
+//						System.out.println("List priceArray[]: " + priceArray[i] + "   List trackPrices[] Array: " + trackPrices[i]);											
+//					}
 					
 					cartClass.check = false;
 					addArrays();
@@ -526,8 +526,6 @@ public class productSearchClass extends JPanel {
 					addTo(ToCartShopList_items_3, cartClass.CartList_items_2);
 					addTo(ToQuantityList_items_4 , cartClass.ToCartQuantityList_items_4); //calls the addTo() which takes a list 'from' and adds it 'to' another list. Basically, sets the quanity in the cart from Shopping List															
 					cartClass.JListCartList.setModel(cartClass.CartList_items_2); //sets the Cart List (JListCartList)  in cartClass with all items from DefaultListModel ToCartShopList_items_3				
-					
-					//JOptionPane.showMessageDialog(null,"Cart is not empty...");
 					
 					ToCartShopList_items_3.removeAllElements();
 					ToQuantityList_items_4.removeAllElements(); //clears out the quantity box from the Shopping List
@@ -542,9 +540,9 @@ public class productSearchClass extends JPanel {
 					productObject.track = 0;
 					JOptionPane.showMessageDialog(null, "Moved all items in shopping list to Cart!", "Products Moved", JOptionPane.INFORMATION_MESSAGE);
 					
-					for(int i = 0; i < priceArray.length; i++) { //for-loop for de-bugging purposes							
-						System.out.println("Cart priceArray[]: " + cartClass.cartPriceArray[i] + "   Cart trackPrices[] Array: " + cartClass.trackPrices[i] );											
-					}
+//					for(int i = 0; i < priceArray.length; i++) { //for-loop for de-bugging purposes							
+//						System.out.println("Cart priceArray[]: " + cartClass.cartPriceArray[i] + "   Cart trackPrices[] Array: " + cartClass.trackPrices[i] );											
+//					}
 					
 					
 					
