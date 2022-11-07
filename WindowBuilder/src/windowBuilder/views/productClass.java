@@ -14,7 +14,7 @@ import javax.swing.ImageIcon;
  * It also includes methods that handle the manipulation of product specifics such as associated image and description features.<br>
  * 
  * @author Ralph Ramirez, Matthew Bellman
- * @version 2022.11.02 
+ * @version 2022.11.04 
  */
 public class productClass {
 	
