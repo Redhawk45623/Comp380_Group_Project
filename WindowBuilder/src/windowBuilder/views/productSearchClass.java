@@ -76,11 +76,12 @@ public class productSearchClass extends JPanel {
 	private boolean checkCartRepeats = false; //boolean used to check if the product is already in the Cart, fast shop method (no Shopping List)
 	private boolean checkMax = false; //temp...will be deleted later after debugging
 	private boolean shopMethod = true; //boolean use to track whattype of shopping method is being used. True for fast shopping, false for Shopping List
+	private boolean cartCheck = false;
 	
 	private static int add = 0; //incremented variable used as index for priceArray, used for btnAddList_1 action event 
 	private static int sum; // the sum total of the Shopping List
 	private static int counter = 0; //incremented variable used as index for addPrices() 
-	private static int increment = 0; //incremented variable used for trackPrices[] in this class and in cartClass.trackPrices[] 
+	public static int increment = 0; //incremented variable used for trackPrices[] in this class and in cartClass.trackPrices[] 
 	
 	private JPanel panel_1; //panel that is used to hold all elements for the Shopping List option
 	private JPanel panel_2; //panel that is used to hold the btnAddCart button and lblAdd2Cart label
@@ -317,28 +318,23 @@ public class productSearchClass extends JPanel {
 	 * 
 	 * 
 	 */
-	public void addArrays() {
+	public void copyArrays() {
 		
 		for (int i = 0, j = 0; i < cartClass.cartPriceArray.length; i++) {
 			
-			if (cartClass.cartPriceArray[i] == 0) {
-				
+			if (cartClass.cartPriceArray[i] == 0) {				
 				cartClass.cartPriceArray[i] = priceArray[j];
 				j++;
-			}
-			
+			}			
 		}
 		
 		for (int i = 0, j = 0; i < cartClass.trackPrices.length; i++) {
 			
-			if (cartClass.trackPrices[i] == null) {
-				
+			if (cartClass.trackPrices[i] == null) {				
 				cartClass.trackPrices[i] = trackPrices[j];
 				j++;
-			}
-			
-		}
-		
+			}			
+		}		
 	}
 	
 	/**
@@ -367,12 +363,22 @@ public class productSearchClass extends JPanel {
 				if (JListShopList.getModel().getSize() > 7) {
 					JOptionPane.showMessageDialog(null, "Maximum products in Shopping List!", "Alert", JOptionPane.ERROR_MESSAGE);
 					checkMax = true;
-				}			
+				}
+				
+				cartCheck = false; //sets the boolean to false when button is pressed.  This is used to check if the selected product has already been added to the Cart
 				checkRepeats = false; //sets the boolean to false when button is pressed. This is used to check if the selected product has already been added to Shopping List
 				addedOne = true; //sets the boolean variable:'addedOne' to true.  This is to establish at least one product has been added to the Shopping List 				
 				int cbIndex = cbProducts.getSelectedIndex(); //creates variable send to pass to addPrices() method from cbProducts_1					
 				String verify = cbProducts.getItemAt(cbIndex); //sets variable: 'verify' to the selected product usine variable: 'cbIndex'
 				
+				for (int i=0; i<cartClass.JListCartList.getModel().getSize(); i++) {
+					
+					if (cartClass.CartList_items_2.get(i) == verify) {
+						cartCheck = true;
+						JOptionPane.showMessageDialog(null, "Product already in Cart!", "Alert", JOptionPane.ERROR_MESSAGE); //display pop-up message
+					}				
+				}
+							
 				for (int i=0; i<JListShopList.getModel().getSize(); i++) { //for-loop using the size of the 'JListShopList_1'					
 					if (ToProductSearchList_items_1.get(i) == verify) { //if-statement that checks to see if the selected item in the combobox that the user is trying to add to Shopping List is already there						
 						checkRepeats = true; //if the product is already in the Shopping list, set 'checkRepeats' to true
@@ -381,7 +387,7 @@ public class productSearchClass extends JPanel {
 				}
 				//JOptionPane.showMessageDialog(null,verify);
 				
-				if (checkRepeats == false & checkMax == false) {
+				if (checkRepeats == false & checkMax == false & cartCheck == false) {
 					
 					trackPrices[increment] = prices[cbIndex];					
 					cartClass.trackPrices[increment] = prices[cbIndex];
@@ -477,9 +483,9 @@ public class productSearchClass extends JPanel {
 											
 				if (! ToProductSearchList_items_1.isEmpty() & cartClass.ToCartQuantityList_items_4.isEmpty()){ //checks to see if there is at least one item in the Shopping List to add to Cart
 					
-					for(int i = 0; i < priceArray.length; i++) { //for-loop for de-bugging purposes							
-						System.out.println("List priceArray[]: " + priceArray[i] + "   List trackPrices[] Array: " + trackPrices[i]);											
-					}
+//					for(int i = 0; i < priceArray.length; i++) { //for-loop for de-bugging purposes							
+//						System.out.println("List priceArray[]: " + priceArray[i] + "   List trackPrices[] Array: " + trackPrices[i]);											
+//					}
 					
 					cartClass.check = false;
 					cartClass.cartPriceArray = priceArray;
@@ -505,14 +511,9 @@ public class productSearchClass extends JPanel {
 					
 //					for(int i = 0; i < priceArray.length; i++) { //for-loop for de-bugging purposes							
 //						System.out.println("Cart priceArray[]: " + cartClass.cartPriceArray[i] + "   Cart trackPrices[] Array: " + cartClass.trackPrices[i]);											
-//					}
+//					}					
 					
-					
-					
-				}
-				
-	//////Working on below
-				
+				}				
 				if (! ToProductSearchList_items_1.isEmpty() & ! cartClass.ToCartQuantityList_items_4.isEmpty()){
 					
 //					for(int i = 0; i < priceArray.length; i++) { //for-loop for de-bugging purposes							
@@ -520,7 +521,7 @@ public class productSearchClass extends JPanel {
 //					}
 					
 					cartClass.check = false;
-					addArrays();
+					copyArrays();
 					cartClass.sum = cartClass.sum + sum;
 					cartClass.setCartPriceTotal();	
 					addTo(ToCartShopList_items_3, cartClass.CartList_items_2);
@@ -543,13 +544,8 @@ public class productSearchClass extends JPanel {
 //					for(int i = 0; i < priceArray.length; i++) { //for-loop for de-bugging purposes							
 //						System.out.println("Cart priceArray[]: " + cartClass.cartPriceArray[i] + "   Cart trackPrices[] Array: " + cartClass.trackPrices[i] );											
 //					}
-					
-					
-					
-				}
-				
-				
-	///////Working on above			
+										
+				}		
 								
 			}
 		});

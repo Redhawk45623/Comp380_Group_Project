@@ -286,6 +286,10 @@ public class cartClass extends JPanel {
 		textAreaCartTotal.setText("$0.00"); //this resets the textAreaCartTotal box back to empty
 		cartPriceArray = new int[15]; // this resets the cartPriceArray[]
 		trackPrices = new String[20];
+		productSearchClass.priceArray = new int[15];
+		productSearchClass.trackPrices = new String[20];
+		productSearchClass.pricesIndex = new int[25];
+		productSearchClass.increment = 0;
 		sum = 0;//this resets the variable sum	
 		
 	}
