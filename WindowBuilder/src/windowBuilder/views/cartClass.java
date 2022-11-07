@@ -366,6 +366,7 @@ public class cartClass extends JPanel {
 		scrollPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
 		textAreaCartTotal = new JTextArea();
+		textAreaCartTotal.setEditable(false);
 		textAreaCartTotal.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
 		JLabel lblTotal = new JLabel("Total = ");

@@ -674,6 +674,7 @@ public class productSearchClass extends JPanel {
 		lblNewLabel = new JLabel("Total = ");
 		
 		textAreaTotal = new JTextArea();
+		textAreaTotal.setEditable(false);
 		textAreaTotal.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
 		btnAddToList = new JButton("Add Now");
@@ -729,10 +730,11 @@ public class productSearchClass extends JPanel {
 										.addComponent(lblRemoveAllFromList)
 										.addComponent(lblNewLabel_2))
 									.addGap(4))
-								.addComponent(rdbtnSeeDescription)
 								.addGroup(gl_panel_1.createSequentialGroup()
-									.addComponent(rdbtnSeeImage)
-									.addGap(35)))
+									.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+										.addComponent(rdbtnSeeDescription)
+										.addComponent(rdbtnSeeImage))
+									.addGap(13)))
 							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panel_1.createSequentialGroup()
 									.addGap(2)
@@ -741,13 +743,13 @@ public class productSearchClass extends JPanel {
 											.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 												.addComponent(btnRemoveOneItem)
 												.addComponent(btnRemoveAll, GroupLayout.PREFERRED_SIZE, 99, GroupLayout.PREFERRED_SIZE))
-											.addGap(18)
+											.addGap(45)
 											.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 212, GroupLayout.PREFERRED_SIZE))
 										.addGroup(gl_panel_1.createSequentialGroup()
 											.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 												.addComponent(btnAddAllToCart)
 												.addComponent(btnAddOneToList))
-											.addPreferredGap(ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+											.addPreferredGap(ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
 											.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 												.addGroup(gl_panel_1.createSequentialGroup()
 													.addGap(12)
@@ -769,7 +771,7 @@ public class productSearchClass extends JPanel {
 							.addComponent(btnAddToList, GroupLayout.PREFERRED_SIZE, 91, GroupLayout.PREFERRED_SIZE)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(lblNewLabel_1)))
-					.addGap(21))
+					.addGap(19))
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(panel_4, GroupLayout.PREFERRED_SIZE, 259, GroupLayout.PREFERRED_SIZE))
@@ -817,11 +819,11 @@ public class productSearchClass extends JPanel {
 										.addComponent(lblRemoveAllFromList))
 									.addGap(12)))
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addComponent(panel_4, GroupLayout.DEFAULT_SIZE, 207, Short.MAX_VALUE))
 						.addGroup(gl_panel_1.createSequentialGroup()
 							.addGap(4)
 							.addComponent(lblNoShipNotaxes, GroupLayout.PREFERRED_SIZE, 13, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(panel_3, GroupLayout.PREFERRED_SIZE, 244, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap(33, GroupLayout.PREFERRED_SIZE))
 		);
@@ -840,6 +842,7 @@ public class productSearchClass extends JPanel {
 		scrollPaneQuantity.setViewportView(JListQuantity);
 		
 		txtpnProductDescription = new JTextPane();
+		txtpnProductDescription.setEditable(false);
 		txtpnProductDescription.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
 		lblProductDescrip = new JLabel("Product Description");
@@ -850,12 +853,12 @@ public class productSearchClass extends JPanel {
 				.addGroup(gl_panel_4.createSequentialGroup()
 					.addGroup(gl_panel_4.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_4.createSequentialGroup()
-							.addContainerGap()
-							.addComponent(txtpnProductDescription, GroupLayout.PREFERRED_SIZE, 239, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel_4.createSequentialGroup()
 							.addGap(77)
-							.addComponent(lblProductDescrip, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(14, Short.MAX_VALUE))
+							.addComponent(lblProductDescrip, GroupLayout.PREFERRED_SIZE, 104, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel_4.createSequentialGroup()
+							.addContainerGap()
+							.addComponent(txtpnProductDescription, GroupLayout.PREFERRED_SIZE, 239, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_panel_4.setVerticalGroup(
 			gl_panel_4.createParallelGroup(Alignment.LEADING)
@@ -863,8 +866,8 @@ public class productSearchClass extends JPanel {
 					.addGap(10)
 					.addComponent(lblProductDescrip, GroupLayout.PREFERRED_SIZE, 13, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(txtpnProductDescription, GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
-					.addGap(49))
+					.addComponent(txtpnProductDescription, GroupLayout.PREFERRED_SIZE, 141, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(37, Short.MAX_VALUE))
 		);
 		panel_4.setLayout(gl_panel_4);
 	
