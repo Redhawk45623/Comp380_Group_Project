@@ -38,8 +38,11 @@ public class checkoutClass extends JPanel {
 	private JTextField state1;
 	private JTextField zipNum;
 	private JTextField cellNum;
-	private JLabel lblNewLabel;
-	private JTextField textField;
+	
+	
+	
+	
+	
 	
 
 	public void Equalize()
@@ -121,6 +124,15 @@ public class checkoutClass extends JPanel {
 		JLabel phone = new JLabel("Phone Number");
 		phone.setBounds(10, 278, 90, 14);
 		
+		JLabel cityName = new JLabel("City");
+		cityName.setBounds(305, 278, 49, 14);
+		
+		JLabel zip = new JLabel("Zip Code");
+		zip.setBounds(436, 278, 70, 14);
+		add(zip);
+		
+		
+		add(cityName);
 		add(phone);
 		add(stateInitials);		
 		add(address);
@@ -152,7 +164,20 @@ public class checkoutClass extends JPanel {
 		add(cellNum);
 		cellNum.setColumns(10);
 		
-	
+		city1 = new JTextField();
+		city1.setBounds(305, 296, 96, 20);
+		add(city1);
+		city1.setColumns(10);
+		
+		
+		zipNum = new JTextField();
+		zipNum.setBounds(436, 296, 50, 20);
+		add(zipNum);
+		zipNum.setColumns(10);
+		
+		
+		
+		
 		
 		
 	}
