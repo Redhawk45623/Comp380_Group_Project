@@ -40,6 +40,7 @@ public class eCommerceMain extends JFrame {
 	private JPanel contentPane;
 	JPanel search_panel = new productSearchClass(); // Instantiates an object of productSearchClass() which is a JPanel
 	JPanel cart_panel = new cartClass(); // Instantiates an object of cartClass() which is a JPanel
+	JPanel help_panel = new helpClass();
 	
 	// Sets the icons for the TabbedPane
 	ImageIcon homeIcon = new ImageIcon(this.getClass().getResource("/icons/Home.png"));
@@ -81,7 +82,8 @@ public class eCommerceMain extends JFrame {
 	 *
 	 * @throws FileNotFoundException 
 	 */
-	public eCommerceMain() throws FileNotFoundException { // Constructor
+	public eCommerceMain() throws FileNotFoundException {
+		setResizable(false); // Constructor
 		
 		setTitle("- 'Think Tank' Group Project: 'Vintage Shop' -");
 
@@ -98,15 +100,15 @@ public class eCommerceMain extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 928, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 525, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(403, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addGap(0)
-					.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 1146, Short.MAX_VALUE)
-					.addGap(0))
+					.addContainerGap()
+					.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
+					.addContainerGap())
 		);
 		
 		JPanel home_panel = new JPanel();	
@@ -155,7 +157,7 @@ public class eCommerceMain extends JFrame {
 		JPanel checkout_panel = new JPanel(); /// Default when TabbedPane was created.....change this like the 'Product Search' and 'View Cart' tabs above
 		tabbedPane.addTab("Checkout", checkoutIcon, checkout_panel, null);
 		
-		JPanel help_panel = new JPanel();
+		//JPanel help_panel = new JPanel();
 		tabbedPane.addTab("Help", helpIcon, help_panel, null);
 		contentPane.setLayout(gl_contentPane);
 	}

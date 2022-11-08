@@ -33,8 +33,8 @@ import javax.swing.SwingConstants;
  * It features two modes that are selected by the user: Fast shopping that does not use a <br>
  * Shopping List and another option that does.<p>
  * 
- * The 'fast' shopping feature allows the user to browse a combobox which holds all products <br>
- * for sale.  The combobox displays ID, Name, and Price of product. Once an item is selected, <br>
+ * The 'fast' shopping feature allows the user to browse a combo box which holds all products <br>
+ * for sale.  The combo box displays ID, Name, and Price of product. Once an item is selected, <br>
  * an 'Add to Cart' button will move the selected product to the Cart. <p>
  * 
  * The 'Shopping List' option is selected by a radio button at the top of the panel.  Once <br>
@@ -124,7 +124,7 @@ public class productSearchClass extends JPanel {
 	/**
 	 * Calls initComponents() which is a method that contains all initialized (structural) components of the JPanel.<br>
 	 * Calls createEvents() which is a method that holds all 'action' events (listeners).<br>
-	 * Calls loadProductCombobox() which is a method that loads the combobox with products.<br>
+	 * Calls loadProductCombobox() which is a method that loads the combo box with products.<br>
 	 * Sets the Shopping List (panel_1) visibility to off upon application load.<br>
 	 * Sets the 'fast' shipping 'Add to Cart' (panel_2) visibility to on upon application load.<br>
 	 * Turns off visibility to panel_3 (display image area) and panel_4 (product description) upon application load.<br>
@@ -143,7 +143,7 @@ public class productSearchClass extends JPanel {
 	}
 		
 	/**
-	 * Adds the prices of the products added to the Shopping List from combobox.<br>
+	 * Adds the prices of the products added to the Shopping List from combo box.<br>
 	 * Finds the price of the selected product from prices[] and adds it to priceArray[].<br>
 	 * Manages a field variable: 'sum' that is used in setPriceTotal() method.<br>
 	 * 
@@ -238,10 +238,10 @@ public class productSearchClass extends JPanel {
 	
 	
 	/**
-	 * Loads the combobox with products using three arrays (simulated database).<br>
+	 * Loads the combo box with products using three arrays (simulated database).<br>
 	 * 
 	 */
-	public void loadProductCombobox() { // Method to load the combobox
+	public void loadProductCombobox() { // Method to load the combo box
 		
 		for (int i = 0; i < products.length; i++) { // For-loop
 			String line = productIDs[i].toString(); // Pulls Object element from productIDs[] and converts to String variable line
@@ -293,7 +293,7 @@ public class productSearchClass extends JPanel {
 		    }
 		};
 			
-		btnAddToList.addActionListener(new ActionListener() { // Button action method that adds item from combobox to Shopping List
+		btnAddToList.addActionListener(new ActionListener() { // Button action method that adds item from combo box to Shopping List
 			public void actionPerformed(ActionEvent e) {
 				
 				if (JListShopList_1.getModel().getSize() > 7) {
@@ -306,14 +306,14 @@ public class productSearchClass extends JPanel {
 				String verify = cbProducts.getItemAt(cbIndex); // Sets variable: 'verify' to the selected product using variable: 'cbIndex'
 				
 				for (int i = 0; i < JListShopList_1.getModel().getSize(); i++) { // for-loop using the size of the 'JListShopList_1'					
-					if (ToProductSearchList_items_1.get(i) == verify) { // if-statement that checks to see if the selected item in the combobox that the user is trying to add to Shopping List is already there						
+					if (ToProductSearchList_items_1.get(i) == verify) { // if-statement that checks to see if the selected item in the combo box that the user is trying to add to Shopping List is already there						
 						checkRepeats = true; // if the product is already in the Shopping list, set 'checkRepeats' to true
 						JOptionPane.showMessageDialog(null, "Already added to Shopping List!", "Alert", JOptionPane.ERROR_MESSAGE); // Display pop-up message						
 					}										
 				}
 				//JOptionPane.showMessageDialog(null,verify);
 				
-				if (checkRepeats == false & checkMax == false) {
+				if (checkRepeats == false && checkMax == false) {
 					
 					trackPrices[increment] = prices[cbIndex];
 					
@@ -344,12 +344,12 @@ public class productSearchClass extends JPanel {
 			} 
 		});
 		
-		btnAddToCart.addActionListener(new ActionListener() { // Button action method that adds product from combobox to Cart
+		btnAddToCart.addActionListener(new ActionListener() { // Button action method that adds product from combo box to Cart
 			public void actionPerformed(ActionEvent e) {
 				
 				checkCartRepeats = false; // Always sets the boolean to false when button is pressed				
 				cartClass.check = true; // Always sets the boolean to true when button is pressed
-				int index = cbProducts.getSelectedIndex(); // Creates variable index to pass to addPrices() method.  Used to get the selected product from combobox			
+				int index = cbProducts.getSelectedIndex(); // Creates variable index to pass to addPrices() method.  Used to get the selected product from combo box			
 				String verify = cbProducts.getItemAt(index); // Sets variable: 'verify' to the selected product using variable: 'index'
 				
 				for (int i = 0; i < cartClass.JListCartList.getModel().getSize(); i++) { // for loop that checks the cartClass.CartList_items_2 for a product (variable: 'verify') already added to the Cart					
@@ -370,7 +370,7 @@ public class productSearchClass extends JPanel {
 					increment++;
 					
 					
-					cartClass.CartList_items_2.addElement(cbProducts.getSelectedItem()); // Adds the product stored in combobox (cbProducts_1) to DefaultListModel -> CartList_items_2
+					cartClass.CartList_items_2.addElement(cbProducts.getSelectedItem()); // Adds the product stored in combo box (cbProducts_1) to DefaultListModel -> CartList_items_2
 					cartClass.JListCartList.setModel(cartClass.CartList_items_2); // Places the items in the cart (cartClass.JListCartList) from CartList_items_2
 					JOptionPane.showMessageDialog(null, "Successfully added to Cart!", "Product Added", JOptionPane.INFORMATION_MESSAGE); // Displays a pop-up message
 				}
