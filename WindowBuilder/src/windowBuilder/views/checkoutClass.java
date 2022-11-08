@@ -1,12 +1,18 @@
 package windowBuilder.views;
 
 import javax.swing.JPanel;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
+import javax.swing.JButton;
 
 public class checkoutClass extends JPanel {
 	
@@ -17,7 +23,7 @@ public class checkoutClass extends JPanel {
 	public checkoutClass() {
 		
 		initLabel();
-		
+		createEvents();
 		//setLayout(groupLayout);
 
 	}
@@ -39,12 +45,56 @@ public class checkoutClass extends JPanel {
 	private JTextField zipNum;
 	private JTextField cellNum;
 	
+	boolean zipCheck;
+	boolean phoneCheck;
 	
+	private JButton enter;
 	
+	/*public void addListeners()
+	{
+		enter.addActionListener(new ActionListener())
+		{
+			@Override
+        	public void actionPerformed(ActionEvent e) 
+			{
+        	
+			}
+		
+		}
+	}*/
 	
-	
-	
-
+		private void createEvents() 
+		{ //this method initializes all event elements of the panel
+		
+			enter.addActionListener(new ActionListener()
+			{ //this action method for button: 'enter' pays and checks inputs 
+				public void actionPerformed(ActionEvent e) 
+				{
+					
+					
+					try
+					{
+						Equalize();
+						 zipCheck = checkZip();
+						 phoneCheck = checkPhone();
+		
+					}
+					 finally
+					 {
+						 if(zipCheck == false)
+							{
+								JOptionPane.showMessageDialog(null, "Zip Code Must Be 5 Digits, Input Again", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up messa
+							}
+						if(phoneCheck == false)
+							{
+								JOptionPane.showMessageDialog(null, "Phone Number Must Be 10 Digits, Input Again ", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up messa
+							}
+								
+					 }
+					
+				}
+			});	
+		}	
 	public void Equalize()
 	{
 		firstName = first.getText();
@@ -174,6 +224,11 @@ public class checkoutClass extends JPanel {
 		zipNum.setBounds(436, 296, 50, 20);
 		add(zipNum);
 		zipNum.setColumns(10);
+		
+		
+		enter = new JButton("Pay");
+		enter.setBounds(436, 600, 89, 23);
+		add(enter);
 		
 		
 		
