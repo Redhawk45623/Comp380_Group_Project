@@ -15,8 +15,8 @@ import javax.swing.ImageIcon;
  * This includes loading arrays that handle product IDs, Names, and Prices (simulated database) that will be dispayed in the combobox in productSearchClass.<br>
  *  It also includes methods that handle the manipulation of product specifics such as associated image and description features.<br>
  * 
- * @author Ralph Ramirez
- * @version 2022.10.31 
+ * @author Ralph Ramirez, Matthew Bellman
+ * @version 2022.11.06 
  */
 public class productClass {
 	

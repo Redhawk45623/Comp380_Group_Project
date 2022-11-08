@@ -37,17 +37,14 @@ import javax.swing.ImageIcon;
 public class cartClass extends JPanel { 
 	
 	private static final long serialVersionUID = 1L;
+	
 	public static DefaultListModel<Object> CartList_items_2; //DefaultListModel list used to create list containing items added to Cart List from 'fast' shopping method in productSearchClass
 	public static DefaultListModel<Object> ToCartQuantityList_items_4; //DefaultListModel list used to track the quantity of items in the Cart List
-	
-	////The 3 elements below will be manipulated from a checkout class/////////////////////////////////////////////////////////////////
-	                                                                                                                                 //
-	public static JList<Object> JListCartList; //JList element that displays the Products added to the Cart							 //
-	public static JTextArea textAreaCartTotal;  // JTextArea that displays the current total of Products added to the Shopping List  //
-	public static JList<Object> JListCartQuantity; //JList element that displays the total quantity of products in the Cart          //
-																																	 //
-	////The 3 elements above will be manipulated from a checkout class/////////////////////////////////////////////////////////////////
-	
+	                                                                                                                                 
+	public static JList<Object> JListCartList; //JList element that displays the Products added to the Cart							 
+	public static JTextArea textAreaCartTotal;  // JTextArea that displays the current total of Products added to the Shopping List  
+	public static JList<Object> JListCartQuantity; //JList element that displays the total quantity of products in the Cart          
+																																		
 	public static int[] cartPriceArray = new int[15]; //an arrray that is used to tabulate the total amount of the Cart
 	public static Object[] trackPrices = new String[20]; //used to track the order of indexes that were added to the Cart	
 	
@@ -74,6 +71,14 @@ public class cartClass extends JPanel {
 		textAreaCartTotal.setText("$0.00"); //sets the initial total of the Shopping List to $0.00
 		JListCartQuantity.setModel(ToCartQuantityList_items_4); //sets the Cart quantity using 'ToCartQuantityList_items_4'
 		
+		
+	}
+	
+	public void checkoutElements() {
+			
+		System.out.println("Products going to checkout: " + CartList_items_2);
+		System.out.println("Quantity going to checkout: " + ToCartQuantityList_items_4);
+		System.out.println("Total Price going to checkout: " + sum);
 		
 	}
 	
@@ -253,7 +258,7 @@ public class cartClass extends JPanel {
 			
 		if ( valueInt == 1) { //when the quantity of the selected product in the Cart List = 1, run this code
 			
-			productSearchClass.ToCartShopList_items_3.removeElementAt(select2); //remove the selected element from 'ToCartShopList_items_3'
+			CartList_items_2.removeElementAt(select2); //remove the selected element from 'ToCartShopList_items_3'
 			ToCartQuantityList_items_4.removeElementAt(select2); //remove the selected element from 'ToCartQuantityList_items_4'
 			int remove2 = cartPriceArray[select2];	//uses select variable as the index for cartPriceArray and assigns to temp variable remove									
 			rearrangeCart(remove2);						
@@ -269,10 +274,9 @@ public class cartClass extends JPanel {
 	}
 	
 	/**
-	 * 
-	 * 
-	 * 
-	 * 
+	 * Removes all content of the Cart.<br>
+	 * Resets crucial code for the operation of Cart such as lists, arrays, and variables.<br>
+	 *
 	 */
 	public static void emptyCart() {
 		
@@ -282,6 +286,10 @@ public class cartClass extends JPanel {
 		textAreaCartTotal.setText("$0.00"); //this resets the textAreaCartTotal box back to empty
 		cartPriceArray = new int[15]; // this resets the cartPriceArray[]
 		trackPrices = new String[20];
+		productSearchClass.priceArray = new int[15];
+		productSearchClass.trackPrices = new String[20];
+		productSearchClass.pricesIndex = new int[25];
+		productSearchClass.increment = 0;
 		sum = 0;//this resets the variable sum	
 		
 	}
@@ -356,6 +364,14 @@ public class cartClass extends JPanel {
 							
 				emptyCart();
 			
+			}
+		});
+		
+		btnCheckoutNow.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				checkoutElements();
+				
 			}
 		});
 	
