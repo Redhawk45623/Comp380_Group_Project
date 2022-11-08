@@ -11,7 +11,6 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.UIManager;
-import javax.swing.LayoutStyle.ComponentPlacement;
 
 /**
  * This class holds the main method and is the launching point of the software.<br>
@@ -118,23 +117,20 @@ public class eCommerceMain extends JFrame {
 		JLabel lblNewLabel_2 = new JLabel("the team name along with team member names...");
 		
 		GroupLayout gl_home_panel = new GroupLayout(home_panel);
-		
 		gl_home_panel.setHorizontalGroup(
-			gl_home_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_home_panel.createSequentialGroup()
-					.addGap(96)
-					.addComponent(lblNewLabel)
-					.addContainerGap(99, Short.MAX_VALUE))
-				.addGroup(gl_home_panel.createSequentialGroup()
-					.addGap(85)
-					.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addGap(91))
-				.addGroup(Alignment.TRAILING, gl_home_panel.createSequentialGroup()
-					.addContainerGap(103, Short.MAX_VALUE)
-					.addComponent(lblNewLabel_2)
-					.addGap(101))
+			gl_home_panel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_home_panel.createSequentialGroup()
+					.addGap(133)
+					.addGroup(gl_home_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNewLabel_1)
+						.addGroup(gl_home_panel.createSequentialGroup()
+							.addGap(8)
+							.addComponent(lblNewLabel_2))
+						.addGroup(gl_home_panel.createSequentialGroup()
+							.addGap(7)
+							.addComponent(lblNewLabel)))
+					.addContainerGap(133, Short.MAX_VALUE))
 		);
-		
 		gl_home_panel.setVerticalGroup(
 			gl_home_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_home_panel.createSequentialGroup()
@@ -142,9 +138,9 @@ public class eCommerceMain extends JFrame {
 					.addComponent(lblNewLabel)
 					.addGap(75)
 					.addComponent(lblNewLabel_1)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGap(11)
 					.addComponent(lblNewLabel_2)
-					.addContainerGap(349, Short.MAX_VALUE))
+					.addContainerGap(331, Short.MAX_VALUE))
 		);
 		home_panel.setLayout(gl_home_panel); // Home tab	
 		

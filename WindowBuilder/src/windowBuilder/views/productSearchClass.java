@@ -60,8 +60,6 @@ public class productSearchClass extends JPanel {
 	public static int[] imagesIndex = new int[25];
 	public static Object[] trackPrices = new String[10];
 	
-	
-	
 	public static DefaultListModel<Object> ToProductSearchList_items_1; // DefaultListModel list used to create list containing items added to the Search List
 	public static DefaultListModel<Object> ToCartShopList_items_3; // DefaultListModel list used to create list containing items added to Cart List from Shopping List
 	public static DefaultListModel<Object> ToQuantityList_items_4; // DefaultListModel list used to create list containing quantity of products in the Shopping List
