@@ -87,7 +87,7 @@ public class eCommerceMain extends JFrame {
 		setTitle("- 'Think Tank' Group Project: 'Vintage Shop' -");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 560, 700);
+		setBounds(325, 50, 560, 700);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 

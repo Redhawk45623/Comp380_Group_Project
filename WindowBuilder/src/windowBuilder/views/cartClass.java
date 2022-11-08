@@ -58,9 +58,9 @@ public class cartClass extends JPanel {
 	public static boolean check = true; //boolean variable used for the 'btnRemoveItem' action method
 	
 	/**
-	 * initComponents() which is a method that contains all initialized (structural) components of the JPanel.<br>
+	 * Calls initComponents() which is a method that contains all initialized (structural) components of the JPanel.<br>
 	 * Calls createEvents() which is a method that holds all 'action' events (listeners).<br>
-	 * Sets the initial total price of the textAreaCartTotal to $0.00.<br>
+	 * Sets the initial total price (visible text only) of the textAreaCartTotal to $0.00.<br>
 	 * Sets the JListCartQuantity to DefaultListModel: 'ToCartQuantityList_items_4'.<br>
 	 * 
 	 */
@@ -436,7 +436,7 @@ public class cartClass extends JPanel {
 		
 		btnAddItem = new JButton("Add One");
 		
-		btnCheckoutNow = new JButton("Buy Now");
+		btnCheckoutNow = new JButton("Checkout");
 		
 		JLabel lblNewLabel = new JLabel("To Checkout:");
 		lblNewLabel.setIcon(new ImageIcon(cartClass.class.getResource("/icons/Full basket.png")));
@@ -454,18 +454,20 @@ public class cartClass extends JPanel {
 								.addComponent(lblAddOneToCart)
 								.addComponent(lblNewLabel))
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(btnCheckoutNow, 0, 0, Short.MAX_VALUE)
-								.addComponent(btnEmptyCart, 0, 0, Short.MAX_VALUE)
-								.addComponent(btnRemoveItem, 0, 0, Short.MAX_VALUE)
-								.addComponent(btnAddItem, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
-							.addGap(18)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(lblTotal)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(textAreaCartTotal, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE))
-								.addComponent(lblNoShipOrTaxes, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)))
+									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(btnEmptyCart, 0, 0, Short.MAX_VALUE)
+										.addComponent(btnRemoveItem, 0, 0, Short.MAX_VALUE)
+										.addComponent(btnAddItem, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
+									.addGap(18)
+									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_panel.createSequentialGroup()
+											.addComponent(lblTotal)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(textAreaCartTotal, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE))
+										.addComponent(lblNoShipOrTaxes, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(btnCheckoutNow, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(79)
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
@@ -478,7 +480,7 @@ public class cartClass extends JPanel {
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 								.addComponent(lblQuantity, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 								.addComponent(scrollPane_1, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap(112, Short.MAX_VALUE))
+					.addContainerGap(98, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
