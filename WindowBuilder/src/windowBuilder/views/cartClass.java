@@ -12,6 +12,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.ListModel;
 import javax.swing.border.BevelBorder;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -80,6 +81,19 @@ public class cartClass extends JPanel {
 		System.out.println("Quantity going to checkout: " + ToCartQuantityList_items_4);
 		System.out.println("Total Price going to checkout: " + sum);
 		
+	}
+	
+	/**
+	 * Used to add one DefaultListModel to another.<br>
+	 * 
+	 * @param <T>     used to represent the type of object stored
+	 * @param from    the list that represents the change 'from'
+	 * @param to      the list that represents the change'to'
+	 */
+	protected static <T> void addTo(ListModel<T> from, DefaultListModel<T> to) { //method used to add one ListModel to another DefaultListModel
+	    for (int index = 0; index < from.getSize(); index++) {
+	        to.addElement(from.getElementAt(index));
+	    }
 	}
 	
 	/**
