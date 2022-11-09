@@ -1,4 +1,4 @@
-package windowBuilder.views;
+ package windowBuilder.views;
 
 import javax.swing.JPanel;
 
@@ -13,6 +13,17 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JList;
+
+
+/**
+ * The goal of the Checkout class is to do what for many people is at the end of the shopping experience
+ * 
+ * 
+ *  
+ * @author Aaron Flores
+ *date Started 10/28
+ */
 
 public class checkoutClass extends JPanel {
 	
@@ -49,6 +60,7 @@ public class checkoutClass extends JPanel {
 	boolean phoneCheck;
 	
 	private JButton enter;
+	private JList shopList;
 	
 	/*public void addListeners()
 	{
@@ -229,6 +241,15 @@ public class checkoutClass extends JPanel {
 		enter = new JButton("Pay");
 		enter.setBounds(436, 600, 89, 23);
 		add(enter);
+		
+		JList shopList = new JList();
+		shopList = cartClass.addTo(JListCartList ,shopList);
+		shopList.setBounds(10, 23, 475, 104);
+		add(shopList);
+		
+		JList list = new JList();
+		list.setBounds(495, 23, 32, 104);
+		add(list);
 		
 		
 		
