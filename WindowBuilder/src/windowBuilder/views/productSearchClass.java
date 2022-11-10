@@ -950,10 +950,20 @@ public class productSearchClass extends JPanel {
 		
 	}
 
+	/**
+	 * Gets the increment value
+	 * 
+	 * @return the value of increment
+	 */
 	public static int getIncrement() {
 		return increment;
 	}
 
+	/**
+	 * Sets the increment value to the 'increment' parameter.
+	 * 
+	 * @param increment - the value that increment gets set to
+	 */
 	public static void setIncrement(int increment) {
 		productSearchClass.increment = increment;
 	}
