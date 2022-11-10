@@ -373,7 +373,7 @@ public class cartClass extends JPanel {
 		
 		btnEmptyCart = new JButton("Empty");
 		
-		JLabel lblNoShipOrTaxes = new JLabel("*Does not include S&H or taxes");
+		JLabel lblNoShipOrTaxes = new JLabel("* Does not include S&H or taxes");
 		lblNoShipOrTaxes.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
 		
 		JLabel lblEmptyCart = new JLabel("Empty Cart:");
@@ -403,7 +403,7 @@ public class cartClass extends JPanel {
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(15)
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
@@ -418,34 +418,40 @@ public class cartClass extends JPanel {
 								.addComponent(btnRemoveItem, 0, 0, Short.MAX_VALUE)
 								.addComponent(btnAddItem, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
 							.addGap(18)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
 								.addGroup(gl_panel.createSequentialGroup()
 									.addComponent(lblTotal)
 									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(textAreaCartTotal, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE))
+									.addComponent(textAreaCartTotal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 								.addComponent(lblNoShipOrTaxes, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(79)
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
 								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(lblItemsInCart)
-									.addGap(64))
-								.addGroup(gl_panel.createSequentialGroup()
+									.addGap(79)
 									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 296, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)))
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblQuantity, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-								.addComponent(scrollPane_1, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap(112, Short.MAX_VALUE))
+									.addPreferredGap(ComponentPlacement.UNRELATED))
+								.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+									.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+									.addComponent(lblItemsInCart)
+									.addGap(90)))
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblQuantity, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)))))
+					.addGap(100))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(20)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblQuantity)
-						.addComponent(lblItemsInCart))
-					.addGap(6)
+					.addContainerGap(20, Short.MAX_VALUE)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+							.addComponent(lblItemsInCart)
+							.addGap(6))
+						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+							.addComponent(lblQuantity)
+							.addGap(11)))
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
 						.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE))
@@ -473,7 +479,7 @@ public class cartClass extends JPanel {
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(btnCheckoutNow)
 								.addComponent(lblNewLabel))))
-					.addContainerGap(226, Short.MAX_VALUE))
+					.addContainerGap(60, Short.MAX_VALUE))
 		);
 		
 		JListCartQuantity = new JList<Object>();

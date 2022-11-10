@@ -318,7 +318,6 @@ public class productSearchClass extends JPanel {
 					cartClass.prices[increment] = prices[cbIndex];
 					increment++;
 					
-					// TODO - Issue Somewhere here or before
 					productObject.setImageIndex(cbIndex); // Uses cbIndex variable as a parameter to call setImageIndex().  This tracks the order of indexes to be used for the description and image display						
 					productObject.loadImages(cbIndex); // Calls the loadImages() using 'cbIndex' as a parameter			
 					pricesIndex[add] = cbIndex; // Used to track price index
@@ -333,6 +332,8 @@ public class productSearchClass extends JPanel {
 					JListShopList_1.setModel(ToProductSearchList_items_1); // This lists the selected DefaultListModel items in the JListShopList shopping list							
 					JListShopList_1.addMouseListener(mouseListener); // A listener that detects when a product is selected in the shopping list
 					//JOptionPane.showMessageDialog(null,S);
+					
+					System.out.println(add);
 				}
 				
 				for(int i = 0; i < priceArray.length; i++) {						
@@ -434,10 +435,11 @@ public class productSearchClass extends JPanel {
 					ToQuantityList_items_4.removeAllElements(); // Clears out the quantity box from the Shopping List
 					ToProductSearchList_items_1.clear(); // Clears all items from DefaultListModel -> ToProductSearchList_items_1
 					textAreaTotal.setText(""); // This resets the textAreaTotal box back to empty
-					priceArray = new int[50]; // Resets the priceArray[]
+					priceArray = new int[10]; // Resets the priceArray[]
 					txtpnProductDescription.setText(null); // Resets the description area
 					displayLabel.setIcon(null); // Resets the display image area
 					JOptionPane.showMessageDialog(null, "Moved all items in shopping list to Cart!", "Products Moved", JOptionPane.INFORMATION_MESSAGE);
+					add = 0; // Resets the add variable for prices[] for the next use
 					
 				} else { // If there is nothing in the Shopping List, then display pop-up message
 					JOptionPane.showMessageDialog(null, "Please add products to the Shopping List first!", "Alert", JOptionPane.ERROR_MESSAGE); // Displays a pop-up message					
@@ -469,6 +471,7 @@ public class productSearchClass extends JPanel {
 						ToQuantityList_items_4.removeElementAt(selectedIx); // Removes the quantity amount from quantity box at index specified by variable: 'index'
 						
 						productObject.track--; // Decrements the variable: 'track' that is used in 'productObject.trackImages[]' to account for the product removed
+						add--; // Decrements the add variable for prices[] for the next use
 						
 						int remove = priceArray[selectedIx];
 						rearrangeCart(remove);
@@ -508,9 +511,10 @@ public class productSearchClass extends JPanel {
 					ToQuantityList_items_4.removeAllElements(); // Clears out the DefaultListModel -> ToQuantityList_items_4 (numbers displayed in the quantity box)
 					ToProductSearchList_items_1.removeAllElements(); // This clears all elements from DefaultListModel -> ToProductSearchList_items_1
 					textAreaTotal.setText("$0.00"); // This resets the textAreaTotal box back to empty
-					priceArray = new int[50]; // This resets the priceArray[]
+					priceArray = new int[10]; // This resets the priceArray[]
 					productObject.trackImages = new Integer[20]; // This resets the trackImages[]
 					productObject.track = 0; // Resets track variable to 0
+					add = 0; // Resets the add variable for prices[] for the next use
 					JOptionPane.showMessageDialog(null, "Removed all products from Shopping List", "Products Removed", JOptionPane.INFORMATION_MESSAGE); // Displays a pop-up message
 					
 				} else { // if there is nothing added to the Shopping List yet...
@@ -747,13 +751,13 @@ public class productSearchClass extends JPanel {
 											.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 												.addComponent(btnAddAllToCart)
 												.addComponent(btnAddOneToList))
-											.addPreferredGap(ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+											.addPreferredGap(ComponentPlacement.RELATED, 84, Short.MAX_VALUE)
 											.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 												.addGroup(gl_panel_1.createSequentialGroup()
 													.addGap(12)
 													.addComponent(lblNewLabel)
 													.addPreferredGap(ComponentPlacement.RELATED)
-													.addComponent(textAreaTotal, GroupLayout.PREFERRED_SIZE, 64, GroupLayout.PREFERRED_SIZE))
+													.addComponent(textAreaTotal, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE))
 												.addComponent(lblNoShipNotaxes, GroupLayout.PREFERRED_SIZE, 186, GroupLayout.PREFERRED_SIZE))
 											.addGap(11))))
 								.addGroup(gl_panel_1.createSequentialGroup()
