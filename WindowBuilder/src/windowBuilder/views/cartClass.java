@@ -12,6 +12,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+import javax.swing.ListModel;
 import javax.swing.border.BevelBorder;
 import javax.swing.JButton;
 import java.awt.Font;
@@ -58,9 +59,9 @@ public class cartClass extends JPanel {
 	public static boolean check = true; //boolean variable used for the 'btnRemoveItem' action method
 	
 	/**
-	 * initComponents() which is a method that contains all initialized (structural) components of the JPanel.<br>
+	 * Calls initComponents() which is a method that contains all initialized (structural) components of the JPanel.<br>
 	 * Calls createEvents() which is a method that holds all 'action' events (listeners).<br>
-	 * Sets the initial total price of the textAreaCartTotal to $0.00.<br>
+	 * Sets the initial total price (visible text only) of the textAreaCartTotal to $0.00.<br>
 	 * Sets the JListCartQuantity to DefaultListModel: 'ToCartQuantityList_items_4'.<br>
 	 * 
 	 */
@@ -80,6 +81,19 @@ public class cartClass extends JPanel {
 		System.out.println("Quantity going to checkout: " + ToCartQuantityList_items_4);
 		System.out.println("Total Price going to checkout: " + sum);
 		
+	}
+	
+	/**
+	 * Used to add one DefaultListModel to another.<br>
+	 * 
+	 * @param <T>     used to represent the type of object stored
+	 * @param from    the list that represents the change coming 'from'
+	 * @param to      the list that represents the change going 'to'
+	 */
+	protected static <T> void addTo(ListModel<T> from, DefaultListModel<T> to) { //method used to add one ListModel to another DefaultListModel
+	    for (int index = 0; index < from.getSize(); index++) {
+	        to.addElement(from.getElementAt(index));
+	    }
 	}
 	
 	/**
@@ -223,9 +237,9 @@ public class cartClass extends JPanel {
 
 		}
 		
-		for(int i = 0; i < cartPriceArray.length; i++) { //for-loop used for de-bugging						
-			System.out.println("Removed Array (fast shop method): " + cartPriceArray[i]);					
-		}
+//		for(int i = 0; i < cartPriceArray.length; i++) { //for-loop used for de-bugging						
+//			System.out.println("Removed Array (fast shop method): " + cartPriceArray[i]);					
+//		}
 		
 	}
 	
@@ -268,9 +282,9 @@ public class cartClass extends JPanel {
 		
 		}
 		
-		for(int i = 0; i < cartPriceArray.length; i++) { //for-loop used for de-bugging							
-			System.out.println("Removed Array (Shop List method): " + cartPriceArray[i]);					
-		}
+//		for(int i = 0; i < cartPriceArray.length; i++) { //for-loop used for de-bugging							
+//			System.out.println("Removed Array (Shop List method): " + cartPriceArray[i]);					
+//		}
 	}
 	
 	/**
@@ -286,6 +300,10 @@ public class cartClass extends JPanel {
 		textAreaCartTotal.setText("$0.00"); //this resets the textAreaCartTotal box back to empty
 		cartPriceArray = new int[15]; // this resets the cartPriceArray[]
 		trackPrices = new String[20];
+		productSearchClass.priceArray = new int[15];
+		productSearchClass.trackPrices = new String[20];
+		productSearchClass.pricesIndex = new int[25];
+		productSearchClass.increment = 0;
 		sum = 0;//this resets the variable sum	
 		
 	}
@@ -322,9 +340,9 @@ public class cartClass extends JPanel {
 						int addedUp = convertedNumber2+ 1; //increments the variable: 'addedUp' by 1
 						ToCartQuantityList_items_4.setElementAt(addedUp, index); //sets the Quantity 					
 					
-					for(int i = 0; i < cartPriceArray.length; i++) { //loop for de-bugging purposes						
-						System.out.println("Added Array: " + cartPriceArray[i]);												
-					}
+//					for(int i = 0; i < cartPriceArray.length; i++) { //loop for de-bugging purposes						
+//						System.out.println("Added Array: " + cartPriceArray[i]);												
+//					}
 										
 				}
 				else { //if the Cart List is empty or no product is selected in the Cart, display the pop-up
@@ -432,7 +450,7 @@ public class cartClass extends JPanel {
 		
 		btnAddItem = new JButton("Add One");
 		
-		btnCheckoutNow = new JButton("Buy Now");
+		btnCheckoutNow = new JButton("Checkout");
 		
 		JLabel lblNewLabel = new JLabel("To Checkout:");
 		lblNewLabel.setIcon(new ImageIcon(cartClass.class.getResource("/icons/Full basket.png")));
@@ -450,18 +468,20 @@ public class cartClass extends JPanel {
 								.addComponent(lblAddOneToCart)
 								.addComponent(lblNewLabel))
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(btnCheckoutNow, 0, 0, Short.MAX_VALUE)
-								.addComponent(btnEmptyCart, 0, 0, Short.MAX_VALUE)
-								.addComponent(btnRemoveItem, 0, 0, Short.MAX_VALUE)
-								.addComponent(btnAddItem, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
-							.addGap(18)
 							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(lblTotal)
-									.addPreferredGap(ComponentPlacement.RELATED)
-									.addComponent(textAreaCartTotal, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE))
-								.addComponent(lblNoShipOrTaxes, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)))
+									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(btnEmptyCart, 0, 0, Short.MAX_VALUE)
+										.addComponent(btnRemoveItem, 0, 0, Short.MAX_VALUE)
+										.addComponent(btnAddItem, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
+									.addGap(18)
+									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+										.addGroup(gl_panel.createSequentialGroup()
+											.addComponent(lblTotal)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(textAreaCartTotal, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE))
+										.addComponent(lblNoShipOrTaxes, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)))
+								.addComponent(btnCheckoutNow, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(79)
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
@@ -474,7 +494,7 @@ public class cartClass extends JPanel {
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 								.addComponent(lblQuantity, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
 								.addComponent(scrollPane_1, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap(112, Short.MAX_VALUE))
+					.addContainerGap(98, Short.MAX_VALUE))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
