@@ -87,8 +87,8 @@ public class cartClass extends JPanel {
 	 * Used to add one DefaultListModel to another.<br>
 	 * 
 	 * @param <T>     used to represent the type of object stored
-	 * @param from    the list that represents the change 'from'
-	 * @param to      the list that represents the change'to'
+	 * @param from    the list that represents the change coming 'from'
+	 * @param to      the list that represents the change going 'to'
 	 */
 	protected static <T> void addTo(ListModel<T> from, DefaultListModel<T> to) { //method used to add one ListModel to another DefaultListModel
 	    for (int index = 0; index < from.getSize(); index++) {
