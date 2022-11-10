@@ -332,8 +332,7 @@ public class productSearchClass extends JPanel {
 					JListShopList_1.setModel(ToProductSearchList_items_1); // This lists the selected DefaultListModel items in the JListShopList shopping list							
 					JListShopList_1.addMouseListener(mouseListener); // A listener that detects when a product is selected in the shopping list
 					//JOptionPane.showMessageDialog(null,S);
-					
-					System.out.println(add);
+
 				}
 				
 				for(int i = 0; i < priceArray.length; i++) {						
