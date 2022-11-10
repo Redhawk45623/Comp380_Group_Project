@@ -51,12 +51,14 @@ import javax.swing.SwingConstants;
  */
 public class productSearchClass extends JPanel {
 	
+	private static int priceArraySIZE = 10; // Size of priceArray[]
+	
 	private static final long serialVersionUID = 1L;
 	public static Object[] products; // Array that is loaded from file containing Product Names, used to load combo box
 	public static Object[] productIDs; // Array that is loaded from read file containing Product IDs, used to load combo box
 	public static Object[] prices = new String[25]; // Array that is loaded from file containing prices, used to load combo box
 	public static int[] pricesIndex = new int[25]; // Used to track the order of indexes that were added to the shopping list
-	public static int[] priceArray = new int[10]; // Array used to store the prices in order of added to the shopping list after pressing add to list button
+	public static int[] priceArray = new int[priceArraySIZE]; // Array used to store the prices in order of added to the shopping list after pressing add to list button
 	public static int[] imagesIndex = new int[25];
 	public static Object[] trackPrices = new String[10];
 	
@@ -434,7 +436,7 @@ public class productSearchClass extends JPanel {
 					ToQuantityList_items_4.removeAllElements(); // Clears out the quantity box from the Shopping List
 					ToProductSearchList_items_1.clear(); // Clears all items from DefaultListModel -> ToProductSearchList_items_1
 					textAreaTotal.setText(""); // This resets the textAreaTotal box back to empty
-					priceArray = new int[10]; // Resets the priceArray[]
+					priceArray = new int[priceArraySIZE]; // Resets the priceArray[]
 					txtpnProductDescription.setText(null); // Resets the description area
 					displayLabel.setIcon(null); // Resets the display image area
 					JOptionPane.showMessageDialog(null, "Moved all items in shopping list to Cart!", "Products Moved", JOptionPane.INFORMATION_MESSAGE);
@@ -510,7 +512,7 @@ public class productSearchClass extends JPanel {
 					ToQuantityList_items_4.removeAllElements(); // Clears out the DefaultListModel -> ToQuantityList_items_4 (numbers displayed in the quantity box)
 					ToProductSearchList_items_1.removeAllElements(); // This clears all elements from DefaultListModel -> ToProductSearchList_items_1
 					textAreaTotal.setText("$0.00"); // This resets the textAreaTotal box back to empty
-					priceArray = new int[10]; // This resets the priceArray[]
+					priceArray = new int[priceArraySIZE]; // This resets the priceArray[]
 					productObject.trackImages = new Integer[20]; // This resets the trackImages[]
 					productObject.track = 0; // Resets track variable to 0
 					add = 0; // Resets the add variable for prices[] for the next use
