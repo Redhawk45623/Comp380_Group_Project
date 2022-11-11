@@ -58,6 +58,9 @@ public class checkoutClass extends JPanel {
 	
 	boolean zipCheck;
 	boolean phoneCheck;
+	boolean firstCheck;
+	boolean lastCheck;
+	
 	
 	private JButton enter;
 	private JList shopList;
@@ -89,7 +92,8 @@ public class checkoutClass extends JPanel {
 						Equalize();
 						 zipCheck = checkZip();
 						 phoneCheck = checkPhone();
-		
+						 firstCheck = checkFirst();
+						 lastCheck = checkLast();
 					}
 					 finally
 					 {
@@ -97,10 +101,18 @@ public class checkoutClass extends JPanel {
 							{
 								JOptionPane.showMessageDialog(null, "Zip Code Must Be 5 Digits, Input Again", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up messa
 							}
-						if(phoneCheck == false)
+						 else if(phoneCheck == false)
 							{
 								JOptionPane.showMessageDialog(null, "Phone Number Must Be 10 Digits, Input Again ", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up messa
 							}
+						 else if(firstCheck == false)
+						 {
+							 JOptionPane.showMessageDialog(null, "First Name Cannot Be Empty, Input Again ", "Alert", JOptionPane.ERROR_MESSAGE);
+						 }
+						 else if(lastCheck == false)
+						 {
+							 JOptionPane.showMessageDialog(null, "Last Name Cannot Be Empty, Input Again ", "Alert", JOptionPane.ERROR_MESSAGE);
+						 }
 								
 					 }
 					
@@ -146,7 +158,32 @@ public class checkoutClass extends JPanel {
 			return true;
 		}
 	}
-
+	
+	public boolean checkFirst()
+	{
+		if(firstName.length() == 0 )
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
+	public boolean checkLast()
+	{
+		if(lastName.length() == 0 )
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
+	
 	public String getFullName()
 	{
 		return firstName + " " + lastName;
