@@ -1,4 +1,4 @@
-package windowBuilder.views;
+ package windowBuilder.views;
 
 import javax.swing.JPanel;
 
@@ -14,10 +14,23 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JList;
+Ralph's-Branch---Contains-all-classes-I'm-working-on
 import javax.swing.border.BevelBorder;
 import javax.swing.JTextArea;
 import javax.swing.JRadioButton;
 import java.awt.Font;
+=======
+
+
+/**
+ * The goal of the Checkout class is to do what for many people is at the end of the shopping experience
+ * 
+ * 
+ *  
+ * @author Aaron Flores
+ *date Started 10/28
+ */
+ //Customer-Specifics
 
 public class checkoutClass extends JPanel {
 	
@@ -52,8 +65,14 @@ public class checkoutClass extends JPanel {
 	
 	boolean zipCheck;
 	boolean phoneCheck;
+	boolean firstCheck;
+	boolean lastCheck;
+	boolean addressCheck;
+	boolean cityCheck;
+	boolean stateCheck;
 	
 	private JButton enter;
+ // Ralph's-Branch---Contains-all-classes-I'm-working-on
 	private JList list;
 	private JList list_1;
 	private JTextArea textArea_1;
@@ -70,6 +89,9 @@ public class checkoutClass extends JPanel {
 	private JRadioButton rdbtnNewRadioButton_3;
 	private JRadioButton rdbtnNewRadioButton_4;
 	private JLabel lblNewLabel_7;
+=======
+	private JList shopList;
+ //Customer-Specifics
 	
 	/*public void addListeners()
 	{
@@ -98,7 +120,11 @@ public class checkoutClass extends JPanel {
 						Equalize();
 						 zipCheck = checkZip();
 						 phoneCheck = checkPhone();
-		
+						 firstCheck = checkFirst();
+						 lastCheck = checkLast();
+						 addressCheck = checkAddress();
+						 cityCheck = checkCity();
+						 stateCheck = checkState();
 					}
 					 finally
 					 {
@@ -106,11 +132,30 @@ public class checkoutClass extends JPanel {
 							{
 								JOptionPane.showMessageDialog(null, "Zip Code Must Be 5 Digits, Input Again", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up messa
 							}
-						if(phoneCheck == false)
+						 else if(phoneCheck == false)
 							{
 								JOptionPane.showMessageDialog(null, "Phone Number Must Be 10 Digits, Input Again ", "Alert", JOptionPane.ERROR_MESSAGE); //Displays a pop-up messa
 							}
-								
+						 else if(firstCheck == false)
+						 {
+							 JOptionPane.showMessageDialog(null, "First Name Cannot Be Empty, Input Again ", "Alert", JOptionPane.ERROR_MESSAGE);
+						 }
+						 else if(lastCheck == false)
+						 {
+							 JOptionPane.showMessageDialog(null, "Last Name Cannot Be Empty, Input Again ", "Alert", JOptionPane.ERROR_MESSAGE);
+						 }
+						 else if(addressCheck == false)
+						 {
+							 JOptionPane.showMessageDialog(null, "Address Cannot Be Empty, Input Again ", "Alert", JOptionPane.ERROR_MESSAGE);
+						 }	
+						 else if(cityCheck == false)
+						 {
+							 JOptionPane.showMessageDialog(null, "City Cannot Be Empty, Input Again ", "Alert", JOptionPane.ERROR_MESSAGE);
+						 }
+						 else if(stateCheck == false)
+						 {
+							 JOptionPane.showMessageDialog(null, "State Not Accepted , Input 2-Letter Abbreviation ", "Alert", JOptionPane.ERROR_MESSAGE);
+						 }
 					 }
 					
 				}
@@ -155,7 +200,67 @@ public class checkoutClass extends JPanel {
 			return true;
 		}
 	}
-
+	
+	public boolean checkFirst()
+	{
+		if(firstName.length() == 0 )
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
+	public boolean checkLast()
+	{
+		if(lastName.length() == 0 )
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
+	public boolean checkAddress()
+	{
+		if(address.length() == 0 )
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
+	public boolean checkCity()
+	{
+		if(city.length() == 0 )
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
+	public boolean checkState()
+	{
+		if(state.length() != 2 )
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
 	public String getFullName()
 	{
 		return firstName + " " + lastName;
@@ -440,7 +545,16 @@ public class checkoutClass extends JPanel {
 		);
 		setLayout(groupLayout);
 		
+		/*JList shopList = new JList();
+		shopList = cartClass.addTo(JListCartList ,shopList);
+		shopList.setBounds(10, 23, 475, 104);
+		add(shopList);
 		
+		JList list = new JList();
+		list.setBounds(495, 23, 32, 104);
+		add(list);
+		
+		*/
 		
 		
 		
