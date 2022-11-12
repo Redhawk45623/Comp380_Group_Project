@@ -60,7 +60,9 @@ public class checkoutClass extends JPanel {
 	boolean phoneCheck;
 	boolean firstCheck;
 	boolean lastCheck;
-	
+	boolean addressCheck;
+	boolean cityCheck;
+	boolean stateCheck;
 	
 	private JButton enter;
 	private JList shopList;
@@ -94,6 +96,9 @@ public class checkoutClass extends JPanel {
 						 phoneCheck = checkPhone();
 						 firstCheck = checkFirst();
 						 lastCheck = checkLast();
+						 addressCheck = checkAddress();
+						 cityCheck = checkCity();
+						 stateCheck = checkState();
 					}
 					 finally
 					 {
@@ -113,7 +118,18 @@ public class checkoutClass extends JPanel {
 						 {
 							 JOptionPane.showMessageDialog(null, "Last Name Cannot Be Empty, Input Again ", "Alert", JOptionPane.ERROR_MESSAGE);
 						 }
-								
+						 else if(addressCheck == false)
+						 {
+							 JOptionPane.showMessageDialog(null, "Address Cannot Be Empty, Input Again ", "Alert", JOptionPane.ERROR_MESSAGE);
+						 }	
+						 else if(cityCheck == false)
+						 {
+							 JOptionPane.showMessageDialog(null, "City Cannot Be Empty, Input Again ", "Alert", JOptionPane.ERROR_MESSAGE);
+						 }
+						 else if(stateCheck == false)
+						 {
+							 JOptionPane.showMessageDialog(null, "State Not Accepted , Input 2-Letter Abbreviation ", "Alert", JOptionPane.ERROR_MESSAGE);
+						 }
 					 }
 					
 				}
@@ -183,6 +199,41 @@ public class checkoutClass extends JPanel {
 		}
 	}
 	
+	public boolean checkAddress()
+	{
+		if(address.length() == 0 )
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
+	public boolean checkCity()
+	{
+		if(city.length() == 0 )
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
+	
+	public boolean checkState()
+	{
+		if(state.length() != 2 )
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
+	}
 	
 	public String getFullName()
 	{
@@ -279,7 +330,7 @@ public class checkoutClass extends JPanel {
 		enter.setBounds(436, 600, 89, 23);
 		add(enter);
 		
-		JList shopList = new JList();
+		/*JList shopList = new JList();
 		shopList = cartClass.addTo(JListCartList ,shopList);
 		shopList.setBounds(10, 23, 475, 104);
 		add(shopList);
@@ -288,7 +339,7 @@ public class checkoutClass extends JPanel {
 		list.setBounds(495, 23, 32, 104);
 		add(list);
 		
-		
+		*/
 		
 		
 		
