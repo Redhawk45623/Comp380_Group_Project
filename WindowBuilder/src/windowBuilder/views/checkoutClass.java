@@ -14,6 +14,12 @@ import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JList;
+Ralph's-Branch---Contains-all-classes-I'm-working-on
+import javax.swing.border.BevelBorder;
+import javax.swing.JTextArea;
+import javax.swing.JRadioButton;
+import java.awt.Font;
+=======
 
 
 /**
@@ -24,6 +30,7 @@ import javax.swing.JList;
  * @author Aaron Flores
  *date Started 10/28
  */
+ //Customer-Specifics
 
 public class checkoutClass extends JPanel {
 	
@@ -65,7 +72,26 @@ public class checkoutClass extends JPanel {
 	boolean stateCheck;
 	
 	private JButton enter;
+ // Ralph's-Branch---Contains-all-classes-I'm-working-on
+	private JList list;
+	private JList list_1;
+	private JTextArea textArea_1;
+	private JTextArea textArea_2;
+	private JTextField textField;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_3;
+	private JTextArea textArea_3;
+	private JLabel lblNewLabel_4;
+	private JLabel lblNewLabel_5;
+	private JLabel lblNewLabel_6;
+	private JRadioButton rdbtnNewRadioButton_3;
+	private JRadioButton rdbtnNewRadioButton_4;
+	private JLabel lblNewLabel_7;
+=======
 	private JList shopList;
+ //Customer-Specifics
 	
 	/*public void addListeners()
 	{
@@ -258,77 +284,266 @@ public class checkoutClass extends JPanel {
 
 	private void initLabel()
 	{
-		setLayout(null);
 		JLabel firstName = new JLabel("First Name");
-		firstName.setBounds(10, 207, 80, 14);
 		
 		JLabel lastName = new JLabel("Last Name");
-		lastName.setBounds(157, 207, 80, 14);
 		
 		JLabel address = new JLabel("Address");
-		address.setBounds(305, 207, 49, 14);
 		
 		JLabel stateInitials = new JLabel("State");
-		stateInitials.setBounds(436, 207, 49, 14);
 		
-		JLabel phone = new JLabel("Phone Number");
-		phone.setBounds(10, 278, 90, 14);
+		JLabel phone = new JLabel("Phone");
 		
 		JLabel cityName = new JLabel("City");
-		cityName.setBounds(305, 278, 49, 14);
 		
-		JLabel zip = new JLabel("Zip Code");
-		zip.setBounds(436, 278, 70, 14);
-		add(zip);
-		
-		
-		add(cityName);
-		add(phone);
-		add(stateInitials);		
-		add(address);
-		add(firstName);
-		add(lastName);
+		JLabel zip = new JLabel("Zip");
 		
 		first = new JTextField();
-		first.setBounds(10, 225, 80, 20);
-		add(first);
 		first.setColumns(10);
 		
 		last = new JTextField();
-		last.setBounds(157, 225, 80, 20);
-		add(last);
 		last.setColumns(10);
 		
 		address1 = new JTextField();
-		address1.setBounds(305, 225, 80, 20);
-		add(address1);
 		address1.setColumns(10);
 		
 		state1 = new JTextField();
-		state1.setBounds(435, 225, 25, 20);
-		add(state1);
 		state1.setColumns(10);
 		
 		cellNum = new JTextField();
-		cellNum.setBounds(10, 296, 96, 20);
-		add(cellNum);
 		cellNum.setColumns(10);
 		
 		city1 = new JTextField();
-		city1.setBounds(305, 296, 96, 20);
-		add(city1);
 		city1.setColumns(10);
 		
 		
 		zipNum = new JTextField();
-		zipNum.setBounds(436, 296, 50, 20);
-		add(zipNum);
 		zipNum.setColumns(10);
 		
 		
 		enter = new JButton("Pay");
-		enter.setBounds(436, 600, 89, 23);
-		add(enter);
+		
+		list = new JList();
+		list.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		
+		list_1 = new JList();
+		list_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		
+		JTextArea textArea = new JTextArea();
+		textArea.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		
+		textArea_1 = new JTextArea();
+		textArea_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		
+		textArea_2 = new JTextArea();
+		textArea_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		
+		textField = new JTextField();
+		textField.setColumns(10);
+		
+		lblNewLabel = new JLabel("E-Mail");
+		
+		lblNewLabel_1 = new JLabel("Total:");
+		
+		lblNewLabel_2 = new JLabel("Tax:");
+		
+		lblNewLabel_3 = new JLabel("Shipping:");
+		
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("7-10 Days Standard Shipping");
+		rdbtnNewRadioButton.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
+		
+		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("3-Day Shipping");
+		rdbtnNewRadioButton_1.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
+		
+		JRadioButton rdbtnNewRadioButton_2 = new JRadioButton("Next Day Shipping");
+		rdbtnNewRadioButton_2.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
+		
+		textArea_3 = new JTextArea();
+		textArea_3.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		
+		lblNewLabel_4 = new JLabel("Grand Total:");
+		
+		lblNewLabel_5 = new JLabel("Qty:");
+		
+		lblNewLabel_6 = new JLabel("Products to Checkout");
+		
+		rdbtnNewRadioButton_3 = new JRadioButton("Credit/Debit Card");
+		rdbtnNewRadioButton_3.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
+		
+		rdbtnNewRadioButton_4 = new JRadioButton("Electronic Check");
+		rdbtnNewRadioButton_4.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
+		
+		lblNewLabel_7 = new JLabel("* Secure payment info will be entered after selection is made from above");
+		lblNewLabel_7.setFont(new Font("Lucida Grande", Font.ITALIC, 9));
+		GroupLayout groupLayout = new GroupLayout(this);
+		groupLayout.setHorizontalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(33)
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(rdbtnNewRadioButton)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(rdbtnNewRadioButton_1)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(rdbtnNewRadioButton_2))
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addGroup(groupLayout.createSequentialGroup()
+											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addComponent(firstName, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+												.addComponent(first, GroupLayout.PREFERRED_SIZE, 98, GroupLayout.PREFERRED_SIZE))
+											.addGap(14)
+											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING, false)
+												.addGroup(groupLayout.createSequentialGroup()
+													.addComponent(lastName, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
+													.addGap(18))
+												.addGroup(groupLayout.createSequentialGroup()
+													.addComponent(last, 0, 0, Short.MAX_VALUE)
+													.addPreferredGap(ComponentPlacement.UNRELATED)))
+											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addComponent(address1, GroupLayout.PREFERRED_SIZE, 153, GroupLayout.PREFERRED_SIZE)
+												.addComponent(address, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addComponent(phone, GroupLayout.PREFERRED_SIZE, 106, GroupLayout.PREFERRED_SIZE)
+												.addComponent(cellNum, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addComponent(textField, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
+												.addComponent(lblNewLabel))
+											.addPreferredGap(ComponentPlacement.UNRELATED)
+											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+												.addGroup(groupLayout.createSequentialGroup()
+													.addComponent(cityName, GroupLayout.PREFERRED_SIZE, 49, GroupLayout.PREFERRED_SIZE)
+													.addGap(47))
+												.addComponent(city1, GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)))
+										.addGroup(groupLayout.createSequentialGroup()
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(rdbtnNewRadioButton_3)
+											.addPreferredGap(ComponentPlacement.RELATED)
+											.addComponent(rdbtnNewRadioButton_4)
+											.addGap(52)))
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+										.addComponent(zip, GroupLayout.PREFERRED_SIZE, 70, GroupLayout.PREFERRED_SIZE)
+										.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+											.addComponent(state1, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE)
+											.addComponent(stateInitials, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 43, GroupLayout.PREFERRED_SIZE))
+										.addComponent(enter, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)
+										.addComponent(zipNum, GroupLayout.PREFERRED_SIZE, 57, GroupLayout.PREFERRED_SIZE))
+									.addGap(68))))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addGroup(groupLayout.createSequentialGroup()
+									.addGap(106)
+									.addGroup(groupLayout.createSequentialGroup()
+										.addGroup(groupLayout.createParallelGroup(Alignment.TRAILING)
+											.addGroup(groupLayout.createSequentialGroup()
+												.addComponent(lblNewLabel_4)
+												.addPreferredGap(ComponentPlacement.UNRELATED)
+												.addComponent(textArea_3, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE))
+											.addGroup(groupLayout.createSequentialGroup()
+												.addComponent(lblNewLabel_3)
+												.addPreferredGap(ComponentPlacement.UNRELATED)
+												.addComponent(textArea_2, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE))
+											.addGroup(groupLayout.createSequentialGroup()
+												.addComponent(lblNewLabel_2)
+												.addPreferredGap(ComponentPlacement.UNRELATED)
+												.addComponent(textArea_1, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE))
+											.addGroup(groupLayout.createSequentialGroup()
+												.addComponent(lblNewLabel_1)
+												.addPreferredGap(ComponentPlacement.UNRELATED)
+												.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE))
+											.addComponent(list, GroupLayout.PREFERRED_SIZE, 274, GroupLayout.PREFERRED_SIZE))
+										.addPreferredGap(ComponentPlacement.UNRELATED)))
+								.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
+									.addContainerGap()
+									.addComponent(lblNewLabel_6)
+									.addGap(74)))
+							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+								.addComponent(lblNewLabel_5)
+								.addComponent(list_1, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
+							.addGap(141))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(23)
+							.addComponent(lblNewLabel_7)))
+					.addContainerGap())
+		);
+		groupLayout.setVerticalGroup(
+			groupLayout.createParallelGroup(Alignment.LEADING)
+				.addGroup(groupLayout.createSequentialGroup()
+					.addGap(26)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(lblNewLabel_6)
+						.addComponent(lblNewLabel_5))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE, false)
+						.addComponent(list, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
+						.addComponent(list_1, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(groupLayout.createSequentialGroup()
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+							.addComponent(textArea, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblNewLabel_1))
+						.addGap(12)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+							.addComponent(textArea_1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblNewLabel_2))
+						.addGap(12)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+							.addComponent(textArea_2, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblNewLabel_3))
+						.addPreferredGap(ComponentPlacement.UNRELATED)
+						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+							.addComponent(textArea_3, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+							.addComponent(lblNewLabel_4)))
+					.addGap(24)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(rdbtnNewRadioButton)
+						.addComponent(rdbtnNewRadioButton_1)
+						.addComponent(rdbtnNewRadioButton_2))
+					.addGap(26, 26, Short.MAX_VALUE)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(firstName, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lastName, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
+						.addComponent(stateInitials, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
+						.addComponent(address, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(first, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+						.addComponent(address1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+						.addComponent(last, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+						.addComponent(state1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+					.addGap(18)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(zip, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
+						.addComponent(phone, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNewLabel)
+						.addComponent(cityName, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+						.addComponent(zipNum, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+						.addComponent(cellNum, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+						.addComponent(city1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
+					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(87)
+							.addComponent(enter, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE))
+						.addGroup(groupLayout.createSequentialGroup()
+							.addGap(30)
+							.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
+								.addComponent(rdbtnNewRadioButton_3)
+								.addComponent(rdbtnNewRadioButton_4))
+							.addGap(18)
+							.addComponent(lblNewLabel_7)))
+					.addGap(41))
+		);
+		setLayout(groupLayout);
 		
 		/*JList shopList = new JList();
 		shopList = cartClass.addTo(JListCartList ,shopList);

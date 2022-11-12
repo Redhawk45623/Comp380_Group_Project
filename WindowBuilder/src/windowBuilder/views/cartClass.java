@@ -76,6 +76,14 @@ public class cartClass extends JPanel {
 	}
 	
 	public void checkoutElements() {
+		
+		
+		//addTo() -----> adding to checkout List DefaultListModel from CartList_items_2
+		//addTo() -----> adding to checkout quantity DefaultListModel from ToCartQuantityList_items_4
+		//textArea for total in checkoutClass.setText(sum from cartClass)
+		//establish tax percentage total ----> some type of method needs to be run or code that calculates tax percentage for the current sum
+		//textArea for taxes added in checkoutClass.setText(the value calculated from the code or method from above)
+		//emptyCart()
 			
 		System.out.println("Products going to checkout: " + CartList_items_2);
 		System.out.println("Quantity going to checkout: " + ToCartQuantityList_items_4);
@@ -87,8 +95,8 @@ public class cartClass extends JPanel {
 	 * Used to add one DefaultListModel to another.<br>
 	 * 
 	 * @param <T>     used to represent the type of object stored
-	 * @param from    the list that represents the change 'from'
-	 * @param to      the list that represents the change'to'
+	 * @param from    the list that represents the change coming 'from'
+	 * @param to      the list that represents the change going 'to'
 	 */
 	protected static <T> void addTo(ListModel<T> from, DefaultListModel<T> to) { //method used to add one ListModel to another DefaultListModel
 	    for (int index = 0; index < from.getSize(); index++) {
@@ -536,7 +544,7 @@ public class cartClass extends JPanel {
 		
 		JListCartQuantity = new JList<Object>();
 		scrollPane_1.setViewportView(JListCartQuantity);
-		CartList_items_2= new DefaultListModel<Object>();
+		CartList_items_2 = new DefaultListModel<Object>();
 		JListCartList = new JList<Object>(); //this creates a new JList element that will display the Products added to the Shopping List
 		JListCartList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		JListCartList.setModel(new AbstractListModel<Object>() {
