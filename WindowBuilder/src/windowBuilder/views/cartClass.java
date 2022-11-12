@@ -392,7 +392,9 @@ public class cartClass extends JPanel {
 		btnCheckoutNow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				checkoutElements();
+				checkoutClass.transferCart();
+				emptyCart();
+				JOptionPane.showMessageDialog(null, "Cart Transferred To Checkout Tab", "Please Head To Checkout", JOptionPane.INFORMATION_MESSAGE); //Displays a pop-up message
 				
 			}
 		});
