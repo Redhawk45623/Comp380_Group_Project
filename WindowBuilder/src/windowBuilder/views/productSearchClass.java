@@ -51,7 +51,7 @@ import javax.swing.SwingConstants;
  */
 public class productSearchClass extends JPanel {
 	
-	private static int priceArraySIZE = 10; // Size of priceArray[]
+	private static int priceArraySIZE = 10; // Size of priceArray[] and trackPrices[]
 	
 	private static final long serialVersionUID = 1L;
 	public static Object[] products; // Array that is loaded from file containing Product Names, used to load combo box
@@ -60,7 +60,7 @@ public class productSearchClass extends JPanel {
 	public static int[] pricesIndex = new int[25]; // Used to track the order of indexes that were added to the shopping list
 	public static int[] priceArray = new int[priceArraySIZE]; // Array used to store the prices in order of added to the shopping list after pressing add to list button
 	public static int[] imagesIndex = new int[25];
-	public static Object[] trackPrices = new String[10];
+	public static Object[] trackPrices = new String[priceArraySIZE];
 	
 	public static DefaultListModel<Object> ToProductSearchList_items_1; // DefaultListModel list used to create list containing items added to the Search List
 	public static DefaultListModel<Object> ToCartShopList_items_3; // DefaultListModel list used to create list containing items added to Cart List from Shopping List
@@ -249,8 +249,8 @@ public class productSearchClass extends JPanel {
 		
 		if (addedUp == 0) {	// If addedUp is equal to 0			
 			textAreaTotal.setText("$0.00"); // This resets the textAreaCartTotal box back to empty
-			priceArray = new int[15]; // This resets the cartPriceArray[]
-			prices = new String[20];
+			priceArray = new int[priceArraySIZE]; // This resets the cartPriceArray[]
+			//prices = new String[20];
 			addedOne = false; // Resets the boolean variable: 'addedOne' to false. this establishes that no product has been added to the Shopping List
 			ToProductSearchList_items_1.removeAllElements(); // This clears all elements from DefaultListModel -> ToProductSearchList_items_1
 			grandtotal = 0;
@@ -345,10 +345,10 @@ public class productSearchClass extends JPanel {
 				
 				if (checkRepeats == false && checkMax == false) {
 					
-					trackPrices[getIncrement()] = prices[cbIndex];
+					trackPrices[increment] = prices[cbIndex];
 					
-					cartClass.prices[getIncrement()] = prices[cbIndex];
-					setIncrement(getIncrement() + 1);
+					cartClass.prices[increment] = prices[cbIndex];
+					increment++;
 					
 					productObject.setImageIndex(cbIndex); // Uses cbIndex variable as a parameter to call setImageIndex().  This tracks the order of indexes to be used for the description and image display						
 					productObject.loadImages(cbIndex); // Calls the loadImages() using 'cbIndex' as a parameter			
@@ -397,8 +397,8 @@ public class productSearchClass extends JPanel {
 					cartClass.JListCartQuantity.setModel(cartClass.ToCartQuantityList_items_4); // Sets the model (cartClass quantity box)
 					
 					
-					cartClass.prices[getIncrement()] = prices[index];
-					setIncrement(getIncrement() + 1);
+					cartClass.prices[increment] = prices[index];
+					increment++;
 					
 					
 					cartClass.CartList_items_2.addElement(cbProducts.getSelectedItem()); // Adds the product stored in combo box (cbProducts_1) to DefaultListModel -> CartList_items_2
@@ -494,7 +494,7 @@ public class productSearchClass extends JPanel {
 					if (quantity2 == 1) {
 						
 						trackPrices[selectedIx] = null;
-						setIncrement(getIncrement() - 1);
+						increment--;
 					
 						int image = productObject.trackImages[selectedIx]; // Sets int variable: 'w' to the index found in 'trackImages[]'
 						productObject.removeImageIndex(image); // Calls the removeImageIndex() from productClass using parameter 'w'
@@ -539,9 +539,10 @@ public class productSearchClass extends JPanel {
 		});
 		
 		btnRemoveAll.addActionListener(new ActionListener() { // Button action method that removes all selected Products in Shopping List
+			
 			public void actionPerformed(ActionEvent e) {
 				
-				if (addedOne == true){ // Checks to see if at least one product is in the Shopping List before trying to clear the Shopping List
+				if (addedOne == true) { // Checks to see if at least one product is in the Shopping List before trying to clear the Shopping List
 					
 					addedOne = false; // Resets the boolean variable: 'addedOne' to false. this establishes that no product has been added to the Shopping List
 					txtpnProductDescription.setText(null); // Clears out the description text area
@@ -552,10 +553,15 @@ public class productSearchClass extends JPanel {
 					priceArray = new int[priceArraySIZE]; // This resets the priceArray[]
 					productObject.trackImages = new Integer[20]; // This resets the trackImages[]
 					productObject.track = 0; // Resets track variable to 0
-					add = 0; // Resets the add variable for prices[] for the next use
+					
+					// Resets the add, increment, and counter variables for the next use
+					add = 0;
+					increment = 0;
+					counter = 0;
+					
 					JOptionPane.showMessageDialog(null, "Removed all products from Shopping List", "Products Removed", JOptionPane.INFORMATION_MESSAGE); // Displays a pop-up message
 					
-				} else { // if there is nothing added to the Shopping List yet...
+				} else { // If there is nothing in the Shopping List
 					JOptionPane.showMessageDialog(null, "Nothing in Shopping List to remove!", "Alert", JOptionPane.ERROR_MESSAGE); // Displays a pop-up message					
 				}
 			}
