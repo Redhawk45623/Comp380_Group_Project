@@ -714,7 +714,7 @@ public class productSearchClass extends JPanel {
 		cbProducts = new JComboBox<String>();
 		cbProducts.setMaximumRowCount(20);
 		
-		ToProductSearchList_items_1= new DefaultListModel<Object>();
+		ToProductSearchList_items_1 = new DefaultListModel<Object>();
 		ToCartShopList_items_3 = new DefaultListModel<Object>();
 		ToQuantityList_items_4 = new DefaultListModel<Object>();
 		

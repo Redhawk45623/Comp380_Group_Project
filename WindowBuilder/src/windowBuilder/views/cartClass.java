@@ -76,6 +76,14 @@ public class cartClass extends JPanel {
 	}
 	
 	public void checkoutElements() {
+		
+		
+		//addTo() -----> adding to checkout List DefaultListModel from CartList_items_2
+		//addTo() -----> adding to checkout quantity DefaultListModel from ToCartQuantityList_items_4
+		//textArea for total in checkoutClass.setText(sum from cartClass)
+		//establish tax percentage total ----> some type of method needs to be run or code that calculates tax percentage for the current sum
+		//textArea for taxes added in checkoutClass.setText(the value calculated from the code or method from above)
+		//emptyCart()
 			
 		System.out.println("Products going to checkout: " + CartList_items_2);
 		System.out.println("Quantity going to checkout: " + ToCartQuantityList_items_4);
@@ -536,7 +544,7 @@ public class cartClass extends JPanel {
 		
 		JListCartQuantity = new JList<Object>();
 		scrollPane_1.setViewportView(JListCartQuantity);
-		CartList_items_2= new DefaultListModel<Object>();
+		CartList_items_2 = new DefaultListModel<Object>();
 		JListCartList = new JList<Object>(); //this creates a new JList element that will display the Products added to the Shopping List
 		JListCartList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		JListCartList.setModel(new AbstractListModel<Object>() {

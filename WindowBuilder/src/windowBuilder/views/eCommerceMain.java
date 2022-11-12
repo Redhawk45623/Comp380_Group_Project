@@ -41,7 +41,7 @@ public class eCommerceMain extends JFrame {
 	private JPanel contentPane;
 	JPanel search_panel = new productSearchClass(); //instantiates an object of productSearchClass() which is a JPanel
 	JPanel cart_panel = new cartClass(); //instantiates an object of cartClass() which is a JPanel
-	JPanel checkout_panel = new checkoutClass();    // <---will be the instantiation of an object of checkoutClass() which will be a JPanel
+	JPanel checkout_panel = new checkoutClass();   
 	
 	ImageIcon homeIcon = new ImageIcon(this.getClass().getResource("/icons/Home.png"));            /////////////////////////////////////
 	ImageIcon searchIcon = new ImageIcon(this.getClass().getResource("/icons/Search2.png"));       //                                 //
