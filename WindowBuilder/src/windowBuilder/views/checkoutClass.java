@@ -244,7 +244,7 @@ public class checkoutClass extends JPanel {
 		
 		lblNewLabel_3 = new JLabel("Shipping:");
 		
-		JRadioButton rdbtnNewRadioButton = new JRadioButton("Standard Shipping");
+		JRadioButton rdbtnNewRadioButton = new JRadioButton("7-10 Days Standard Shipping");
 		rdbtnNewRadioButton.setFont(new Font("Lucida Grande", Font.PLAIN, 11));
 		
 		JRadioButton rdbtnNewRadioButton_1 = new JRadioButton("3-Day Shipping");
@@ -281,9 +281,9 @@ public class checkoutClass extends JPanel {
 								.addGroup(groupLayout.createSequentialGroup()
 									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(rdbtnNewRadioButton)
-									.addGap(18)
+									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(rdbtnNewRadioButton_1)
-									.addPreferredGap(ComponentPlacement.UNRELATED)
+									.addPreferredGap(ComponentPlacement.RELATED)
 									.addComponent(rdbtnNewRadioButton_2))
 								.addGroup(groupLayout.createSequentialGroup()
 									.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -399,8 +399,8 @@ public class checkoutClass extends JPanel {
 					.addGap(24)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(rdbtnNewRadioButton)
-						.addComponent(rdbtnNewRadioButton_2)
-						.addComponent(rdbtnNewRadioButton_1))
+						.addComponent(rdbtnNewRadioButton_1)
+						.addComponent(rdbtnNewRadioButton_2))
 					.addGap(26, 26, Short.MAX_VALUE)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(firstName, GroupLayout.PREFERRED_SIZE, 14, GroupLayout.PREFERRED_SIZE)
