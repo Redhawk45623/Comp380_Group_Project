@@ -71,8 +71,7 @@ public class cartClass extends JPanel {
 		createEvents(); //calls createEvents()() method; builds all events that happen (actions)
 		textAreaCartTotal.setText("$0.00"); //sets the initial total of the Shopping List to $0.00
 		JListCartQuantity.setModel(ToCartQuantityList_items_4); //sets the Cart quantity using 'ToCartQuantityList_items_4'
-		
-		
+				
 	}
 	
 	/**
