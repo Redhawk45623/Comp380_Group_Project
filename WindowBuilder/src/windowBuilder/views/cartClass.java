@@ -75,22 +75,6 @@ public class cartClass extends JPanel {
 		
 	}
 	
-	public void checkoutElements() {
-		
-		
-		//addTo() -----> adding to checkout List DefaultListModel from CartList_items_2
-		//addTo() -----> adding to checkout quantity DefaultListModel from ToCartQuantityList_items_4
-		//textArea for total in checkoutClass.setText(sum from cartClass)
-		//establish tax percentage total ----> some type of method needs to be run or code that calculates tax percentage for the current sum
-		//textArea for taxes added in checkoutClass.setText(the value calculated from the code or method from above)
-		//emptyCart()
-			
-		System.out.println("Products going to checkout: " + CartList_items_2);
-		System.out.println("Quantity going to checkout: " + ToCartQuantityList_items_4);
-		System.out.println("Total Price going to checkout: " + sum);
-		
-	}
-	
 	/**
 	 * Used to add one DefaultListModel to another.<br>
 	 * 
