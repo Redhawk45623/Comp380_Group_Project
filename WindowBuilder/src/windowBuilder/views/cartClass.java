@@ -257,7 +257,7 @@ public class cartClass extends JPanel {
 			
 			Object evaluatedValue = ToCartQuantityList_items_4.getElementAt(select2); //assign Object: 'evaluatedValue' to the element using index variable: 'select2'				
 			int valueInt2 = Integer.parseInt(evaluatedValue.toString()); //convert Object to int
-			valueInt2 = valueInt2 - 1; //subract 'valueInt2' by 1 
+			valueInt2 = valueInt2 - 1; // subtract 'valueInt2' by 1 
 			ToCartQuantityList_items_4.set( select2, valueInt2); //adjust the quantity using index 'select2' by inserting 'valueInt2'					
 			adjCartPricesRemove(select2); //call the adjustCartTotal() using the parameter: 'select2'
 			setCartPriceTotal(); //adjust the cart price total
@@ -343,7 +343,8 @@ public class cartClass extends JPanel {
 				textAreaCartTotal.setText("$0.00"); //this resets the textAreaCartTotal box back to empty
 				cartPriceArray = new int[15]; // this resets the cartPriceArray[]
 				prices = new String[20];
-				sum = 0;//this resets the variable sum	
+				sum = 0;//this resets the variable sum
+				counter = 0;
 			
 			}
 		});

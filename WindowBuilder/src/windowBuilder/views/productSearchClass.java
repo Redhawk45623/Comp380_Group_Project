@@ -461,7 +461,11 @@ public class productSearchClass extends JPanel {
 					
 					cartClass.textAreaCartTotal.setText(""); // Resets the textAreaCartTotal in case there has been a quantity added
 					cartClass.textAreaCartTotal.append("$" + quantAdded + ".00"); // Sets the textAreaCartTotal to the variable: 'quantAdded' to account for any added items from the Shopping List				
-					addTo(ToQuantityList_items_4 , cartClass.ToCartQuantityList_items_4); // Calls the addTo() which takes a list 'from' and adds it 'to' another list. Basically, sets the quanity in the cart from Shopping List								
+					
+					// DUP CHECK
+					dupCheck();
+					
+					addTo(ToQuantityList_items_4, cartClass.ToCartQuantityList_items_4); // Calls the addTo() which takes a list 'from' and adds it 'to' another list. Basically, sets the quanity in the cart from Shopping List								
 					cartClass.JListCartList.setModel(ToCartShopList_items_3); // Sets the Cart List (JListCartList)  in cartClass with all items from DefaultListModel ToCartShopList_items_3
 					
 					ToQuantityList_items_4.removeAllElements(); // Clears out the quantity box from the Shopping List
@@ -476,6 +480,42 @@ public class productSearchClass extends JPanel {
 				} else { // If there is nothing in the Shopping List, then display pop-up message
 					JOptionPane.showMessageDialog(null, "Please add products to the Shopping List first!", "Alert", JOptionPane.ERROR_MESSAGE); // Displays a pop-up message					
 				}				
+			}
+			
+			// Checks for duplcates in the cartClass
+			private void dupCheck() {
+				
+				Object[] prod = ToProductSearchList_items_1.toArray();
+				Object[] check = cartClass.CartList_items_2.toArray();
+				int remove = 0;
+
+				for (int i = 0; i < prod.length; i++) {
+				
+					String v1 = prod[i].toString();
+					
+					for (int j = 0; j < check.length; j++) {
+					
+						// If the item is already in the cart, add to the quantity instead
+						if (v1.compareTo(check[j].toString()) == 0) {
+							cartClass.cartPriceArray[j] += priceArray[i];
+							//cartClass.ToCartQuantityList_items_4.set(j,
+									//cartClass.ToCartQuantityList_items_4.get(j) + ToQuantityList_items_4.get(i));
+							ToProductSearchList_items_1.removeElementAt(remove - i);
+							remove++;
+							break;
+						}
+					}
+					
+					
+					System.out.println(prod[i].toString());
+				}
+				
+				
+				for (int i = 0; i < check.length; i++) {
+					System.out.println(check[i].toString());
+				}
+				
+				
 			}
 		});
 		
