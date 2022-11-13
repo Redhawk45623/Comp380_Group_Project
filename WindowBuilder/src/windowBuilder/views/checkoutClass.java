@@ -4,7 +4,9 @@ import javax.swing.JPanel;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 
+import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -12,14 +14,15 @@ import javax.swing.JOptionPane;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
+import javax.swing.ListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
-Ralph's-Branch---Contains-all-classes-I'm-working-on
+//Ralph's-Branch---Contains-all-classes-I'm-working-on
 import javax.swing.border.BevelBorder;
 import javax.swing.JTextArea;
 import javax.swing.JRadioButton;
 import java.awt.Font;
-=======
+
 
 
 /**
@@ -42,6 +45,9 @@ public class checkoutClass extends JPanel {
 		
 		initLabel();
 		createEvents();
+		
+		shoppingList = new DefaultListModel<Object>();
+		quantityList = new DefaultListModel<Object>();
 		//setLayout(groupLayout);
 
 	}
@@ -53,6 +59,7 @@ public class checkoutClass extends JPanel {
 	private  String state;
 	private  String zipCode;
 	private  String phoneNum;
+	private  String email;
 
 	
 	private JTextField first;
@@ -70,14 +77,14 @@ public class checkoutClass extends JPanel {
 	boolean addressCheck;
 	boolean cityCheck;
 	boolean stateCheck;
+	boolean emailCheck;
 	
 	private JButton enter;
  // Ralph's-Branch---Contains-all-classes-I'm-working-on
-	private JList list;
-	private JList list_1;
-	private JTextArea textArea_1;
+	private static JList checkoutList;
+	private static JList checkoutQuantity;
 	private JTextArea textArea_2;
-	private JTextField textField;
+	private JTextField emailAddress;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
@@ -89,8 +96,14 @@ public class checkoutClass extends JPanel {
 	private JRadioButton rdbtnNewRadioButton_3;
 	private JRadioButton rdbtnNewRadioButton_4;
 	private JLabel lblNewLabel_7;
-=======
+
 	private JList shopList;
+	
+	public static DefaultListModel<Object> shoppingList;  
+	public static DefaultListModel<Object> quantityList;
+	private static JTextArea totalPrice;
+	private static JTextArea taxArea;
+	
  //Customer-Specifics
 	
 	/*public void addListeners()
@@ -105,7 +118,37 @@ public class checkoutClass extends JPanel {
 		
 		}
 	}*/
-	
+		public static void transferCart()
+		{
+			addTo(cartClass.CartList_items_2,shoppingList);
+			addTo(cartClass.ToCartQuantityList_items_4, quantityList);
+			
+			checkoutList.setModel(shoppingList);
+			checkoutQuantity.setModel(quantityList);
+			
+			totalPrice.setText("$"+String.valueOf(cartClass.sum)+".00");
+			double taxTot = cartClass.sum *.0725;
+			DecimalFormat shorten = new DecimalFormat("#.00");
+			
+			String taxTransfer = shorten.format(taxTot);
+			taxArea.setText("$"+ taxTransfer);
+			
+		}
+		
+		/**
+		 * Used to add one DefaultListModel to another.<br>
+		 * 
+		 * @param <T>     used to represent the type of object stored
+		 * @param from    the list that represents the change coming 'from'
+		 * @param to      the list that represents the change going 'to'
+		 */
+		protected static <T> void addTo(ListModel<T> from, DefaultListModel<T> to) { //method used to add one ListModel to another DefaultListModel
+		    for (int index = 0; index < from.getSize(); index++) {
+		        to.addElement(from.getElementAt(index));
+		    }
+		}
+		
+		
 		private void createEvents() 
 		{ //this method initializes all event elements of the panel
 		
@@ -125,6 +168,8 @@ public class checkoutClass extends JPanel {
 						 addressCheck = checkAddress();
 						 cityCheck = checkCity();
 						 stateCheck = checkState();
+						 emailCheck = checkEmail();
+						 
 					}
 					 finally
 					 {
@@ -156,6 +201,10 @@ public class checkoutClass extends JPanel {
 						 {
 							 JOptionPane.showMessageDialog(null, "State Not Accepted , Input 2-Letter Abbreviation ", "Alert", JOptionPane.ERROR_MESSAGE);
 						 }
+						 else if(emailCheck == false)
+						 {
+							 JOptionPane.showMessageDialog(null, "Email Cannot be left Empty", "Alert", JOptionPane.ERROR_MESSAGE);
+						 }
 					 }
 					
 				}
@@ -170,13 +219,23 @@ public class checkoutClass extends JPanel {
 		state = state1.getText();
 		zipCode = zipNum.getText();
 		phoneNum = cellNum.getText();
-		
+		email = emailAddress.getText();
 		
         //JOptionPane.showMessageDialog(null, "Woah! Bad input, numbers only!");     
 	}
 			//int.parseint(cellNum)
 			
-			
+	public boolean checkEmail()
+	{
+		if(email.length() == 0)
+		{
+			return false;
+		}
+		else 
+		{
+			return true;
+		}
+	}
 	public boolean checkZip()
 	{				 
 		if(zipCode.length() != 5 )
@@ -281,6 +340,10 @@ public class checkoutClass extends JPanel {
 		return state;
 	}
 
+	public String getEmail()
+	{
+		return email;
+	}
 
 	private void initLabel()
 	{
@@ -323,23 +386,23 @@ public class checkoutClass extends JPanel {
 		
 		enter = new JButton("Pay");
 		
-		list = new JList();
-		list.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		checkoutList = new JList<Object>();
+		checkoutList.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
-		list_1 = new JList();
-		list_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		checkoutQuantity = new JList<Object>();
+		checkoutQuantity.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
-		JTextArea textArea = new JTextArea();
-		textArea.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		totalPrice = new JTextArea();
+		totalPrice.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
-		textArea_1 = new JTextArea();
-		textArea_1.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		taxArea = new JTextArea();
+		taxArea.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
 		textArea_2 = new JTextArea();
 		textArea_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		emailAddress = new JTextField();
+		emailAddress.setColumns(10);
 		
 		lblNewLabel = new JLabel("E-Mail");
 		
@@ -413,7 +476,7 @@ public class checkoutClass extends JPanel {
 												.addComponent(cellNum, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))
 											.addPreferredGap(ComponentPlacement.RELATED)
 											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-												.addComponent(textField, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
+												.addComponent(emailAddress, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
 												.addComponent(lblNewLabel))
 											.addPreferredGap(ComponentPlacement.UNRELATED)
 											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -453,12 +516,12 @@ public class checkoutClass extends JPanel {
 											.addGroup(groupLayout.createSequentialGroup()
 												.addComponent(lblNewLabel_2)
 												.addPreferredGap(ComponentPlacement.UNRELATED)
-												.addComponent(textArea_1, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE))
+												.addComponent(taxArea, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE))
 											.addGroup(groupLayout.createSequentialGroup()
 												.addComponent(lblNewLabel_1)
 												.addPreferredGap(ComponentPlacement.UNRELATED)
-												.addComponent(textArea, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE))
-											.addComponent(list, GroupLayout.PREFERRED_SIZE, 274, GroupLayout.PREFERRED_SIZE))
+												.addComponent(totalPrice, GroupLayout.PREFERRED_SIZE, 62, GroupLayout.PREFERRED_SIZE))
+											.addComponent(checkoutList, GroupLayout.PREFERRED_SIZE, 274, GroupLayout.PREFERRED_SIZE))
 										.addPreferredGap(ComponentPlacement.UNRELATED)))
 								.addGroup(Alignment.TRAILING, groupLayout.createSequentialGroup()
 									.addContainerGap()
@@ -466,7 +529,7 @@ public class checkoutClass extends JPanel {
 									.addGap(74)))
 							.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 								.addComponent(lblNewLabel_5)
-								.addComponent(list_1, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
+								.addComponent(checkoutQuantity, GroupLayout.PREFERRED_SIZE, 26, GroupLayout.PREFERRED_SIZE))
 							.addGap(141))
 						.addGroup(groupLayout.createSequentialGroup()
 							.addGap(23)
@@ -482,16 +545,16 @@ public class checkoutClass extends JPanel {
 						.addComponent(lblNewLabel_5))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE, false)
-						.addComponent(list, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
-						.addComponent(list_1, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE))
+						.addComponent(checkoutList, GroupLayout.PREFERRED_SIZE, 130, GroupLayout.PREFERRED_SIZE)
+						.addComponent(checkoutQuantity, GroupLayout.PREFERRED_SIZE, 129, GroupLayout.PREFERRED_SIZE))
 					.addGap(18)
 					.addGroup(groupLayout.createSequentialGroup()
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-							.addComponent(textArea, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addComponent(totalPrice, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(lblNewLabel_1))
 						.addGap(12)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
-							.addComponent(textArea_1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+							.addComponent(taxArea, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 							.addComponent(lblNewLabel_2))
 						.addGap(12)
 						.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
@@ -528,7 +591,7 @@ public class checkoutClass extends JPanel {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(zipNum, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 						.addComponent(cellNum, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+						.addComponent(emailAddress, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 						.addComponent(city1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()

@@ -42,6 +42,7 @@ public class eCommerceMain extends JFrame {
 	JPanel search_panel = new productSearchClass(); //instantiates an object of productSearchClass() which is a JPanel
 	JPanel cart_panel = new cartClass(); //instantiates an object of cartClass() which is a JPanel
 	JPanel checkout_panel = new checkoutClass();   
+	JPanel help_panel = new helpClass();
 	
 	ImageIcon homeIcon = new ImageIcon(this.getClass().getResource("/icons/Home.png"));            /////////////////////////////////////
 	ImageIcon searchIcon = new ImageIcon(this.getClass().getResource("/icons/Search2.png"));       //                                 //
@@ -154,7 +155,6 @@ public class eCommerceMain extends JFrame {
 			
 		tabbedPane.addTab("Checkout", checkoutIcon, checkout_panel, null); //this will change too to look like the existing tabs above fore 'Product Search' and 'View Cart'
 		
-		JPanel help_panel = new JPanel();
 		tabbedPane.addTab("Help", helpIcon, help_panel, null);
 		contentPane.setLayout(gl_contentPane);
 	}
