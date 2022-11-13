@@ -59,6 +59,7 @@ public class checkoutClass extends JPanel {
 	private  String state;
 	private  String zipCode;
 	private  String phoneNum;
+	private  String email;
 
 	
 	private JTextField first;
@@ -76,13 +77,14 @@ public class checkoutClass extends JPanel {
 	boolean addressCheck;
 	boolean cityCheck;
 	boolean stateCheck;
+	boolean emailCheck;
 	
 	private JButton enter;
  // Ralph's-Branch---Contains-all-classes-I'm-working-on
 	private static JList checkoutList;
 	private static JList checkoutQuantity;
 	private JTextArea textArea_2;
-	private JTextField textField;
+	private JTextField emailAddress;
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel_1;
 	private JLabel lblNewLabel_2;
@@ -166,6 +168,8 @@ public class checkoutClass extends JPanel {
 						 addressCheck = checkAddress();
 						 cityCheck = checkCity();
 						 stateCheck = checkState();
+						 emailCheck = checkEmail();
+						 
 					}
 					 finally
 					 {
@@ -197,6 +201,10 @@ public class checkoutClass extends JPanel {
 						 {
 							 JOptionPane.showMessageDialog(null, "State Not Accepted , Input 2-Letter Abbreviation ", "Alert", JOptionPane.ERROR_MESSAGE);
 						 }
+						 else if(emailCheck == false)
+						 {
+							 JOptionPane.showMessageDialog(null, "Email Cannot be left Empty", "Alert", JOptionPane.ERROR_MESSAGE);
+						 }
 					 }
 					
 				}
@@ -211,13 +219,23 @@ public class checkoutClass extends JPanel {
 		state = state1.getText();
 		zipCode = zipNum.getText();
 		phoneNum = cellNum.getText();
-		
+		email = emailAddress.getText();
 		
         //JOptionPane.showMessageDialog(null, "Woah! Bad input, numbers only!");     
 	}
 			//int.parseint(cellNum)
 			
-			
+	public boolean checkEmail()
+	{
+		if(email.length() == 0)
+		{
+			return false;
+		}
+		else 
+		{
+			return true;
+		}
+	}
 	public boolean checkZip()
 	{				 
 		if(zipCode.length() != 5 )
@@ -322,6 +340,10 @@ public class checkoutClass extends JPanel {
 		return state;
 	}
 
+	public String getEmail()
+	{
+		return email;
+	}
 
 	private void initLabel()
 	{
@@ -379,8 +401,8 @@ public class checkoutClass extends JPanel {
 		textArea_2 = new JTextArea();
 		textArea_2.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		emailAddress = new JTextField();
+		emailAddress.setColumns(10);
 		
 		lblNewLabel = new JLabel("E-Mail");
 		
@@ -454,7 +476,7 @@ public class checkoutClass extends JPanel {
 												.addComponent(cellNum, GroupLayout.PREFERRED_SIZE, 96, GroupLayout.PREFERRED_SIZE))
 											.addPreferredGap(ComponentPlacement.RELATED)
 											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
-												.addComponent(textField, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
+												.addComponent(emailAddress, GroupLayout.PREFERRED_SIZE, 111, GroupLayout.PREFERRED_SIZE)
 												.addComponent(lblNewLabel))
 											.addPreferredGap(ComponentPlacement.UNRELATED)
 											.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
@@ -569,7 +591,7 @@ public class checkoutClass extends JPanel {
 					.addGroup(groupLayout.createParallelGroup(Alignment.BASELINE)
 						.addComponent(zipNum, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 						.addComponent(cellNum, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+						.addComponent(emailAddress, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
 						.addComponent(city1, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))
 					.addGroup(groupLayout.createParallelGroup(Alignment.LEADING)
 						.addGroup(groupLayout.createSequentialGroup()
