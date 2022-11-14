@@ -396,9 +396,13 @@ public class productSearchClass extends JPanel {
 					cartClass.ToCartQuantityList_items_4.addElement("1"); // Adds a 1 to the DefaultListModel: 'ToCartQuantityList_items_4' in the cartClass
 					cartClass.JListCartQuantity.setModel(cartClass.ToCartQuantityList_items_4); // Sets the model (cartClass quantity box)
 					
-					
-					cartClass.prices[increment] = prices[index];
-					increment++;
+					for (int i = 0; i < cartClass.prices.length; i++) {
+						if (cartClass.prices[i] == null) {
+							cartClass.prices[i] = prices[index];
+						}
+					}
+					//cartClass.prices[increment] = prices[index];
+					//increment++;
 					
 					
 					cartClass.CartList_items_2.addElement(cbProducts.getSelectedItem()); // Adds the product stored in combo box (cbProducts_1) to DefaultListModel -> CartList_items_2
@@ -462,11 +466,17 @@ public class productSearchClass extends JPanel {
 					cartClass.textAreaCartTotal.setText(""); // Resets the textAreaCartTotal in case there has been a quantity added
 					cartClass.textAreaCartTotal.append("$" + quantAdded + ".00"); // Sets the textAreaCartTotal to the variable: 'quantAdded' to account for any added items from the Shopping List				
 					
-					// DUP CHECK
-					dupCheck();
+					// DUP CHECK (ToProductSearchList_items_1)
+					dupCheck1();
 					
 					addTo(ToQuantityList_items_4, cartClass.ToCartQuantityList_items_4); // Calls the addTo() which takes a list 'from' and adds it 'to' another list. Basically, sets the quanity in the cart from Shopping List								
+					
+
+					// DUP CHECK (ToCartShopList)
+					dupCheck2();
+					
 					cartClass.JListCartList.setModel(ToCartShopList_items_3); // Sets the Cart List (JListCartList)  in cartClass with all items from DefaultListModel ToCartShopList_items_3
+					
 					
 					ToQuantityList_items_4.removeAllElements(); // Clears out the quantity box from the Shopping List
 					ToProductSearchList_items_1.clear(); // Clears all items from DefaultListModel -> ToProductSearchList_items_1
@@ -474,16 +484,44 @@ public class productSearchClass extends JPanel {
 					priceArray = new int[priceArraySIZE]; // Resets the priceArray[]
 					txtpnProductDescription.setText(null); // Resets the description area
 					displayLabel.setIcon(null); // Resets the display image area
+					
 					JOptionPane.showMessageDialog(null, "Moved all items in shopping list to Cart!", "Products Moved", JOptionPane.INFORMATION_MESSAGE);
-					add = 0; // Resets the add variable for prices[] for the next use
+					
+					// Resets the add, increment, and counter variables for the next use
+					add = 0;
+					increment = 0;
+					counter = 0;
+					
+					grandtotal = 0;
 					
 				} else { // If there is nothing in the Shopping List, then display pop-up message
 					JOptionPane.showMessageDialog(null, "Please add products to the Shopping List first!", "Alert", JOptionPane.ERROR_MESSAGE); // Displays a pop-up message					
 				}				
 			}
 			
-			// Checks for duplcates in the cartClass
-			private void dupCheck() {
+			private void dupCheck2() {
+				Object[] prod = ToCartShopList_items_3.toArray();
+				int remove = 0;
+				
+				for (int i = 0; i < prod.length; i++) {
+					
+					String v1 = prod[i].toString();
+					
+					for (int j = i+1; j < prod.length; j++) {
+					
+						// If the item is already in the cart, add to the quantity instead
+						if (v1.compareTo(prod[j].toString()) == 0) {
+							ToCartShopList_items_3.removeElementAt(remove - i);
+							remove++;
+						}
+						
+					}
+				}
+				
+			}
+
+			// Checks for duplicates in the cartClass
+			private void dupCheck1() {
 				
 				Object[] prod = ToProductSearchList_items_1.toArray();
 				Object[] check = cartClass.CartList_items_2.toArray();
@@ -498,9 +536,12 @@ public class productSearchClass extends JPanel {
 						// If the item is already in the cart, add to the quantity instead
 						if (v1.compareTo(check[j].toString()) == 0) {
 							cartClass.cartPriceArray[j] += priceArray[i];
-							//cartClass.ToCartQuantityList_items_4.set(j,
-									//cartClass.ToCartQuantityList_items_4.get(j) + ToQuantityList_items_4.get(i));
+							int a = Integer.parseInt(cartClass.ToCartQuantityList_items_4.get(i).toString()) + Integer.parseInt(ToQuantityList_items_4.get(i).toString());
+							
+							System.out.println(a);
+							cartClass.ToCartQuantityList_items_4.set(j, ("" + a));
 							ToProductSearchList_items_1.removeElementAt(remove - i);
+							ToQuantityList_items_4.removeElementAt(remove - i);
 							remove++;
 							break;
 						}
@@ -515,7 +556,10 @@ public class productSearchClass extends JPanel {
 					System.out.println(check[i].toString());
 				}
 				
-				
+				prod = ToProductSearchList_items_1.toArray();
+				for (int i = 0; i < prod.length; i++) {
+					System.out.println(prod[i].toString());
+				}
 			}
 		});
 		
