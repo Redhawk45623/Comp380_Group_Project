@@ -32,7 +32,7 @@ import javax.swing.UIManager;
  * necessary to allow a user to view products added to the cart with some features and ability to begin checkout process.<p>
  * 
  * @author Ralph Ramirez
- * @version 2022.10.28
+ * @version 2022.11.13
  */ 
 public class eCommerceMain extends JFrame {
 
@@ -85,8 +85,7 @@ public class eCommerceMain extends JFrame {
 	 * @throws FileNotFoundException 
 	 */
 	public eCommerceMain() throws FileNotFoundException {
-		lblLogo.setIcon(new ImageIcon(eCommerceMain.class.getResource("/images/logo.png")));
-		setTitle("- 'Think Tank' Group Project: 'Vintage Shop' -");
+		setTitle("Vintage Curios");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(325, 50, 560, 700);
@@ -121,6 +120,7 @@ public class eCommerceMain extends JFrame {
 					.addComponent(lblLogo, GroupLayout.PREFERRED_SIZE, 474, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap())
 		);
+		lblLogo.setIcon(new ImageIcon(eCommerceMain.class.getResource("/images/logo.png")));
 		gl_home_panel.setVerticalGroup(
 			gl_home_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_home_panel.createSequentialGroup()
@@ -136,9 +136,9 @@ public class eCommerceMain extends JFrame {
 		
 		tabbedPane.addTab("View Cart", cartIcon, cart_panel, "Click to view Cart"); //View Cart tab
 			
-		tabbedPane.addTab("Checkout", checkoutIcon, checkout_panel, null); //this will change too to look like the existing tabs above fore 'Product Search' and 'View Cart'
+		tabbedPane.addTab("Checkout", checkoutIcon, checkout_panel, null); //Checkout tab
 		
-		tabbedPane.addTab("Help", helpIcon, help_panel, null);
+		tabbedPane.addTab("Help", helpIcon, help_panel, null); //help tab
 		contentPane.setLayout(gl_contentPane);
 	}
 }
