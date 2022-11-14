@@ -34,8 +34,8 @@ import javax.swing.SwingConstants;
  * It features two modes that are selected by the user: Fast shopping that does not use a <br>
  * Shopping List and another option that does.<p>
  * 
- * The 'fast' shopping feature alows the user to browse a combobox which holds all products <br>
- * for sale.  The combobox displays ID, Name, and Price of product. Once an item is selected, <br>
+ * The 'fast' shopping feature allows the user to browse a combo box which holds all products <br>
+ * for sale.  The combo box displays ID, Name, and Price of product. Once an item is selected, <br>
  * an 'Add to Cart' button will move the selected product to the Cart. <p>
  * 
  * The 'Shopping List' option is selected by a radio button at the top of the panel.  Once <br>
