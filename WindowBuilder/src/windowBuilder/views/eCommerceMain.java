@@ -84,11 +84,20 @@ public class eCommerceMain extends JFrame {
 	 *
 	 * @throws FileNotFoundException 
 	 */
-	public eCommerceMain() throws FileNotFoundException { //constructor
+	public eCommerceMain() throws FileNotFoundException {
+		setResizable(false); // Constructor
+		
 		setTitle("- 'Think Tank' Group Project: 'Vintage Shop' -");
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(325, 50, 560, 700);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+
+		setTitle("- 'Think Tank' Group Project: 'Vintage Shop' -");
+
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 560, 700);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -100,39 +109,37 @@ public class eCommerceMain extends JFrame {
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 535, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 525, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(403, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
-					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 662, Short.MAX_VALUE)
+					.addContainerGap()
+					.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
 					.addContainerGap())
 		);
 		
 		JPanel home_panel = new JPanel();	
-		tabbedPane.addTab("Home", homeIcon, home_panel, null);
-		
+		tabbedPane.addTab("Home", homeIcon, home_panel, null);		
 		JLabel lblNewLabel = new JLabel("This is the Home page that will be modified later...");
-		
 		JLabel lblNewLabel_1 = new JLabel("We could possibly add a custom logo and incorporate");
-		
 		JLabel lblNewLabel_2 = new JLabel("the team name along with team member names...");
+		
 		GroupLayout gl_home_panel = new GroupLayout(home_panel);
 		gl_home_panel.setHorizontalGroup(
-			gl_home_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_home_panel.createSequentialGroup()
-					.addGap(96)
-					.addComponent(lblNewLabel)
-					.addContainerGap(99, Short.MAX_VALUE))
-				.addGroup(gl_home_panel.createSequentialGroup()
-					.addGap(85)
-					.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-					.addGap(91))
-				.addGroup(Alignment.TRAILING, gl_home_panel.createSequentialGroup()
-					.addContainerGap(103, Short.MAX_VALUE)
-					.addComponent(lblNewLabel_2)
-					.addGap(101))
+			gl_home_panel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(Alignment.LEADING, gl_home_panel.createSequentialGroup()
+					.addGap(133)
+					.addGroup(gl_home_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(lblNewLabel_1)
+						.addGroup(gl_home_panel.createSequentialGroup()
+							.addGap(8)
+							.addComponent(lblNewLabel_2))
+						.addGroup(gl_home_panel.createSequentialGroup()
+							.addGap(7)
+							.addComponent(lblNewLabel)))
+					.addContainerGap(133, Short.MAX_VALUE))
 		);
 		gl_home_panel.setVerticalGroup(
 			gl_home_panel.createParallelGroup(Alignment.LEADING)
@@ -141,19 +148,19 @@ public class eCommerceMain extends JFrame {
 					.addComponent(lblNewLabel)
 					.addGap(75)
 					.addComponent(lblNewLabel_1)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGap(11)
 					.addComponent(lblNewLabel_2)
-					.addContainerGap(349, Short.MAX_VALUE))
+					.addContainerGap(331, Short.MAX_VALUE))
 		);
-		home_panel.setLayout(gl_home_panel); //home tab	
+		home_panel.setLayout(gl_home_panel); // Home tab
 		
 		/////Add panels below/////////
 				
-		tabbedPane.addTab("Product Search", searchIcon, search_panel, "Click to search for products"); //Product Search tab
+		tabbedPane.addTab("Product Search", searchIcon, search_panel, "Click to search for products"); // Product Search tab
 		
-		tabbedPane.addTab("View Cart", cartIcon, cart_panel, "Click to view Cart"); //View Cart tab
+		tabbedPane.addTab("View Cart", cartIcon, cart_panel, "Click to view Cart"); // View Cart tab
 			
-		tabbedPane.addTab("Checkout", checkoutIcon, checkout_panel, null); //this will change too to look like the existing tabs above fore 'Product Search' and 'View Cart'
+		tabbedPane.addTab("Checkout", checkoutIcon, checkout_panel, null); // This will change to look like the existing tabs above from 'Product Search' and 'View Cart'
 		
 		tabbedPane.addTab("Help", helpIcon, help_panel, null);
 		contentPane.setLayout(gl_contentPane);
