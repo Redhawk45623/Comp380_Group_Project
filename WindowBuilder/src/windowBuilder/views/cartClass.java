@@ -433,13 +433,14 @@ public class cartClass extends JPanel {
 		scrollPane.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
 		textAreaCartTotal = new JTextArea();
+		textAreaCartTotal.setEditable(false);
 		textAreaCartTotal.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, null, null));
 		
 		JLabel lblTotal = new JLabel("Total = ");
 		
 		btnEmptyCart = new JButton("Empty");
 		
-		JLabel lblNoShipOrTaxes = new JLabel("*Does not include S&H or taxes");
+		JLabel lblNoShipOrTaxes = new JLabel("* Does not include S&H or taxes");
 		lblNoShipOrTaxes.setFont(new Font("Lucida Grande", Font.PLAIN, 9));
 		
 		JLabel lblEmptyCart = new JLabel("Empty Cart:");
@@ -460,7 +461,7 @@ public class cartClass extends JPanel {
 		
 		btnAddItem = new JButton("Add One");
 		
-		btnCheckoutNow = new JButton("Checkout");
+		btnCheckoutNow = new JButton("Buy Now");
 		
 		JLabel lblNewLabel = new JLabel("To Checkout:");
 		lblNewLabel.setIcon(new ImageIcon(cartClass.class.getResource("/icons/Full basket.png")));
@@ -469,7 +470,7 @@ public class cartClass extends JPanel {
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(15)
 							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
@@ -478,42 +479,45 @@ public class cartClass extends JPanel {
 								.addComponent(lblAddOneToCart)
 								.addComponent(lblNewLabel))
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+								.addComponent(btnCheckoutNow, 0, 0, Short.MAX_VALUE)
+								.addComponent(btnEmptyCart, 0, 0, Short.MAX_VALUE)
+								.addComponent(btnRemoveItem, 0, 0, Short.MAX_VALUE)
+								.addComponent(btnAddItem, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
+							.addGap(18)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
 								.addGroup(gl_panel.createSequentialGroup()
-									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(btnEmptyCart, 0, 0, Short.MAX_VALUE)
-										.addComponent(btnRemoveItem, 0, 0, Short.MAX_VALUE)
-										.addComponent(btnAddItem, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))
-									.addGap(18)
-									.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_panel.createSequentialGroup()
-											.addComponent(lblTotal)
-											.addPreferredGap(ComponentPlacement.RELATED)
-											.addComponent(textAreaCartTotal, GroupLayout.PREFERRED_SIZE, 58, GroupLayout.PREFERRED_SIZE))
-										.addComponent(lblNoShipOrTaxes, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)))
-								.addComponent(btnCheckoutNow, GroupLayout.PREFERRED_SIZE, 89, GroupLayout.PREFERRED_SIZE)))
+									.addComponent(lblTotal)
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(textAreaCartTotal, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+								.addComponent(lblNoShipOrTaxes, GroupLayout.PREFERRED_SIZE, 143, GroupLayout.PREFERRED_SIZE)))
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(79)
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(lblItemsInCart)
-									.addGap(64))
+							.addContainerGap(79, Short.MAX_VALUE)
+							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
 								.addGroup(gl_panel.createSequentialGroup()
 									.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 296, GroupLayout.PREFERRED_SIZE)
-									.addPreferredGap(ComponentPlacement.UNRELATED)))
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-								.addComponent(lblQuantity, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
-								.addComponent(scrollPane_1, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap(98, Short.MAX_VALUE))
+									.addPreferredGap(ComponentPlacement.UNRELATED))
+								.addGroup(gl_panel.createSequentialGroup()
+									.addComponent(lblItemsInCart)
+									.addGap(90)))
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+								.addGroup(gl_panel.createSequentialGroup()
+									.addPreferredGap(ComponentPlacement.RELATED)
+									.addComponent(lblQuantity, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)))))
+					.addGap(100))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(20)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblQuantity)
-						.addComponent(lblItemsInCart))
-					.addGap(6)
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(lblItemsInCart)
+							.addGap(6))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(lblQuantity)
+							.addGap(11)))
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(scrollPane, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE)
 						.addComponent(scrollPane_1, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE))
@@ -541,12 +545,12 @@ public class cartClass extends JPanel {
 							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 								.addComponent(btnCheckoutNow)
 								.addComponent(lblNewLabel))))
-					.addContainerGap(226, Short.MAX_VALUE))
+					.addContainerGap(60, Short.MAX_VALUE))
 		);
 		
 		JListCartQuantity = new JList<Object>();
 		scrollPane_1.setViewportView(JListCartQuantity);
-		CartList_items_2 = new DefaultListModel<Object>();
+		CartList_items_2= new DefaultListModel<Object>();
 		JListCartList = new JList<Object>(); //this creates a new JList element that will display the Products added to the Shopping List
 		JListCartList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		JListCartList.setModel(new AbstractListModel<Object>() {
@@ -565,5 +569,5 @@ public class cartClass extends JPanel {
 		panel.setLayout(gl_panel);
 		setLayout(groupLayout);
 		
-	}	
+	}
 }

@@ -84,8 +84,9 @@ public class eCommerceMain extends JFrame {
 	 *
 	 * @throws FileNotFoundException 
 	 */
-	public eCommerceMain() throws FileNotFoundException {
-		setResizable(false); // Constructor
+	public eCommerceMain() throws FileNotFoundException { // Constructor
+		
+		setResizable(false);
 		
 		setTitle("- 'Think Tank' Group Project: 'Vintage Shop' -");
 
@@ -110,14 +111,14 @@ public class eCommerceMain extends JFrame {
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
 					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 525, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(403, Short.MAX_VALUE))
+					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(tabbedPane, GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
-					.addContainerGap())
+					.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 638, GroupLayout.PREFERRED_SIZE)
+					.addContainerGap(38, Short.MAX_VALUE))
 		);
 		
 		JPanel home_panel = new JPanel();	
