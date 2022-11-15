@@ -24,6 +24,7 @@ public class helpClass extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	private JTextField addressField;
+	private JTextArea emailArea;
 
 	public helpClass() {
 		
@@ -43,17 +44,70 @@ public class helpClass extends JPanel {
 		
 		btnSend.addActionListener(new ActionListener() {
 			
-			// Send Button Clicked
+			// Send Button Clicked (2/5)
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("Hello World"); // TEMP: BUTTON CLICK CHECKER
 				
-				// Email Address Checker
-				// Email Content Checker
-				// Write file (send)
+				// Checks to see if the email address is valid.
+				if (!adressCheck())
+					return;
+				
+				// Checks to see if the email message is not blank.
+				if (emailArea.getText().isEmpty()) {
+					// Pop up to tell the user that the message area is empty.
+					System.out.println("X"); // REPLACE THIS WITH POP UP
+					return;
+				}
+				
+				System.out.println(emailArea.getText());
+				
+				// Write file (send) [Will be a private void function]
 				// Display "Send confirmation" message
 				// Clear fields and open Home Pane
 				
 			}
+
+			// Checks to see if the email address is valid.
+			private boolean adressCheck() {
+				
+				String email = addressField.getText();
+				boolean check = true;
+				
+				/* Valid Email address:
+				 * 1. Exactly one '@'
+				 * 2. Exactly one '.' after '@'
+				 */
+				if (email.isEmpty()) {
+					// Pop up to tell the user that the email address field is empty
+					System.out.println("E"); // REPLACE THIS WITH POP UP
+					return false;
+				}
+				
+				if (email.contains("@")) {
+					email = email.substring(email.indexOf("@") + 1);
+					
+					if (email.contains("@") || !email.contains(".")) {
+						check = false; // Invalid
+					}
+					
+					email = email.substring(email.indexOf(".") + 1);
+					
+					if (email.isEmpty() || email.contains(".")) {
+						check = false;
+					}
+				} else {
+					check = false; // Invalid
+				}
+				
+				if (!check) {
+					// Pop up to tell the user that the email address is not valid
+					System.out.println("X"); // REPLACE THIS WITH POP UP
+				}
+				
+				return check;
+			}
+	
+			
+			
 			
 		});
 				
@@ -120,7 +174,7 @@ public class helpClass extends JPanel {
 					.addContainerGap())
 		);
 		
-		JTextArea emailArea = new JTextArea();
+		emailArea = new JTextArea();
 		emailArea.setFont(new Font("Tahoma", Font.PLAIN, 11));
 		emailArea.setWrapStyleWord(true);
 		emailArea.setLineWrap(true);
