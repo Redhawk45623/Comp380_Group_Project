@@ -17,9 +17,9 @@ import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 
 /**
-* @author Matthew Bellman
-* @version 2022.11.07
-*/
+ * @author Matthew Bellman
+ * @version 2022.11.16
+ */
 public class helpClass extends JPanel {
 	/**
 	 * 
@@ -60,8 +60,6 @@ public class helpClass extends JPanel {
 					return;
 				}
 				
-				//System.out.println(emailArea.getText());
-				
 				// 'Send'
 				try {
 					writeEmail();
@@ -79,24 +77,14 @@ public class helpClass extends JPanel {
 				emailArea.setText("");
 				addressField.setText("");
 				
-				//eCommerceMain.setPane(0); //[Needs to be added to eCommerceMain]
+				//eCommerceMain.setPane(0); // TODO [Needs to be added to eCommerceMain]
 				
 			}
-			
-			
+					
 			// Generates the email
 			private void writeEmail() throws IOException {
-				
+
 				try (FileWriter emailWriter = new FileWriter((System.getProperty("user.dir")) + "helpEmail.txt")) {
-					// To: addressField.getText()
-					// 
-					// Hello customer,
-					// Thank you for contacting us, this auto generated email is here to let you know that we got your message.
-					// One of our employees will reply to you shortly. If there is any additional information you need to send to us, please reply to this email.
-					// Below is what you've sent:
-					//
-					// emailArea.getText()
-					
 					emailWriter.write("To: " + addressField.getText() + "\n\n\n"); // For address field
 					emailWriter.write("Hello customer,\n");
 					emailWriter.write("Thank you for contacting us, this auto generated email is here to let you know that we got your message.\n\n");
@@ -127,9 +115,8 @@ public class helpClass extends JPanel {
 				if (email.contains("@")) {
 					email = email.substring(email.indexOf("@") + 1);
 					
-					if (email.contains("@") || !email.contains(".")) {
+					if (email.contains("@") || !email.contains("."))
 						check = false; // Invalid
-					}
 					
 					do {
 						email = email.substring(email.indexOf(".") + 1);
