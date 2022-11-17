@@ -11,6 +11,8 @@ import java.awt.SystemColor;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 
@@ -28,7 +30,7 @@ public class helpClass extends JPanel {
 
 	public helpClass() {
 		
-		JLabel lblNewLabel = new JLabel("Phone Number: X-XXX-XXX-XXXX");
+		JLabel lblNewLabel = new JLabel("Phone Number: 1-271-581-2221");
 		
 		JLabel lblNewLabel_1 = new JLabel("Email: support@oldvintage.shop");
 		
@@ -44,7 +46,7 @@ public class helpClass extends JPanel {
 		
 		btnSend.addActionListener(new ActionListener() {
 			
-			// Send Button Clicked (2/5)
+			// Send Button Clicked (4/5)
 			public void actionPerformed(ActionEvent e) {
 				
 				// Checks to see if the email address is valid.
@@ -54,15 +56,54 @@ public class helpClass extends JPanel {
 				// Checks to see if the email message is not blank.
 				if (emailArea.getText().isEmpty()) {
 					// Pop up to tell the user that the message area is empty.
-					System.out.println("X"); // REPLACE THIS WITH POP UP
+					System.out.println("X2"); // REPLACE THIS WITH POP UP
 					return;
 				}
 				
-				System.out.println(emailArea.getText());
+				//System.out.println(emailArea.getText());
 				
-				// Write file (send) [Will be a private void function]
-				// Display "Send confirmation" message
+				// 'Send'
+				try {
+					writeEmail();
+				} catch (IOException e1) {
+					// Pop up to tell the user that something went wrong with the send.
+					System.out.println("X3"); // REPLACE THIS WITH POP UP
+					e1.printStackTrace();
+					return;
+				}
+				
+				// Pop up to tell the user that the email is sent.
+				System.out.println("O"); // REPLACE THIS WITH POP UP
+				
 				// Clear fields and open Home Pane
+				emailArea.setText("");
+				addressField.setText("");
+				
+				//eCommerceMain.setPane(0); //[Needs to be added to eCommerceMain]
+				
+			}
+			
+			
+			// Generates the email
+			private void writeEmail() throws IOException {
+				
+				try (FileWriter emailWriter = new FileWriter((System.getProperty("user.dir")) + "helpEmail.txt")) {
+					// To: addressField.getText()
+					// 
+					// Hello customer,
+					// Thank you for contacting us, this auto generated email is here to let you know that we got your message.
+					// One of our employees will reply to you shortly. If there is any additional information you need to send to us, please reply to this email.
+					// Below is what you've sent:
+					//
+					// emailArea.getText()
+					
+					emailWriter.write("To: " + addressField.getText() + "\n\n\n"); // For address field
+					emailWriter.write("Hello customer,\n");
+					emailWriter.write("Thank you for contacting us, this auto generated email is here to let you know that we got your message.\n\n");
+					emailWriter.write("One of our employees will reply to you shortly. If there is any additional information you need to send to us, please reply to this email.\n\n");
+					emailWriter.write("Below is what you've sent:\n\n");
+					emailWriter.write(emailArea.getText());
+				}
 				
 			}
 
@@ -74,7 +115,8 @@ public class helpClass extends JPanel {
 				
 				/* Valid Email address:
 				 * 1. Exactly one '@'
-				 * 2. Exactly one '.' after '@'
+				 * 2. At least one '.' after '@'
+				 * 3. Not empty after all '.'s
 				 */
 				if (email.isEmpty()) {
 					// Pop up to tell the user that the email address field is empty
@@ -89,18 +131,22 @@ public class helpClass extends JPanel {
 						check = false; // Invalid
 					}
 					
-					email = email.substring(email.indexOf(".") + 1);
+					do {
+						email = email.substring(email.indexOf(".") + 1);
+						
+						if (email.isEmpty()) {
+							check = false; // Invalid
+						}
+					} while ((email.indexOf(".") != -1));
 					
-					if (email.isEmpty() || email.contains(".")) {
-						check = false;
-					}
+					
 				} else {
 					check = false; // Invalid
 				}
 				
 				if (!check) {
 					// Pop up to tell the user that the email address is not valid
-					System.out.println("X"); // REPLACE THIS WITH POP UP
+					System.out.println("X1"); // REPLACE THIS WITH POP UP
 				}
 				
 				return check;
