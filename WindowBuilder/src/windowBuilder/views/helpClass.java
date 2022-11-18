@@ -2,6 +2,7 @@ package windowBuilder.views;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextArea;
@@ -17,13 +18,21 @@ import java.awt.event.ActionEvent;
 import javax.swing.JScrollPane;
 
 /**
+ * This class allows the user to 'send an email' to the store. It has two input fields the<br>
+ * user can input text into and a send button to send the email. One of the input fields is<br>
+ * for the email address and the other one is for the email message itself.<p>
+ * 
+ * The send button checks to make sure that (a) both the email address and the email message<br>
+ * aren't blank and (b) the email address is valid. After those tests, the email gets 'sent'<br>
+ * and a message appears to let the user know that it was sent.<p>
+ * 
+ * The 'send' is actually just a file output. The file's location is outside the directory.<p>
+ * 
  * @author Matthew Bellman
- * @version 2022.11.16
+ * @version 2022.11.17
  */
 public class helpClass extends JPanel {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private JTextField addressField;
 	private JTextArea emailArea;
@@ -44,9 +53,28 @@ public class helpClass extends JPanel {
 		
 		JButton btnSend = new JButton("Send");
 		
+		JLabel lblNewLabel_2 = new JLabel("Or you can contact us directly by filling out the form below:");
+		
+		addressField = new JTextField();
+		
+		JLabel lblNewLabel_3 = new JLabel("* Email Address:");
+		
+		JLabel lblNewLabel_4 = new JLabel("* Required Field");
+		
+		JLabel lblNewLabel_5 = new JLabel("* Email Meassage:");
+		
+		JScrollPane scrollPane = new JScrollPane();
+		
+		emailArea = new JTextArea();
+		emailArea.setFont(new Font("Tahoma", Font.PLAIN, 11));
+		emailArea.setWrapStyleWord(true);
+		emailArea.setLineWrap(true);
+		scrollPane.setViewportView(emailArea);
+		
+		/// CODE FOR SEND BUTTON ///
 		btnSend.addActionListener(new ActionListener() {
 			
-			// Send Button Clicked (4/5)
+			// Send Button Clicked (4.8/5)
 			public void actionPerformed(ActionEvent e) {
 				
 				// Checks to see if the email address is valid.
@@ -55,8 +83,7 @@ public class helpClass extends JPanel {
 				
 				// Checks to see if the email message is not blank.
 				if (emailArea.getText().isEmpty()) {
-					// Pop up to tell the user that the message area is empty.
-					System.out.println("X2"); // REPLACE THIS WITH POP UP
+					JOptionPane.showInternalMessageDialog(null, "Please enter an email message", "Error", 0);
 					return;
 				}
 				
@@ -65,19 +92,19 @@ public class helpClass extends JPanel {
 					writeEmail();
 				} catch (IOException e1) {
 					// Pop up to tell the user that something went wrong with the send.
-					System.out.println("X3"); // REPLACE THIS WITH POP UP
+					JOptionPane.showInternalMessageDialog(null, "Something went wrong with the conection...\n\nPlease try sending it again.", "Error", 0);
 					e1.printStackTrace();
 					return;
 				}
 				
 				// Pop up to tell the user that the email is sent.
-				System.out.println("O"); // REPLACE THIS WITH POP UP
+				JOptionPane.showInternalMessageDialog(null, "Your meassage has been sent.", "Meassage sent", -1);
 				
 				// Clear fields and open Home Pane
 				emailArea.setText("");
 				addressField.setText("");
 				
-				//eCommerceMain.setPane(0); // TODO [Needs to be added to eCommerceMain]
+				//eCommerceMain.setPane(0); // TODO: Request Ralph to allow me to add this method to eCommerceMain]
 				
 			}
 					
@@ -106,9 +133,8 @@ public class helpClass extends JPanel {
 				 * 2. At least one '.' after '@'
 				 * 3. Not empty after all '.'s
 				 */
-				if (email.isEmpty()) {
-					// Pop up to tell the user that the email address field is empty
-					System.out.println("E"); // REPLACE THIS WITH POP UP
+				if (email.isEmpty()) { // Pop up to tell the user that the email address field is empty
+					JOptionPane.showInternalMessageDialog(null, "Please enter an valid email adress", "Error", 0);
 					return false;
 				}
 				
@@ -131,30 +157,17 @@ public class helpClass extends JPanel {
 					check = false; // Invalid
 				}
 				
+				// Pop up to tell the user that the email address is not valid
 				if (!check) {
-					// Pop up to tell the user that the email address is not valid
-					System.out.println("X1"); // REPLACE THIS WITH POP UP
+					JOptionPane.showInternalMessageDialog(null, "Please enter an valid email adress", "Error", 0);
 				}
 				
 				return check;
 			}
-	
-			
-			
 			
 		});
 				
-		JLabel lblNewLabel_2 = new JLabel("Or you can contact us directly by filling out the form below:");
-		
-		addressField = new JTextField();
-		
-		JLabel lblNewLabel_3 = new JLabel("* Email Address:");
-		
-		JLabel lblNewLabel_4 = new JLabel("* Required Field");
-		
-		JLabel lblNewLabel_5 = new JLabel("* Email Meassage:");
-		
-		JScrollPane scrollPane = new JScrollPane();
+
 		
 		
 		GroupLayout groupLayout = new GroupLayout(this);
@@ -207,11 +220,6 @@ public class helpClass extends JPanel {
 					.addContainerGap())
 		);
 		
-		emailArea = new JTextArea();
-		emailArea.setFont(new Font("Tahoma", Font.PLAIN, 11));
-		emailArea.setWrapStyleWord(true);
-		emailArea.setLineWrap(true);
-		scrollPane.setViewportView(emailArea);
 		setLayout(groupLayout);
 	
 	}
