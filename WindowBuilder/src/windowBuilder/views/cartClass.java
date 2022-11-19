@@ -74,8 +74,8 @@ public class cartClass extends JPanel {
 	}
 	
 	/**
-	 * 
-	 * 
+	 * Sets variable 'sum' to 0 before adding up the total amount of all products in priceArray[].<br>
+	 * This loop resets 'sum' to the newly added up total.<br> * 
 	 * 
 	 */
 	public static void setSum() {
