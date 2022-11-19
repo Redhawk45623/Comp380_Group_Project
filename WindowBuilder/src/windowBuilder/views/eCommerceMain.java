@@ -48,6 +48,7 @@ public class eCommerceMain extends JFrame {
 	ImageIcon cartIcon = new ImageIcon(this.getClass().getResource("/icons/basket.png"));          //sets the icons for the TabbedPane//
 	ImageIcon checkoutIcon = new ImageIcon(this.getClass().getResource("/icons/Dollar.png"));      //                                 //
 	ImageIcon helpIcon = new ImageIcon(this.getClass().getResource("/icons/Help.png"));            /////////////////////////////////////
+	
 	private final JLabel lblLogo = new JLabel("");
 	
 	/**
@@ -111,7 +112,7 @@ public class eCommerceMain extends JFrame {
 		);
 		
 		JPanel home_panel = new JPanel();	
-		tabbedPane.addTab("Home", homeIcon, home_panel, null);
+		
 		GroupLayout gl_home_panel = new GroupLayout(home_panel);
 		gl_home_panel.setHorizontalGroup(
 			gl_home_panel.createParallelGroup(Alignment.TRAILING)
@@ -131,14 +132,15 @@ public class eCommerceMain extends JFrame {
 		home_panel.setLayout(gl_home_panel); //home tab	
 		
 		/////Add panels below/////////
+		tabbedPane.addTab("Home", homeIcon, home_panel,"Home");
 				
 		tabbedPane.addTab("Product Search", searchIcon, search_panel, "Click to search for products"); //Product Search tab
 		
 		tabbedPane.addTab("View Cart", cartIcon, cart_panel, "Click to view Cart"); //View Cart tab
 			
-		tabbedPane.addTab("Checkout", checkoutIcon, checkout_panel, null); //Checkout tab
+		tabbedPane.addTab("Checkout", checkoutIcon, checkout_panel, "Click to view Checkout items"); //Checkout tab
 		
-		tabbedPane.addTab("Help", helpIcon, help_panel, null); //help tab
+		tabbedPane.addTab("Help", helpIcon, help_panel, "Click for help"); //help tab
 		contentPane.setLayout(gl_contentPane);
 	}
 }
