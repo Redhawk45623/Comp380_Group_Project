@@ -86,21 +86,7 @@ public class cartClass extends JPanel {
 		}		
 		
 	}
-	
-	/**
-	 * 
-	 * 
-	 * 
-	 * 
-	 * @param x
-	 * @return
-	 */
-	public int convertObject(Object x) {
-		int convert = Integer.parseInt(x.toString());
-		return convert;
-			
-	}
-	
+
 	/**
 	 * Adds the prices of the products added to the Cart from combobox (via productSearchClass).<br>
 	 * Finds the price of the selected product from productSearchClass.prices[index] and adds it to cartPriceArray[].<br>

@@ -143,9 +143,8 @@ public class productSearchClass extends JPanel {
 	}
 	
 	/**
-	 * 
-	 * 
-	 * 
+	 * Sets variable 'sum' to 0 before adding up the total amount of all products in priceArray[].<br>
+	 * This loop resets 'sum' to the newly added up total.<br>
 	 * 
 	 */
 	public static void setSum() {
@@ -155,19 +154,6 @@ public class productSearchClass extends JPanel {
 			sum += priceArray[i]; //adds up the priceArray[] and stores it in the variable sum
 		}	
 		
-	}
-	
-	/**
-	 * 
-	 * 
-	 * 
-	 * @param x
-	 * @return
-	 */
-	public int convertObject(Object x) {
-		int convert = Integer.parseInt(x.toString());
-		return convert;
-			
 	}
 		
 	/**
@@ -180,8 +166,8 @@ public class productSearchClass extends JPanel {
 	public void addPrices(int index) { //method to add up the prices
 		
 		Object first = prices[index]; //this creates an object variable that is initialized from the passed parameter, used to get selected index and match to price
-		//int second = Integer.parseInt(first.toString()); //this converts the object to integer
-		priceArray[counter] = convertObject(first); //this loads the priceArray[]		
+		int second = Integer.parseInt(first.toString()); //this converts the object to integer
+		priceArray[counter] = second; //this loads the priceArray[]		
 		counter++; //increments counter variable
 		setSum();	
 	}
