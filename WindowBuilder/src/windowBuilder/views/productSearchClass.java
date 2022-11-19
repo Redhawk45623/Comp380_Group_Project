@@ -156,6 +156,20 @@ public class productSearchClass extends JPanel {
 		}	
 		
 	}
+	
+	/**
+	 * 
+	 * 
+	 * 
+	 * 
+	 * @param x
+	 * @return
+	 */
+	public int convertObject(Object x) {
+		int convert = Integer.parseInt(x.toString());
+		return convert;
+			
+	}
 		
 	/**
 	 * Adds the prices of the products added to the Shopping List from combobox.<br>
@@ -167,8 +181,8 @@ public class productSearchClass extends JPanel {
 	public void addPrices(int index) { //method to add up the prices
 		
 		Object first = prices[index]; //this creates an object variable that is initialized from the passed parameter, used to get selected index and match to price
-		int second = Integer.parseInt(first.toString()); //this converts the object to integer
-		priceArray[counter] = second; //this loads the priceArray[]		
+		//int second = Integer.parseInt(first.toString()); //this converts the object to integer
+		priceArray[counter] = convertObject(first); //this loads the priceArray[]		
 		counter++; //increments counter variable
 		setSum();	
 	}
@@ -183,10 +197,10 @@ public class productSearchClass extends JPanel {
 	public void addOne(int index) {
 		
 		Object priceFound = trackPrices[index];
-		int priceOfProduct = Integer.parseInt(priceFound.toString()); 				
+		//int priceOfProduct = Integer.parseInt(priceFound.toString()); 				
 		Object adjust = priceArray[index]; //sets Object variable: 'adjust' to the element found at cartPriceArray[] using parameter: 'index'
-		int currentPrice = Integer.parseInt(adjust.toString()); //this converts the object to integer
-		int added = currentPrice + priceOfProduct;
+		//int currentPrice = Integer.parseInt(adjust.toString()); //this converts the object to integer
+		int added = convertObject(priceFound) + convertObject(adjust);
 		priceArray[index] = added; //this loads the cartPriceArray[]
 		setSum();
 		
@@ -202,10 +216,10 @@ public class productSearchClass extends JPanel {
 	public void removeOne(int index) {
 		
 		Object priceFound = trackPrices[index];
-		int priceOfProduct = Integer.parseInt(priceFound.toString()); 				
+		//int priceOfProduct = Integer.parseInt(priceFound.toString()); 				
 		Object adjust = priceArray[index]; //sets Object variable: 'adjust' to the element found at cartPriceArray[] using parameter: 'index'
-		int currentPrice = Integer.parseInt(adjust.toString()); //this converts the object to integer
-		int remove = currentPrice - priceOfProduct;
+		//int currentPrice = Integer.parseInt(adjust.toString()); //this converts the object to integer
+		int remove = convertObject(priceFound) - convertObject(adjust);
 		priceArray[index] = remove; //this loads the cartPriceArray[]
 		setSum();
 		
@@ -456,8 +470,8 @@ public class productSearchClass extends JPanel {
 					addOne(selectedIx); 					
 					setPriceTotal(); //calls setPriceTotal method										
 					Object number = ToQuantityList_items_4.getElementAt(selectedIx); //sets Object variable: 'number' to the price stored at ToQuantityList_items_4
-					int convertedNumber = Integer.parseInt(number.toString()); //converts the Object: 'number' to int: 'convertedNumber2'
-					int addedUp = convertedNumber + 1; //adds the price of convertedNumber2	+ 1		
+					//int convertedNumber = Integer.parseInt(number.toString()); //converts the Object: 'number' to int: 'convertedNumber2'
+					int addedUp = convertObject(number) + 1; //adds the price of convertedNumber2	+ 1		
 					ToQuantityList_items_4.setElementAt(addedUp, selectedIx); //sets the quantity displayed in quantity box for selected item at the right spot
 					//JOptionPane.showMessageDialog(null, "Added one more -> " + products[selectedIx], "Added One", JOptionPane.INFORMATION_MESSAGE);
 					
@@ -562,9 +576,9 @@ public class productSearchClass extends JPanel {
 											
 					int selectedIx = JListShopList.getSelectedIndex(); //creates a temp array that stores the selected index in the Shopping List. Will only be one item in array			    					
 					Object quantity = ToQuantityList_items_4.get(selectedIx);
-					int quantity2 = Integer.parseInt(quantity.toString());
+					//int quantity2 = Integer.parseInt(quantity.toString());
 					
-					if (quantity2 == 1) {
+					if (convertObject(quantity) == 1) {
 					
 						int image = productObject.trackImages[selectedIx]; //sets int variable: 'w' to the index found in 'trackImages[]'
 						productObject.removeImageIndex(image); //calls the removeImageIndex() from productClass using parameter 'w'
