@@ -31,7 +31,7 @@ import javax.swing.ImageIcon;
  * This class has buttons that allow the user to add a quantity, remove<br>
  * a selected product, empty the Cart, or proceed to the checkout area.<p>
  * 
- * @author Ralph Ramirez
+ * @author Ralph Ramirez, Aaron Flores
  * @version 2022.10.31 
  */
 public class cartClass extends JPanel { 
